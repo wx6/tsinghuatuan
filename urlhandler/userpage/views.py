@@ -39,30 +39,30 @@ def validate_view(request, openid):
 # success: check substring 'loginteacher_action.jsp'
 # validate: userid is number
 def validate_through_learn(userid, userpass):
-	timeStamp_url = 'http://auth.igeek.asia/v1/time'
-	req = urllib2.Request(url=timeStamp_url)
-	res_time = urllib2.urlopen(req)
-	key = new RSAKeyPair("10001", "", "89323ab0fba8422ba79b2ef4fb4948ee5158f927f63daebd35c7669fc1af6501ceed5fd13ac1d236d144d39808eb8da53aa0af26b17befd1abd6cfb1dcfba937438e4e95cd061e2ba372d422edbb72979f4ccd32f75503ad70769e299a4143a428380a2bd43c30b0c37fda51d6ee7adbfec1a9d0ad1891e1ae292d8fb992821b")
-	encrypted = {secret: encryptedString(key, res_time + "|" + userid + "|" + userpass)}
-	req_data = urllib.urlencode(encrypted)
-	request_url = 'http://auth.igeek.asia/v1'
-	res_data = urllib2.urlopen(req)
-    if res_data.code == 0:
+	# timeStamp_url = 'http://auth.igeek.asia/v1/time'
+	# req = urllib2.Request(url=timeStamp_url)
+	# res_time = urllib2.urlopen(req)
+	# key = new RSAKeyPair("10001", "", "89323ab0fba8422ba79b2ef4fb4948ee5158f927f63daebd35c7669fc1af6501ceed5fd13ac1d236d144d39808eb8da53aa0af26b17befd1abd6cfb1dcfba937438e4e95cd061e2ba372d422edbb72979f4ccd32f75503ad70769e299a4143a428380a2bd43c30b0c37fda51d6ee7adbfec1a9d0ad1891e1ae292d8fb992821b")
+	# encrypted = {secret: encryptedString(key, res_time + "|" + userid + "|" + userpass)}
+	# req_data = urllib.urlencode(encrypted)
+	# request_url = 'http://auth.igeek.asia/v1'
+	# res_data = urllib2.urlopen(req)
+    # if res_data.code == 0:
+        # return 'Accepted'
+    # else:
+        # return 'Rejected'
+    req_data = urllib.urlencode({'userid': userid, 'userpass': userpass, 'submit1': u'登录'.encode('gb2312')})
+    request_url = 'https://learn.tsinghua.edu.cn/MultiLanguage/lesson/teacher/loginteacher.jsp'
+    req = urllib2.Request(url=request_url, data=req_data)
+    res_data = urllib2.urlopen(req)
+    try:
+        res = res_data.read()
+    except:
+        return 'Error'
+    if 'loginteacher_action.jsp' in res:
         return 'Accepted'
     else:
         return 'Rejected'
-    #req_data = urllib.urlencode({'userid': userid, 'userpass': userpass, 'submit1': u'登录'.encode('gb2312')})
-    #request_url = 'https://learn.tsinghua.edu.cn/MultiLanguage/lesson/teacher/loginteacher.jsp'
-    #req = urllib2.Request(url=request_url, data=req_data)
-    #res_data = urllib2.urlopen(req)
-    #try:
-    #    res = res_data.read()
-    #except:
-    #    return 'Error'
-    #if 'loginteacher_action.jsp' in res:
-    #    return 'Accepted'
-    #else:
-    #    return 'Rejected'
 
 
 # METHOD 2 is not valid, because student.tsinghua has not linked to Internet
