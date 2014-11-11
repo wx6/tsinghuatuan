@@ -26,10 +26,9 @@ img{
     text-align: center;
     padding-top: 3px;
 }
-/* 刘博格添加的内容，渲染有关按钮
-	*/
 .botton{
 	padding: 10px;
+	background-color: EA0000;
 	font-size: 24px;
-	color: EA0000;
+	color: black;
 }
