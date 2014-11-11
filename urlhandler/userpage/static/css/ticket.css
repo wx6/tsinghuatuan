@@ -27,7 +27,8 @@ img{
     padding-top: 3px;
 }
 .botton{
-	background-color: F0F8FF;
-	font-size: 18px;
+	padding: 10px;
+	background-color: EA0000;
+	font-size: 24px;
 	color: black;
 }

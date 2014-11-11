@@ -24,15 +24,13 @@
 	
 	<div class="ticket-wrapper">
 		<b class="botton" onclick="find()">发现</b>
-		<b class="botton" onclick="share()">分享</b>
-	</div>	
-	<div class="ticket-wrapper" onclick="chooseSeat()">
 		{% if ticket_status == 1 %}
-		<b class="botton">选座</b>
+		<b class="botton" onclick="chooseSeat()">选座</b>
 		{% elif ticket_status == 3 %}
-		<b class="botton">评价</b>
+		<b class="botton" onclick="comment()">评价</b>
 		{% else %}
 		{% endif %}
+		<b class="botton" onclick="share()">分享</b>
 	</div>
 	
     <div class="ticket-wrapper">
