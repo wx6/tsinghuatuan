@@ -24,7 +24,7 @@ def validate_view(request, openid):
     studentid = ''
     if request.GET:
         studentid = request.GET.get('studentid', '')
-    return render_to_response('validation.html', {
+    return render_to_response('validation_student.html', {
         'openid': openid,
         'studentid': studentid,
         'isValidated': isValidated,
@@ -39,18 +39,6 @@ def validate_view(request, openid):
 # success: check substring 'loginteacher_action.jsp'
 # validate: userid is number
 def validate_through_learn(userid, userpass):
-	# timeStamp_url = 'http://auth.igeek.asia/v1/time'
-	# req = urllib2.Request(url=timeStamp_url)
-	# res_time = urllib2.urlopen(req)
-	# key = new RSAKeyPair("10001", "", "89323ab0fba8422ba79b2ef4fb4948ee5158f927f63daebd35c7669fc1af6501ceed5fd13ac1d236d144d39808eb8da53aa0af26b17befd1abd6cfb1dcfba937438e4e95cd061e2ba372d422edbb72979f4ccd32f75503ad70769e299a4143a428380a2bd43c30b0c37fda51d6ee7adbfec1a9d0ad1891e1ae292d8fb992821b")
-	# encrypted = {secret: encryptedString(key, res_time + "|" + userid + "|" + userpass)}
-	# req_data = urllib.urlencode(encrypted)
-	# request_url = 'http://auth.igeek.asia/v1'
-	# res_data = urllib2.urlopen(req)
-    # if res_data.code == 0:
-        # return 'Accepted'
-    # else:
-        # return 'Rejected'
     req_data = urllib.urlencode({'userid': userid, 'userpass': userpass, 'submit1': u'登录'.encode('gb2312')})
     request_url = 'https://learn.tsinghua.edu.cn/MultiLanguage/lesson/teacher/loginteacher.jsp'
     req = urllib2.Request(url=request_url, data=req_data)
@@ -75,6 +63,24 @@ def validate_through_student(userid, userpass):
     return 'Error'
 
 
+
+# Function: To validate student number through AuthTHU provided by Chen Huarong
+# Recently Modified by: Liu Junlin
+# Date: 2014-11-11 18:56
+def validate_through_auth(userpass):
+    req_url = 'http://auth.igeek.asia/v1'
+    req_data = urllib.urlencode({'secret': userpass})
+    req = urllib2.Request(url = req_url, data = req_data)
+    res_data = urllib2.urlopen(req)
+    if res_data.code == 0:
+        return 'Accepted'
+    else:
+        return 'Rejected'
+
+
+
+# Recently Modified by: Liu Junlin
+# Date: 2014-11-11 19:14
 def validate_post(request):
     if (not request.POST) or (not 'openid' in request.POST) or \
             (not 'username' in request.POST) or (not 'password' in request.POST):
@@ -83,7 +89,8 @@ def validate_post(request):
     if not userid.isdigit():
         raise Http404
     userpass = request.POST['password'].encode('gb2312')
-    validate_result = validate_through_learn(userid, userpass)
+    #validate_result = validate_through_learn(userid, userpass)
+    validate_result = validate_through_auth(userpass)
     if validate_result == 'Accepted':
         openid = request.POST['openid']
         try:
