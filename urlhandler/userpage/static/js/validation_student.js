@@ -175,6 +175,7 @@ function submitValidation(openid) {
 
         console.log(url);
         console.log(params);
+        xmlhttp = new XMLHttpRequest();
         xmlhttp.open('POST', url, true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onreadystatechange = readyStateChanged;
