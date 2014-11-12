@@ -85,7 +85,7 @@ def get_timestamp():
     req_url = 'http://auth.igeek.asia/v1/time'
     req = urllib2.Request(url = req_url)
     res_data = urllib2.urlopen(req)
-    return res_data
+    return res_data.read()
 
 
 # Recently Modified by: Liu Junlin
