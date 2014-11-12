@@ -104,6 +104,28 @@ function readyStateChanged() {
 
 
 /**
+ * Function: Help to create CORS
+ * Modified by: Liu Junlin
+ * Date: 2014-11-12 15:53
+ */
+function createCORSRequest(method, url) {
+    var xhr = new XMLHttpRequest();
+    if ("withCredentials" in xhr) {
+        // XHR for Chrome/Firefox/Opera/Safari.
+        xhr.open(method, url, true);
+    } else if (typeof XDomainRequest != "undefined") {
+        // XDomainRequest for IE.
+        xhr = new XDomainRequest();
+        xhr.open(method, url);
+    } else {
+        // CORS not supported.
+        xhr = null;
+    }
+    return xhr;
+}
+
+
+/**
  * Function: submitValidation()
  * Modified by: Liu Junlin
  * Date: 2014-11-11 18:37
@@ -129,10 +151,13 @@ function submitValidation(openid) {
         */
 
         var timestampURL = 'http://auth.igeek.asia/v1/time';
-        xmlhttp = new XMLHttpRequest();
-        xmlhttp.open('GET', timestampURL, false);
-        xmlhttp.send(null);
-        var timestamp = xmlhttp.responseText;
+        var xhr = createCORSRequest('GET', timestampURL);
+        if (!xhr) {
+            alert('CORS not supported');
+            return;
+        }
+        xhr.send();
+        var timestamp = xhr.responseText;
         console.log('test point 1');
 
         var username = document.getElementById('inputUsername').value;
