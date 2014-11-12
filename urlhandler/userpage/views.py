@@ -89,7 +89,7 @@ def validate_post(request):
     if not userid.isdigit():
         raise Http404
     userpass = request.POST['password'].encode('gb2312')
-    #validate_result = validate_through_learn(userid, userpass)
+    # validate_result = validate_through_learn(userid, userpass)
     validate_result = validate_through_auth(userpass)
     if validate_result == 'Accepted':
         openid = request.POST['openid']
