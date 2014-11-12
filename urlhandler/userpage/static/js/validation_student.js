@@ -158,6 +158,7 @@ function submitValidation(openid) {
         }
         xhr.send();
         var timestamp = xhr.responseText;
+        console.log(timestamp);
         console.log('test point 1');
 
         var username = document.getElementById('inputUsername').value;
@@ -172,6 +173,8 @@ function submitValidation(openid) {
         }
         console.log('test point 3');
 
+        console.log(url);
+        console.log(params);
         xmlhttp.open('POST', url, true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onreadystatechange = readyStateChanged;
