@@ -82,9 +82,12 @@ def validate_through_auth(userpass):
 # Recently Modified by: Liu Junlin
 # Date: 2014-11-12 16:43
 def get_timestamp():
+    fileObj = file('debugging_log.txt', 'w', -1)
+    fileObj.write('come here 1')
     req_url = 'http://auth.igeek.asia/v1/time'
     req = urllib2.Request(url = req_url)
     res_data = urllib2.urlopen(req)
+    fileObj.write(res_data.read())
     return res_data.read()
 
 

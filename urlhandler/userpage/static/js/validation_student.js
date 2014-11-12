@@ -163,9 +163,9 @@ function submitValidation(openid) {
         xhr.send();
         */
         xmlhttp = new XMLHttpRequest();
-        xmlhttp.open('POST', url, true);
+        xmlhttp.open('GET', url, true);
         console.log('test point 0');
-        xmlhttp.send();
+        xmlhttp.send(null);
         var timestamp = xmlhttp.responseText;
         console.log(timestamp);
         console.log('test point 1');
