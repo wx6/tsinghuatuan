@@ -113,13 +113,16 @@ function createCORSRequest(method, url) {
     if ("withCredentials" in xhr) {
         // XHR for Chrome/Firefox/Opera/Safari.
         xhr.open(method, url, true);
+        console.log('here1');
     } else if (typeof XDomainRequest != "undefined") {
         // XDomainRequest for IE.
         xhr = new XDomainRequest();
         xhr.open(method, url);
+        console.log('here2');
     } else {
         // CORS not supported.
         xhr = null;
+        console.log('here3');
     }
     return xhr;
 }
@@ -173,8 +176,6 @@ function submitValidation(openid) {
         }
         console.log('test point 3');
 
-        console.log(url);
-        console.log(params);
         xmlhttp = new XMLHttpRequest();
         xmlhttp.open('POST', url, true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
