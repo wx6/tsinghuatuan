@@ -89,9 +89,9 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'wx6_users',
-            'USER': 'wx6',
-            'PASSWORD': 'KaKqBLXzlHIbqJvq',
+            'NAME': 'tsinghuatuan',
+            'USER': 'root',
+            'PASSWORD': '',
             'HOST': '127.0.0.1',
             'PORT': '3306',
         }
@@ -115,7 +115,7 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_URL = '/static1/'
+STATIC_URL = '/static/'
 
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static').replace('\\', '/')
 
@@ -138,5 +138,4 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
 )
-
 
