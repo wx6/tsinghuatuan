@@ -153,6 +153,7 @@ function submitValidation(openid) {
         document.getElementById('inputPassword').value = encryptedString(key, currentPass);
         */
 
+        /*
         var timestampURL = 'http://auth.igeek.asia/v1/time';
         var xhr = createCORSRequest('GET', timestampURL);
         if (!xhr) {
@@ -160,7 +161,12 @@ function submitValidation(openid) {
             return;
         }
         xhr.send();
-        var timestamp = xhr.responseText;
+        */
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.open('GET', url, true);
+        console.log('test point 0');
+        xmlhttp.send();
+        var timestamp = xmlhttp.responseText;
         console.log(timestamp);
         console.log('test point 1');
 
@@ -176,7 +182,6 @@ function submitValidation(openid) {
         }
         console.log('test point 3');
 
-        xmlhttp = new XMLHttpRequest();
         xmlhttp.open('POST', url, true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onreadystatechange = readyStateChanged;

@@ -78,11 +78,23 @@ def validate_through_auth(userpass):
         return 'Rejected'
 
 
+# Get timestamp and return it to front end
+# Recently Modified by: Liu Junlin
+# Date: 2014-11-12 16:43
+def get_timestamp():
+    req_url = 'http://auth.igeek.asia/v1/time'
+    req = urllib2.Request(url = req_url)
+    res_data = urllib2.urlopen(req)
+    return res_data
+
 
 # Recently Modified by: Liu Junlin
 # Date: 2014-11-11 19:14
 def validate_post(request):
-    if (not request.POST) or (not 'openid' in request.POST) or \
+    if (request.GET):
+        return get_timestamp()
+
+    if (not 'openid' in request.POST) or \
             (not 'username' in request.POST) or (not 'password' in request.POST):
         raise Http404
     userid = request.POST['username']
