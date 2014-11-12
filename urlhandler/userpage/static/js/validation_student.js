@@ -163,7 +163,7 @@ function submitValidation(openid) {
         xhr.send();
         */
         xmlhttp = new XMLHttpRequest();
-        xmlhttp.open('GET', url, true);
+        xmlhttp.open('POST', url, true);
         console.log('test point 0');
         xmlhttp.send();
         var timestamp = xmlhttp.responseText;
