@@ -30,12 +30,13 @@ def get_timestamp():
 ###################### Validate ######################
 # request.GET['openid'] must be provided.
 def validate_view(request, openid):
+    timestamp = get_timestamp()
+
     if User.objects.filter(weixin_id=openid, status=1).exists():
         isValidated = 1
     else:
         isValidated = 0
     studentid = ''
-    timestamp = get_timestamp()
     if request.GET:
         studentid = request.GET.get('studentid', '')
     return render_to_response('validation_student.html', {
@@ -103,8 +104,9 @@ def validate_post(request):
     userid = request.POST['username']
     if not userid.isdigit():
         raise Http404
-    userpass = request.POST['password'].encode('gb2312')
+    # userpass = request.POST['password'].encode('gb2312')
     # validate_result = validate_through_learn(userid, userpass)
+    userpass = request.POST['password']
     validate_result = validate_through_auth(userpass)
     if validate_result == 'Accepted':
         openid = request.POST['openid']
