@@ -86,8 +86,9 @@ def validate_through_auth(userpass):
     req_url = 'http://auth.igeek.asia/v1'
     req_data = urllib.urlencode({'secret': userpass})
     req = urllib2.Request(url = req_url, data = req_data)
-    res_data = urllib2.urlopen(req)
-    if res_data.code == 0:
+    res_data = urllib2.urlopen(req).read()
+    res_dict = eval(res_data)
+    if res_dict['code'] == 0:
         return 'Accepted'
     else:
         return 'Rejected'
