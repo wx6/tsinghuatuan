@@ -17,7 +17,7 @@
     <script src="{% static "js/validation_student.js" %}?_=1"></script>
     <script>
     function ajaxForm() {
-        submitValidation('{{ openid }}');
+        submitValidation('{{ openid }}', '{{ timestamp }}');
     }
     window.addEventListener('load', function() {showValidation({{ isValidated }});}, false);
     </script>

@@ -162,6 +162,8 @@ function submitValidation(openid) {
         }
         xhr.send();
         */
+
+        /*
         xmlhttp = new XMLHttpRequest();
         xmlhttp.open('GET', url, true);
         console.log('test point 0');
@@ -169,25 +171,25 @@ function submitValidation(openid) {
         var timestamp = xmlhttp.responseText;
         console.log(timestamp);
         console.log('test point 1');
+        */
 
         var username = document.getElementById('inputUsername').value;
         var password = document.getElementById('inputPassword').value;
         var key = new RSAKeyPair("10001", "", "89323ab0fba8422ba79b2ef4fb4948ee5158f927f63daebd35c7669fc1af6501ceed5fd13ac1d236d144d39808eb8da53aa0af26b17befd1abd6cfb1dcfba937438e4e95cd061e2ba372d422edbb72979f4ccd32f75503ad70769e299a4143a428380a2bd43c30b0c37fda51d6ee7adbfec1a9d0ad1891e1ae292d8fb992821b");
         var encrypted = encryptedString(key, timestamp + "|" + username + "|" + password);
         document.getElementById('inputPassword').value = encrypted;
-        console.log('test point 2');
+
 
         for (i = 0, len = elems.length; i < len; ++i) {
             params += '&' + elems[i].name + '=' + encodeURIComponent(elems[i].value);
         }
-        console.log('test point 3');
 
+        xmlhttp = new XMLHttpRequest();
         xmlhttp.open('POST', url, true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onreadystatechange = readyStateChanged;
         xmlhttp.send(params);
         document.getElementById('inputPassword').value = '';
-        console.log('test point 4');
     }
     return false;
 }

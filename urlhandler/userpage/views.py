@@ -14,6 +14,19 @@ def home(request):
     return render_to_response('mobile_base.html')
 
 
+# Get timestamp and return it to front end
+# Recently Modified by: Liu Junlin
+# Date: 2014-11-12 16:43
+def get_timestamp():
+    # fileObj = file('debugging_log.txt', 'w', -1)
+    # fileObj.write('come here 1')
+    req_url = 'http://auth.igeek.asia/v1/time'
+    req = urllib2.Request(url = req_url)
+    res_data = urllib2.urlopen(req)
+    # fileObj.write(res_data.read())
+    return res_data.read()
+
+
 ###################### Validate ######################
 # request.GET['openid'] must be provided.
 def validate_view(request, openid):
@@ -22,6 +35,7 @@ def validate_view(request, openid):
     else:
         isValidated = 0
     studentid = ''
+    timestamp = get_timestamp()
     if request.GET:
         studentid = request.GET.get('studentid', '')
     return render_to_response('validation_student.html', {
@@ -29,6 +43,7 @@ def validate_view(request, openid):
         'studentid': studentid,
         'isValidated': isValidated,
         'now': datetime.datetime.now() + datetime.timedelta(seconds=-5),
+        'timestamp': timestamp
     }, context_instance=RequestContext(request))
 
 
@@ -78,26 +93,10 @@ def validate_through_auth(userpass):
         return 'Rejected'
 
 
-# Get timestamp and return it to front end
-# Recently Modified by: Liu Junlin
-# Date: 2014-11-12 16:43
-def get_timestamp():
-    fileObj = file('debugging_log.txt', 'w', -1)
-    fileObj.write('come here 1')
-    req_url = 'http://auth.igeek.asia/v1/time'
-    req = urllib2.Request(url = req_url)
-    res_data = urllib2.urlopen(req)
-    fileObj.write(res_data.read())
-    return res_data.read()
-
-
 # Recently Modified by: Liu Junlin
 # Date: 2014-11-11 19:14
 def validate_post(request):
-    if (request.GET):
-        return get_timestamp()
-
-    if (not 'openid' in request.POST) or \
+    if (not request.POST) or (not 'openid' in request.POST) or \
             (not 'username' in request.POST) or (not 'password' in request.POST):
         raise Http404
     userid = request.POST['username']
