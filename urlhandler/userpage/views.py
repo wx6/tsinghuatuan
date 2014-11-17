@@ -16,14 +16,11 @@ def home(request):
 
 # Get timestamp and return it to front end
 # Recently Modified by: Liu Junlin
-# Date: 2014-11-12 16:43
+# Date: 2014-11-17 16:32
 def get_timestamp():
-    # fileObj = file('debugging_log.txt', 'w', -1)
-    # fileObj.write('come here 1')
     req_url = 'http://auth.igeek.asia/v1/time'
     req = urllib2.Request(url = req_url)
     res_data = urllib2.urlopen(req)
-    # fileObj.write(res_data.read())
     return res_data.read()
 
 
@@ -82,7 +79,7 @@ def validate_through_student(userid, userpass):
 
 # Function: To validate student number through AuthTHU provided by Chen Huarong
 # Recently Modified by: Liu Junlin
-# Date: 2014-11-11 18:56
+# Date: 2014-11-17 16:32
 def validate_through_auth(userpass):
     req_url = 'http://auth.igeek.asia/v1'
     req_data = urllib.urlencode({'secret': userpass})
@@ -96,7 +93,7 @@ def validate_through_auth(userpass):
 
 
 # Recently Modified by: Liu Junlin
-# Date: 2014-11-11 19:14
+# Date: 2014-11-17 16:32
 def validate_post(request):
     if (not request.POST) or (not 'openid' in request.POST) or \
             (not 'username' in request.POST) or (not 'password' in request.POST):

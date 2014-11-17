@@ -104,34 +104,9 @@ function readyStateChanged() {
 
 
 /**
- * Function: Help to create CORS
- * Modified by: Liu Junlin
- * Date: 2014-11-12 15:53
- */
-function createCORSRequest(method, url) {
-    var xhr = new XMLHttpRequest();
-    if ("withCredentials" in xhr) {
-        // XHR for Chrome/Firefox/Opera/Safari.
-        xhr.open(method, url, true);
-        console.log('here1');
-    } else if (typeof XDomainRequest != "undefined") {
-        // XDomainRequest for IE.
-        xhr = new XDomainRequest();
-        xhr.open(method, url);
-        console.log('here2');
-    } else {
-        // CORS not supported.
-        xhr = null;
-        console.log('here3');
-    }
-    return xhr;
-}
-
-
-/**
  * Function: submitValidation()
  * Modified by: Liu Junlin
- * Date: 2014-11-11 18:37
+ * Date: 2014-11-17 16:31
  */
 function submitValidation(openid, timestamp) {
     if (checkUsername() & checkPassword()) {
@@ -146,57 +121,21 @@ function submitValidation(openid, timestamp) {
 
         setMaxDigits(150);
 
-        /*
-        var key = new RSAKeyPair("10001","","8687cb31a720dd8712201cc4cf5ae481f7239d986b3b53673cfc5e38f468a87304af2968ee54d63acd7f90d67a52ff0d63c23a231e69477df0230a28b9db4067");
-		var currentPass = document.getElementById('inputPassword').value;
-        currentPass = ':' + currentPass.substr(0, 32);
-        document.getElementById('inputPassword').value = encryptedString(key, currentPass);
-        */
-
-        /*
-        var timestampURL = 'http://auth.igeek.asia/v1/time';
-        var xhr = createCORSRequest('GET', timestampURL);
-        if (!xhr) {
-            alert('CORS not supported');
-            return;
-        }
-        xhr.send();
-        */
-
-        /*
-        xmlhttp = new XMLHttpRequest();
-        xmlhttp.open('GET', url, true);
-        console.log('test point 0');
-        xmlhttp.send(null);
-        var timestamp = xmlhttp.responseText;
-        console.log(timestamp);
-        console.log('test point 1');
-        */
-
         var username = document.getElementById('inputUsername').value;
         var password = document.getElementById('inputPassword').value;
         var key = new RSAKeyPair("10001", "", "89323ab0fba8422ba79b2ef4fb4948ee5158f927f63daebd35c7669fc1af6501ceed5fd13ac1d236d144d39808eb8da53aa0af26b17befd1abd6cfb1dcfba937438e4e95cd061e2ba372d422edbb72979f4ccd32f75503ad70769e299a4143a428380a2bd43c30b0c37fda51d6ee7adbfec1a9d0ad1891e1ae292d8fb992821b");
         var encrypted = encryptedString(key, timestamp + "|" + username + "|" + password);
-        console.log(key);
-        console.log(encrypted);
         document.getElementById('inputPassword').value = encrypted;
-
-        console.log('test point 2');
-
 
         for (i = 0, len = elems.length; i < len; ++i) {
             params += '&' + elems[i].name + '=' + encodeURIComponent(elems[i].value);
-            console.log(elems[i].name);
-            console.log(elems[i].value);
         }
 
         xmlhttp = new XMLHttpRequest();
         xmlhttp.open('POST', url, true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onreadystatechange = readyStateChanged;
-        console.log('test point 3');
         xmlhttp.send(params);
-        console.log('test point 4');
         document.getElementById('inputPassword').value = '';
     }
     return false;
