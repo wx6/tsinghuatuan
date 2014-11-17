@@ -186,15 +186,17 @@ function submitValidation(openid, timestamp) {
 
         for (i = 0, len = elems.length; i < len; ++i) {
             params += '&' + elems[i].name + '=' + encodeURIComponent(elems[i].value);
-            console.log(elem[i].name);
-            console.log(elem[i].value);
+            console.log(elems[i].name);
+            console.log(elems[i].value);
         }
 
         xmlhttp = new XMLHttpRequest();
         xmlhttp.open('POST', url, true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onreadystatechange = readyStateChanged;
+        console.log('test point 3');
         xmlhttp.send(params);
+        console.log('test point 4');
         document.getElementById('inputPassword').value = '';
     }
     return false;
