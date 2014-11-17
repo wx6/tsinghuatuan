@@ -133,7 +133,7 @@ function createCORSRequest(method, url) {
  * Modified by: Liu Junlin
  * Date: 2014-11-11 18:37
  */
-function submitValidation(openid) {
+function submitValidation(openid, timestamp) {
     if (checkUsername() & checkPassword()) {
         disableAll(true);
         showLoading(true);
