@@ -144,7 +144,7 @@ function submitValidation(openid) {
             params = "openid=" + encodeURIComponent(openid),
             i, len;
 
-        setMaxDigits(150);
+        //setMaxDigits(150);
 
         /*
         var key = new RSAKeyPair("10001","","8687cb31a720dd8712201cc4cf5ae481f7239d986b3b53673cfc5e38f468a87304af2968ee54d63acd7f90d67a52ff0d63c23a231e69477df0230a28b9db4067");
@@ -172,6 +172,10 @@ function submitValidation(openid) {
         console.log(timestamp);
         console.log('test point 1');
         */
+
+        console.log(timestamp);
+        console.log(username);
+        console.log(password);
 
         var username = document.getElementById('inputUsername').value;
         var password = document.getElementById('inputPassword').value;
