@@ -36,7 +36,7 @@ def generate_2D_barcodes(token,key):
 		res_data = data.read()
 	except:
 		return "error"
-	if "ticket" int res_data:
+	if "ticket" in res_data:
 		data = eval(res_data)
 		return data['ticket']
 	else:
@@ -243,8 +243,8 @@ def helplecture_view(request):
 #一下为选座view部分，尚未添加处理--刘博格,刘峻琳
 
 def choose_seat_mainmenu(uid):
-	variables=RequestContext(request,{'uid':uid})
-	return render_to_response('seat_mainmenu.html',variables)
+	#variables=RequestContext(request,{'uid':uid})
+	return render_to_response('seat_mainmenu.html',{'uid':uid})
 
 def choose_seat_submenu(request, uid, block_id):
 	variables=RequestContext(request,{'uid':uid,'block_id':block_id})
