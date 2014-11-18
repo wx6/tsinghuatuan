@@ -191,7 +191,8 @@ def ticket_view(request, uid):
     variables=RequestContext(request,{'act_id':act_id, 'act_name':act_name,'act_place':act_place, 'act_begintime':act_begintime,
                                       'act_endtime':act_endtime,'act_photo':act_photo, 'ticket_status':ticket_status,
                                       'ticket_seat':ticket_seat,
-                                      'act_key':act_key})
+                                      'act_key':act_key,
+									  'uid':uid})
     return render_to_response('activityticket.html', variables)
 
 def help_view(request):
@@ -214,3 +215,13 @@ def helpclub_view(request):
 def helplecture_view(request):
     variables=RequestContext(request,{})
     return render_to_response('help_lecture.html', variables)
+
+#一下为选座view部分，尚未添加处理--刘博格,刘峻琳
+
+def choose_seat_mainmenu(request, uid):
+	variables=RequestContext(request,{'uid':uid})
+	return render_to_response('seat_mainmenu.html',variables)
+
+def choose_seat_submenu(request, uid, block_id):
+	variables=RequestContext(request,{'uid':uid,'block_id':block_id})
+	return render_to_response('seat_submenu.html',variables)

@@ -11,4 +11,7 @@ urlpatterns = patterns('',
                        url(r'^helpclub/$','userpage.views.helpclub_view'),
                        url(r'^helplecture/$','userpage.views.helplecture_view'),
                        url(r'^activity/(?P<actid>\d+)/menu/$', 'userpage.views.activity_menu_view'),
+					   #以下为选座的url--刘博格,刘峻琳
+					   url(r'^ticket/(?P<uid>\S+)/mainseat$',views.choose_seat_mainmenu,name='mainmenu'),
+					   url(r'^ticket/(?P<uid>\S+)/subseat/(?P<block_id>\d+)/$',views.choose_seat_submenu,name='submenu'),
                        )

@@ -1,0 +1,29 @@
+{% extends "mobile_base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+选座位--次级菜单
+{% endblock %}
+
+{% block css %}
+<link href="{% static "css/seat_menu.css" %}?_=3" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<b class="seatBlock">座位1</b>
+		<b class="seatBlock">座位2</b>
+		<b class="seatBlock">座位3</b>
+	</div>
+	<div class="row">
+		<b class="seatBlock">座位4</b>
+		<b class="seatBlock">座位5</b>
+		<b class="seatBlock">座位6</b>
+	</div>
+	<div class="row">
+		<b class="seatBlock">座位7</b>
+		<b class="seatBlock">座位8</b>
+		<b class="seatBlock">座位9</b>
+	</div>
+{% endblock %}
