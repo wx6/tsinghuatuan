@@ -55,7 +55,7 @@
     <div class="ticket-wrapper">
 		<b class="botton" onclick="find()">发现</b>
 		{% if ticket_status == 1 %}
-		<b class="botton" href="{% url 'userpage.views.choose_seat_mainmenu' %}">选座</b>
+		<b class="botton" href="{% url 'userpage.views.choose_seat_mainmenu' UID=uid %}">选座</b>
 		{% elif ticket_status == 3 %}
 		<b class="botton" onclick="comment()">评价</b>
 		{% else %}

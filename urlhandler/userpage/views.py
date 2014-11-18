@@ -242,8 +242,8 @@ def helplecture_view(request):
 
 #一下为选座view部分，尚未添加处理--刘博格,刘峻琳
 
-def choose_seat_mainmenu(request):
-	variables=RequestContext(request,{})
+def choose_seat_mainmenu(request,UID):
+	variables=RequestContext(request,{'UID':UID})
 	return render_to_response('seat_mainmenu.html',variables)
 
 def choose_seat_submenu(request, uid, block_id):
