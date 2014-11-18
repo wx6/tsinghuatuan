@@ -21,31 +21,7 @@
 {% block content %}
 
     {% include 'activityphoto.html' %}
-	
-	<div class="ticket-wrapper">
-		<b class="botton" onclick="find()">发现</b>
-		{% if ticket_status == 1 %}
-		<b class="botton" onclick="chooseSeat()">选座</b>
-		{% elif ticket_status == 3 %}
-		<b class="botton" onclick="comment()">评价</b>
-		{% else %}
-		{% endif %}
-		<b class="botton" onclick="share()">分享</b>
-	</div>
-	
-    <div class="ticket-wrapper">
-        <b>电子票状态：</b>
-        {% if ticket_status == 0 %}
-            <span class="status-size ticket-invalid">无效</span>
-        {% elif ticket_status == 1 %}
-            <span class="status-size ticket-valid">未使用</span>
-        {% elif ticket_status == 2 %}
-            <span class="status-size ticket-used">已使用</span>
-        {% elif ticket_status == 3 %}
-            <span class="status-size ticket-used">活动已结束</span>
-        {% else %}
-        {% endif %}
-    </div>
+
     <div class="ticket-wrapper">
         活动地点：<b>{{ act_place }}</b>
     </div>
