@@ -38,8 +38,8 @@ class Ticket(models.Model):
     activity = models.ForeignKey(Activity)
     status = models.IntegerField()
     seat = models.CharField(max_length=255)
-    barcode_key = models.CharField(max_length=255)
-    barcode_number = models.IntegerField()
+    #barcode_key = models.CharField(max_length=255)
+    #barcode_number = models.IntegerField()
     # Something about isUsed
     # 0: ticket order is cancelled
     # 1: ticket order is valid
