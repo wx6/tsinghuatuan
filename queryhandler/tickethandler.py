@@ -246,8 +246,8 @@ def book_ticket(user, key, now):
 				unique_id=random_string,
 				status=1,
 				seat=next_seat,
-				barcode_number=ticket_number,
-				barcode_key=ticket_key
+				barcode_number=1,
+				barcode_key="dwq"
 			)
 			return ticket
 		elif tickets[0].status == 0:
