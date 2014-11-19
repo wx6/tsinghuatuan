@@ -232,11 +232,11 @@ def book_ticket(user, key, now):
 
 		if not tickets.exists():
 			Activity.objects.filter(id=activity.id).update(remain_tickets=F('remain_tickets')-1)
-			tickets = Ticket.objects.order_by('number')
-			if tickets.exists():
-				ticket_number = tickets[0].barcode_number+1
-			else:
-				ticket_number = 1
+			#tickets = Ticket.objects.order_by('number')
+			#if tickets.exists():
+			#	ticket_number = tickets[0].barcode_number+1
+			#else:
+			#	ticket_number = 1
 			#ticket_key = generate_2D_barcodes(ticket_number)
 			#if(ticket_key == 'error'):
 			#	return None
