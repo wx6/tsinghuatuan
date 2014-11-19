@@ -12,7 +12,7 @@ from queryhandler.weixin_reply_templates import *
 from queryhandler.weixin_text_templates import *
 from queryhandler.handler_check_templates import *
 from queryhandler.weixin_msg import *
-from weixinlib.settings import WEIXIN_EVENT_KEYS
+from weixinlib.settings import WEIXIN_EVENT_KEYS,WEIXIN_TOKEN
 
 
 def get_user(openid):
@@ -35,6 +35,24 @@ def get_reply_single_ticket(msg, ticket, now, ext_desc=''):
 def is_authenticated(openid):
     return get_user(openid) is not None
 
+# Generate two-dimensional barcodes by weixin server
+# By: Li Yinghui
+# Date: 2014-11-17
+def generate_2D_barcodes(key):
+	req_url =  'https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=' + WEIXIN_TOKEN
+	values = {"action_name":"QR_LIMIT_SCENE","action_info": {"scene": {"scene_id": key}}}
+	req_data = urllib.urlencode(values)
+	req = urllib2.Request(req_url, req_data)
+	res = urllib2.urlopen(req)
+	try:
+		res_data = res.read()
+	except:
+		return "error"
+	if "ticket" in res_data:
+		data = eval(res_data)
+		return data['ticket']
+	else:
+		return "error"
 
 #check help command
 def check_help_or_subscribe(msg):
@@ -213,12 +231,22 @@ def book_ticket(user, key, now):
 
         if not tickets.exists():
             Activity.objects.filter(id=activity.id).update(remain_tickets=F('remain_tickets')-1)
+			tickets = Ticket.objects.order_by('number')
+			if tickets.exits():
+				ticket_number = tickets[0].number+1
+			else:
+				ticket_number = 1
+			ticket_key = generate_2D_barcodes(ticket_number)
+			if(ticket_number == 'error'):
+				return None
             ticket = Ticket.objects.create(
                 stu_id=user.stu_id,
                 activity=activity,
                 unique_id=random_string,
                 status=1,
-                seat=next_seat
+                seat=next_seat,
+				number=ticket_number,
+				key=ticket_key
             )
             return ticket
         elif tickets[0].status == 0:

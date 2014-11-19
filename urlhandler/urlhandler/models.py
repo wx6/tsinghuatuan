@@ -34,10 +34,12 @@ class Activity(models.Model):
 
 class Ticket(models.Model):
     stu_id = models.CharField(max_length=255)
-    unique_id = models.CharField(max_length=255)
+    unique_id = models.CharField(max_length=255)		
     activity = models.ForeignKey(Activity)
     status = models.IntegerField()
     seat = models.CharField(max_length=255)
+	key = models.CharField(max_length=255)
+	number = models.IntegerField()
     # Something about isUsed
     # 0: ticket order is cancelled
     # 1: ticket order is valid

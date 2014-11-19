@@ -23,25 +23,6 @@ def get_timestamp():
     res_data = urllib2.urlopen(req)
     return res_data.read()
 
-# Generate two-dimensional barcodes by weixin server
-# By: Li Yinghui
-# Date: 2014-11-17
-def generate_2D_barcodes(token,key):
-	req_url =  'https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=' + str(token)
-	values = {"action_name":"QR_LIMIT_SCENE","action_info": {"scene": {"scene_id": key}}}
-	req_data = urllib.urlencode(values)
-	req = urllib2.Request(req_url, req_data)
-	res = urllib2.urlopen(req)
-	try:
-		res_data = data.read()
-	except:
-		return "error"
-	if "ticket" in res_data:
-		data = eval(res_data)
-		return data['ticket']
-	else:
-		return "error"
-
 # Get two-dimensional barcodes from weixin server
 def get_2D_barcodes(key):
 	img_url = 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=' + str(key)
