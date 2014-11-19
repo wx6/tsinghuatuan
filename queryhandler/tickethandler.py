@@ -231,27 +231,27 @@ def book_ticket(user, key, now):
 				next_seat = 'C'
 
 		if not tickets.exists():
-            try:
-                Activity.objects.filter(id=activity.id).update(remain_tickets=F('remain_tickets')-1)
-                #tickets = Ticket.objects.order_by('number')
-                #if tickets.exists():
-                #	ticket_number = tickets[0].barcode_number+1
-                #else:
-                #	ticket_number = 1
-                #ticket_key = generate_2D_barcodes(ticket_number)
-                #if(ticket_key == 'error'):
-                #	return None
-                ticket = Ticket.objects.create(
-                    stu_id=user.stu_id,
-                    activity=activity,
-                    unique_id=random_string,
-                    status=1,
-                    seat=next_seat,
-                    barcode_number=1,
-                    barcode_key="dwq"
-                )
-            except Exception as e:
-                return None
+			try:
+				Activity.objects.filter(id=activity.id).update(remain_tickets=F('remain_tickets')-1)
+				#tickets = Ticket.objects.order_by('number')
+				#if tickets.exists():
+				#	ticket_number = tickets[0].barcode_number+1
+				#else:
+				#	ticket_number = 1
+				#ticket_key = generate_2D_barcodes(ticket_number)
+				#if(ticket_key == 'error'):
+				#	return None
+				ticket = Ticket.objects.create(
+					stu_id=user.stu_id,
+					activity=activity,
+					unique_id=random_string,
+					status=1,
+					seat=next_seat,
+					barcode_number=1,
+					barcode_key="dwq"
+				)
+			except Exception as e:
+				return None
 			return ticket
 		elif tickets[0].status == 0:
 			Activity.objects.filter(id=activity.id).update(remain_tickets=F('remain_tickets')-1)
