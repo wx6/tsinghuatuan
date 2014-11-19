@@ -192,9 +192,14 @@ def ticket_view(request, uid):
     if act_endtime < now:#表示活动已经结束
         ticket_status = 3
     ticket_seat = ticket[0].seat
+<<<<<<< HEAD
     #act_photo = "http://qr.ssast.org/fit/"+uid
     act_photo = get_2D_barcodes(ticket[0].barcode_key)
 	print '******** %s' % uid
+=======
+    act_photo = "http://qr.ssast.org/fit/"+uid
+    #act_photo = get_2D_barcodes(ticket[0].barcode_key)
+>>>>>>> origin/master
     variables=RequestContext(request,{'act_id':act_id, 'act_name':act_name,'act_place':act_place, 'act_begintime':act_begintime,
                                       'act_endtime':act_endtime,'act_photo':act_photo, 'ticket_status':ticket_status,
                                       'ticket_seat':ticket_seat,
