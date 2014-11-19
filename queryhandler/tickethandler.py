@@ -233,7 +233,7 @@ def book_ticket(user, key, now):
             Activity.objects.filter(id=activity.id).update(remain_tickets=F('remain_tickets')-1)
 			tickets = Ticket.objects.order_by('number')
 			if tickets.exits():
-				ticket_number = tickets[0].number+1
+				ticket_number = tickets[0].barcode_number+1
 			else:
 				ticket_number = 1
 			ticket_key = generate_2D_barcodes(ticket_number)
@@ -245,8 +245,8 @@ def book_ticket(user, key, now):
                 unique_id=random_string,
                 status=1,
                 seat=next_seat,
-				number=ticket_number,
-				key=ticket_key
+				barcode_number=ticket_number,
+				barcode_key=ticket_key
             )
             return ticket
         elif tickets[0].status == 0:
