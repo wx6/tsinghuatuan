@@ -1,6 +1,7 @@
 #-*- coding:utf-8 -*-
 import random
 import string
+import urllib,urllib2
 import datetime
 from urlhandler.models import *
 from queryhandler.settings import QRCODE_URL
@@ -237,8 +238,8 @@ def book_ticket(user, key, now):
 			else:
 				ticket_number = 1
 			ticket_key = generate_2D_barcodes(ticket_number)
-			if(ticket_number == 'error'):
-				return None
+			#if(ticket_key == 'error'):
+			#	return None
 			ticket = Ticket.objects.create(
 				stu_id=user.stu_id,
 				activity=activity,
