@@ -193,7 +193,7 @@ def ticket_view(request, uid):
         ticket_status = 3
     ticket_seat = ticket[0].seat
     #act_photo = "http://qr.ssast.org/fit/"+uid
-	act_photo = get_2D_barcodes(ticket[0].barcode_key)
+    act_photo = get_2D_barcodes(ticket[0].barcode_key)
     variables=RequestContext(request,{'act_id':act_id, 'act_name':act_name,'act_place':act_place, 'act_begintime':act_begintime,
                                       'act_endtime':act_endtime,'act_photo':act_photo, 'ticket_status':ticket_status,
                                       'ticket_seat':ticket_seat,
@@ -224,9 +224,9 @@ def helplecture_view(request):
 #一下为选座view部分，尚未添加处理--刘博格,刘峻琳
 
 def choose_seat_mainmenu(request,uid):
-	variables=RequestContext(request,{'uid':uid})
-	return render_to_response('seat_mainmenu.html',variables)
+    variables=RequestContext(request,{'uid':uid})
+    return render_to_response('seat_mainmenu.html',variables)
 
 def choose_seat_submenu(request, uid, block_id):
-	variables=RequestContext(request,{'uid':uid,'block_id':block_id})
-	return render_to_response('seat_submenu.html',variables)
+    variables=RequestContext(request,{'uid':uid,'block_id':block_id})
+    return render_to_response('seat_submenu.html',variables)
