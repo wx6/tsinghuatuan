@@ -138,8 +138,8 @@ def check_fetch_ticket(msg):
 
 #handle order message
 def response_fetch_ticket(msg):
-    fromuser = get_msg_from(msg)
-    user = get_user(fromuser)
+	fromuser = get_msg_from(msg)
+	user = get_user(fromuser)
 	if user is None:
 		return get_reply_text_xml(msg, get_text_unbinded_fetch_ticket(fromuser))
 
