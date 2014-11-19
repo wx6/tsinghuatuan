@@ -237,7 +237,7 @@ def book_ticket(user, key, now):
 				ticket_number = tickets[0].barcode_number+1
 			else:
 				ticket_number = 1
-			ticket_key = generate_2D_barcodes(ticket_number)
+			#ticket_key = generate_2D_barcodes(ticket_number)
 			#if(ticket_key == 'error'):
 			#	return None
 			ticket = Ticket.objects.create(
