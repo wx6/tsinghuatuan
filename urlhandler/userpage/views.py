@@ -202,13 +202,12 @@ def ticket_view(request, uid):
     variables=RequestContext(request,{'act_id':act_id, 'act_name':act_name,'act_place':act_place, 'act_begintime':act_begintime,
                                       'act_endtime':act_endtime,'act_photo':act_photo, 'ticket_status':ticket_status,
                                       'ticket_seat':ticket_seat,
-                                      'act_key':act_key,'mainmenu':mainmenu})
+                                      'act_key':act_key,'mainmenu':mainmenu,'uid':uid})
     return render_to_response('activityticket.html', variables)
 
 def help_view(request):
     variables=RequestContext(request,{'name':u'“紫荆之声”'})
     return render_to_response('help.html', variables)
-
 
 def activity_menu_view(request, actid):
     activity = Activity.objects.get(id=actid)
