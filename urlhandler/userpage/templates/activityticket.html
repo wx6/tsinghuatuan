@@ -56,7 +56,7 @@
 		<b class="botton" onclick="find()">发现</b>
 		{% if ticket_status == 1 %}
 		<!--<b class="botton">选座</b>-->
-		<b class="botton" href="{{ mainmenu }}">选座{{ mainmenu }}+{{ uid }}</b>
+		<b class="botton" href="{{ mainmenu }}">选座{{ mainmenu }}+{{ uid }}+{{ tichet_status }}</b>
 		{% elif ticket_status == 3 %}
 		<b class="botton" onclick="comment()">评价</b>
 		{% else %}
