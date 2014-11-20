@@ -18,7 +18,6 @@ from queryhandler.settings import SITE_DOMAIN, SITE_HTTP_PROTOCOL
 def app(environ, start_response):
     update_site_domain(environ.get('HTTP_HOST', ''))
     if environ.get('PATH_INFO', '') == LUCKY_URL:
-        print '************************'
         result = handle_weixin_request(environ)
         status = '200 OK'
         headers = [('Content-type', 'text/html')]

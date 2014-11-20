@@ -8,6 +8,7 @@ from urlhandler.settings import STATIC_URL
 import urllib, urllib2
 import datetime
 from django.utils import timezone
+from userpage.safe_reverse import *
 
 
 def home(request):
@@ -197,10 +198,11 @@ def ticket_view(request, uid):
     print '******** %s' % uid
     act_photo = "http://qr.ssast.org/fit/"+uid
     #act_photo = get_2D_barcodes(ticket[0].barcode_key)
+    mainmenu = s_safe_reverse_seat_mainmenu(uid)
     variables=RequestContext(request,{'act_id':act_id, 'act_name':act_name,'act_place':act_place, 'act_begintime':act_begintime,
                                       'act_endtime':act_endtime,'act_photo':act_photo, 'ticket_status':ticket_status,
                                       'ticket_seat':ticket_seat,
-                                      'act_key':act_key,'uid':uid})
+                                      'act_key':act_key,'mainmenu':mainmenu})
     return render_to_response('activityticket.html', variables)
 
 def help_view(request):
