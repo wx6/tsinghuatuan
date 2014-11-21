@@ -2,7 +2,7 @@
 
 from django.http import HttpResponse, Http404
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from urlhandler.models import User, Activity, Ticket
 from urlhandler.settings import STATIC_URL
 import urllib, urllib2
@@ -204,7 +204,10 @@ def ticket_view(request, uid):
                                     #  'act_endtime':act_endtime,'act_photo':act_photo, 'ticket_status':ticket_status,
                                     #  'ticket_seat':ticket_seat,
                                     #  'act_key':act_key})
-    return render_to_response('activityticket.html', locals())
+    #return render_to_response('activityticket.html', locals())
+    context = {'abd':2, 'mainmenu':mainmenu,'act_uid':act_uid,'act_id':act_id, 'act_name':act_name,'act_place':act_place, 'act_begintime':act_begintime,'act_endtime':act_endtime,'act_photo':act_photo, 'ticket_status':ticket_status,'ticket_seat':ticket_seat,'act_key':act_key}
+
+    return render(request, 'activityticket.html', context)
 
 def help_view(request):
     variables=RequestContext(request,{'name':u'“紫荆之声”'})
