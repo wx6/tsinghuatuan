@@ -200,14 +200,22 @@ def ticket_view(request, uid):
     act_photo = "http://qr.ssast.org/fit/"+uid
     #act_photo = get_2D_barcodes(ticket[0].barcode_key)
     mainmenu = s_safe_reverse_seat_mainmenu(uid)
-    # variables=RequestContext(request,{'abd':2, 'mainmenu':mainmenu,'act_uid':act_uid,'act_id':act_id, 'act_name':act_name,'act_place':act_place, 'act_begintime':act_begintime,
-                                     # 'act_endtime':act_endtime,'act_photo':act_photo, 'ticket_status':ticket_status,
-                                     # 'ticket_seat':ticket_seat,
-                                     # 'act_key':act_key})
-    # return render_to_response('activityticket.html', locals())
-    context = {'abd':2, 'mainmenu':mainmenu,'act_uid':act_uid,'act_id':act_id, 'act_name':act_name,'act_place':act_place, 'act_begintime':act_begintime,'act_endtime':act_endtime,'act_photo':act_photo, 'ticket_status':ticket_status,'ticket_seat':ticket_seat,'act_key':act_key}
-    print '#######'
-    return render_to_response('activityticket.html', context, context_instance=RequestContext(request))
+    variables=RequestContext(request,{'abd':2,
+                                      'mainmenu':mainmenu,
+                                      'act_uid':act_uid,
+                                      'act_id':act_id,
+                                      'act_name':act_name,
+                                      'act_place':act_place,
+                                      'act_begintime':act_begintime,
+                                      'act_endtime':act_endtime,
+                                      'act_photo':act_photo,
+                                      'ticket_status':ticket_status,
+                                      'ticket_seat':ticket_seat,
+                                      'act_key':act_key})
+    return render_to_response('activityticket.html', variables)
+    # context = {'abd':2, 'mainmenu':mainmenu,'act_uid':act_uid,'act_id':act_id, 'act_name':act_name,'act_place':act_place, 'act_begintime':act_begintime,'act_endtime':act_endtime,'act_photo':act_photo, 'ticket_status':ticket_status,'ticket_seat':ticket_seat,'act_key':act_key}
+    # print '#######'
+    # return render_to_response('activityticket.html', context, context_instance=RequestContext(request))
 
 def help_view(request):
     variables=RequestContext(request,{'name':u'“紫荆之声”'})
