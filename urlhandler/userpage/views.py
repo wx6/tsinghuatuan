@@ -212,7 +212,19 @@ def ticket_view(request, uid):
                                       'ticket_status':ticket_status,
                                       'ticket_seat':ticket_seat,
                                       'act_key':act_key})
-    return render_to_response('activityticket.html', variables)
+    
+    return render_to_response('activityticket.html', {'abd':ticket_status,
+                                      'mainmenu':mainmenu,
+                                      'act_uid':act_uid,
+                                      'act_id':act_id,
+                                      'act_name':act_name,
+                                      'act_place':act_place,
+                                      'act_begintime':act_begintime,
+                                      'act_endtime':act_endtime,
+                                      'act_photo':act_photo,
+                                      'ticket_status':ticket_status,
+                                      'ticket_seat':ticket_seat,
+                                      'act_key':act_key})
     # context = {'abd':2, 'mainmenu':mainmenu,'act_uid':act_uid,'act_id':act_id, 'act_name':act_name,'act_place':act_place, 'act_begintime':act_begintime,'act_endtime':act_endtime,'act_photo':act_photo, 'ticket_status':ticket_status,'ticket_seat':ticket_seat,'act_key':act_key}
     # print '#######'
     # return render_to_response('activityticket.html', context, context_instance=RequestContext(request))
