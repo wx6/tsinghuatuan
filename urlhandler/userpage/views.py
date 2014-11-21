@@ -212,10 +212,8 @@ def ticket_view(request, uid):
                                       'ticket_status':ticket_status,
                                       'ticket_seat':ticket_seat,
                                       'act_key':act_key})
-    
+
     return render_to_response('activityticket.html', {'abd':ticket_status,
-                                      'mainmenu':mainmenu,
-                                      'act_uid':act_uid,
                                       'act_id':act_id,
                                       'act_name':act_name,
                                       'act_place':act_place,
