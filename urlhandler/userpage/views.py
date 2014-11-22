@@ -209,7 +209,7 @@ def ticket_view(request, uid):
 									  'act_begintime':act_begintime,
 									  'act_endtime':act_endtime,
 									  'act_photo':act_photo,
-									  'ticket_status':ticket_status,
+									  'ticket_status':2,
 									  'ticket_seat':ticket_seat,
 									  'act_key':act_key})
 	return render_to_response('activityticket.html', variables)
