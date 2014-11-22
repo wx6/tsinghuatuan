@@ -59,10 +59,10 @@
         <br/>
      </div>
     <div class="ticket-wrapper">
-		<b class="button" onclick="find()">发现+{{uid}}</b>
+		<b class="button" onclick="find()">发现</b>
 		{% if ticket_status == 1 %}
 		<!--<b class="botton">选座</b>-->
-		<b class="button" href={% url 'mainmenu' uid %}>选座</b>
+		<b class="button" href="{% url 'mainmenu' uid %}">选座</b>
 		{% else %}
 		    {% if ticket_status == 3 %}
 		    <b class="button" onclick="comment()">评价</b>
