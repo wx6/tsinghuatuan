@@ -22,4 +22,4 @@ def s_reverse_activity_menu(actid):
     return SITE_DOMAIN + reverse('userpage.views.activity_menu_view', kwargs={'actid': actid})
 
 def s_safe_reverse_seat_mainmenu(uid):
-	return SITE_DOMAIN + reverse('userpage.views.seat_mainmenu', kwargs={'uid': uid})
+	return SITE_DOMAIN + reverse('userpage.views.seat_mainmenu_view')

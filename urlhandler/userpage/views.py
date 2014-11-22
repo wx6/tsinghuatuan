@@ -252,9 +252,8 @@ def helplecture_view(request):
 def seat_mainmenu_view(request):
     print 'aaaaaaaaaaaaaaaaaaaaaa'
     # variables=RequestContext(request,{'uid':uid})
-    return render_to_response('seat_mainmenu.html', {
-        'uid': uid
-    })
+    variables = RequestContext(request, {})
+    return render_to_response('seat_mainmenu.html', variables)
 
 
 def seat_submenu(request, uid, block_id):
