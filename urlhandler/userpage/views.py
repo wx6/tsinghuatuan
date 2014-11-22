@@ -258,5 +258,8 @@ def seat_mainmenu(request, uid):
 
 
 def seat_submenu(request, uid, block_id):
-    variables = RequestContext(request, {'uid': uid, 'block_id': block_id})
-    return render_to_response('seat_submenu.html', variables)
+    # variables = RequestContext(request, {'uid': uid, 'block_id': block_id})
+    return render_to_response('seat_submenu.html', {
+        'uid':uid,
+        'block_id':block_id
+    })
