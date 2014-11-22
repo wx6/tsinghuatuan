@@ -12,10 +12,10 @@
 
 {% block js %}
     <script type="text/javascript">
-        console.log(ticket_status);
-        console.log(abd);
-        console.log(mainmenu);
-        console.log(act_uid);
+        console.log({{ ticket_status }});
+        console.log({{ abd }});
+        console.log({{ mainmenu }});
+        console.log({{ act_uid }});
     </script>
     <script src="{% static "js/ticket.js" %}"></script>
 {% endblock %}
@@ -62,7 +62,7 @@
 		<b class="button" onclick="find()">发现+{{uid}}</b>
 		{% if ticket_status == 1 %}
 		<!--<b class="botton">选座</b>-->
-		<b class="button">选座{{ mainmenu }} {{ act_uid | safe }} {{ ticket_status }} {{ act_key }} {{ abd }}</b>
+		<b class="button">选座{{ mainmenu }} + {{ act_uid | safe }} + {{ ticket_status }} + {{ act_key }} + {{ abd }}</b>
 		{% else %}
 		    {% if ticket_status == 3 %}
 		    <b class="button" onclick="comment()">评价</b>
