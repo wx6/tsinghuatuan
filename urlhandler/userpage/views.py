@@ -199,10 +199,8 @@ def ticket_view(request, uid):
 	# print '******** %s' % uid
 	act_photo = "http://qr.ssast.org/fit/"+uid
 	#act_photo = get_2D_barcodes(ticket[0].barcode_key)
-	mainmenu = s_safe_reverse_seat_mainmenu(uid)
-	variables=RequestContext(request,{'abd':1,
-									  'mainmenu':mainmenu,
-									  'act_uid':act_uid,
+	#mainmenu = s_safe_reverse_seat_mainmenu(uid)
+	variables=RequestContext(request,{'uid':uid,
 									  'act_id':act_id,
 									  'act_name':act_name,
 									  'act_place':act_place,
