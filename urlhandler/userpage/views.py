@@ -239,9 +239,11 @@ def helplecture_view(request):
 
 def choose_seat_mainmenu(request,uid):
 	print '****************** %s' % uid
-	variables=RequestContext(request,{'uid':uid})
-	return render_to_response('choose_seat_mainmenu.html',variables)
+	# variables=RequestContext(request,{'uid':uid})
+	return render_to_response('seat_mainmenu.html', {
+        'uid':uid
+    })
 
 def choose_seat_submenu(request, uid, block_id):
 	variables=RequestContext(request,{'uid':uid,'block_id':block_id})
-	return render_to_response('choose_seat_submenu.html',variables)
+	return render_to_response('seat_submenu.html',variables)
