@@ -196,7 +196,7 @@ def ticket_view(request, uid):
 	ticket_seat = ticket[0].seat
 	# act_photo = "http://qr.ssast.org/fit/"+uid
 	# act_photo = get_2D_barcodes(ticket[0].barcode_key)
-	# print '******** %s' % uid
+	print '******** %s' % uid
 	act_photo = "http://qr.ssast.org/fit/"+uid
 	#act_photo = get_2D_barcodes(ticket[0].barcode_key)
 	#mainmenu = s_safe_reverse_seat_mainmenu(uid)
