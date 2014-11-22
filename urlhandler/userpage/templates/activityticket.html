@@ -59,10 +59,10 @@
         <br/>
      </div>
     <div class="ticket-wrapper">
-		<b class="button" onclick="find()">发现</b>
+		<a class="button" onclick="find()">发现</b>
 		{% if ticket_status == 1 %}
 		<!--<b class="botton">选座</b>-->
-		<a class="button" href="{% url 'mainmenu' uid %}">选座</a>
+		<a class="button" href="{% url "userpage.views.choose_seat_mainmenu" uid %}">选座</a>
 		{% else %}
 		    {% if ticket_status == 3 %}
 		    <b class="button" onclick="comment()">评价</b>
@@ -70,7 +70,7 @@
 		    <b class="button">其它</b>
 		    {% endif %}
 		{% endif %}
-		<b class="button" onclick="share()">分享</b>
+		<a class="button" onclick="share()">分享</b>
 	</div>
 
 {% endblock %}
