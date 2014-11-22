@@ -250,7 +250,7 @@ def helplecture_view(request):
 #一下为选座view部分，尚未添加处理--刘博格,刘峻琳
 
 def seat_mainmenu(request, uid):
-    print '****************** %s' % uid
+    print 'aaaaaaaaaaaaaaaaaaaaaa'
     # variables=RequestContext(request,{'uid':uid})
     return render_to_response('seat_mainmenu.html', {
         'uid': uid
