@@ -260,6 +260,7 @@ def seat_mainmenu_view(request, uid):
     location = tickets[0].activity.seat_status
 
     if location == 2:
+        print 'come here hahaha'
         seat_status_array = get_seat_status_tsinghua_hall(tickets[0])
         variables = RequestContext(request, {
             'seat_status': seat_status_array,
@@ -318,4 +319,6 @@ def get_seat_status_tsinghua_hall(ticket):
                 else:
                     row[str(y)] = 1
         res[str(x)] = row
+    res['1']['1'] = 2
+    res['1']['2'] = 2
     return res

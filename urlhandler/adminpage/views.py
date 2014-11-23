@@ -182,8 +182,6 @@ def activity_create(activity):
         preDict['seat_start'] = activities[0].seat_end + 1
     else:
         preDict['seat_start'] = 1
-    print type(preDict['seat_start'])
-    print type(preDict['total_tickets'])
     total_tickets = preDict['total_tickets']
     total_tickets = int(total_tickets)
     preDict['seat_end'] = preDict['seat_start'] + total_tickets - 1
