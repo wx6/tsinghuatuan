@@ -255,8 +255,7 @@ def helplecture_view(request):
 
 def seat_mainmenu_view(request, uid):
     print 'aaaaaaaaaaaaaaaaaaaaaa'
-    # variables=RequestContext(request, {'uid':uid})
-    variables = RequestContext(request, {})
+    variables = RequestContext(request, {'uid': uid})
 
     """
     tickets = Ticket.objects.filter(uid = uid)
