@@ -10,8 +10,7 @@ def s_reverse_activity_detail(activityid):
 
 
 def s_reverse_ticket_detail(uid):
-    print 'dddddddddddddddddddd'
-    return SITE_DOMAIN + reverse('userpage.views.seat_mainmenu_view')
+    return SITE_DOMAIN + reverse('userpage.views.s_reverse_ticket_detail', kwargs={'uid':uid})
 
 #def s_reverse_ticket_detail(uid):
 #    print 'ccccccccccccccccccc'

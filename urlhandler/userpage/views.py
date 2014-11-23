@@ -222,7 +222,7 @@ def ticket_view(request, uid):
 # print '#######'
 # return render_to_response('activityticket.html', context, context_instance=RequestContext(request))
 
-def help_views(request):
+def help_view(request):
     variables = RequestContext(request, {'name': u'“紫荆之声”'})
     return render_to_response('help.html', variables)
 
