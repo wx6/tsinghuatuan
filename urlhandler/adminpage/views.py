@@ -176,6 +176,9 @@ def activity_create(activity):
         preDict[k] = str_to_datetime(activity[k])
     preDict['status'] = 1 if ('publish' in activity) else 0
     preDict['remain_tickets'] = preDict['total_tickets']
+    # activities = Activity.objects.order_by("-seat_end")
+    # preDict['seat_start'] = activities[0].seat_end + 1
+    # preDict['seat_end'] = preDict['seat_start'] + preDict['total_tickets'] - 1
     newact = Activity.objects.create(**preDict)
     return newact
 

@@ -10,6 +10,8 @@ import datetime
 from django.utils import timezone
 from userpage.safe_reverse import *
 
+import json
+
 
 def home(request):
     return render_to_response('mobile_base.html')
@@ -247,11 +249,71 @@ def helplecture_view(request):
     return render_to_response('help_lecture.html', variables)
 
 
-def seat_mainmenu_view(request,uid):
-    variables = RequestContext(request, {'uid':uid})
+
+# functions below are about choosing seats
+# By: Liu Junlin
+
+def seat_mainmenu_view(request, uid):
+    print 'aaaaaaaaaaaaaaaaaaaaaa'
+    # variables=RequestContext(request, {'uid':uid})
+    variables = RequestContext(request, {})
+
+    """
+    tickets = Ticket.objects.filter(uid = uid)
+    activity = tickets[0].activity
+    location = activity.seat_status
+    if location == 2:
+        seat_status_array = get_seat_status_tsinghua_hall(activity)
+        variables = RequestContext(request, {
+            'seat_status':seat_status_array
+        })
+        return render_to_response('seat_tsinghua_hall.html', variables)
+    """
+
     return render_to_response('seat_mainmenu.html', variables)
 
 
 def seat_submenu(request, uid, block_id):
     variables = RequestContext(request, {'uid': uid, 'block_id': block_id})
-    return render_to_response('seat_submenu.html',variables)
+    return render_to_response('seat_submenu.html', variables)
+
+
+def choose_seat_post(request, uid):
+    if not request.POST:
+        raise Http404
+
+    post = request.POST
+    tickets = Ticket.objects.filter(uid = uid, status = 1)
+    rtnJSON = dict()
+
+    if not tickets.exist():
+        rtnJSON['error'] = u'该电子票已无法进行选座操作'
+        return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),
+                            content_type='application/json')
+
+    current_ticket = tickets[0]
+    seat_chosen = post['seatid']
+    real_seatid = current_ticket.activity.seat_start + seat_chosen - 1
+
+    tickets = Ticket.objects.filter(seat_id = real_seatid)
+    if tickets.exists():
+        rtnJSON['error'] = u'该座位已被其它小伙伴抢到'
+    else:
+        current_ticket.seat_id = real_seatid
+        current_ticket.save()
+
+
+def get_seat_status_tsinghua_hall(activity):
+    res = {}
+    for x in range(1,4):
+        row = {}
+        for y in range(1, 10):
+            seat_id = (x - 1) * 10 + y
+            seat_id = activity.seat_start + seat_id - 1
+            tickets = Ticket.objects.filter(seat_id = seat_id)
+            if tickets.exists():
+                row[y] = 1
+            else:
+                row[y] = 0
+        res[x] = row
+    return res

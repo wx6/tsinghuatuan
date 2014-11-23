@@ -19,6 +19,8 @@ class Activity(models.Model):
     book_start = models.DateTimeField()
     book_end = models.DateTimeField()
     seat_status = models.IntegerField(default=0)
+    # seat_start = models.IntegerField(default=0)
+    # seat_end = models.IntegerField(default=0)
     total_tickets = models.IntegerField()
     status = models.IntegerField()
     pic_url = models.CharField(max_length=255)
@@ -38,8 +40,9 @@ class Ticket(models.Model):
     activity = models.ForeignKey(Activity)
     status = models.IntegerField()
     seat = models.CharField(max_length=255)
-    #barcode_key = models.CharField(max_length=255)
-    #barcode_number = models.IntegerField()
+    # seat_id = models.IntegerField()
+    # barcode_key = models.CharField(max_length=255)
+    # barcode_number = models.IntegerField()
     # Something about isUsed
     # 0: ticket order is cancelled
     # 1: ticket order is valid
