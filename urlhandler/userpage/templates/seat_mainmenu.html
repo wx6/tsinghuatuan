@@ -12,18 +12,18 @@
 
 {% block content %}
 	<div class="row">
-		<b class="seatBlock">座位区1</b>
-		<b class="seatBlock">座位区2</b>
-		<b class="seatBlock">座位区3</b>
+		<a class="seatBlock" href="{% url 'userpage.views.seat_submenu' uid 1 %}">座位区1</a>
+		<a class="seatBlock" href="{% url 'userpage.views.seat_submenu' uid 2 %}">座位区2</a>
+		<a class="seatBlock" href="{% url 'userpage.views.seat_submenu' uid 3 %}">座位区3</a>
 	</div>
 	<div class="row">
-		<b class="seatBlock">座位区4</b>
-		<b class="seatBlock">座位区5</b>
-		<b class="seatBlock">座位区6</b>
+		<a class="seatBlock">座位区4</a>
+		<a class="seatBlock">座位区5</a>
+		<a class="seatBlock">座位区6</a>
 	</div>
 	<div class="row">
-		<b class="seatBlock">座位区7</b>
-		<b class="seatBlock">座位区8</b>
-		<b class="seatBlock">座位区9</b>
+		<a class="seatBlock">座位区7</a>
+		<a class="seatBlock">座位区8</a>
+		<a class="seatBlock">座位区9</a>
 	</div>
 {% endblock %}
