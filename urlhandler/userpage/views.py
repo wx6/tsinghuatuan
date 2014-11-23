@@ -247,8 +247,6 @@ def helplecture_view(request):
     return render_to_response('help_lecture.html', variables)
 
 
-#一下为选座view部分，尚未添加处理--刘博格,刘峻琳
-
 def seat_mainmenu_view(request):
     print 'aaaaaaaaaaaaaaaaaaaaaa'
     # variables=RequestContext(request,{'uid':uid})
