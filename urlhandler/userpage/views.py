@@ -254,20 +254,19 @@ def helplecture_view(request):
 # By: Liu Junlin
 
 def seat_mainmenu_view(request, uid):
-    print 'aaaaaaaaaaaaaaaaaaaaaa'
     variables = RequestContext(request, {'uid': uid})
 
-    """
     tickets = Ticket.objects.filter(uid = uid)
-    activity = tickets[0].activity
-    location = activity.seat_status
+    location = tickets[0].activity.seat_status
+
     if location == 2:
-        seat_status_array = get_seat_status_tsinghua_hall(activity)
+        seat_status_array = get_seat_status_tsinghua_hall(tickets[0])
         variables = RequestContext(request, {
-            'seat_status':seat_status_array
+            'seat_status': seat_status_array,
+            'uid': uid
         })
         return render_to_response('seat_tsinghua_hall.html', variables)
-    """
+
 
     return render_to_response('seat_mainmenu.html', variables)
 
@@ -302,17 +301,21 @@ def choose_seat_post(request, uid):
         current_ticket.save()
 
 
-def get_seat_status_tsinghua_hall(activity):
+def get_seat_status_tsinghua_hall(ticket):
+    activity = ticket.activity
     res = {}
     for x in range(1,4):
         row = {}
         for y in range(1, 10):
             seat_id = (x - 1) * 10 + y
             seat_id = activity.seat_start + seat_id - 1
-            tickets = Ticket.objects.filter(seat_id = seat_id)
-            if tickets.exists():
-                row[y] = 1
+            if seat_id == ticket.seat_id:
+                row[str(y)] = 4
             else:
-                row[y] = 0
-        res[x] = row
+                tickets = Ticket.objects.filter(seat_id = seat_id)
+                if tickets.exists():
+                    row[str(y)] = 2
+                else:
+                    row[str(y)] = 1
+        res[str(x)] = row
     return res

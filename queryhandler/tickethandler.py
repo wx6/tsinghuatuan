@@ -237,8 +237,8 @@ def book_ticket(user, key, now):
 				activity=activity,
 				unique_id=random_string,
 				status=1,
-				seat=next_seat
-				# seat_id=0
+				seat=next_seat,
+				seat_id=0
 			)
 			return ticket
 		elif tickets[0].status == 0:
