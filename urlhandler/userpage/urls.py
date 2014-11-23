@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, url, include
 
 urlpatterns = patterns('',
+                       url(r'^ticket/mainseat/$','userpage.views.seat_mainmenu_view'),
                        url(r'^$', 'userpage.views.home'),
                        url(r'^validate/try/$', 'userpage.views.validate_post'),
                        url(r'^validate/(?P<openid>\S+)/$', 'userpage.views.validate_view'),
@@ -12,6 +13,5 @@ urlpatterns = patterns('',
                        url(r'^helplecture/$','userpage.views.helplecture_view'),
                        url(r'^activity/(?P<actid>\d+)/menu/$','userpage.views.activity_menu_view'),
                        # url(r'^ticket/mainseat/(?P<uid>\S+)/$','userpage.views.seat_mainmenu'),
-                       url(r'^ticket/mainseat/$','userpage.views.seat_mainmenu_view'),
                        url(r'^ticket/subseat/(?P<uid>\S+)/(?P<block_id>\d+)/$','userpage.views.seat_submenu'),
                        )
