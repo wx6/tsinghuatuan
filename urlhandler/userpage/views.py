@@ -306,9 +306,9 @@ def choose_seat_post(request, uid):
 def get_seat_status_tsinghua_hall(ticket):
     activity = ticket.activity
     res = []
-    for x in range(1,4):
+    for x in range(1, 5):
         row = []
-        for y in range(1, 10):
+        for y in range(1, 11):
             seat_id = (x - 1) * 10 + y
             seat_id = activity.seat_start + seat_id - 1
             if seat_id == ticket.seat_id:
