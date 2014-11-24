@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-CN" class="ua-windows ua-webkit">
 <script src="http://soso.qstatic.com/wenwen/deploy/js/sea_modules/jquery/1.7.2/jquery-1.7.2.min_a0069db.js"></script>
+{% block css %}
 <link rel="stylesheet" href="{% static "css/seat_tsinghua_hall.css" %}" type="text/css" />
+{% endblock %}
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="renderer" content="webkit">
@@ -74,10 +76,12 @@
 	<input type="submit" value="提交" >
 </form>
 </body>
+{% block js%}
 <script src = "{% static "js/seat_tsinghua_hall.js"%}"></script>
 <script>
 	var l = document.getElementById("n")
 	l.value = row
 	l.style.display = "none"
 </script>
+{% endblock %}
 </html> 
