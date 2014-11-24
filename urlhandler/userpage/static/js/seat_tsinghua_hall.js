@@ -12,10 +12,11 @@ function changeState(id){
 		if(lastid != -1){
 		var ltd = document.getElementById(lastid)
 		ltd.className = 1
-		ltd.innerHTML = "<span></span><img src='../img/可选座位.png' style='width:100px;height:85px;'/>"
+		"{% static "css/details.css" %}"
+		ltd.innerHTML = "<span></span><img src='{% static '/img/可选座位.png' %}' style='width:100px;height:85px;'/>"
 		}
 		td.className = 3
-		td.innerHTML = "<span></span><img src='../img/选择座位.png' style='width:100px;height:85px;'/>"
+		td.innerHTML = "<span></span><img src='(% static '/img/选择座位.png' %}' style='width:100px;height:85px;'/>"
 		lastid = id
 	}
 	changeRecord(id)
@@ -30,7 +31,7 @@ setTableId()
 var length = 10
 var row = 0, column = 0
 var lastid = -1 
-$(".1").append("<img src= '../img/可选座位.png'  style='width:100px;height:85px;'/>")
-$(".2").append("<img src= '../img/不可选座位.png'  style='width:100px;height:85px;'/>")
-$(".3").append("<img src= '../img/选择座位.png'  style='width:100px;height:85px;'/>")
-$(".4").append("<img src= '../img/上次选择座位.png'  style='width:100px;height:85px;'/>")
+$(".1").append("<img src= '{% static /img/可选座位.png' %}'  style='width:100px;height:85px;'/>")
+$(".2").append("<img src= '{% static /img/不可选座位.png' %}' style='width:100px;height:85px;'/>")
+$(".3").append("<img src= '{% static /img/选择座位.png' %}' style='width:100px;height:85px;'/>")
+$(".4").append("<img src= '{% static /img/上次选择座位.png' %}'  style='width:100px;height:85px;'/>")
