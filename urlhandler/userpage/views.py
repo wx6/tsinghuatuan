@@ -305,21 +305,21 @@ def choose_seat_post(request, uid):
 
 def get_seat_status_tsinghua_hall(ticket):
     activity = ticket.activity
-    res = {}
+    res = []
     for x in range(1,4):
-        row = {}
+        row = []
         for y in range(1, 10):
             seat_id = (x - 1) * 10 + y
             seat_id = activity.seat_start + seat_id - 1
             if seat_id == ticket.seat_id:
-                row[str(y)] = 4
+                row.append(4)
             else:
                 tickets = Ticket.objects.filter(seat_id = seat_id)
                 if tickets.exists():
-                    row[str(y)] = 2
+                    row.append(2)
                 else:
-                    row[str(y)] = 1
-        res[str(x)] = row
-    res['1']['1'] = 2
-    res['1']['2'] = 2
+                    row.append(1)
+        res.append = row
+    res[0][0] = 2
+    res[0][1] = 2
     return res
