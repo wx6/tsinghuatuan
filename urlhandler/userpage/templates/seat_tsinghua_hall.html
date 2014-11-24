@@ -4,6 +4,7 @@
 {% block css %}
 <link href="{% static "css/seat_tsinghua_hall.css" %}" rel="stylesheet" type="text/css" />
 {% endblock %}
+{% block content %}
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="renderer" content="webkit">
@@ -75,12 +76,13 @@
 	<input type="submit" value="提交" >
 </form>
 </body>
+{% endblock %}
 {% block js%}
 <script src="http://soso.qstatic.com/wenwen/deploy/js/sea_modules/jquery/1.7.2/jquery-1.7.2.min_a0069db.js"></script>
 <script src = "{% static "js/seat_tsinghua_hall.js"%}"></script>
 <script>
 	var l = document.getElementById("n")
-	l.value = row
+	l.value = {{row}}
 	l.style.display = "none"
 </script>
 {% endblock %}
