@@ -1,9 +1,6 @@
 {% extends "mobile_base.html" %}
 
 {% load staticfiles %}
-{% block js%}
-<script src="http://soso.qstatic.com/wenwen/deploy/js/sea_modules/jquery/1.7.2/jquery-1.7.2.min_a0069db.js"></script>
-{% endblock %}
 {% block css %}
 <link href="{% static "css/seat_tsinghua_hall.css" %}" rel="stylesheet" type="text/css" />
 {% endblock %}
@@ -79,6 +76,7 @@
 </form>
 </body>
 {% block js%}
+<script src="http://soso.qstatic.com/wenwen/deploy/js/sea_modules/jquery/1.7.2/jquery-1.7.2.min_a0069db.js"></script>
 <script src = "{% static "js/seat_tsinghua_hall.js"%}"></script>
 <script>
 	var l = document.getElementById("n")
