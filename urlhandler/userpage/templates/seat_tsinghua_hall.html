@@ -20,7 +20,7 @@
 	{% for row in seat_status %}
 		<tr> 
 			<th>第{{forloop.counter}}排</th>
-		{% for columns in row %}
+		{% for columns in seat_status.row %}
 			<td class = {{columns}} onclick = "changeState(this.id)"><span></span></td>
 		{% endfor %}
 		</tr>
