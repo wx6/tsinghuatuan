@@ -13,6 +13,7 @@
     <title>0表示不可选；1表示空闲座位；2表示已被选；3表示自己当前选中；4表示自己上一次选中</title>
 </head>
 <body>
+<div id="seatArea">
 <div class = "head">
 	<h7>选择座位</h7>
 </div>
@@ -34,7 +35,7 @@
 	<input type="text" name="column" style="display:none;" id="n">
 </form>
  <button type="button" onclick="commitSeat();">提交</button>
- 
+</div>
  <div >
 	<p class="help-block" id="Loading" style="display: none"><img src="{% static "img/loading.gif" %}">正在提交选座信息，请稍候...</p>
 </div>
