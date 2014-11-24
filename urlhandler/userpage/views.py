@@ -256,12 +256,16 @@ def helplecture_view(request):
 def seat_mainmenu_view(request, uid):
     variables = RequestContext(request, {'uid': uid})
 
-    print 'uid = %s' % uid
     tickets = Ticket.objects.filter(unique_id = uid)
     location = tickets[0].activity.seat_status
 
+    if location == 0:
+        pass
+
+    if location == 1:
+        pass
+
     if location == 2:
-        print 'come here hahaha'
         seat_status_array = get_seat_status_tsinghua_hall(tickets[0])
         variables = RequestContext(request, {
             'seat_status': seat_status_array,
@@ -283,8 +287,8 @@ def choose_seat_post(request, uid):
         raise Http404
 
     post = request.POST
-    tickets = Ticket.objects.filter(uid = uid, status = 1)
-    rtnJSON = dict()
+    tickets = Ticket.objects.filter(unique_id = uid, status = 1)
+    rtnJSON = {}
 
     if not tickets.exist():
         rtnJSON['error'] = u'该电子票已无法进行选座操作'
@@ -320,10 +324,6 @@ def get_seat_status_tsinghua_hall(ticket):
                 else:
                     row.append(1)
         res.append(row)
-    for row in res:
-        for col in row:
-            print col
-        print
     res[0][0] = 2
     res[0][1] = 2
     return res
