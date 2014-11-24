@@ -1,7 +1,9 @@
 {% extends "mobile_base.html" %}
 
 {% load staticfiles %}
+{% block js%}
 <script src="http://soso.qstatic.com/wenwen/deploy/js/sea_modules/jquery/1.7.2/jquery-1.7.2.min_a0069db.js"></script>
+{% endblock %}
 {% block css %}
 <link href="{% static "css/seat_tsinghua_hall.css" %}" rel="stylesheet" type="text/css" />
 {% endblock %}
@@ -11,7 +13,6 @@
 
     <title>0表示不可选；1表示空闲座位；2表示已被选；3表示自己当前选中；4表示自己上一次选中</title>
 </head>
-<css
 <body>
 <div class = "head">
 	<h7>选择座位</h7>
@@ -62,10 +63,10 @@
 
 ---调试部分完
 
-	{% for rows in seat_status %}
+	{% for row in seat_status %}
 		<tr> 
 			<th>第{{forloop.counter}}排</th>
-		{% for columns in rows%}
+		{% for columns in row%}
 			<td class = {{columns}} onclick = "changeState(this.id)"><span></span></td>
 		{% endfor %}
 		</tr>
