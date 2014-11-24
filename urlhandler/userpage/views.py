@@ -256,7 +256,7 @@ def helplecture_view(request):
 def seat_mainmenu_view(request, uid):
     variables = RequestContext(request, {'uid': uid})
 
-    tickets = Ticket.objects.filter(uid = uid)
+    tickets = Ticket.objects.filter(uid == uid)
     location = tickets[0].activity.seat_status
 
     if location == 2:
