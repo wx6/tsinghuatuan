@@ -6,10 +6,9 @@ from django.shortcuts import render_to_response, render
 from urlhandler.models import User, Activity, Ticket
 from urlhandler.settings import STATIC_URL
 import urllib, urllib2
-import datetime
+from datetime import datetime
 from django.utils import timezone
 from userpage.safe_reverse import *
-from datetime import datetime
 import json
 
 
@@ -197,7 +196,7 @@ def ticket_view(request, uid):
     act_endtime = activity[0].end_time
     act_place = activity[0].place
     ticket_status = ticket[0].status
-    now = datetime.datetime.now()
+    now = datetime.now()
     if act_endtime < now:  #表示活动已经结束
         ticket_status = 3
     ticket_seat = ticket[0].seat
@@ -280,6 +279,7 @@ def seat_mainmenu_view(request, uid):
 def seat_submenu(request, uid, block_id):
     variables = RequestContext(request, {'uid': uid, 'block_id': block_id})
     return render_to_response('seat_submenu.html', variables)
+
 
 class DatetimeJsonEncoder(json.JSONEncoder):
     def default(self, obj):
