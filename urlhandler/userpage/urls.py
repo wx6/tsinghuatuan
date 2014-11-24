@@ -11,7 +11,8 @@ urlpatterns = patterns('',
                        url(r'^helpclub/$','userpage.views.helpclub_view'),
                        url(r'^helplecture/$','userpage.views.helplecture_view'),
                        url(r'^activity/(?P<actid>\d+)/menu/$','userpage.views.activity_menu_view'),
-                       # url(r'^ticket/mainseat/(?P<uid>\S+)/$','userpage.views.seat_mainmenu'),
+
+                       url(r'^choose_seat/try/(?P<uid>\S+)/$', 'userpage.views.choose_seat_post'),
                        url(r'^mainseat/(?P<uid>\S+)/$','userpage.views.seat_mainmenu_view'),
                        url(r'^subseat/(?P<uid>\S+)/(?P<block_id>\d+)/$','userpage.views.seat_submenu'),
                        )
