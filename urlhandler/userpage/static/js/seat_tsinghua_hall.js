@@ -6,10 +6,7 @@ function setTableId(){
 	}
 }
 
-
-//--- test
 function commitSeat() {
-        setResult('');
         var options = {
             dataType: 'json',
             success: function (data) {
@@ -25,8 +22,6 @@ function commitSeat() {
         return false;
 }
 
-
-//------
 
 function changeState(id){
 	var td = document.getElementById(id)
