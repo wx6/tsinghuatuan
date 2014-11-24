@@ -12,11 +12,13 @@ function changeState(id){
 		if(lastid != -1){
 		var ltd = document.getElementById(lastid)
 		ltd.className = 1
+		{% block js%}
 		ltd.innerHTML = "<span></span><img src="{% static 'img/可选座位.png' %}" style='width:100px;height:85px;'/>"
 		}
 		td.className = 3
 		td.innerHTML = "<span></span><img src="{% static 'img/选择座位.png' %}" style='width:100px;height:85px;'/>"
 		lastid = id
+		{% endblock %}
 	}
 	changeRecord(id)
 }
