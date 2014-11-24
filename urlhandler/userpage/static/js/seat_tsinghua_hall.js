@@ -12,7 +12,6 @@ function changeState(id){
 		if(lastid != -1){
 		var ltd = document.getElementById(lastid)
 		ltd.className = 1
-		"{% static "css/details.css" %}"
 		ltd.innerHTML = "<span></span><img src='{% static '/img/可选座位.png' %}' style='width:100px;height:85px;'/>"
 		}
 		td.className = 3
