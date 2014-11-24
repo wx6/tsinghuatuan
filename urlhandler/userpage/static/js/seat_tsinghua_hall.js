@@ -6,6 +6,28 @@ function setTableId(){
 	}
 }
 
+
+//--- test
+function commitSeat() {
+        setResult('');
+        var options = {
+            dataType: 'json',
+            success: function (data) {
+            	$("#success").show()
+            	$(".head").hide()
+			},
+            error: function (xhr) {
+    		$("#failure").show()
+    		$(".head").hide()									
+    		},
+        };
+        $('#seatForm').ajaxSubmit(options);
+        return false;
+}
+
+
+//------
+
 function changeState(id){
 	var td = document.getElementById(id)
 	if(td.className == 1){
@@ -19,11 +41,14 @@ function changeState(id){
 		lastid = id
 	}
 	changeRecord(id)
+	return false;
 }
 
 function changeRecord(id){
 	row = parseInt(1 + id / length)
 	column = 1 + id % length 
+	 $("#seatForm").attr("row",row);
+	 $("#seatForm").attr("column",column);
 }
 
 setTableId()
