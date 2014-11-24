@@ -17,10 +17,10 @@
 </div>
 <div class = "view">
 	<table>
-	{% for row in seat_status %}
+	{% for row in seat_status.res %}
 		<tr> 
 			<th>第{{forloop.counter}}排</th>
-		{% for columns in seat_status.row %}
+		{% for columns in seat_status.res.row %}
 			<td class = {{columns}} onclick = "changeState(this.id)"><span></span></td>
 		{% endfor %}
 		</tr>
