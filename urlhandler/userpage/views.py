@@ -9,7 +9,7 @@ import urllib, urllib2
 import datetime
 from django.utils import timezone
 from userpage.safe_reverse import *
-
+from datetime import datetime
 import json
 
 
@@ -281,8 +281,15 @@ def seat_submenu(request, uid, block_id):
     variables = RequestContext(request, {'uid': uid, 'block_id': block_id})
     return render_to_response('seat_submenu.html', variables)
 
+class DatetimeJsonEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            return obj.strftime('%Y-%m-%d %H:%M:%S')
+        else:
+            return json.JSONEncoder.default(self, obj)
 
 def choose_seat_post(request, uid):
+    print 'bbbbbbbbbbbbbbbbb'
     if not request.POST:
         raise Http404
 
@@ -292,8 +299,7 @@ def choose_seat_post(request, uid):
 
     if not tickets.exist():
         rtnJSON['error'] = u'该电子票已无法进行选座操作'
-        return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),
-                            content_type='application/json')
+        return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),content_type='application/json')
 
     current_ticket = tickets[0]
     seat_chosen = post['seatid']
