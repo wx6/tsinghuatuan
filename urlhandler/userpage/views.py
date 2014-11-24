@@ -319,7 +319,7 @@ def get_seat_status_tsinghua_hall(ticket):
                     row.append(2)
                 else:
                     row.append(1)
-        res.append = row
+        res.append(row)
     res[0][0] = 2
     res[0][1] = 2
     return res
