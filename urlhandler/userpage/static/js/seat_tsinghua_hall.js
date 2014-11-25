@@ -16,7 +16,7 @@ function commitSeat() {
         error: function (xhr) {
     		$("#failure").show()
     		$("#seatArea").hide()									
-    	},
+    	}
     };
     console.log('come here point 1');
     $('#seatForm').ajaxSubmit(options);
