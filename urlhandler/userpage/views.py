@@ -10,9 +10,9 @@ from datetime import datetime, timedelta
 from django.utils import timezone
 from userpage.safe_reverse import *
 from weixinlib.settings import WEIXIN_TOKEN
-from userpage.barcode import *
 import json
 from django.views.decorators.csrf import csrf_exempt
+from weixinlib.base_support import get_access_token
 
 
 
@@ -31,10 +31,11 @@ def get_timestamp():
 
 # generate two-dimensional barcodes
 def generate_2D_barcodes(key):
-    req_url =  'https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=' + WEIXIN_TOKEN
-    values = {"action_name":"QR_LIMIT_SCENE","action_info": {"scene": {"scene_id": key}}}
+    req_url =  'https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=' + get_access_token()
+    values = {"action_name":"QR_LIMIT_SCENE","action_info": {"scene": {"scene_id": 1}}}
     req_data = urllib.urlencode(values)
-    req = urllib2.Request(req_url, req_data)
+    print req_data
+    req = urllib2.Request(req_url, values)
     res = urllib2.urlopen(req)
     try:
         res_data = res.read()
