@@ -202,10 +202,7 @@ def ticket_view(request, uid):
         ticket_status = 3
     ticket_seat = ticket[0].seat
     act_photo = activity[0].pic_url
-    # act_photo = "http://qr.ssast.org/fit/"+uid
     # act_photo = get_2D_barcodes(ticket[0].barcode_key)
-    # act_photo = get_2D_barcodes(ticket[0].barcode_key)
-    # mainmenu = s_safe_reverse_seat_mainmenu(uid)
     variables = RequestContext(request, {'uid': uid,
                                          'act_id': act_id,
                                          'act_name': act_name,
@@ -218,10 +215,6 @@ def ticket_view(request, uid):
                                          'act_key': act_key})
     return render_to_response('activityticket.html', variables)
 
-
-# context = {'abd':2, 'mainmenu':mainmenu,'act_uid':act_uid,'act_id':act_id, 'act_name':act_name,'act_place':act_place, 'act_begintime':act_begintime,'act_endtime':act_endtime,'act_photo':act_photo, 'ticket_status':ticket_status,'ticket_seat':ticket_seat,'act_key':act_key}
-# print '#######'
-# return render_to_response('activityticket.html', context, context_instance=RequestContext(request))
 
 def help_view(request):
     variables = RequestContext(request, {'name': u'“紫荆之声”'})
@@ -249,7 +242,9 @@ def helplecture_view(request):
 
 
 
-# functions below are about choosing seats
+
+
+# Functions below are about choosing seats.
 # By: Liu Junlin
 
 def seat_mainmenu_view(request, uid):
@@ -266,10 +261,8 @@ def seat_mainmenu_view(request, uid):
 
     if location == 2:
         seat_status_array = get_seat_status_tsinghua_hall(tickets[0])
-        variables = RequestContext(request, {
-            'seat_status': seat_status_array,
-            'uid': uid
-        })
+        variables = RequestContext(request, {'seat_status': seat_status_array,
+                                             'uid': uid})
         return render_to_response('seat_tsinghua_hall.html', variables)
 
 
@@ -289,44 +282,42 @@ class DatetimeJsonEncoder(json.JSONEncoder):
             return json.JSONEncoder.default(self, obj)
 
 
-@csrf_exempt
+@csrf_exempt # To avoid http 403 error.
 def choose_seat_post(request, uid):
-    print 'test point 1'
-    rtnJSON = {}
-    rtnJSON['error'] = u'发生错误'
-    return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),content_type='application/json')
-
-    '''
     if not request.POST:
         raise Http404
 
-    print 'test point 2'
     post = request.POST
-    tickets = Ticket.objects.filter(unique_id = uid, status = 1)
     rtnJSON = {}
 
-    print 'test point 3'
-    if not tickets.exists():
-        rtnJSON['error'] = u'该电子票已无法进行选座操作'
-        return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),content_type='application/json')
+    try:
+        tickets = Ticket.objects.filter(unique_id = uid)
+        current_ticket = tickets[0]
 
-    print 'test point 4'
-    current_ticket = tickets[0]
-    seat_chosen = get_seat_chosen(post, uid)
+        if current_ticket.status == 2:
+            rtnJSON['error'] = u'已经过了选座位的时间啦'
+            return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),content_type='application/json')
 
-    print 'test point 5'
-    tickets = Ticket.objects.filter(seat_id = seat_chosen)
-    if tickets.exists():
-        rtnJSON['error'] = u'该座位已被其它小伙伴抢到'
-    else:
-        current_ticket.seat_id = seat_chosen
-        current_ticket.save()
-    '''
+        if current_ticket.status == 0:
+            rtnJSON['error'] = u'这张票已经被你取消啦'
+            return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),content_type='application/json')
 
-def get_seat_chosen(post, uid):
-    tickets = Ticket.objects.filter(unique_id = uid, status = 1)
-    activity = tickets[0].activity
-    location = activity.seat_status
+        seat_chosen = get_seat_chosen(post, current_ticket)
+        tickets = Ticket.objects.filter(seat_id = seat_chosen)
+        if tickets.exists():
+            rtnJSON['error'] = u'这个座位已被其它小伙伴抢到了= ='
+        else:
+            current_ticket.seat_id = seat_chosen
+            current_ticket.save()
+
+    except Exception as e:
+        rtnJSON['error'] = str(e)
+
+    return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder), content_type='application/json')
+
+
+def get_seat_chosen(post, ticket):
+    location = ticket.activity.seat_status
 
     if location == 1:
         pass
@@ -335,9 +326,9 @@ def get_seat_chosen(post, uid):
         pass
 
     if location == 3:
-        row = post['row'] # Possibly needed to be converted to int
-        column = post['column'] # Possibly needed to be converted to int
-        seat_id = (row - 1) * 10 + column + activity.seat_start - 1
+        row = int(post['row'])
+        column = int(post['column'])
+        seat_id = (row - 1) * 10 + column + ticket.activity.seat_start - 1
         return seat_id
 
 
