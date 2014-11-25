@@ -11,8 +11,8 @@ function commitSeat() {
         dataType: 'json',
         success: function (data) {
         	console.log(data)
-        	console.log(data==null)
-        	if(data.error)
+        	console.log(data.error==null)
+        	if(data.error==null)
         	{
         		$("#success").show()
             	$("#seatArea").hide()	
