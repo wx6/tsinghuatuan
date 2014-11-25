@@ -308,6 +308,7 @@ def choose_seat_post(request, uid):
         print 'test point 4'
         seat_chosen = get_seat_chosen(post, current_ticket)
         tickets = Ticket.objects.filter(seat_id = seat_chosen)
+        print seat_chosen
         if tickets.exists():
             rtnJSON['error'] = u'这个座位已被其它小伙伴抢到了= ='
         else:
