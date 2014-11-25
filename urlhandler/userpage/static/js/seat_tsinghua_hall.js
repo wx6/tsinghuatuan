@@ -38,10 +38,10 @@ function changeState(id){
 		if(lastid != -1){
 		var ltd = document.getElementById(lastid)
 		ltd.className = 1
-		ltd.innerHTML = "<span></span><img src='http://wx6.igeek.asia/static1/img/selectable.png' style='width:40px;height:34px;'/>"
+		ltd.innerHTML = "<span></span><img src='http://wx6.igeek.asia/static1/img/selectable.png' style='width:30px;height:25px;'/>"
 		}
 		td.className = 3
-		td.innerHTML = "<span></span><img src='http://wx6.igeek.asia/static1/img/selected.png' style='width:40px;height:34px;'/>"
+		td.innerHTML = "<span></span><img src='http://wx6.igeek.asia/static1/img/selected.png' style='width:30px;height:25px;'/>"
 		lastid = id
 	}
 	changeRecord(id)
@@ -59,7 +59,7 @@ setTableId()
 var length = 10
 var row = 0, column = 0
 var lastid = -1 
-$(".1").append("<img src= 'http://wx6.igeek.asia/static1/img/selectable.png'  style='width:40px;height:34px;'/>")
-$(".2").append("<img src= 'http://wx6.igeek.asia/static1/img/unselectable.png' style='width:40px;height:34px;'/>")
-$(".3").append("<img src= 'http://wx6.igeek.asia/static1/img/selected.png' style='width:40px;height:34px;'/>")
-$(".4").append("<img src= 'http://wx6.igeek.asia/static1/img/lastselect.png'  style='width:40px;height:34px;'/>")
+$(".1").append("<img src= 'http://wx6.igeek.asia/static1/img/selectable.png'  style='width:30px;height:25px;'/>")
+$(".2").append("<img src= 'http://wx6.igeek.asia/static1/img/unselectable.png' style='width:30px;height:25px;'/>")
+$(".3").append("<img src= 'http://wx6.igeek.asia/static1/img/selected.png' style='width:30px;height:25px;'/>")
+$(".4").append("<img src= 'http://wx6.igeek.asia/static1/img/lastselect.png'  style='width:30px;height:25px;'/>")
