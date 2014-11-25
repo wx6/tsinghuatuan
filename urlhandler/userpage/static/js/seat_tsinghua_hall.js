@@ -17,6 +17,7 @@ function commitSeat() {
             }
             else
             {
+            	console.log("error");
             	$("#failure").show()
     			$("#seatArea").hide()	
             }
