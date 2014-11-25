@@ -6,7 +6,7 @@ from django.shortcuts import render_to_response, render
 from urlhandler.models import User, Activity, Ticket
 from urlhandler.settings import STATIC_URL
 import urllib, urllib2
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.utils import timezone
 from userpage.safe_reverse import *
 import json
@@ -48,7 +48,8 @@ def validate_view(request, openid):
         'openid': openid,
         'studentid': studentid,
         'isValidated': isValidated,
-        'now': datetime.datetime.now() + datetime.timedelta(seconds=-5),
+        # 'now': datetime.datetime.now() + datetime.timedelta(seconds=-5),
+        'now': datetime.now() + timedelta(seconds=-5),
         'timestamp': timestamp
     }, context_instance=RequestContext(request))
 
@@ -287,7 +288,6 @@ class DatetimeJsonEncoder(json.JSONEncoder):
             return json.JSONEncoder.default(self, obj)
 
 def choose_seat_post(request, uid):
-    print 'ddddddddddddddddddd'
     print 'test point 1'
     if not request.POST:
         raise Http404
