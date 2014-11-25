@@ -12,6 +12,9 @@
 <div id="seatArea">
 <div class = "head">
 	<h7>舞台方向</h7>
+
+<div id="hint"></div>
+
 </div>
 <div class = "view">
 	<table>
@@ -24,15 +27,18 @@
 	{% endfor %}
 	</table>
 </div>
-
+<table>
+	<td><img src= 'http://wx6.igeek.asia/static1/img/selectable.png'  style='width:25px;height:20px;'/>可选座位</td>
+	<td><img src= 'http://wx6.igeek.asia/static1/img/unselectable.png' style='width:25px;height:20px;'/>不可选座位</td>
+	<td><img src= 'http://wx6.igeek.asia/static1/img/selected.png' style='width:25px;height:20px;'/>当前选择座位</td>
+	<td><img src= 'http://wx6.igeek.asia/static1/img/lastselect.png'  style='width:25px;height:20px;'/>上次选择座位</td>
+</table>
 <form name="input"  id="seatForm" action="{% url 'userpage.views.choose_seat_post' uid %}" method="post" style="display:none">
 	<input type="text" name="row" id="n">
 	<input type="text" name="column" id="n">
 </form>
 <button type="button" onclick="commitSeat();">提交</button>
 </div>
-
-<div id="hint"></div>
 
 <div id="loading">
     <p class="help-block" id="Loading" style="display: none"><img src="{% static "img/loading.gif" %}">正在提交选座信息，请稍候...</p>
