@@ -287,8 +287,14 @@ class DatetimeJsonEncoder(json.JSONEncoder):
         else:
             return json.JSONEncoder.default(self, obj)
 
+
 def choose_seat_post(request, uid):
     print 'test point 1'
+    rtnJSON = {}
+    rtnJSON['error'] = u'发生错误'
+    return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),content_type='application/json')
+
+    '''
     if not request.POST:
         raise Http404
 
@@ -304,16 +310,33 @@ def choose_seat_post(request, uid):
 
     print 'test point 4'
     current_ticket = tickets[0]
-    seat_chosen = post['seatid']
-    real_seatid = current_ticket.activity.seat_start + seat_chosen - 1
+    seat_chosen = get_seat_chosen(post, uid)
 
     print 'test point 5'
-    tickets = Ticket.objects.filter(seat_id = real_seatid)
+    tickets = Ticket.objects.filter(seat_id = seat_chosen)
     if tickets.exists():
         rtnJSON['error'] = u'该座位已被其它小伙伴抢到'
     else:
-        current_ticket.seat_id = real_seatid
+        current_ticket.seat_id = seat_chosen
         current_ticket.save()
+    '''
+
+def get_seat_chosen(post, uid):
+    tickets = Ticket.objects.filter(unique_id = uid, status = 1)
+    activity = tickets[0].activity
+    location = activity.seat_status
+
+    if location == 1:
+        pass
+
+    if location == 2:
+        pass
+
+    if location == 3:
+        row = post['row'] # Possibly needed to be converted to int
+        column = post['column'] # Possibly needed to be converted to int
+        seat_id = (row - 1) * 10 + column + activity.seat_start - 1
+        return seat_id
 
 
 def get_seat_status_tsinghua_hall(ticket):
