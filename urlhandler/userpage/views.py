@@ -291,17 +291,21 @@ def choose_seat_post(request, uid):
     rtnJSON = {}
 
     try:
+        print 'test point 1'
         tickets = Ticket.objects.filter(unique_id = uid)
         current_ticket = tickets[0]
 
+        print 'test point 2'
         if current_ticket.status == 2:
             rtnJSON['error'] = u'已经过了选座位的时间啦'
             return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),content_type='application/json')
 
+        print 'test point 3'
         if current_ticket.status == 0:
             rtnJSON['error'] = u'这张票已经被你取消啦'
             return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),content_type='application/json')
 
+        print 'test point 4'
         seat_chosen = get_seat_chosen(post, current_ticket)
         tickets = Ticket.objects.filter(seat_id = seat_chosen)
         if tickets.exists():
