@@ -43,7 +43,7 @@ height: 17px;
 }
 button
 {
-	-webkit-appearance: none;
+-webkit-appearance: none;
 -webkit-user-select: none;
 -webkit-writing-mode: horizontal-tb;
 align-items: flex-start;
