@@ -10,19 +10,23 @@ function commitSeat() {
     var options = {
         dataType: 'json',
         success: function (data) {
-        	console.log('success function');
-            $("#success").show()
-            $(".head").hide()
+        	if(!data.error)
+        	{
+            	$("#success").show()
+            	$("#seatArea").hide()
+            }
+            else
+            {
+            	$("#failure").show()
+    			$("#seatArea").hide()	
+            }
 		},
         error: function (xhr) {
-        	console.log('error function');
     		$("#failure").show()
     		$("#seatArea").hide()									
     	}
     };
-    console.log('come here point 1');
     $('#seatForm').ajaxSubmit(options);
-    console.log('come here point 2');
     return false;
 }
 
