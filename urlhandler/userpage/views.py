@@ -34,7 +34,8 @@ def generate_2D_barcodes(key):
     req_url =  'https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=' + get_access_token()
     values = {"action_name":"QR_LIMIT_SCENE","action_info": {"scene": {"scene_id": 1}}}
     req_data = urllib.urlencode(values)
-    req = urllib2.Request(req_url, req_data)
+    print req_data
+    req = urllib2.Request(req_url, values)
     res = urllib2.urlopen(req)
     try:
         res_data = res.read()
