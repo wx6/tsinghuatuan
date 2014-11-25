@@ -47,8 +47,8 @@ def generate_2D_barcodes(key):
         print "success"
         return data['url']
     else:
+        print res_data
         return 'http://avatar.csdn.net/4/1/0/1_chenggong2dm.jpg'
-        print "failure"
 
 # Get two-dimensional barcodes from weixin server
 def get_2D_barcodes(key):
