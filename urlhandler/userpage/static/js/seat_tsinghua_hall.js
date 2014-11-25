@@ -9,7 +9,7 @@ function setTableId(){
 function commitSeat() {
 	if(lastid == -1)
 	{
-		$("#hint").append("请先选择座位之后再提交")
+		$("#hint")[0].innerHTML = "请先选择座位之后再提交"
 		return false
 	}
     var options = {
@@ -57,7 +57,7 @@ function changeRecord(id){
 	column = 1 + id % length 
 	 $("#seatForm [name=row]")[0].value = row;
 	 $("#seatForm [name=column]")[0].value = column;
-	 $("#hint").append("第"+row +"行"+"第"+column+"列")
+	 $("#hint")[0].innerHTML = "第"+row +"行"+"第"+column+"列"
 }
 
 setTableId()
