@@ -10,6 +10,7 @@ from datetime import datetime, timedelta
 from django.utils import timezone
 from userpage.safe_reverse import *
 import json
+from django.views.decorators.csrf import csrf_exempt
 
 
 def home(request):
@@ -288,6 +289,7 @@ class DatetimeJsonEncoder(json.JSONEncoder):
             return json.JSONEncoder.default(self, obj)
 
 
+@csrf_exempt
 def choose_seat_post(request, uid):
     print 'test point 1'
     rtnJSON = {}
