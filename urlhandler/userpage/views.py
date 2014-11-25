@@ -319,13 +319,13 @@ def choose_seat_post(request, uid):
 def get_seat_chosen(post, ticket):
     location = ticket.activity.seat_status
 
+    if location == 0:
+        pass
+
     if location == 1:
         pass
 
     if location == 2:
-        pass
-
-    if location == 3:
         row = int(post['row'])
         column = int(post['column'])
         seat_id = (row - 1) * 10 + column + ticket.activity.seat_start - 1
