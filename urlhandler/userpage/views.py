@@ -289,22 +289,26 @@ class DatetimeJsonEncoder(json.JSONEncoder):
             return json.JSONEncoder.default(self, obj)
 
 def choose_seat_post(request, uid):
-    print 'bbbbbbbbbbbbbbbbb'
+    print 'test point 1'
     if not request.POST:
         raise Http404
 
+    print 'test point 2'
     post = request.POST
     tickets = Ticket.objects.filter(unique_id = uid, status = 1)
     rtnJSON = {}
 
+    print 'test point 3'
     if not tickets.exist():
         rtnJSON['error'] = u'该电子票已无法进行选座操作'
         return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),content_type='application/json')
 
+    print 'test point 4'
     current_ticket = tickets[0]
     seat_chosen = post['seatid']
     real_seatid = current_ticket.activity.seat_start + seat_chosen - 1
 
+    print 'test point 5'
     tickets = Ticket.objects.filter(seat_id = real_seatid)
     if tickets.exists():
         rtnJSON['error'] = u'该座位已被其它小伙伴抢到'
