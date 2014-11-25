@@ -189,7 +189,6 @@ def ticket_view(request, uid):
         raise Http404  #current activity is invalid
     activity = Activity.objects.filter(id=ticket[0].activity_id)
     act_id = activity[0].id
-    act_uid = uid
     act_name = activity[0].name
     act_key = activity[0].key
     act_begintime = activity[0].start_time
@@ -200,12 +199,11 @@ def ticket_view(request, uid):
     if act_endtime < now:  #表示活动已经结束
         ticket_status = 3
     ticket_seat = ticket[0].seat
+    act_photo = activity[0].pic_url
     # act_photo = "http://qr.ssast.org/fit/"+uid
     # act_photo = get_2D_barcodes(ticket[0].barcode_key)
-    print '******** %s' % uid
-    act_photo = "http://qr.ssast.org/fit/" + uid
-    #act_photo = get_2D_barcodes(ticket[0].barcode_key)
-    #mainmenu = s_safe_reverse_seat_mainmenu(uid)
+    # act_photo = get_2D_barcodes(ticket[0].barcode_key)
+    # mainmenu = s_safe_reverse_seat_mainmenu(uid)
     variables = RequestContext(request, {'uid': uid,
                                          'act_id': act_id,
                                          'act_name': act_name,
@@ -289,7 +287,10 @@ class DatetimeJsonEncoder(json.JSONEncoder):
             return json.JSONEncoder.default(self, obj)
 
 def choose_seat_post(request, uid):
+    print 'ddddddddddddddddddd'
     print 'test point 1'
+    if not request.POST:
+        raise Http404
 
     print 'test point 2'
     post = request.POST
@@ -297,7 +298,7 @@ def choose_seat_post(request, uid):
     rtnJSON = {}
 
     print 'test point 3'
-    if not tickets.exist():
+    if not tickets.exists():
         rtnJSON['error'] = u'该电子票已无法进行选座操作'
         return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),content_type='application/json')
 
