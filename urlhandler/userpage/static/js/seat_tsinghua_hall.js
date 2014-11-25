@@ -11,6 +11,7 @@ function commitSeat() {
         dataType: 'json',
         success: function (data) {
         	console.log(data)
+        	console.log(data==null)
         	if(data.error)
         	{
         		$("#success").show()
