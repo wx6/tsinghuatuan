@@ -43,8 +43,8 @@ function changeState(id){
 		td.className = 3
 		td.innerHTML = "<span></span><img src='http://wx6.igeek.asia/static1/img/selected.png' style='width:25px;height:20px;'/>"
 		lastid = id
+		changeRecord(id)
 	}
-	changeRecord(id)
 	return false;
 }
 
