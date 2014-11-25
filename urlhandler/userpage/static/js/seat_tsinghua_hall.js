@@ -10,10 +10,12 @@ function commitSeat() {
     var options = {
         dataType: 'json',
         success: function (data) {
+        	console.log('error function');
             $("#success").show()
             $(".head").hide()
 		},
         error: function (xhr) {
+        	console.log('error function');
     		$("#failure").show()
     		$("#seatArea").hide()									
     	}
