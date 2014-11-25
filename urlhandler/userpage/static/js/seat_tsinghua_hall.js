@@ -10,16 +10,16 @@ function commitSeat() {
     var options = {
         dataType: 'json',
         success: function (data) {
-        	if(data.error == null)
+        	if(data == null)
         	{
-        		console.log("error");
-            	$("#failure").show()
-    			$("#seatArea").hide()	
+        		$("#success").show()
+            	$("#seatArea").hide()	
             }
             else
             {
-            	$("#success").show()
-            	$("#seatArea").hide()
+   				console.log("error");
+            	$("#failure").show()
+    			$("#seatArea").hide()
             }
 		},
         error: function (xhr) {
