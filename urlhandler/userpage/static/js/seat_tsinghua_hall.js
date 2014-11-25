@@ -9,8 +9,8 @@ function setTableId(){
 function commitSeat() {
 	if(lastid == -1)
 	{
-		$("#hint").innerHTML = "请先选择座位之后再提交"
-		return false;
+		$("#hint").append("请先选择座位之后再提交")
+		return false
 	}
     var options = {
         dataType: 'json',
@@ -57,7 +57,7 @@ function changeRecord(id){
 	column = 1 + id % length 
 	 $("#seatForm [name=row]")[0].value = row;
 	 $("#seatForm [name=column]")[0].value = column;
-	 $("#hint").innerHTML = "第"+row +"行"+"第"+column+"列"
+	 $("#hint").append("第"+row +"行"+"第"+column+"列")
 }
 
 setTableId()

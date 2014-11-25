@@ -24,6 +24,7 @@
 	{% endfor %}
 	</table>
 </div>
+<div id="hint"></div>
 
 <form name="input"  id="seatForm" action="{% url 'userpage.views.choose_seat_post' uid %}" method="post" style="display:none">
 	<input type="text" name="row" id="n">
@@ -45,7 +46,6 @@
     <img src="{% static "img/success.png" %}" />
     <p>选座成功！</p>
 </div>
-<div id="hint"></div>
 </center>
 {% endblock %}
 
