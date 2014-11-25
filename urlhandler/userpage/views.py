@@ -206,6 +206,7 @@ def ticket_view(request, uid):
     ticket_seat = ticket[0].seat
     # act_photo = activity[0].pic_url
     act_photo = get_2D_barcodes(1)
+    print 'act_photo is %s' % act_photo
     variables = RequestContext(request, {'uid': uid,
                                          'act_id': act_id,
                                          'act_name': act_name,
