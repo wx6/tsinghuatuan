@@ -9,8 +9,11 @@ import urllib, urllib2
 from datetime import datetime, timedelta
 from django.utils import timezone
 from userpage.safe_reverse import *
+
+from userpage.barcode import *
 import json
 from django.views.decorators.csrf import csrf_exempt
+
 
 
 def home(request):
@@ -322,6 +325,7 @@ def choose_seat_post(request, uid):
 
 
 def get_seat_chosen(post, ticket):
+    print 'come here'
     location = ticket.activity.seat_status
 
     if location == 0:
