@@ -15,12 +15,11 @@ def generate_2D_barcodes(key):
 	except:
 		return 'http://lib.tsinghua.edu.cn/dra/sites/all/themes/theme_for_note/images/bj.jpg'
 		print "exception"
-	if "ticket" in res_data:
+	if 'url' in res_data:
 		data = eval(res_data)
 		img_url = 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=' + data['ticket']
 		print "success"
-		print data['ticket']
-		return img_url
+		return data['url']
 	else:
 		return 'http://avatar.csdn.net/4/1/0/1_chenggong2dm.jpg'
 		print "failure"
