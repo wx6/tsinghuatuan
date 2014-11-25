@@ -10,8 +10,6 @@ function commitSeat() {
     var options = {
         dataType: 'json',
         success: function (data) {
-        	console.log(data)
-        	console.log(data.error==null)
         	if(data.error==null)
         	{
         		$("#success").show()
@@ -19,7 +17,6 @@ function commitSeat() {
             }
             else
             {
-   				console.log("error");
             	$("#failure").show()
     			$("#seatArea").hide()
             }
