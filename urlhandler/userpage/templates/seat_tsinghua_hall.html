@@ -3,16 +3,15 @@
 {% load staticfiles %}
 
 {% block css %}
-<link href="{% static "css/seat_tsinghua_hall.css" %}" rel="stylesheet" type="text/css" />
+    <link href="{% static "css/seat_tsinghua_hall.css" %}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
+{% block title %}
+    0表示不可选；1表示空闲座位；2表示已被选；3表示自己当前选中；4表示自己上一次选中
+{% endblock %}
+
+
 {% block content %}
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="renderer" content="webkit">
-    <title>0表示不可选；1表示空闲座位；2表示已被选；3表示自己当前选中；4表示自己上一次选中</title>
-</head>
-<body>
 <div id="seatArea">
 <div class = "head">
 	<h7>选择座位</h7>
@@ -30,17 +29,19 @@
 	</table>
 </div>
 
-<form name="input"  id="seatForm" action="{% url "userpage.views.choose_seat_post" uid %}" method="post" style="display:none">
-	<input type="text" name="row" style="display:none;" id="n">
-	<input type="text" name="column" style="display:none;" id="n">
+<form name="input"  id="seatForm" action="{% url 'userpage.views.choose_seat_post' uid %}" method="post" style="display:none">
+	<input type="text" name="row" id="n">
+	<input type="text" name="column" id="n">
+    <button type="button" onclick="commitSeat();">提交</button>
 </form>
- <button type="button" onclick="commitSeat();">提交</button>
-</div>
- <div >
-	<p class="help-block" id="Loading" style="display: none"><img src="{% static "img/loading.gif" %}">正在提交选座信息，请稍候...</p>
+
 </div>
 
-<div id = "failure" style="display:none">
+<div id="loading">
+    <p class="help-block" id="Loading" style="display: none"><img src="{% static "img/loading.gif" %}">正在提交选座信息，请稍候...</p>
+</div>
+
+<div id="failure" style="display:none">
 	<a href="{% url 'userpage.views.seat_mainmenu_view' uid %}">重新选座</a>
 	<p class="help-block" id="failHolder">您选的座位刚刚被别人抢走了T_T</p>
 </div>
@@ -49,17 +50,15 @@
     <img src="{% static "img/success.png" %}" />
     <p>选座成功！</p>
 </div>
-</body>
 {% endblock %}
 
 {% block js%}
 <script src="http://soso.qstatic.com/wenwen/deploy/js/sea_modules/jquery/1.7.2/jquery-1.7.2.min_a0069db.js"></script>
-<script src="{% static "lib/jq/form/jquery.form.min.js" %}"></script>
-<script src = "{% static "js/seat_tsinghua_hall.js"%}"></script>
-<script>
-	var l = document.getElementById("n")
+<script src="{% static 'lib/jq/form/jquery.form.min.js' %}"></script>
+<script src="{% static 'js/seat_tsinghua_hall.js' %}"></script>
+<script type="text/javascript">
+    var l = document.getElementById("n")
 	l.value = {{row}}
 	l.style.display = "none"
 </script>
 {% endblock %}
-</html> 
