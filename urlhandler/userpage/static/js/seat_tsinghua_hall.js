@@ -10,6 +10,7 @@ function commitSeat() {
     var options = {
         dataType: 'json',
         success: function (data) {
+        	console.log(data)
         	if(data == null)
         	{
         		$("#success").show()
