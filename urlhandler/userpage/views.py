@@ -290,8 +290,6 @@ class DatetimeJsonEncoder(json.JSONEncoder):
 
 def choose_seat_post(request, uid):
     print 'test point 1'
-    if not request.POST:
-        raise Http404
 
     print 'test point 2'
     post = request.POST
