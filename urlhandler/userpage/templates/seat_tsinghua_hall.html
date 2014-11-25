@@ -13,7 +13,7 @@
 <div class = "head">
 	<h7>舞台方向</h7>
 
-<div id="hint">  </div>
+<div id="hint">当前没有选择座位</div>
 
 </div>
 <div class = "view">
@@ -28,10 +28,10 @@
 	</table>
 </div>
 <table>
-	<td><img src= 'http://wx6.igeek.asia/static1/img/selectable.png'  style='width:25px;height:20px;'/>可选座位</td>
-	<td><img src= 'http://wx6.igeek.asia/static1/img/unselectable.png' style='width:25px;height:20px;'/>不可选座位</td>
-	<td><img src= 'http://wx6.igeek.asia/static1/img/selected.png' style='width:25px;height:20px;'/>当前选择座位</td>
-	<td><img src= 'http://wx6.igeek.asia/static1/img/lastselect.png'  style='width:25px;height:20px;'/>上次选择座位</td>
+	<td><img src= 'http://wx6.igeek.asia/static1/img/selectable.png'  style='width:25px;height:20px;'/>可选</td>
+	<td><img src= 'http://wx6.igeek.asia/static1/img/unselectable.png' style='width:25px;height:20px;'/>不可选</td>
+	<td><img src= 'http://wx6.igeek.asia/static1/img/selected.png' style='width:25px;height:20px;'/>当前选择</td>
+	<td><img src= 'http://wx6.igeek.asia/static1/img/lastselect.png'  style='width:25px;height:20px;'/>上次选择</td>
 </table>
 <form name="input"  id="seatForm" action="{% url 'userpage.views.choose_seat_post' uid %}" method="post" style="display:none">
 	<input type="text" name="row" id="n">
