@@ -10,7 +10,7 @@ function commitSeat() {
     var options = {
         dataType: 'json',
         success: function (data) {
-        	console.log('error function');
+        	console.log('success function');
             $("#success").show()
             $(".head").hide()
 		},
