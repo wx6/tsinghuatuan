@@ -7,19 +7,21 @@ function setTableId(){
 }
 
 function commitSeat() {
-        var options = {
-            dataType: 'json',
-            success: function (data) {
-            	$("#success").show()
-            	$(".head").hide()
-			},
-            error: function (xhr) {
+    var options = {
+        dataType: 'json',
+        success: function (data) {
+            $("#success").show()
+            $(".head").hide()
+		},
+        error: function (xhr) {
     		$("#failure").show()
     		$("#seatArea").hide()									
-    		},
-        };
-        $('#seatForm').ajaxSubmit(options);
-        return false;
+    	},
+    };
+    console.log('come here point 1');
+    $('#seatForm').ajaxSubmit(options);
+    console.log('come here point 2');
+    return false;
 }
 
 
