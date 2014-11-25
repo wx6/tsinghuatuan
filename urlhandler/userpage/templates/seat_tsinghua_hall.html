@@ -32,9 +32,8 @@
 <form name="input"  id="seatForm" action="{% url 'userpage.views.choose_seat_post' uid %}" method="post" style="display:none">
 	<input type="text" name="row" id="n">
 	<input type="text" name="column" id="n">
-    <button type="button" onclick="commitSeat();">提交</button>
 </form>
-
+<button type="button" onclick="commitSeat();">提交</button>
 </div>
 
 <div id="loading">
