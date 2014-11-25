@@ -52,8 +52,8 @@ function changeState(id){
 function changeRecord(id){
 	row = parseInt(1 + id / length)
 	column = 1 + id % length 
-	 $("#seatForm").attr("row",row);
-	 $("#seatForm").attr("column",column);
+	 $("#seatForm [name=row]").attr("row",row);
+	 $("#seatForm [name=column]").attr("column",column);
 }
 
 setTableId()
