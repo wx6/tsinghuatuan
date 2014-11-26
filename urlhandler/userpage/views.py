@@ -199,6 +199,11 @@ def ticket_view(request, uid):
     if act_endtime < now:  #表示活动已经结束
         ticket_status = 3
     ticket_seat = ticket[0].seat
+
+    ticket_seat_id = ticket[0].seat_id - activity.seat_start
+    seat_row = ticket_seat_id / 10 + 1
+    seat_column = ticket_seat_id % 10 + 1
+
     # act_photo = activity[0].pic_url
     act_photo = generate_2D_barcodes(1)
     print 'act_photo is %s' % act_photo
@@ -211,6 +216,8 @@ def ticket_view(request, uid):
                                          'act_photo': act_photo,
                                          'ticket_status': ticket_status,
                                          'ticket_seat': ticket_seat,
+                                         'seat_row':seat_row,
+                                         'seat_column':seat_column,
                                          'act_key': act_key})
     return render_to_response('activityticket.html', variables)
 
