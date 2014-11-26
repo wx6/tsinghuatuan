@@ -23,7 +23,7 @@ def generate_2D_barcodes(key):
         data = eval(res_data)
         img_url = 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=' + data['ticket']
         print "success"
-        return data['url']
+        return img_url
     else:
         print res_data
         return 'http://avatar.csdn.net/4/1/0/1_chenggong2dm.jpg'
