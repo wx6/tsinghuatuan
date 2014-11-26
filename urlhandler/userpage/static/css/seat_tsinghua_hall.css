@@ -45,7 +45,7 @@ img{
     height: 17px;
 }
 
-#stage_sign{
+div #stage_sign{
     font-size: 20px
     border: 1px solid black
 }
