@@ -55,6 +55,7 @@
 <div id="success" style="display: none">
     <img src="{% static "img/success.png" %}" />
     <p>选座成功！</p>
+    <a href="{% url 'userpage.views.ticket_view' uid %}"></a>
 </div>
 </center>
 {% endblock %}
