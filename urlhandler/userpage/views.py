@@ -321,7 +321,6 @@ def choose_seat_post(request, uid):
 
 
 def get_seat_chosen(post, ticket):
-    print 'come here'
     location = ticket.activity.seat_status
 
     if location == 0:
@@ -331,12 +330,8 @@ def get_seat_chosen(post, ticket):
         pass
 
     if location == 2:
-        print 'come here again again'
-        print post['row']
         row = int(post['row'])
-        print row
         column = int(post['column'])
-        print column
         seat_id = (row - 1) * 10 + column + ticket.activity.seat_start - 1
         return seat_id
 
@@ -358,6 +353,4 @@ def get_seat_status_tsinghua_hall(ticket):
                 else:
                     row.append(1)
         res.append(row)
-    res[0][0] = 2
-    res[0][1] = 2
     return res
