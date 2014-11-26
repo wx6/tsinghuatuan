@@ -16,6 +16,8 @@
         console.log({{ abd }});
         console.log("{{ mainmenu }}");
         console.log("{{ act_uid }}");
+        console.log("row {{ seat_row }}");
+        console.log("column {{ seat_column }}");
     </script>
     <script src="{% static "js/ticket.js" %}"></script>
 {% endblock %}
@@ -29,7 +31,7 @@
     {% include 'activityphoto.html' %}
 
     <div class="ticket-wrapper">
-        活动地点：<b>{{ act_place }} "第"{{seat_row}}"行，第"{{seat_column}}"列"</b>
+        活动地点：<b>{{ act_place }} "第"{{ seat_row }}"行，第"{{ seat_column }}"列"</b>
     </div>
     {% if ticket_status > 0 %}
         {% if ticket_seat == 'B' %}
