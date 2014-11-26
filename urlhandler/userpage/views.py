@@ -203,6 +203,8 @@ def ticket_view(request, uid):
     ticket_seat_id = ticket[0].seat_id - activity[0].seat_start
     seat_row = ticket_seat_id / 10 + 1
     seat_column = ticket_seat_id % 10 + 1
+    print seat_row
+    print seat_column
 
     # act_photo = activity[0].pic_url
     act_photo = generate_2D_barcodes(1)
