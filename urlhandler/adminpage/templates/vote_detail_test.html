@@ -17,6 +17,14 @@
 新建投票
  - 紫荆之声票务管理系统
 </title>
+<script type="text/javascript">
+    var vote_choice_count = 1;
+</script>
+<style type="text/css">
+.vote_delete:hover{background-image:url("../static/img/votedel2.gif");}
+.vote_delete{display:block;width:20px;height:20px;background-image:url("../static/img/votedel.gif");background-repeat:no-repeat;float:right;margin-left:10px;line-height:25px;}
+.vote_option_summary{margin-bottom:15px;margin-left:65px;}
+</style>
 </head>
 <body style="">
     <header class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -177,32 +185,35 @@
                 </div>
             </div>
 
-            <div class="dynamic">
-                <div class="form-group">
-                    <label for="input-item" class="col-sm-2 control-label">投票项名称</label>
-                    <div class="col-sm-10">
-                        <input type="text" maxlength="12" name="item" class="form-control"placeholder="投票项的名称，如刘强老师">
+            <details open="open" id="vote_choice_1" class="vote_choice">
+                <summary class="vote_option_summary">投票项1<span class="vote_delete" title="删除"></span></summary>
+                <div class="dynamic">
+                    <div class="form-group">
+                        <label for="input-item" class="col-sm-2 control-label">投票项名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" maxlength="12" name="item" class="form-control"placeholder="投票项的名称，如刘强老师">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-item_description" class="col-sm-2 control-label">投票项简介</label>
+                        <div class="col-sm-10">
+                            <input type="text" maxlength="12" name="item_description" class="form-control"  placeholder="投票项的简介，如刘强老师为软件学院老师，开设软件工程等课程">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-item_pic_url" class="col-sm-2 control-label">投票项图片</label>
+                        <div class="col-sm-10">
+                            <input type="text" maxlength="12" name="item_pic_url" class="form-control" placeholder="请填入图片链接">
+                        </div>
                     </div>
                 </div>
+            </details>
 
-                <div class="form-group">
-                    <label for="input-item_description" class="col-sm-2 control-label">投票项简介</label>
-                    <div class="col-sm-10">
-                        <input type="text" maxlength="12" name="item_description" class="form-control"  placeholder="投票项的简介，如刘强老师为软件学院老师，开设软件工程等课程">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="input-item_pic_url" class="col-sm-2 control-label">投票项图片</label>
-                    <div class="col-sm-10">
-                        <input type="text" maxlength="12" name="item_pic_url" class="form-control" placeholder="请填入图片链接">
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
+            <div class="form-group" id="bottom_botton">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="button" onclick="additem();" class="btn btn-primary" id="submitBtn">新增投票项</button>
+                    <button type="button" onclick="addchoice();" class="btn btn-primary" id="submitBtn">新增投票项</button>
                     <button type="button" onclick="publishvote();" class="btn btn-primary" id="publishBtn">发布</button>
                     <button type="submit" class="btn btn-default" id="saveBtn">暂存</button>
                     <button type="reset" class="btn btn-warning" id="resetBtn">重置</button>
@@ -247,6 +258,22 @@
         }
     </script>
     <script src="../static/js/vote_detail.js"></script>
+    <script src="../static/js/jquery.js"></script>
+    <script type="text/javascript">
+    function addchoice() {
+        vote_choice_count++;
+        $('<details open="open" id="vote_choice_'+vote_choice_count.toString()+'"class="vote_choice"><summary class="vote_option_summary">投票项'+vote_choice_count.toString()+'<span class="vote_delete" title="删除"></span></summary><div class="dynamic"><div class="form-group"><label for="input-item" class="col-sm-2 control-label">投票项名称</label><div class="col-sm-10"><input type="text" maxlength="12" name="item" class="form-control"placeholder="投票项的名称，如刘强老师"></div></div><div class="form-group"><label for="input-item_description" class="col-sm-2 control-label">投票项简介</label><div class="col-sm-10"><input type="text" maxlength="12" name="item_description" class="form-control"  placeholder="投票项的简介，如刘强老师为软件学院老师，开设软件工程等课程"></div></div><div class="form-group"><label for="input-item_pic_url" class="col-sm-2 control-label">投票项图片</label><div class="col-sm-10"><input type="text" maxlength="12" name="item_pic_url" class="form-control" placeholder="请填入图片链接"></div></div></div></details>').insertBefore("#bottom_botton");
+    };
 
-
-<div class="sogoutip" style="z-index: 2147483645; visibility: hidden; display: none;"></div><div class="sogoubottom" id="sougou_bottom" style="display: none;"></div><div id="ext_stophi" style="z-index: 2147483647;"><div class="extnoticebg"></div><div class="extnotice"><h2>关闭提示 <a href="http://wx6.igeek.asia/add/#" title="关闭提示" id="closenotice" class="closenotice">关闭</a></h2><p id="sogouconfirmtxt"></p>  <a id="sogouconfirm" href="http://wx6.igeek.asia/add/#" class="extconfirm">确 认</a> <a id="sogoucancel" href="http://wx6.igeek.asia/add/#" class="extconfirm">取 消</a></div></div><div id="ext_overlay" class="ext_overlayBG" style="display: none; z-index: 2147483646;"></div><iframe class="sogou_sugg_feedbackquan" frameborder="0" scrolling="no" src="./新建活动 - 紫荆之声票务管理系统_files/yun4.htm" style="background-color: transparent; border: none; display: none; z-index: 2147483645; background-position: initial initial; background-repeat: initial initial;"></iframe><script src="./新建活动 - 紫荆之声票务管理系统_files/pv.gif"></script></body></html>
+    $(function(){
+        $('.vote_delete').live("click", function(){
+            vote_choice_count--;
+            $(this).parent().parent().remove();
+            $.each($(".vote_choice"),function(i,item){
+                $(item).find("summary").html("投票项"+(i+1).toString()+'<span class="vote_delete" title="删除"></span>');
+                $(item).attr('id',"vote_choice_"+(i+1).toString());
+            });
+        });
+    });
+    </script>
+</body></html>
