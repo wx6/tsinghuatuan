@@ -203,7 +203,9 @@ def ticket_view(request, uid):
     ticket_seat_id = ticket[0].seat_id - activity[0].seat_start
     seat_row = ticket_seat_id / 10 + 1
     seat_column = ticket_seat_id % 10 + 1
+    print 'aaaaaaaaaaaaaa'
     print seat_row
+    print 'bbbbbbbbbbbbbb'
     print seat_column
 
     # act_photo = activity[0].pic_url
