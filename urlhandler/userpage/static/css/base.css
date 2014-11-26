@@ -61,4 +61,5 @@ body > #wrap {
     height: 37px; /* a little smaller than 50 to avoid scroll*/
     clear:both;
     text-align: center;
+    font-size:12px;
 }
