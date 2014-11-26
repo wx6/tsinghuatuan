@@ -500,3 +500,14 @@ def activity_export_stunum(request, actid):
     ##########################################保存
     wb.save(response)
     return response
+
+
+
+# Functions below are about vote activities
+# By: Liu Junlin
+def vote_list(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(s_reverse_admin_home())
+
+    variables = RequestContext(request, {})
+    return render_to_response('vote_detail.html', variables)
