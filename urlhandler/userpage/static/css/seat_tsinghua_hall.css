@@ -46,9 +46,9 @@ img{
 }
 
 #stage_sign{
-    background-color: #yellow
+    background-color: yellow
     width: 200px
-    border: solid 1px
+    border: 1px solid black
 }
 
 button{
