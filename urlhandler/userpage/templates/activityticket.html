@@ -33,9 +33,11 @@
     <div class="ticket-wrapper">
         活动地点：<b>{{ act_place }}</b>
     </div>
+    <center>
     <div>
         <b>您的座位在：第{{ seat_row }}行，第{{ seat_column }}列</b>
     </div>
+    </center>
     {% if ticket_status > 0 %}
         {% if ticket_seat == 'B' %}
             <div class="ticket-wrapper">
