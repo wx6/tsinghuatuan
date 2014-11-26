@@ -31,6 +31,7 @@ def get_text_time_standard(dt):
 
 def get_text_ticket_pic(ticket):
     # return QRCODE_URL + str(ticket.unique_id)
+    print ticket.activity.pic_url
     return ticket.activity.pic_url
 
 
