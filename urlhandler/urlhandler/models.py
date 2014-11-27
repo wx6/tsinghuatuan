@@ -48,6 +48,19 @@ class Ticket(models.Model):
     # 1: ticket order is valid
     # 2: ticket is used
 
+class Vote(models.Model):
+    name = models.CharField(max_length=255)
+    key = models.CharField(max_length=255)
+    description = models.CharField(max_length=255)
+    pic_url = models.CharField(max_length=255)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+    status = models.IntegerField(default=0)
+    # Something about status:
+    # 0: saved but not publihsed
+    # 1: published
+
+
 '''
 class UserSession(models.Model):
     stu_id = models.CharField(max_length=255)

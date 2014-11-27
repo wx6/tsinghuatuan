@@ -509,5 +509,77 @@ def vote_list(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(s_reverse_admin_home())
 
-    variables = RequestContext(request, {})
-    return render_to_response('vote_detail.html', variables)
+    # variables = RequestContext(request, {})
+    # return render_to_response('vote_detail.html', variables)
+
+    vote_models = Vote.objects.filter(status__gte=0).order_by("-id").all()
+    votes = []
+
+    for vote in vote_models:
+        votes += [wrap_vote_dict(vote)]
+
+    return render_to_response('vote_list.html', {
+        'votes':votes
+    }, context_instance=RequestContext(request))
+
+
+def wrap_vote_dict(vote):
+    dt = model_to_dict(vote)
+    return dt
+
+
+def vote_detail(request, voteid):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(s_reverse_admin_home())
+
+    try:
+        vote = Vote.objects.get(id=voteid)
+        unpublished = (vote.status == 0)
+    except:
+        raise Http404
+
+    return render_to_response('vote_detail.html', {
+        'vote': vote,
+        'unpublished': unpublished
+    }, context_instance=RequestContext(request))
+
+
+"""
+def activity_detail(request, actid):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(s_reverse_admin_home())
+
+    try:
+        activity = Activity.objects.get(id=actid)
+
+        unpublished = (activity.status == 0)
+    except:
+        raise Http404
+    return render_to_response('activity_detail.html', {
+        'activity': wrap_activity_dict(activity),
+        'unpublished': unpublished
+    }, context_instance=RequestContext(request))
+
+def wrap_activity_dict(activity):
+    dt = model_to_dict(activity)
+    if (dt['status'] >= 1) and (datetime.now() >= dt['book_start']):
+        dt['tickets_ready'] = 1
+        dt['ordered_tickets'] = int(activity.total_tickets) - int(activity.remain_tickets)
+        dt['checked_tickets'] = get_checked_tickets(activity)
+    return dt
+
+
+def activity_list(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(s_reverse_admin_home())
+
+    actmodels = Activity.objects.filter(status__gte=0).order_by('-id').all()
+    activities = []
+    for act in actmodels:
+        activities += [wrap_activity_dict(act)]
+    permission_num = 1 if request.user.is_superuser else 0
+    return render_to_response('activity_list.html', {
+        'activities': activities,
+        'permission': permission_num,
+    })
+"""
