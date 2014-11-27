@@ -1,11 +1,43 @@
+/**
+ * Created with PyCharm.
+ * User: Epsirom
+ * Date: 13-11-30
+ * Time: ä¸Šåˆ11:43
+ */
+/*
+var datetimepicker_option = {
+    format: "yyyyå¹´mmæœˆddæ—¥ - hh:ii",
+    autoclose: true,
+    pickerPosition: "bottom-left",
+    weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    forceParse: 0,
+    showMeridian: 1,
+    language: 'zh-CN'
+};
+
+$(".form_datetime").datetimepicker(datetimepicker_option);
+
+function enableDatetimePicker(dom) {
+    dom.datetimepicker(datetimepicker_option);
+    dom.children('.input-group-addon').css('cursor', 'pointer').children().css('cursor', 'pointer');
+}
+
+function disableDatetimePicker(dom) {
+    dom.datetimepicker('remove');
+    dom.children('.input-group-addon').css('cursor', 'no-drop').children().css('cursor', 'no-drop');
+}
+*/
 var dateInterfaceMap = {
     'year': 'getFullYear',
     'month': 'getMonth',
     'day': 'getDate',
     'hour': 'getHours',
     'minute': 'getMinutes'
-};
-var actionMap = {
+}, actionMap = {
     'value': function(dom, value) {
         dom.val(value);
     },
