@@ -176,16 +176,6 @@ def activity_create(activity):
         preDict[k] = str_to_datetime(activity[k])
     preDict['status'] = 1 if ('publish' in activity) else 0
     preDict['remain_tickets'] = preDict['total_tickets']
-
-    activities = Activity.objects.order_by("-seat_end")
-    if activities.exists():
-        preDict['seat_start'] = activities[0].seat_end + 1
-    else:
-        preDict['seat_start'] = 1
-    total_tickets = preDict['total_tickets']
-    total_tickets = int(total_tickets)
-    preDict['seat_end'] = preDict['seat_start'] + total_tickets - 1
-
     newact = Activity.objects.create(**preDict)
     return newact
 
@@ -500,14 +490,3 @@ def activity_export_stunum(request, actid):
     ##########################################保存
     wb.save(response)
     return response
-
-
-
-# Functions below are about vote activities
-# By: Liu Junlin
-def vote_list(request):
-    if not request.user.is_authenticated():
-        return HttpResponseRedirect(s_reverse_admin_home())
-
-    variables = RequestContext(request, {})
-    return render_to_response('vote_detail.html', variables)

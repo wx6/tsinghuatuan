@@ -1,7 +1,7 @@
-{% extends "activity_list.html" %}
+{% extends "vote_list.html" %}
 
-{% block activity-title %}
-{{ activity.name }}
+{% block vote-title %}
+{{vote.name }}
 {% endblock %}
 
 {% load staticfiles %}
@@ -12,65 +12,44 @@
 
 {% block js %}
     <script src="{% static "lib/jq/form/jquery.form.min.js" %}"></script>
+    <script src="{% static "lib/jq/jquery-1.10.2.min.js" %}"></script>
     <script>
-        var activity = {
-            'name': '{{ activity.name }}'{% if activity.id %},
-            'id': {{ activity.id }},
-            'key': '{{ activity.key|escapejs }}',
-            'description': '{{ activity.description|escapejs }}',
-            'pic_url': '{{ activity.pic_url }}',
-            // 'seat_status': {{ activity.seat_status }},
+        var vote = {
+            'name': '{{vote.name }}'{% if vote.id %},
+            'id': {{ vote.id }},
+            'key': '{{ vote.key|escapejs }}',
+            'description': '{{ vote.description|escapejs }}',
+            'pic_url': '{{ vote.pic_url }}',
             'start_time': {
-                'year': {{ activity.start_time.year }},
-                'month': {{ activity.start_time.month }},
-                'day': {{ activity.start_time.day }},
-                'hour': {{ activity.start_time.hour }},
-                'minute': {{ activity.start_time.minute }}
+                'year': {{ vote.start_time.year }},
+                'month': {{ vote.start_time.month }},
+                'day': {{ vote.start_time.day }},
+                'hour': {{ vote.start_time.hour }},
+                'minute': {{ vote.start_time.minute }}
             },
             'end_time': {
-                'year': {{ activity.end_time.year }},
-                'month': {{ activity.end_time.month }},
-                'day': {{ activity.end_time.day }},
-                'hour': {{ activity.end_time.hour }},
-                'minute': {{ activity.end_time.minute }}
-            },
-            // 'place': '{{ activity.place }}',
-            // 'book_start': {
-            //     'year': {{ activity.book_start.year }},
-            //     'month': {{ activity.book_start.month }},
-            //     'day': {{ activity.book_start.day }},
-            //     'hour': {{ activity.book_start.hour }},
-            //     'minute': {{ activity.book_start.minute }}
-            // },
-            // 'book_end': {
-            //     'year': {{ activity.book_end.year }},
-            //     'month': {{ activity.book_end.month }},
-            //     'day': {{ activity.book_end.day }},
-            //     'hour': {{ activity.book_end.hour }},
-            //     'minute': {{ activity.book_end.minute }}
-            // },
-            // 'total_tickets': {{ activity.total_tickets }},
-            // 'status': {{ activity.status }}{% else %},
-            // 'status': 0{% endif %}{% if activity.tickets_ready %},
-            // 'checked_tickets': {{ activity.checked_tickets }},
-            // 'ordered_tickets': {{ activity.ordered_tickets }}{% endif %}
+                'year': {{ vote.end_time.year }},
+                'month': {{ vote.end_time.month }},
+                'day': {{ vote.end_time.day }},
+                'hour': {{ vote.end_time.hour }},
+                'minute': {{ vote.end_time.minute }}
+            }
         }
 
 
     </script>
     <script src="{% static "js/vote_detail.js" %}"></script>
-    <script src="{% static "js/jquery.js" %}"></script>
 {% endblock %}
 
-{% block activity-list-active %}{% endblock %}
+{% block vote-list-active %}{% endblock %}
 
 {% block nav-li-ext %}
-    <li class="{% block activity-detail-active %}active{% endblock %}">
-        <a href="{% if activity.id %}
-        {% url "adminpage.views.activity_detail" actid=activity.id %}
+    <li class="{% block vote-detail-active %}active{% endblock %}">
+        <a href="{% if vote.id %}
+        {% url "adminpage.views.vote_detail" actid=vote.id %}
         {% else %}
-        {% url "adminpage.views.activity_add" %}
-        {% endif %} ">{{ activity.name }}</a>
+        {% url "adminpage.views.vote_add" %}
+        {% endif %} ">{{ vote.name }}</a>
     </li>
 {% endblock %}
 
@@ -79,7 +58,7 @@
         <noscript>请开启JavaScript后重试。</noscript>
     </div>
     <div class="container" id="detail-form" style="display: none;">
-        <form class="form-horizontal" role="form" method="post" action="{% url "adminpage.views.activity_post" %}" id="activity-form">
+        <form class="form-horizontal" role="form" method="post" action="{% url "adminpage.views.vote_post" %}" id="vote-form">
             {% csrf_token %}
             <div class="form-group">
                 <label for="input-name" class="col-sm-2 control-label" id="label-input-name">投票名称</label>
@@ -91,7 +70,7 @@
             <div class="form-group">
                 <label for="input-key" class="col-sm-2 control-label">投票代称</label>
                 <div class="col-sm-10">
-                    <input type="text" maxlength="12" name="key" class="form-control" id="input-key" placeholder="用户用于订票的活动代称，推荐使用中文(少于7个字)，如 清韵烛光">
+                    <input type="text" maxlength="12" name="key" class="form-control" id="input-key" placeholder="用户参与投票的投票代称，推荐使用中文(少于7个字)，如 清韵烛光">
                 </div>
             </div>
 
@@ -110,7 +89,7 @@
             </div>
 
             <div class="form-group">
-                <label for="input-start-year" class="col-sm-2 control-label">活动开始</label>
+                <label for="input-start-year" class="col-sm-2 control-label">投票开始</label>
                 <div class="form-inline col-sm-10" id="input-start_time">
                     <div class="form-group date-input">
                         <input class="form-control" maxlength="4" type="number" id="input-start-year" value=""
@@ -151,8 +130,9 @@
                     </div>
                 </div>
             </div>
+
             <div class="form-group">
-                <label for="input-end-year" class="col-sm-2 control-label">活动结束</label>
+                <label for="input-end-year" class="col-sm-2 control-label">投票结束</label>
                 <div class="form-inline col-sm-10" id="input-end_time">
                     <div class="form-group date-input">
                         <input class="form-control" maxlength="4" type="number" id="input-end-year" value=""
@@ -194,94 +174,33 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="input-book-start-year" class="col-sm-2 control-label">投票开始</label>
-                <div class="form-inline col-sm-10" id="input-book_start">
-                    <div class="form-group date-input">
-                        <input class="form-control" maxlength="4" type="number" id="input-book-start-year" value=""
-                               date-part="year" placeholder="年，>=2013" min="2013" max="2100" step="1">
-                    </div>
-                    <div class="form-group date-label">
-                        <label class="control-label" for="input-book-start-year">年</label>
-                    </div>
-                    <div class="form-group date-input">
-                        <input class="form-control" maxlength="2" type="number" id="input-book-start-month" value="" date-part="month"
-                               placeholder="月，1-12" min="1" max="12" step="1">
-                    </div>
-                    <div class="form-group date-label">
-                        <label class="control-label" for="input-book-start-month">月</label>
-                    </div>
-                    <div class="form-group date-input">
-                        <input class="form-control" maxlength="2" type="number" id="input-book-start-day" value="" date-part="day"
-                               placeholder="日，1-31" min="1" max="31" step="1">
-                    </div>
-                    <div class="form-group date-label">
-                        <label class="control-label" for="input-book-start-day">日</label>
-                    </div>
-                    <div class="form-group date-offset">
-                    </div>
-                    <div class="form-group date-input">
-                        <input class="form-control" maxlength="2" type="number" id="input-book-start-hour" value="" date-part="hour"
-                               placeholder="小时，0-23" min="0" max="23" step="1">
-                    </div>
-                    <div class="form-group date-label">
-                        <label class="control-label" for="input-book-start-hour">时</label>
-                    </div>
-                    <div class="form-group date-input">
-                        <input class="form-control" maxlength="2" type="number" id="input-book-start-minute" value="" date-part="minute"
-                               placeholder="分钟，0-59"min="0" max="59" step="1">
-                    </div>
-                    <div class="form-group date-label">
-                        <label class="control-label" for="input-book-start-minute">分</label>
+            <div class="dynamic">
+                <div class="form-group">
+                    <label for="input-item" class="col-sm-2 control-label">投票项名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" maxlength="12" name="item" class="form-control" placeholder="投票项的名称，如刘强老师">
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="input-book-end-year" class="col-sm-2 control-label">投票结束</label>
-                <div class="form-inline col-sm-10" id="input-book_end">
-                    <div class="form-group date-input">
-                        <input class="form-control" maxlength="4" type="number" id="input-book-end-year" value=""
-                               date-part="year" placeholder="年，>=2013" min="2013" max="2100" step="1">
+
+                <div class="form-group">
+                    <label for="input-item_description" class="col-sm-2 control-label">投票项简介</label>
+                    <div class="col-sm-10">
+                        <input type="text" maxlength="12" name="item_description" class="form-control" placeholder="投票项的简介，如刘强老师为软件学院老师，开设软件工程等课程">
                     </div>
-                    <div class="form-group date-label">
-                        <label class="control-label" for="input-book-end-year">年</label>
-                    </div>
-                    <div class="form-group date-input">
-                        <input class="form-control" maxlength="2" type="number" id="input-book-end-month" value="" date-part="month"
-                               placeholder="月，1-12" min="1" max="12" step="1">
-                    </div>
-                    <div class="form-group date-label">
-                        <label class="control-label" for="input-book-end-month">月</label>
-                    </div>
-                    <div class="form-group date-input">
-                        <input class="form-control" maxlength="2" type="number" id="input-book-end-day" value="" date-part="day"
-                               placeholder="日，1-31" min="1" max="31" step="1">
-                    </div>
-                    <div class="form-group date-label">
-                        <label class="control-label" for="input-book-end-day">日</label>
-                    </div>
-                    <div class="form-group date-offset">
-                    </div>
-                    <div class="form-group date-input">
-                        <input class="form-control" maxlength="2" type="number" id="input-book-end-hour" value="" date-part="hour"
-                               placeholder="小时，0-23" min="0" max="23" step="1">
-                    </div>
-                    <div class="form-group date-label">
-                        <label class="control-label" for="input-book-end-hour">时</label>
-                    </div>
-                    <div class="form-group date-input">
-                        <input class="form-control" maxlength="2" type="number" id="input-book-end-minute" value="" date-part="minute"
-                               placeholder="分钟，0-59"min="0" max="59" step="1">
-                    </div>
-                    <div class="form-group date-label">
-                        <label class="control-label" for="input-book-end-minute">分</label>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-item_pic_url" class="col-sm-2 control-label">投票项图片</label>
+                    <div class="col-sm-10">
+                        <input type="text" maxlength="12" name="item_pic_url" class="form-control" placeholder="请填入图片链接">
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="button" onclick="publishActivity();" class="btn btn-primary" id="publishBtn">发布</button>
+                    <button type="button" onclick="additem();" class="btn btn-primary" id="submitBtn">新增投票项</button>
+                    <button type="button" onclick="publishvote();" class="btn btn-primary" id="publishBtn">发布</button>
                     <button type="submit" class="btn btn-default" id="saveBtn">暂存</button>
                     <button type="reset" class="btn btn-warning" id="resetBtn">重置</button>
                 </div>
@@ -300,7 +219,7 @@
         <pre id="resultHolder"></pre>
         <div class="col-sm-offset-2">
             <button class="btn btn-info" id="continueBtn">继续修改</button>
-            <a class="btn btn-success" href="{% url "adminpage.views.activity_list" %}">返回列表</a>
+            <a class="btn btn-success" href="{% url "adminpage.views.vote_list" %}">返回列表</a>
         </div>
     </div>
 
