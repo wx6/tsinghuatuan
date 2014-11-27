@@ -25,6 +25,8 @@ import re
 from django.utils.http import urlquote
 from django.utils.encoding import smart_str
 
+from urlhandler.models import Vote
+
 
 
 @csrf_protect
