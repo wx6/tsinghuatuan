@@ -5,8 +5,8 @@
 {% block vote-title %}投票列表{% endblock %}
 
 {% block nav-li %}
-    <li class="{% block vote-list-active %}active{% endblock %}"><a class="btn-link" href="{% url "adminpage.views.activity_list" %}">活动列表</a></li>
-    <li><a class="btn-link" href="{% url "adminpage.views.vote_list" %}">投票列表</a></li>
+    <li class="{% block vote-list-active %}{% endblock %}"><a class="btn-link" href="{% url "adminpage.views.activity_list" %}">活动列表</a></li>
+    <li><a class="btn-link active" href="{% url "adminpage.views.vote_list" %}">投票列表</a></li>
     {% block nav-li-ext %}{% endblock %}
 {% endblock %}
 
