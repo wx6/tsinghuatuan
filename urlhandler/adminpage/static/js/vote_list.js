@@ -102,7 +102,7 @@ var tdMap = {
 	'description':'longtext',
 	'start_time':'time',
 	'end_time':'time',
-	
+	'operations':'operation_links',
 	'delete':'deletelink'
 };
 
@@ -222,7 +222,7 @@ function createtips(){
 }
 
 function appendVot(vot){
-    var tr = $('<tr></tr>'), key;
+    var tr = $('<tr' + ((typeof vot.delete != "undefined") ? (' id="'+vot.delete+'"') : '') + '></tr>'), key;
     for (key in tdMap) {
         getTd(key).html(tdActionMap[tdMap[key]](vot, key)).appendTo(tr);
     }
