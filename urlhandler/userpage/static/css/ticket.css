@@ -38,7 +38,7 @@
 .ticket-wrapper b{
     padding-bottom: 4px;
 }
-.ticket-wrapper icon{
+.ticket-wrapper .icon{
     background-color: red;
     padding-right: 5px;
 }
