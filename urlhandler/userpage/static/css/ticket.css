@@ -4,21 +4,21 @@
     text-align: center;
 }
 .info-wrapper{
-    height: 12.9rem;
+    height: 16rem;
     padding-left: 5%;
-    padding-bottom: 5px;
+    padding-bottom: 0px;
     width: 90%;
 }
 .img-inner{
     float: left;
-    max-width: 25%;
+    max-width: 30%;
     margin:0; 
     padding:0;
     overflow:hidden; 
 }
 .text-inner{
     float: left;
-    width: 75%;
+    width: 70%;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -28,7 +28,7 @@
     text-align: left;
 }
 
-img{
+.img-inner img{
     max-width: 100%;
 }
 .status-size{
