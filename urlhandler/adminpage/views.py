@@ -522,7 +522,7 @@ def vote_list(request):
 
     return render_to_response('vote_list.html', {
         'votes':votes
-    }, context_instance=RequestContext(request))
+    })
 
 
 def wrap_vote_dict(vote):
