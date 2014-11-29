@@ -9,7 +9,7 @@ function clearVotes(){
 
 function getSmartStatus(vot){
 	if (vot.status == 0){
-		return '未发布'；
+		return '未发布';
 	} else if (vot.status == 1) {
         var now = new Date();
         if (now < vot.start_time){
@@ -102,7 +102,7 @@ var tdMap = {
 	'description':'longtext',
 	'start_time':'time',
 	'end_time':'time',
-	/*'operations':'operation_links',*/
+	
 	'delete':'deletelink'
 };
 
@@ -164,7 +164,7 @@ var tdActionMap = {
 var smartTimeMap = {
 	'start_time':function(vot){
 		return getChsFullDate(vot.start_time);
-	}
+	},
 	'end_time':function(vot){
 		return getChsFullDate(vot.end_time);
 	}
@@ -222,7 +222,7 @@ function createtips(){
 }
 
 function appendVot(vot){
-	var tr = $('<tr' + ((typeof vot.delete != "undefined") ? (' id="'+vot.delete+'"') : '') + '></tr>'), key;
+    var tr = $('<tr></tr>'), key;
     for (key in tdMap) {
         getTd(key).html(tdActionMap[tdMap[key]](vot, key)).appendTo(tr);
     }
@@ -232,7 +232,7 @@ function appendVot(vot){
 function initialVotes(){
 	var i;
 	for (i = 0; i < votes.length; i++){
-		appendVot();
+		appendVot(votes[i]);
 	}
 	createtips();
 }
