@@ -222,7 +222,7 @@ function createtips(){
 }
 
 function appendVot(vot){
-	var tr = $('<tr' + ((typeof vot.delete != "undefined") ? (' id="'+vot.delete+'"') : '') + '></tr>'), key;
+    var tr = $('<tr></tr>'), key;
     for (key in tdMap) {
         getTd(key).html(tdActionMap[tdMap[key]](vot, key)).appendTo(tr);
     }
@@ -232,7 +232,7 @@ function appendVot(vot){
 function initialVotes(){
 	var i;
 	for (i = 0; i < votes.length; i++){
-		appendVot();
+		appendVot(votes[i]);
 	}
 	createtips();
 }
