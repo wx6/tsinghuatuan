@@ -33,10 +33,14 @@
 }
 .ticket-wrapper img{
     height: 1rem;
-    padding-right: 2px;
+    padding-right: 5px;
 }
 .ticket-wrapper b{
     padding-bottom: 4px;
+}
+.ticket-wrapper icon{
+    background-color: "red";
+    padding-right: 5px;
 }
 .status-size{
     font-size: 18px;
