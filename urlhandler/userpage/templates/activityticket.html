@@ -29,17 +29,15 @@
 {% block content %}
 
     <div class="info-wrapper">
-        <span class="img-inner">
+        <div class="img-inner">
             <img class="details-img" src="{{ act_photo  }}" />
-        </span>
-        <span class="ticket-wrapper">
+        </div>
+        <p class="ticket-wrapper">
             活动地点：<b>{{ act_place }}</b>
-        </span>
-        <br>
-        <span class="ticket-wrapper">
+        </p>
+        <p class="ticket-wrapper">
             <b>您的座位在：第{{ seat_row }}行，第{{ seat_column }}列</b>
-        </span>
-        <br>
+        </p>
         {% if ticket_status > 0 %}
             {% if ticket_seat == 'B' %}
                 <div class="ticket-wrapper">
@@ -51,9 +49,9 @@
                 </div>
             {% endif %}
         {% endif %}
-        <span class="ticket-wrapper">
+        <p class="ticket-wrapper">
             开始时间：<b>{{ act_begintime|date:"Y年m月d日 H:i" }}</b>
-        </span>
+        </p>
     </div>
 
     {% if ticket_status == 1 %}
