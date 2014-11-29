@@ -531,6 +531,7 @@ def vote_list(request):
 
 def wrap_vote_dict(vote):
     dt = model_to_dict(vote)
+    dt['id'] = vote.id
     return dt
 
 
