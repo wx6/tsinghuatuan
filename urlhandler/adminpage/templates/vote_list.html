@@ -28,9 +28,6 @@
                 }{% if forloop.last %}{% else %},{% endif %}
             {% endfor %}
         ];
-        var operations_name = {{% if permission %}'detail':'详情', 'export':'导出', {% endif %}};
-        var operations_icon = {{% if permission %}'detail':'pencil', 'export':'export', {% endif %}};
-        var operations_target = {{% if permission %}'detail':'', 'export':'_blank', {% endif %}};
     </script>
     <script src="{% static "js/vote_list.js" %}"></script>
 {% endblock %}
