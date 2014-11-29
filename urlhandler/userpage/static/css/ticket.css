@@ -1,14 +1,24 @@
 .ticket-wrapper{
+    float: left;
     padding-left: 10px;
     padding-bottom: 8px;
     text-align: left;
 }
-.details-wrapper{
+.info-wrapper{
+    float: left;
     text-align: left;
     padding-bottom: 5px;
 }
+.img-inner{
+    float: left;
+    width: 6.6rem;
+    height: 9rem;
+    margin:0; 
+    padding:0;
+    overflow:hidden; 
+}
 img{
-    width: 25%;
+    max-width: 100%;
 }
 .status-size{
     font-size: 18px;
