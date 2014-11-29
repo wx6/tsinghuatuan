@@ -507,6 +507,14 @@ def activity_export_stunum(request, actid):
 
 # Functions below are about vote activities
 # By: Liu Junlin
+def vote_add(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(s_reverse_admin_home())
+
+    variables = RequestContext(request, {})
+    return render_to_response('vote_detail.html', variables)
+
+
 def vote_list(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(s_reverse_admin_home())
@@ -519,10 +527,6 @@ def vote_list(request):
 
     for vote in vote_models:
         votes += [wrap_vote_dict(vote)]
-
-    for vote in votes:
-        print 'hahahahhahahahahahha'
-        print vote['id']
 
     return render_to_response('vote_list.html', {
         'votes':votes
