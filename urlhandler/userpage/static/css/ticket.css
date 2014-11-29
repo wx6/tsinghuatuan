@@ -5,7 +5,9 @@
 }
 .info-wrapper{
     height: 12.9rem;
+    padding-left: 5%;
     padding-bottom: 5px;
+    width: 90%;
 }
 .img-inner{
     float: left;
