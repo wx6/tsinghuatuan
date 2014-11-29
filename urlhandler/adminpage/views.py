@@ -521,6 +521,7 @@ def vote_list(request):
         votes += [wrap_vote_dict(vote)]
 
     for vote in vote_models:
+        print 'hahahahhahahahahahha'
         print vote.id
 
     return render_to_response('vote_list.html', {
