@@ -11,14 +11,14 @@
 }
 .img-inner{
     float: left;
-    max-width: 30%;
+    width: 40%;
     margin:0; 
     padding:0;
     overflow:hidden; 
 }
 .text-inner{
     float: left;
-    width: 70%;
+    width: 60%;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -30,6 +30,9 @@
 
 .img-inner img{
     max-width: 100%;
+}
+.ticket-wrapper img{
+    height: 2rem;
 }
 .status-size{
     font-size: 18px;
