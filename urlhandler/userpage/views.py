@@ -203,10 +203,6 @@ def ticket_view(request, uid):
     ticket_seat_id = ticket[0].seat_id - activity[0].seat_start
     seat_row = ticket_seat_id / 10 + 1
     seat_column = ticket_seat_id % 10 + 1
-    print 'aaaaaaaaaaaaaa'
-    print seat_row
-    print 'bbbbbbbbbbbbbb'
-    print seat_column
 
     # act_photo = activity[0].pic_url
     act_photo = generate_2D_barcodes(1)
@@ -301,24 +297,20 @@ def choose_seat_post(request, uid):
     rtnJSON = {}
 
     try:
-        print 'test point 1'
         tickets = Ticket.objects.filter(unique_id = uid)
         current_ticket = tickets[0]
 
-        print 'test point 2'
-        if current_ticket.status == 2:
+        if (current_ticket.status == 2) or (current_ticket.activity.start_time < datetime.now()):
             rtnJSON['error'] = u'已经过了选座位的时间啦'
             return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),content_type='application/json')
 
-        print 'test point 3'
         if current_ticket.status == 0:
             rtnJSON['error'] = u'这张票已经被你取消啦'
             return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),content_type='application/json')
 
-        print 'test point 4'
         seat_chosen = get_seat_chosen(post, current_ticket)
         tickets = Ticket.objects.filter(seat_id = seat_chosen)
-        print seat_chosen
+
         if tickets.exists():
             rtnJSON['error'] = u'这个座位已被其它小伙伴抢到了= ='
         else:
