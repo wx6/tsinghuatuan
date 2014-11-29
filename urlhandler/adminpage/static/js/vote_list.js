@@ -102,7 +102,7 @@ var tdMap = {
 	'description':'longtext',
 	'start_time':'time',
 	'end_time':'time',
-	/*'operations':'operation_links',*/
+	
 	'delete':'deletelink'
 };
 
