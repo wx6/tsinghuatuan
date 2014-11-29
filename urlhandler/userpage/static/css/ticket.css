@@ -35,6 +35,9 @@
     height: 1rem;
     padding-right: 2px;
 }
+.ticket-wrapper b{
+    padding-bottom: 4px;
+}
 .status-size{
     font-size: 18px;
 }
