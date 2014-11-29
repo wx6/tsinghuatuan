@@ -22,4 +22,5 @@ urlpatterns = patterns('',
                        url(r'^menu/submit/$', 'adminpage.views.custom_menu_modify_post'),
 
                        url(r'^vote_list/$', 'adminpage.views.vote_list'),
+                       url(r'^vote_detail/(?P<votid>\S+)/$', 'adminpage.views.vote_detail'),
                        )
