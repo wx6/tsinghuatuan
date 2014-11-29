@@ -23,8 +23,7 @@
                     'description': '{{ vote.description|escapejs }}',
                     'start_time': new Date('{{ vote.start_time|date:"r" }}'),
                     'end_time': new Date('{{ vote.end_time|date:"r" }}'),
-                {% if permission %}'delete':{{ vote.id }}{% endif %}
-                    
+                    'delete':{{ vote.id }}
                 }{% if forloop.last %}{% else %},{% endif %}
             {% endfor %}
         ];
