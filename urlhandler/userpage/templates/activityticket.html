@@ -71,7 +71,7 @@
     <div class="ticket-wrapper">
 		<button class="button" onclick="find()" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">发现</button>
 		{% if ticket_status == 1 %}
-		<a> <button class="button" href="{% url 'userpage.views.seat_mainmenu_view' uid %}" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">选座</button></a>
+		<a class="button" href="{% url 'userpage.views.seat_mainmenu_view' uid %}"> <button style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">选座</button></a>
 		{% else %}
 		    {% if ticket_status == 3 %}
 		    <button class="button" onclick="comment()" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">评价</button>
