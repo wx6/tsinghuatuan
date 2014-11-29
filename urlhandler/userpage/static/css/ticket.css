@@ -32,7 +32,8 @@
     max-width: 100%;
 }
 .ticket-wrapper img{
-    height: 2rem;
+    height: 1.5rem;
+    padding-right: 2px;
 }
 .status-size{
     font-size: 18px;
