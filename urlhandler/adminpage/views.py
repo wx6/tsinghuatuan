@@ -520,6 +520,9 @@ def vote_list(request):
     for vote in vote_models:
         votes += [wrap_vote_dict(vote)]
 
+    for vote in vote_models:
+        print vote.id
+
     return render_to_response('vote_list.html', {
         'votes':votes
     })
