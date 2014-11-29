@@ -37,7 +37,11 @@
                 活动地点：<b>{{ act_place }}</b>
             </div>
             <div class="ticket-wrapper">
+                {% ifequal seat_row  0 %}
+                <b> 您还未选座</b>
+                {% else %}
                 <b>您的座位在：第{{ seat_row }}行，第{{ seat_column }}列</b>
+                {% endifequal %}
             </div>
             {% if ticket_status > 0 %}
                 {% if ticket_seat == 'B' %}
