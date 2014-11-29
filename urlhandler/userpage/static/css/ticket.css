@@ -4,21 +4,21 @@
     text-align: center;
 }
 .info-wrapper{
-    height: 12.9rem;
+    height: 16rem;
     padding-left: 5%;
-    padding-bottom: 5px;
+    padding-bottom: 0px;
     width: 90%;
 }
 .img-inner{
     float: left;
-    max-width: 25%;
+    width: 40%;
     margin:0; 
     padding:0;
     overflow:hidden; 
 }
 .text-inner{
     float: left;
-    width: 75%;
+    width: 60%;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -28,8 +28,19 @@
     text-align: left;
 }
 
-img{
+.img-inner img{
     max-width: 100%;
+}
+.ticket-wrapper img{
+    height: 1rem;
+    padding-right: 5px;
+}
+.ticket-wrapper b{
+    padding-bottom: 4px;
+}
+.ticket-wrapper icon{
+    background-color: "red";
+    padding-right: 5px;
 }
 .status-size{
     font-size: 18px;
