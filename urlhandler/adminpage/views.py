@@ -522,7 +522,7 @@ def vote_list(request):
 
     for vote in vote_models:
         print 'hahahahhahahahahahha'
-        print vote.id
+        print vote['id']
 
     return render_to_response('vote_list.html', {
         'votes':votes
