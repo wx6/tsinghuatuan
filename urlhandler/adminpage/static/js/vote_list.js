@@ -9,7 +9,7 @@ function clearVotes(){
 
 function getSmartStatus(vot){
 	if (vot.status == 0){
-		return '未发布'；
+		return '未发布';
 	} else if (vot.status == 1) {
         var now = new Date();
         if (now < vot.start_time){
