@@ -23,11 +23,13 @@ function commitSeat() {
             else
             {
             	$("#failure").show()
+            	$("#errorinfo")[0].innerHTML = data.error;
     			$("#seatArea").hide()
             }
 		},
         error: function (xhr) {
     		$("#failure").show()
+    		$("#errorinfo")[0].innerHTML = "网络错误";
     		$("#seatArea").hide()									
     	}
     };
