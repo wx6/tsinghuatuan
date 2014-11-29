@@ -69,17 +69,17 @@
         <br/>
      </div>
     <div class="ticket-wrapper">
-		<a class="button" onclick="find()" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">发现</b>
+		<button class="button" onclick="find()" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">发现</button>
 		{% if ticket_status == 1 %}
-		<a class="button" href="{% url 'userpage.views.seat_mainmenu_view' uid %}" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">选座</a>
+		<a> <button class="button" href="{% url 'userpage.views.seat_mainmenu_view' uid %}" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">选座</button></a>
 		{% else %}
 		    {% if ticket_status == 3 %}
-		    <b class="button" onclick="comment()" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">评价</b>
+		    <button class="button" onclick="comment()" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">评价</button>
 		    {% else %}
-		    <b class="button" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">其它</b>
+		    <button class="button" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">其它</button>
 		    {% endif %}
 		{% endif %}
-		<a class="button" onclick="share()" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">分享</b>
+		<button class="button" onclick="share()" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">分享</button>
 	</div>
 
 {% endblock %}
