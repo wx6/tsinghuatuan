@@ -1,5 +1,4 @@
 .ticket-wrapper{
-    float: left;
     padding-bottom: 8px;
     text-align: left;
 }
@@ -7,13 +6,20 @@
     text-align: left;
     padding-bottom: 5px;
 }
+
 .img-inner{
     float: left;
-    width: 6.6rem;
-    height: 9rem;
+    width: 25%;
     margin:0; 
     padding:0;
     overflow:hidden; 
+}
+.text-align{
+    float: left;
+    width: 75%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 img{
     max-width: 100%;
