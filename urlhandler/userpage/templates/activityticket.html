@@ -41,9 +41,9 @@
             </div>
             <div class="ticket-wrapper">
             {% ifequal seat_row  0 %}
-                < <strong class = "icon">座<strong><b>您还未选座</b>
+                <strong class = "icon">座<strong><b>您还未选座</b>
                 {% else %}
-                < <strong class = "icon">座<strong><b>第{{ seat_row }}行，第{{ seat_column }}列</b>
+                <strong class = "icon">座<strong><b>第{{ seat_row }}行，第{{ seat_column }}列</b>
                 {% endifequal %}
             </div>
             {% if ticket_status > 0 %}
