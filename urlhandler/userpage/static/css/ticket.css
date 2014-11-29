@@ -39,8 +39,9 @@
     padding-bottom: 4px;
 }
 .ticket-wrapper .icon{
-    background-color: red;
+    background-color: #eb426a;
     margin-right: 5px;
+    color: white;
 }
 .status-size{
     font-size: 18px;
