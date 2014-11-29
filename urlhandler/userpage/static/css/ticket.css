@@ -65,3 +65,9 @@
 	font-size: 24px;
 	color: black;
 }
+.barcode-img{
+    text-align: center;
+}
+.barcode-img img{
+    width: 70%;
+}
