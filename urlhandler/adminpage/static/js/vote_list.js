@@ -164,7 +164,7 @@ var tdActionMap = {
 var smartTimeMap = {
 	'start_time':function(vot){
 		return getChsFullDate(vot.start_time);
-	}
+	},
 	'end_time':function(vot){
 		return getChsFullDate(vot.end_time);
 	}
