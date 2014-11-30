@@ -32,7 +32,8 @@
     max-width: 100%;
 }
 .ticket-wrapper img{
-    height: 1rem;
+    height: 1.4rem;
+    width: 1.4rem;
     padding-right: 5px;
 }
 .ticket-wrapper b{
@@ -42,6 +43,7 @@
     background-color: #eb426a;
     margin-right: 5px;
     color: white;
+    font-family: 微软雅黑
 }
 .status-size{
     font-size: 18px;
