@@ -32,8 +32,8 @@
     max-width: 100%;
 }
 .ticket-wrapper img{
-    height: 15px;
-    width: 15px;
+    height: 40px;
+    width: 40px;
     padding-right: 5px;
 }
 .ticket-wrapper b{
@@ -62,12 +62,19 @@
     padding-top: 3px;
 }
 .button{
+    margin-bottom: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
+    width: 80px;
+    height: 41px;
+    background-color: #fff;
+    border-radius: 9px;
+    font-size: 1.4em;
+
 	padding: 10px;
 	background-color: EA0000;
 	font-size: 24px;
 	color: black;
-	margin-left: 10px;
-	margin-right: 10px;
 }
 .barcode-img{
     text-align: center;

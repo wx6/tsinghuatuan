@@ -34,10 +34,10 @@
         </div>
         <div class="text-inner">
             <div class="ticket-wrapper">
-                <img src = "http://m.damai.cn/images/ico_time.png"><b>{{ act_begintime|date:"Y.m.d H:i" }}</b>
+                <img src="http://m.damai.cn/images/ico_time.png"><b>{{ act_begintime|date:"Y.m.d H:i" }}</b>
             </div>
             <div class="ticket-wrapper">
-                <img src = "http://m.damai.cn/images/ico_area.png"><b>{{ act_place }}</b>
+                <img src="http://m.damai.cn/images/ico_area.png"><b>{{ act_place }}</b>
             </div>
             <div class="ticket-wrapper">
             {% ifequal seat_row  0 %}
@@ -65,22 +65,20 @@
         </div>
     </div>
 
-    <div>
-        <br/>
-        <br/>
-    </div>
     <div class="ticket-wrapper">
-		<button class="button" onclick="find()" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">发现</button>
+		<button class="button" onclick="find()">发现</button>
 		{% if ticket_status == 1 %}
-		<a href="{% url 'userpage.views.seat_mainmenu_view' uid %}"> <button class="button" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">选座</button></a>
+		<a href="{% url 'userpage.views.seat_mainmenu_view' uid %}">
+		    <button class="button">选座</button>
+		</a>
 		{% else %}
 		    {% if ticket_status == 3 %}
-		    <button class="button" onclick="comment()" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">评价</button>
+		    <button class="button" onclick="comment()">评价</button>
 		    {% else %}
-		    <button class="button" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">其它</button>
+		    <button class="button">其它</button>
 		    {% endif %}
 		{% endif %}
-		<button class="button" onclick="share()" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">分享</button>
+		<button class="button" onclick="share()">分享</button>
 	</div>
 
     <div class = "barcode-img">
