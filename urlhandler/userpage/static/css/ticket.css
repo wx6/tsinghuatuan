@@ -4,7 +4,7 @@
     text-align: center;
 }
 .info-wrapper{
-    height: 16rem;
+    height: 13rem;
     padding-left: 5%;
     padding-bottom: 0px;
     width: 90%;
@@ -32,8 +32,8 @@
     max-width: 100%;
 }
 .ticket-wrapper img{
-    height: 40px;
-    width: 40px;
+    height: 1rem;
+    width: 1rem;
     padding-right: 5px;
 }
 .ticket-wrapper b{
