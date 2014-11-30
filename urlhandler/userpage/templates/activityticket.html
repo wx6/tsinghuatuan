@@ -46,14 +46,11 @@
                 <span class="icon">座</span><b>第{{ seat_row }}行，第{{ seat_column }}列</b>
                 {% endifequal %}
             </div>
-            {% if ticket_status == 1 %}
+
             <div class="ticket-wrapper">
                 <span class="icon">注</span><b>活动开始前45分钟凭本电子票入场</b>
             </div>
-            <div class="ticket-wrapper">
-                <span class="icon">退</span><b>回复“退票 {{ act_key }}”即可退票</b>
-            </div>
-            {% endif %}
+
             {% if ticket_status > 0 %}
                 {% if ticket_seat == 'B' %}
                     <div class="ticket-wrapper">
@@ -85,8 +82,13 @@
 		{% endif %}
 		<button class="button" onclick="share()" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">分享</button>
 	</div>
+
     <div class = "barcode-img">
         <img class="details-img" src="{{ act_photo  }}" />
+    </div>
+
+    <div class="ticket-wrapper">
+        <b>回复“退票 {{ act_key }}”即可退票</b>
     </div>
 
 {% endblock %}
