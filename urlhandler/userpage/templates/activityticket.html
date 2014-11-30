@@ -66,19 +66,19 @@
     </div>
 
     <div class="ticket-wrapper">
-		<button class="custom_button button" onclick="find()">发现</button>
+		<button class="custom_button" onclick="find()">发现</button>
 		{% if ticket_status == 1 %}
 		<a href="{% url 'userpage.views.seat_mainmenu_view' uid %}">
-		    <button class="custom_button button">选座</button>
+		    <button class="custom_button">选座</button>
 		</a>
 		{% else %}
 		    {% if ticket_status == 3 %}
-		    <button class="custom_button button" onclick="comment()">评价</button>
+		    <button class="custom_button" onclick="comment()">评价</button>
 		    {% else %}
-		    <button class="custom_button button">其它</button>
+		    <button class="custom_button">其它</button>
 		    {% endif %}
 		{% endif %}
-		<button class="custom_button button" onclick="share()">分享</button>
+		<button class="custom_button" onclick="share()">分享</button>
 	</div>
 
     <div class = "barcode-img">
