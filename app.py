@@ -24,7 +24,7 @@ def app(environ, start_response):
     start_response(status, headers)
     #print result
     return [result.encode('utf8')]
-    """
+
     if environ.get('PATH_INFO', '') == LUCKY_URL:
         result = handle_weixin_request(environ)
         status = '200 OK'
@@ -38,7 +38,7 @@ def app(environ, start_response):
         #start_response(status, headers)
         #return [environ['PATH_INFO']]
         return django_WSGI.__call__(environ, start_response)
-    """
+
 
 
 def update_site_domain(newdomain):
