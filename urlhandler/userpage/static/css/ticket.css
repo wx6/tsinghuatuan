@@ -3,6 +3,11 @@
     padding-bottom: 8px;
     text-align: center;
 }
+.button-wrapper{
+    padding-left: 10px;
+    padding-bottom: 8px;
+    text-align: left;
+}
 .info-wrapper{
     height: 10rem;
     padding-left: 5%;
