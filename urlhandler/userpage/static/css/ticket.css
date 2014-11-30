@@ -61,16 +61,6 @@
     text-align: left;
     padding-top: 3px;
 }
-.custom_button{
-    margin-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    width: 80px;
-    height: 41px;
-    background-color: #fff;
-    border-radius: 9px;
-    font-size: 1.4em;
-}
 .button{
 	padding: 10px;
 	background-color: EA0000;
