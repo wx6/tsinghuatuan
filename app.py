@@ -17,14 +17,14 @@ from queryhandler.settings import SITE_DOMAIN, SITE_HTTP_PROTOCOL
 
 def app(environ, start_response):
     update_site_domain(environ.get('HTTP_HOST', ''))
-
+    """
     result = handle_weixin_request(environ)
     status = '200 OK'
     headers = [('Content-type', 'text/html')]
     start_response(status, headers)
     #print result
     return [result.encode('utf8')]
-
+    """
     if environ.get('PATH_INFO', '') == LUCKY_URL:
         result = handle_weixin_request(environ)
         status = '200 OK'
