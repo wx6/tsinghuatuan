@@ -16,7 +16,6 @@ from django.views.decorators.csrf import csrf_exempt
 from weixinlib.base_support import get_access_token
 
 
-
 def home(request):
     return render_to_response('mobile_base.html')
 
@@ -249,9 +248,6 @@ def helpclub_view(request):
 def helplecture_view(request):
     variables = RequestContext(request, {})
     return render_to_response('help_lecture.html', variables)
-
-
-
 
 
 # Functions below are about choosing seats.
