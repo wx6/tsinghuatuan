@@ -71,10 +71,10 @@
     </div>
 
     <div class="button-wrapper">
-		<button class="button" style="margin-bottom:20px; margin-left:20px; margin-right:10px; width:80px; height:41px; background-color:#fff; border-radius:9px; font-size:1.4em" onclick="find()">发现</button>
+		<button class="button" style="margin-bottom:20px; margin-left:20px; margin-right:5px; width:80px; height:41px; background-color:#fff; border-radius:9px; font-size:1.4em" onclick="find()">发现</button>
 		{% if ticket_status == 1 %}
 		<a href="{% url 'userpage.views.seat_mainmenu_view' uid %}">
-		    <button class="button" style="margin-bottom:20px; margin-left:10px; margin-right:10px; width:80px; height:41px; background-color:#fff; border-radius:9px; font-size:1.4em">选座</button>
+		    <button class="button" style="margin-bottom:20px; margin-left:5px; margin-right:5px; width:80px; height:41px; background-color:#fff; border-radius:9px; font-size:1.4em">选座</button>
 		</a>
 		{% else %}
 		    {% if ticket_status == 3 %}
@@ -83,7 +83,7 @@
 		    <button class="button" style="margin-bottom:20px; margin-left:10px; margin-right:10px; width:80px; height:41px; background-color:#fff; border-radius:9px; font-size:1.4em">其它</button>
 		    {% endif %}
 		{% endif %}
-		<button class="button" onclick="share()" style="margin-bottom:20px; margin-left:10px; margin-right:0px; width:80px; height:41px; background-color:#fff; border-radius:9px; font-size:1.4em">分享</button>
+		<button class="button" onclick="share()" style="margin-bottom:20px; margin-left:5px; margin-right:0px; width:80px; height:41px; background-color:#fff; border-radius:9px; font-size:1.4em">分享</button>
 	</div>
 
     <div class = "barcode-img">
