@@ -8,6 +8,9 @@
     padding-bottom: 8px;
     text-align: left;
 }
+.button-wrapper a{
+    text-decoration: none;
+}
 .info-wrapper{
     height: 10rem;
     padding-left: 5%;
