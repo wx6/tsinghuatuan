@@ -20,6 +20,7 @@
             'key': '{{ vote.key|escapejs }}',
             'description': '{{ vote.description|escapejs }}',
             'pic_url': '{{ vote.pic_url }}',
+            'status': {{ vote.status }},
             'start_time': {
                 'year': {{ vote.start_time.year }},
                 'month': {{ vote.start_time.month }},
@@ -34,9 +35,14 @@
                 'hour': {{ vote.end_time.hour }},
                 'minute': {{ vote.end_time.minute }}
             }
+            'choice_num':3,
+            'choice_set':{
+                'choice_name':'xx',
+                'choice_abstract':'xxx',
+                'choice_photo':'picture',
+            }
         }
-
-
+        var vote_choice_count = 1;
     </script>
     <script src="{% static "js/vote_detail.js" %}"></script>
 {% endblock %}
@@ -174,32 +180,35 @@
                 </div>
             </div>
 
-            <div class="dynamic">
-                <div class="form-group">
-                    <label for="input-item" class="col-sm-2 control-label">投票项名称</label>
-                    <div class="col-sm-10">
-                        <input type="text" maxlength="12" name="item" class="form-control" placeholder="投票项的名称，如刘强老师">
+            <details open="open" id="vote_choice_1" class="vote_choice">
+                <summary class="vote_option_summary">投票项1<span class="vote_delete" title="删除"></span></summary>
+                <div class="dynamic">
+                    <div class="form-group">
+                        <label for="input-item" class="col-sm-2 control-label">投票项名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" maxlength="12" name="choice_1" class="form-control"placeholder="投票项的名称，如刘强老师">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-item_description" class="col-sm-2 control-label">投票项简介</label>
+                        <div class="col-sm-10">
+                            <input type="text" maxlength="12" name="choice_description_1" class="form-control"  placeholder="投票项的简介，如刘强老师为软件学院老师，开设软件工程等课程">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-item_pic_url" class="col-sm-2 control-label">投票项图片</label>
+                        <div class="col-sm-10">
+                            <input type="text" maxlength="12" name="choice_pic_url_1" class="form-control" placeholder="请填入图片链接">
+                        </div>
                     </div>
                 </div>
+            </details>
 
-                <div class="form-group">
-                    <label for="input-item_description" class="col-sm-2 control-label">投票项简介</label>
-                    <div class="col-sm-10">
-                        <input type="text" maxlength="12" name="item_description" class="form-control" placeholder="投票项的简介，如刘强老师为软件学院老师，开设软件工程等课程">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="input-item_pic_url" class="col-sm-2 control-label">投票项图片</label>
-                    <div class="col-sm-10">
-                        <input type="text" maxlength="12" name="item_pic_url" class="form-control" placeholder="请填入图片链接">
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
+            <div class="form-group" id="bottom_botton">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="button" onclick="additem();" class="btn btn-primary" id="submitBtn">新增投票项</button>
+                    <button type="button" onclick="addchoice();" class="btn btn-primary" id="submitBtn">新增投票项</button>
                     <button type="button" onclick="publishvote();" class="btn btn-primary" id="publishBtn">发布</button>
                     <button type="submit" class="btn btn-default" id="saveBtn">暂存</button>
                     <button type="reset" class="btn btn-warning" id="resetBtn">重置</button>
@@ -216,7 +225,7 @@
 
     <div class="container" id="detail-result" style="display: none;">
         <h1>处理结果</h1>
-        <pre id="resultHolder"></pre>
+        <pre id="date-part"></pre>
         <div class="col-sm-offset-2">
             <button class="btn btn-info" id="continueBtn">继续修改</button>
             <a class="btn btn-success" href="{% url "adminpage.views.vote_list" %}">返回列表</a>
