@@ -35,12 +35,7 @@
                 'hour': {{ vote.end_time.hour }},
                 'minute': {{ vote.end_time.minute }}
             }
-            'choice_num':3,
-            'choice_set':{
-                'choice_name':'xx',
-                'choice_abstract':'xxx',
-                'choice_photo':'picture',
-            }
+            'items': {{ vote.items }}
         }
         var vote_choice_count = 1;
     </script>

@@ -25,7 +25,7 @@ function enableDatetimePicker(dom) {
     dom.datetimepicker(datetimepicker_option);
     dom.children('.input-group-addon').css('cursor', 'pointer').children().css('cursor', 'pointer');
 }
-
+l
 function disableDatetimePicker(dom) {
     dom.datetimepicker('remove');
     dom.children('.input-group-addon').css('cursor', 'no-drop').children().css('cursor', 'no-drop');
@@ -92,7 +92,9 @@ function updateActivity(nact) {
             for (key2 in dateInterfaceMap) {
                 vote[key][key2] = tdate[dateInterfaceMap[key2]]() + ((key2 == 'month') ? 1 : 0);
             }
-        } else {
+        } 
+        else if (key == '')
+        else {
             vote[key] = nact[key];
         }
     }
@@ -219,6 +221,7 @@ function lockByStatus(status, start_time, end_time) {
         }
         lockMap[keyMap[key]]($('#input-' + key), flag);
     }
+    lockItemsByStatus(status);
     if (status >= 1) {
         $('#saveBtn').hide();
     } else {
@@ -284,13 +287,12 @@ function beforeSubmit(formData, jqForm, options) {
         'description': '活动简介',
         'start_time': '活动开始时间',
         'end_time': '活动结束时间',
-        'pic_url': '活动配图',
-        'choice_num': '投票选项'
+        'pic_url': '活动配图'
     }, lackArray = [], dateArray = [
         'start_time', 'end_time'
     ];
     for (i = 0, len = formData.length; i < len; ++i) {
-        if (!formData[i].value) {
+        if (!formData[i].value && nameMap[formData[i].name]) {
             lackArray.push(nameMap[formData[i].name]);
         }
     }
@@ -301,9 +303,7 @@ function beforeSubmit(formData, jqForm, options) {
             }
         }
     }
-    if (!wrapVoteChoice(formData,lackArray)){
-        lackArray.push(nameMap['choice_num']);
-    }
+    detectVoteChoiceError(formData,lackArray);
     if (lackArray.length > 0) {
         setResult('以下字段是必须的，请补充完整后再提交：\r\n' + lackArray.join('、'));
         $('#continueBtn').click(function() {
@@ -349,7 +349,7 @@ function beforePublish(formData, jqForm, options) {
 function submitResponse(data) {
     if (!data.error) {
         updateActivity(data.vote);
-        show_vote_choice(vote);
+        init_vote_choice(vote);
         initializeForm(vote);
         appendResult('成功');
     } else {
@@ -443,10 +443,10 @@ $(function(){
 });
 
 function init_vote_choice(vote){
-    if (vote.choice_num==0){
+    if (vote.items.length()==0){
         return;
     }
-    var count = vote.choice_num-1;
+    var count = vote.items.length()-vote_choice_count;
     while(count > 0){
         addchoice();
         --count;
@@ -456,17 +456,64 @@ function init_vote_choice(vote){
 
 function show_vote_choice(vote) {
     count = 0;
-    while(count < vote.choice_num){
-        $("input[name='choice_"+(count+1).toString()+"']").val(vote.choice_set.choice_name);
-        $("input[name='choice_description_"+(count+1).toString()+"']")[count].val(vote.choice_set.choice_abstract);
-        $("input[name='choice_pic_url_"+(count+1).toString()+"']")[count].val(vote.choice_set.choice_photo);
+    while(count < vote.items.length()){
+        $("input[name='choice_"+(count+1).toString()+"']").val(vote.items[count].choice_name);
+        $("input[name='choice_description_"+(count+1).toString()+"']").val(vote.items[count].choice_abstract);
+        $("input[name='choice_pic_url_"+(count+1).toString()+"']").val(vote.items[count].choice_photo);
         ++count;
     }
 }
 
-function wrapVoteChoice(formData,lackArray){
+function detectVoteChoiceError(formData,lackArray){
     if (vote_choice_count < 1){
+        lackArray.push('投票项不能为空');
         return false;
     }
-    
+    var i,j,flag;
+    flag = false;
+    for (i = 0; i < vote_choice_count; i++){
+        for (j = 0; j < formData.length(); j++){
+            if (!formData[j].value && formData[j].name=='choice_'+(i+1).toString()){
+                lackArray.push('投票项'+(i+1).toString()+'的投票项名称');
+                flag = true;
+            }
+            if (!formData[j].value && formData[j].name=='choice_description_'+(i+1).toString()){
+                lackArray.push('投票项'+(i+1).toString()+'的投票项名称');
+                flag = true;
+            }
+            if (!formData[j].value && formData[j].name=='choice_pic_url_'+(i+1).toString()){
+               lackArray.push('投票项'+(i+1).toString()+'的投票项名称');
+               flag = true;
+            }
+        }
+    }
+    if (flag){
+        return false;
+    }
+    formData.push({
+            name: 'choice_num',
+            required: false,
+            type: 'number',
+            value: vote_choice_count.toString()
+    });
+    return true;
+}
+
+function lockItemsByStatus(status){
+    if (status < 1){
+        var i;
+        for (i = 0; i < vote_choice_count; i++){
+            $("input[name='choice_"+(i+1).toString()+"']").prop('disabled',false);
+            $("input[name='choice_description_"+(i+1).toString()+"']").prop('disabled',false);
+            $("input[name='choice_pic_url_"+(i+1).toString()+"']").prop('disabled',false);
+        }
+    }
+    else{
+        var i;
+        for (i = 0; i < vote_choice_count; i++){
+            $("input[name='choice_"+(i+1).toString()+"']").prop('disabled',true);
+            $("input[name='choice_description_"+(i+1).toString()+"']").prop('disabled',true);
+            $("input[name='choice_pic_url_"+(i+1).toString()+"']").prop('disabled',true);
+        }
+    }
 }
