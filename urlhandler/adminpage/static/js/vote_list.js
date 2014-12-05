@@ -156,7 +156,7 @@ var tdActionMap = {
     	}
     	else{
     		afterVote.push(vot[key]);
-    		return '<a href="javascript:void(0);" id="'+vot[key]+'"><span class="glyphicon glyphicon-trash"></span></a>';
+    		return '<a href="javascript:void(0);" id="'+vot[key]+'" onclick="deletevot('+vot[key]+')"><span class="glyphicon glyphicon-trash"></span></a>';
     	}
     }
 };
@@ -183,7 +183,7 @@ function deletevot(votid){
 		}
 	}
 	var content = '确认删除<span style="color:red">'+getSmartStatus(curvot)+'</span>投票：<span style="color:red">'+curvot.name+'</span>？';
-    $('modalcontent').html(content);
+    $('#modalcontent').html(content);
     $('#'+votid).css("background-color","#FFE4C4");
     $('#deleteid').val(votid);
     $('#delModal').modal({

@@ -16,6 +16,6 @@ img{
     margin-bottom: 20px;
     width: 2cm;
 }
-.vote_delete:hover{background-image:url("../static/img/votedel2.gif");}
-.vote_delete{display:block;width:20px;height:20px;background-image:url("../static/img/votedel.gif");background-repeat:no-repeat;float:right;margin-left:10px;line-height:25px;}
+.vote_delete:hover{background:url("/static/img/votedel2.gif");}
+.vote_delete{display:block;width:20px;height:20px;background:url("/static/img/votedel.gif");background-repeat:no-repeat;float:right;margin-left:10px;line-height:25px;}
 .vote_option_summary{margin-bottom:15px;margin-left:65px;}

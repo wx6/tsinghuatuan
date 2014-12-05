@@ -95,6 +95,10 @@ WEIXIN_CUSTOM_MENU_TEMPLATE = {
         {
             "name": "抢票",
             "sub_button": []
+        },
+        {
+            "name": "投票",
+            "sub_button": []
         }
     ]
 }
