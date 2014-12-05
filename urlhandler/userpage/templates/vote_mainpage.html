@@ -2,6 +2,8 @@
 
 {% load staticfiles %}
 
+
+
 {% block title %}
 投票页面
 {% endblock %}
@@ -11,6 +13,8 @@
 {% endblock %}
 
 {% block content %}
+
+<link href="{% static 'css/vote_mainpage.css' %}" type="text/css" />
 
 <form id="voteItem" >
 {% for item in vote.items %}
@@ -22,10 +26,6 @@
 {% endfor %}
 </form>
 
-{% endblock %}
-
-{% block css%}
-<link href="{% static 'css/vote_mainpage.css' %}" type="text/css" />
 {% endblock %}
 {% block js %}
 <script src="{% static 'js/vote_mainpage.js' %}"></script>
