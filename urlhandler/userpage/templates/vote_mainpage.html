@@ -16,8 +16,7 @@
 
 {% block content %}
 
-<form>
-<!-- <form id="voteItem" action="{% url 'userpage.views.userpost' %}" method="post"> -->
+<form id="voteItem" <!-- action="{% url 'userpage.views.userpost' %}" --> method="post"> 
 {% for item in vote.items %}
 	<img src = "{{ item.pic_url }}" >
 	<span></span>
