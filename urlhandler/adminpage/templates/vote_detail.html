@@ -190,21 +190,21 @@
                     <div class="form-group">
                         <label for="input-item" class="col-sm-2 control-label">投票项名称</label>
                         <div class="col-sm-10">
-                            <input type="text" maxlength="12" name="choice_1" class="form-control"placeholder="投票项的名称，如刘强老师">
+                            <input type="text" name="choice_1" class="form-control"placeholder="投票项的名称，如刘强老师">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="input-item_description" class="col-sm-2 control-label">投票项简介</label>
                         <div class="col-sm-10">
-                            <input type="text" maxlength="12" name="choice_description_1" class="form-control"  placeholder="投票项的简介，如刘强老师为软件学院老师，开设软件工程等课程">
+                            <input type="text" name="choice_description_1" class="form-control"  placeholder="投票项的简介，如刘强老师为软件学院老师，开设软件工程等课程">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="input-item_pic_url" class="col-sm-2 control-label">投票项图片</label>
                         <div class="col-sm-10">
-                            <input type="text" maxlength="12" name="choice_pic_url_1" class="form-control" placeholder="请填入图片链接">
+                            <input type="text" name="choice_pic_url_1" class="form-control" placeholder="请填入图片链接">
                         </div>
                     </div>
                 </div>
@@ -213,7 +213,7 @@
             <div class="form-group" id="bottom_botton">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="button" onclick="addchoice();" class="btn btn-primary" id="submitBtn">新增投票项</button>
-                    <button type="button" onclick="publishvote();" class="btn btn-primary" id="publishBtn">发布</button>
+                    <button type="button" onclick="publishVote();" class="btn btn-primary" id="publishBtn">发布</button>
                     <button type="submit" class="btn btn-default" id="saveBtn">暂存</button>
                     <button type="reset" class="btn btn-warning" id="resetBtn">重置</button>
                 </div>
