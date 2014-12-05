@@ -434,7 +434,6 @@ function addchoice() {
 };
 
 function dymBotton (){
-    $(function(){
         $('.vote_delete').click(function(){
             vote_choice_count--;
             $(this).parent().parent().remove();
@@ -444,7 +443,6 @@ function dymBotton (){
                 dymBotton();
              });
         });
-    });
 }
 
 $(function(){
