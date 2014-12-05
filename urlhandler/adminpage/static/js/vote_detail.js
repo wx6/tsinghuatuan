@@ -457,7 +457,7 @@ function init_vote_choice(vote){
 
 function show_vote_choice(vote) {
     count = 0;
-    while(count < vote.items.length{
+    while(count < vote.items.length){
         $("input[name='choice_"+(count+1).toString()+"']").val(vote.items[count].choice_name);
         $("input[name='choice_description_"+(count+1).toString()+"']").val(vote.items[count].choice_abstract);
         $("input[name='choice_pic_url_"+(count+1).toString()+"']").val(vote.items[count].choice_photo);
