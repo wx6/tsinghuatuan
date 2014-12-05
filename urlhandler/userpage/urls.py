@@ -16,5 +16,5 @@ urlpatterns = patterns('',
                        url(r'^mainseat/(?P<uid>\S+)/$','userpage.views.seat_mainmenu_view'),
                        url(r'^subseat/(?P<uid>\S+)/(?P<block_id>\d+)/$','userpage.views.seat_submenu'),
 
-                       # url(r'^vote_main/(?P<voteid>\S+)/$', 'userpage.views.vote_main_page')
+                       url(r'^vote_main/(?P<voteid>\S+)/$', 'userpage.views.vote_main_page')
                        )

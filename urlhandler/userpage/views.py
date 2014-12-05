@@ -384,6 +384,7 @@ def vote_main_view(request, voteid):
         itemDict['pic_url'] = item.pic_url
         itemDict['description'] = item.description
         itemDict['vote_num'] = int(item.vote_num)
+        itemDict['id'] = int(item.id)
         voteDict['vote_items'].append(itemDict)
 
     return render_to_response('vote_main_page.html', {
