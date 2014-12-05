@@ -61,7 +61,8 @@ var dateInterfaceMap = {
     'description': 'value',
     'start_time': 'time',
     'end_time': 'time',
-    'pic_url': 'value'
+    'pic_url': 'value',
+    'max_num' : 'value'
 }, lockMap = {
     'value': function(dom, lock) {
         dom.prop('disabled', lock);
@@ -92,7 +93,7 @@ function updateActivity(nact) {
             for (key2 in dateInterfaceMap) {
                 vote[key][key2] = tdate[dateInterfaceMap[key2]]() + ((key2 == 'month') ? 1 : 0);
             }
-        } 
+        }
         else if (key == '')
         else {
             vote[key] = nact[key];
@@ -287,7 +288,8 @@ function beforeSubmit(formData, jqForm, options) {
         'description': '活动简介',
         'start_time': '活动开始时间',
         'end_time': '活动结束时间',
-        'pic_url': '活动配图'
+        'pic_url': '活动配图',
+        'max_num' : '每人投票量上限'
     }, lackArray = [], dateArray = [
         'start_time', 'end_time'
     ];

@@ -21,6 +21,7 @@
             'description': '{{ vote.description|escapejs }}',
             'pic_url': '{{ vote.pic_url }}',
             'status': {{ vote.status }},
+            'max_num' : {{ vote.max_num }},
             'start_time': {
                 'year': {{ vote.start_time.year }},
                 'month': {{ vote.start_time.month }},
@@ -86,6 +87,13 @@
                 <label for="input-pic_url" class="col-sm-2 control-label" min="0">投票配图</label>
                 <div class="col-sm-10">
                     <input type="url" name="pic_url" class="form-control" id="input-pic_url" min="0" placeholder="请填入图片链接">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="input-max_num" class="col-sm-2 control-label" min="0">每人投票量上限</label>
+                <div class="col-sm-10">
+                    <input type="number" name="max_num" class="form-control" id="input-max_num" min="0" placeholder="请输入每人投票量上限">
                 </div>
             </div>
 
