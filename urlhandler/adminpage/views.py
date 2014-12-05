@@ -462,8 +462,9 @@ def custom_menu_modify_post(request):
                            'type': 'click',
                            'name': menu['name'],
                            'key': 'TSINGHUA_BOOK_' + str(menu['id']),
-                           # 'sub_button': [],
+                           'sub_button': [],
                        }]
+    print 'come here test point point'
     return HttpResponse(modify_custom_menu(json.dumps(get_custom_menu_with_book_acts(sub_button), ensure_ascii=False).encode('utf8')),
                         content_type='application/json')
 

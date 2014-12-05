@@ -348,6 +348,7 @@ function beforePublish(formData, jqForm, options) {
 }
 
 function submitResponse(data) {
+    console.log("success");
     if (!data.error) {
         updateActivity(data.vote);
         init_vote_choice(vote);
@@ -372,6 +373,7 @@ function submitResponse(data) {
 }
 
 function submitError(xhr) {
+    console.log("error");
     setResult('ERROR!\r\nStatus:' + xhr.status + ' ' + xhr.statusText + '\r\n\r\nResponseText:\r\n' + (xhr.responseText || '<null>'));
     $('#continueBtn').click(function() {
         showForm();
