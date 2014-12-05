@@ -20,7 +20,6 @@
             'key': '{{ vote.key|escapejs }}',
             'description': '{{ vote.description|escapejs }}',
             'pic_url': '{{ vote.pic_url }}',
-            'status': {{ vote.status }},
             'max_num' : {{ vote.max_num }},
             'start_time': {
                 'year': {{ vote.start_time.year }},
@@ -36,7 +35,9 @@
                 'hour': {{ vote.end_time.hour }},
                 'minute': {{ vote.end_time.minute }}
             }
-            'items': {{ vote.items }}
+            'items': {{ vote.items }},
+            'status': {{ vote.status }}{% else %},
+            'status': 0{% endif %}
         }
         var vote_choice_count = 1;
     </script>
