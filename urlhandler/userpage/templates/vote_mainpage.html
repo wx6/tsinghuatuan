@@ -6,9 +6,14 @@
 投票页面
 {% endblock %}
 {% block css %}
-<link href="{% static "css/vote_mainpage.css" %}" rel="stylesheet" type="text/css" />
+<!-- <link href="{% static "css/vote_mainpage.css" %}" rel="stylesheet" type="text/css" /> -->
 {% endblock %}
+
+<script type="text/javascript">
+console.log("123");
 console.log(vote)
+</script>
+
 {% block theme %}
     {{ vote.name }}
 {% endblock %}
@@ -21,12 +26,15 @@ console.log(vote)
 	<input type ="checkbox" name={{item.name}}>
 	<p>投票数目:{{item.vote_num}}</p>
 
+<script type="text/javascript">
 	console.log(item.name)
+</script>
 {% endfor %}
 </form>
 
 {% endblock %}
 
 {% block js %} 
- <script src="{% static "js/vote_mainpage.js" %}"></script>
+<!--  
+ <script src="{% static "js/vote_mainpage.js" %}"></script> -->
 {% endblock %}
