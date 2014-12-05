@@ -94,7 +94,6 @@ function updateActivity(nact) {
                 vote[key][key2] = tdate[dateInterfaceMap[key2]]() + ((key2 == 'month') ? 1 : 0);
             }
         }
-        else if (key == '')
         else {
             vote[key] = nact[key];
         }
