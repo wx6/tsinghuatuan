@@ -25,7 +25,7 @@ import re
 from django.utils.http import urlquote
 from django.utils.encoding import smart_str
 
-from urlhandler.models import Vote
+from urlhandler.models import Vote, VoteItem
 
 
 
@@ -231,7 +231,7 @@ def activity_delete(request):
     curact = Activity.objects.get(id=requestdata.get('activityId', ''))
     curact.status = -1
     curact.save()
-    #删除后刷新界面
+    # 删除后刷新界面
     return HttpResponse('OK')
 
 
@@ -511,16 +511,16 @@ def vote_add(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(s_reverse_admin_home())
 
-    variables = RequestContext(request, {})
-    return render_to_response('vote_detail.html', variables)
+    return render_to_response('vote_detail.html', {
+        'vote': {
+            'name':'u新增投票'
+        }
+    }, context_instance=RequestContext(request))
 
 
 def vote_list(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(s_reverse_admin_home())
-
-    # variables = RequestContext(request, {})
-    # return render_to_response('vote_detail.html', variables)
 
     vote_models = Vote.objects.filter(status__gte=0).order_by("-id").all()
     votes = []
@@ -530,13 +530,25 @@ def vote_list(request):
 
     return render_to_response('vote_list.html', {
         'votes':votes
-    })
+    }, context_instance=RequestContext(request))
 
 
 def wrap_vote_dict(vote):
     dt = model_to_dict(vote)
     dt['id'] = vote.id
     return dt
+
+
+def get_vote_items(vote):
+    ret = []
+    vote_items = Vote.objects.filter(vote_key=vote.key, status__gte=0)
+    for item in vote_items:
+        dict = {}
+        for k in ['name', 'pic_url', 'description']:
+            dict[k] = item[k]
+        dict['vote_num'] = int(item['vote_num'])
+        ret.append(dict)
+    return ret
 
 
 def vote_detail(request, voteid):
@@ -546,6 +558,8 @@ def vote_detail(request, voteid):
     try:
         vote = Vote.objects.get(id=voteid)
         unpublished = (vote.status == 0)
+        voteDict = wrap_vote_dict(vote)
+        voteDict['items'] = get_vote_items(vote)
     except:
         raise Http404
 
@@ -553,4 +567,107 @@ def vote_detail(request, voteid):
         'vote': vote,
         'unpublished': unpublished
     }, context_instance=RequestContext(request))
+
+
+def vote_post(request):
+    if not request.user.is_authencicated():
+        return HttpResponseRedirect(s_reverse_admin_home())
+
+    if not request.POST:
+        raise Http404
+
+    post = request.POST
+    rtnJSON = {}
+
+    try:
+        if 'id' in post:
+            vote = vote_modify(post)
+        else:
+            iskey = Vote.objects.filte(key=post['key'])
+            if iskey:
+                now = datetime.now()
+                for keyvote in iskey:
+                    if now < keyvote.end_time:
+                        rtnJSON['error'] = u"当前有投票活动正在使用该活动代称"
+                        return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),
+                                            content_type='application/json')
+            vote = vote_create(post)
+            # rtnJSON['updateUrl'] = s_reverse_activity_detail(activity.id)
+        voteDict = wrap_vote_dict(vote)
+        voteDict['items'] = get_vote_items(vote)
+        rtnJSON['vote'] = voteDict
+    except Exception as e:
+        rtnJSON['error'] = str(e)
+
+    return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder), content_type='application/json')
+
+
+def vote_modify(vote):
+    curVote = Vote.objects.get(id=vote['id'])
+    for k in ['pic_url', 'description']:
+        setattr(curVote, k, vote[k])
+    now = datetime.now()
+    if now <curVote.start_time:
+        for k in ['start_time', 'end_time']:
+            setattr(curVote, k, str_to_datetime(vote[k]))
+    curVote.save()
+
+    vote_item_delete(curVote.key)
+
+    vote_item_create(vote, curVote)
+
+    return curVote
+
+
+def vote_item_create(vote, newVote):
+    item_num = int(vote['item_num'])
+    # next_id = VoteItem.objects.all().order_by('-id')
+    for j in range(1, item_num + 1):
+        preItem = {}
+        for k in ['name', 'pic_url', 'description']:
+            preItem[k] = vote[k + str(j)]
+        preItem['vote'] = newVote
+        preItem['vote_key'] = newVote.key
+        preItem['vote_num'] = 0
+        preItem['status'] = newVote.status
+        VoteItem.objects.create(**preItem)
+
+
+def vote_create(vote):
+    preVote = {}
+    for k in ['name', 'key', 'description', 'pic_url']:
+        preVote[k] = vote[k]
+    for k in ['start_time', 'end_time']:
+        preVote[k] = str_to_datetime(vote[k])
+    preVote['status'] = 1 if ('publish' in vote) else 0
+    newVote = Vote.objects.create(**preVote)
+
+    vote_item_create(vote, newVote)
+
+    return newVote
+
+
+def vote_delete(request):
+    if not request.user.is_authencicated():
+        return HttpResponseRedirect(s_reverse_admin_home())
+
+    if not request.POST:
+        raise Http404
+
+    post = request.POST
+    vote = Vote.objects.get(id=int(post['id']))
+    vote.status = -1
+    vote.save()
+
+    vote_item_delete(vote.key)
+
+    return HttpResponse('ok')
+
+
+def vote_item_delete(key):
+    vote_items = VoteItem.objects.filter(vote_key=key)
+    if vote_items.exists():
+        for item in vote_items:
+            item.status = -1
+            item.save()
 
