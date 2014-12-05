@@ -433,7 +433,7 @@ function addchoice() {
 };
 
 $(function(){
-    $('.vote_delete').live("click", function(){
+    $('.vote_delete').click(function(){
         vote_choice_count--;
         $(this).parent().parent().remove();
         $.each($(".vote_choice"),function(i,item){
