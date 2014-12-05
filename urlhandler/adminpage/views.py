@@ -513,7 +513,7 @@ def vote_add(request):
 
     return render_to_response('vote_detail.html', {
         'vote': {
-            'name':'u新增投票'
+            'name': u'新增投票'
         }
     }, context_instance=RequestContext(request))
 
