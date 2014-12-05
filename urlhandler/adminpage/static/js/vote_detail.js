@@ -444,10 +444,10 @@ $(function(){
 });
 
 function init_vote_choice(vote){
-    if (vote.items.length()==0){
+    if (vote.items.length==0){
         return;
     }
-    var count = vote.items.length()-vote_choice_count;
+    var count = vote.items.length-vote_choice_count;
     while(count > 0){
         addchoice();
         --count;
@@ -457,7 +457,7 @@ function init_vote_choice(vote){
 
 function show_vote_choice(vote) {
     count = 0;
-    while(count < vote.items.length()){
+    while(count < vote.items.length{
         $("input[name='choice_"+(count+1).toString()+"']").val(vote.items[count].choice_name);
         $("input[name='choice_description_"+(count+1).toString()+"']").val(vote.items[count].choice_abstract);
         $("input[name='choice_pic_url_"+(count+1).toString()+"']").val(vote.items[count].choice_photo);
@@ -473,7 +473,7 @@ function detectVoteChoiceError(formData,lackArray){
     var i,j,flag;
     flag = false;
     for (i = 0; i < vote_choice_count; i++){
-        for (j = 0; j < formData.length(); j++){
+        for (j = 0; j < formData.length; j++){
             if (!formData[j].value && formData[j].name=='choice_'+(i+1).toString()){
                 lackArray.push('投票项'+(i+1).toString()+'的投票项名称');
                 flag = true;
