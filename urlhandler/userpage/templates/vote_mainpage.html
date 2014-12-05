@@ -8,27 +8,22 @@
 
 {% block theme %}
     {{ vote.name }}
-    {{vote.items}}
 {% endblock %}
 
 {% block content %}
-
-<script type="text/javascript">
-console.log("123")
-console.log("{{vote}}")
-</script>
 
 <form id="voteItem" >
 {% for item in vote.items %}
 	<img src = "{{ item.pic_url }}" >
 	<span></span>
 	<input type ="checkbox" name={{item.name}}>
-	<p>投票数目:{{item.vote_num}}</p>
+	投票数目:{{item.vote_num}}
 
-<script type="text/javascript">
-	console.log("{{item.name}}")
-</script>
 {% endfor %}
 </form>
 
 {% endblock %}
+
+{% block js %}
+<script src="{% static 'js/vote_mainpage.js' %}"></script>
+{% endblock%}
