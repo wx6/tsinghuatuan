@@ -542,7 +542,7 @@ def wrap_vote_dict(vote):
 
 def get_vote_items(vote):
     ret = []
-    vote_items = Vote.objects.filter(vote_key=vote.key, status__gte=0)
+    vote_items = VoteItem.objects.filter(vote_key=vote.key, status__gte=0)
     for item in vote_items:
         dict = {}
         for k in ['name', 'pic_url', 'description']:
