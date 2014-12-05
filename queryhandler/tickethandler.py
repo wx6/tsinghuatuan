@@ -412,7 +412,6 @@ def response_vote_event(msg):
 	fromuser = get_msg_from(msg)
 	user = get_user(fromuser)
 	if user is None:
-		print 'come here'
 		return get_reply_text_xml(msg, get_text_unbinded_vote_event(fromuser))
 
 

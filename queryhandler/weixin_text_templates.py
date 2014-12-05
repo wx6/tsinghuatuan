@@ -242,5 +242,5 @@ def get_text_no_activity_menu():
 
 
 def get_text_unbinded_vote_event(openid):
-    get_text_unbinded_template('投票', openid)
+    return get_text_unbinded_template('投票', openid)
 
