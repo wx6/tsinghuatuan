@@ -445,7 +445,6 @@ function dymBotton (){
         });
 }
 
-$(function(){
     $('.vote_delete').click(function(){
         vote_choice_count--;
         $(this).parent().parent().remove();
@@ -454,7 +453,6 @@ $(function(){
             $(item).attr('id',"vote_choice_"+(i+1).toString());
         });
     });
-});
 
 function init_vote_choice(vote){
     if (vote.items.length==0){
