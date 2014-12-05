@@ -116,5 +116,6 @@ def get_custom_menu_with_book_acts(actbtns):
     print 'test point 111111'
     tmpmenu['button'][2] = book_btn
     print 'test point 222222'
+    print tmpmenu
     return tmpmenu
 
