@@ -441,8 +441,9 @@ function dymBotton (){
                 $(item).find("summary").html("投票项"+(i+1).toString()+'<span class="vote_delete" title="删除"></span>');
                 $(item).attr('id',"vote_choice_"+(i+1).toString());
              });
+            dymBotton();
         });
-        dymBotton();
+        //dymBotton();
 }
 
     $('.vote_delete').click(function(){
@@ -452,6 +453,7 @@ function dymBotton (){
             $(item).find("summary").html("投票项"+(i+1).toString()+'<span class="vote_delete" title="删除"></span>');
             $(item).attr('id',"vote_choice_"+(i+1).toString());
         });
+        dymBotton();
     });
 
 function init_vote_choice(vote){
