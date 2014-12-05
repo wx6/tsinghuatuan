@@ -572,6 +572,9 @@ def vote_detail(request, voteid):
     except:
         raise Http404
 
+    for k in voteDict:
+        print voteDict[k]
+
     return render_to_response('vote_detail.html', {
         'vote': voteDict,
         'unpublished': unpublished
