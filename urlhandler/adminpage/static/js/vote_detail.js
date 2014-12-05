@@ -383,7 +383,7 @@ function submitComplete(xhr) {
 }
 
 
-function publishActivity() {
+function publishVote() {
     if(!$('#activity-form')[0].checkValidity || $('#activity-form')[0].checkValidity()){
         if(!checktime())
             return false;
