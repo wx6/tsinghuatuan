@@ -19,6 +19,8 @@ handler_list = [
     {'check': check_no_book_acts_event,     'response': response_no_book_acts},
     {'check': check_get_activity_menu,      'response': response_get_activity_menu},
     {'check': check_xnlhwh,                 'response': response_xnlhwh},
+
+    {'check': check_vote_event,             'response': response_vote_event}
 ]
 
 

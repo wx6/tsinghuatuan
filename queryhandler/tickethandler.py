@@ -401,3 +401,50 @@ def response_xnlhwh(msg):
 	msg['Content'] = '节目单 新年联欢晚会'
 	return response_get_activity_menu(msg)
 
+
+# Functions below are about voting]
+# By: Liu Junlin
+def check_vote_event(msg):
+	return handler_check_text(msg, ['投票'])
+
+
+def response_vote_event(msg):
+	fromuser = get_msg_from(msg)
+	user = get_user(fromuser)
+	if user is None:
+		return get_reply_text_xml(msg, get_text_unbinded_vote_event(fromuser))
+
+    
+
+
+'''
+def response_book_event(msg):
+	fromuser = get_msg_from(msg)
+	user = get_user(fromuser)
+	if user is None:
+		return get_reply_text_xml(msg, get_text_unbinded_book_ticket(fromuser))
+
+	now = datetime.datetime.fromtimestamp(get_msg_create_time(msg))
+
+	cmd_list = get_msg_event_key(msg).split('_')
+	activity_id = int(cmd_list[2])
+	activities = Activity.objects.filter(id=activity_id, status=1, end_time__gt=now)
+	if activities.exists():
+		activity = activities[0]
+	else:
+		return get_reply_text_xml(msg, get_text_no_such_activity())
+
+	if activity.book_start > now:
+		return get_reply_text_xml(msg, get_text_book_ticket_future(activity, now))
+
+	tickets = Ticket.objects.filter(stu_id=user.stu_id, activity=activity, status__gt=0)
+	if tickets.exists():
+		return get_reply_single_ticket(msg, tickets[0], now, get_text_existed_book_event())
+	if activity.book_end < now:
+		return get_reply_text_xml(msg, get_text_timeout_book_event())
+	ticket = book_ticket(user, activity.key, now)
+	if ticket is None:
+		return get_reply_text_xml(msg, get_text_fail_book_ticket(activities[0], now))
+	else:
+		return get_reply_single_ticket(msg, ticket, now, get_text_success_book_ticket())
+'''
