@@ -384,7 +384,7 @@ function submitComplete(xhr) {
 
 
 function publishVote() {
-    if(!$('#activity-form')[0].checkValidity || $('#activity-form')[0].checkValidity()){
+    if(!$('#activity-form').checkValidity || $('#activity-form').checkValidity()){
         if(!checktime())
             return false;
         showProcessing();
