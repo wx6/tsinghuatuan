@@ -587,7 +587,7 @@ def vote_post(request):
             vote = vote_modify(post)
         else:
             print 'come test point 99999'
-            iskey = Vote.objects.filte(key=post['key'])
+            iskey = Vote.objects.filter(key=post['key'])
             if iskey:
                 now = datetime.now()
                 for keyvote in iskey:
