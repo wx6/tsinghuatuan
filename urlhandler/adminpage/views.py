@@ -462,7 +462,7 @@ def custom_menu_modify_post(request):
                            'type': 'click',
                            'name': menu['name'],
                            'key': 'TSINGHUA_BOOK_' + str(menu['id']),
-                           'sub_button': [],
+                           # 'sub_button': [],
                        }]
     return HttpResponse(modify_custom_menu(json.dumps(get_custom_menu_with_book_acts(sub_button), ensure_ascii=False).encode('utf8')),
                         content_type='application/json')
@@ -570,6 +570,8 @@ def vote_detail(request, voteid):
 
 
 def vote_post(request):
+    print 'Enter function vote_post!'
+
     if not request.user.is_authencicated():
         return HttpResponseRedirect(s_reverse_admin_home())
 
