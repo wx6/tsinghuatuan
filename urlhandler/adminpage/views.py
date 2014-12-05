@@ -584,6 +584,7 @@ def vote_post(request):
 
     try:
         if 'id' in post:
+            print 'come test point 99999'
             vote = vote_modify(post)
         else:
             iskey = Vote.objects.filte(key=post['key'])
