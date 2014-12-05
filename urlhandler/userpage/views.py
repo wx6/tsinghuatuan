@@ -13,7 +13,9 @@ from weixinlib.settings import WEIXIN_TOKEN
 from userpage.barcode import *
 import json
 from django.views.decorators.csrf import csrf_exempt
+
 from weixinlib.base_support import get_access_token
+from urlhandler.models import Vote, VoteItem, SingleVote
 
 
 def home(request):
