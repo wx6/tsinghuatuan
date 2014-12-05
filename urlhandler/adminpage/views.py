@@ -573,7 +573,7 @@ def vote_detail(request, voteid):
         raise Http404
 
     return render_to_response('vote_detail.html', {
-        'vote': vote,
+        'vote': voteDict,
         'unpublished': unpublished
     }, context_instance=RequestContext(request))
 
