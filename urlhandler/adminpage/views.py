@@ -560,10 +560,15 @@ def vote_detail(request, voteid):
         return HttpResponseRedirect(s_reverse_admin_home())
 
     try:
+        print 'vote_detail 111111'
         vote = Vote.objects.get(id=voteid)
+        print 'vote_detail 222222'
         unpublished = (vote.status == 0)
+        print 'vote_detail 333333'
         voteDict = wrap_vote_dict(vote)
+        print 'vote_detail 444444'
         voteDict['items'] = get_vote_items(vote)
+        print 'vote_detail 555555'
     except:
         raise Http404
 
