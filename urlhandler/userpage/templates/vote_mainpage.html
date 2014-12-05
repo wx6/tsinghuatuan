@@ -6,6 +6,12 @@
 投票页面
 {% endblock %}
 
+{% block theme %}
+    {{ vote.name }}
+    {{vote.items}}
+{% endblock %}
+
+{% block content %}
 
 <script type="text/javascript">
 alert(233)
@@ -14,12 +20,6 @@ console.log("123")
 console.log(vote)
 </script>
 
-{% block theme %}
-    {{ vote.name }}
-    {{vote.items}}
-{% endblock %}
-
-{% block content %}
 <form id="voteItem" >
 {% for item in vote.items %}
 	<img src = "{{ item.pic_url }}" >
