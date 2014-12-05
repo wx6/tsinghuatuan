@@ -440,9 +440,9 @@ function dymBotton (){
             $.each($(".vote_choice"),function(i,item){
                 $(item).find("summary").html("投票项"+(i+1).toString()+'<span class="vote_delete" title="删除"></span>');
                 $(item).attr('id',"vote_choice_"+(i+1).toString());
-                dymBotton();
              });
         });
+        dymBotton();
 }
 
     $('.vote_delete').click(function(){
