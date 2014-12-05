@@ -595,9 +595,12 @@ def vote_post(request):
                         rtnJSON['error'] = u"当前有投票活动正在使用该活动代称"
                         return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),
                                             content_type='application/json')
+            print 'aaaaaaaaaaaaaaa'
             vote = vote_create(post)
             # rtnJSON['updateUrl'] = s_reverse_activity_detail(activity.id)
+        print 'bbbbbbbbbbbbbb'
         voteDict = wrap_vote_dict(vote)
+        print 'cccccccccccccc'
         voteDict['items'] = get_vote_items(vote)
         rtnJSON['vote'] = voteDict
     except Exception as e:
