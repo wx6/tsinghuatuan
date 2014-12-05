@@ -8,7 +8,7 @@
 {% block css %}
 <link href="{% static "css/vote_mainpage.css" %}" rel="stylesheet" type="text/css" />
 {% endblock %}
-console.logt({{vote}})
+console.log(vote)
 {% block theme %}
     {{ vote.name }}
 {% endblock %}
@@ -21,7 +21,7 @@ console.logt({{vote}})
 	<input type ="checkbox" name={{item.name}}>
 	<p>投票数目:{{item.vote_num}}</p>
 
-	console.log(233 {{item.name}})
+	console.log(item.name)
 {% endfor %}
 </form>
 
