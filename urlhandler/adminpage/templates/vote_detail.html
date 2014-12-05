@@ -37,6 +37,7 @@
             }
             'items': {{ vote.items }},
             'status': {{ vote.status }}{% else %},
+            'items': [],
             'status': 0{% endif %}
         }
         var vote_choice_count = 1;
