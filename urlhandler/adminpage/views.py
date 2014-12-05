@@ -583,7 +583,7 @@ def vote_post(request):
     rtnJSON = {}
 
     try:
-        if 'id' in post:
+        if not ('id' in post):
             print 'come test point 99999'
             vote = vote_modify(post)
         else:
