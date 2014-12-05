@@ -183,6 +183,7 @@ function deletevot(votid){
 		}
 	}
 	var content = '确认删除<span style="color:red">'+getSmartStatus(curvot)+'</span>投票：<span style="color:red">'+curvot.name+'</span>？';
+    alert(content);
     $('modalcontent').html(content);
     $('#'+votid).css("background-color","#FFE4C4");
     $('#deleteid').val(votid);
