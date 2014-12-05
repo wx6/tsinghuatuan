@@ -1,0 +1,32 @@
+{% extends "mobile_base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+投票页面
+{% endblock %}
+
+{% block css %}
+<!-- <link href="{% static "css/details.css" %}" rel="stylesheet" type="text/css" /> -->
+{% endblock %}
+
+{% block theme %}
+    {{ vote.name }}
+{% endblock %}
+
+{% block content %}
+<form id="voteItem" >
+{% for item in vote.items %}
+	<img src = {{ item.pic_url }}>
+	<span></span>
+	<input type ="checkbox" name={{item.name}}>
+	<p>投票数目:{{item.vote_num}}</p>
+{% endfor %}
+</form>
+
+{% endblock %}
+
+{% block js %}
+<!--  
+ <script src="{% static "js/details.js" %}"></script> -->
+{% endblock %}
