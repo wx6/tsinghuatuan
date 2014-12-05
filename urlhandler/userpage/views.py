@@ -373,7 +373,7 @@ def vote_main_view(request, voteid):
     voteDict['description'] = vote.description
     voteDict['pic_url'] = vote.pic_url
     voteDict['end_time'] = vote.end_time
-    voteDict['vote_items'] = []
+    voteDict['items'] = []
 
     voteItems = VoteItem.objects.filter(vote_key=vote.key)
     for item in  voteItems:
@@ -383,7 +383,7 @@ def vote_main_view(request, voteid):
         itemDict['description'] = item.description
         itemDict['vote_num'] = int(item.vote_num)
         itemDict['id'] = int(item.id)
-        voteDict['vote_items'].append(itemDict)
+        voteDict['items'].append(itemDict)
 
     return render_to_response('vote_mainpage.html', {
         'vote': voteDict
