@@ -54,6 +54,7 @@ class Vote(models.Model):
     description = models.CharField(max_length=255)
     pic_url = models.CharField(max_length=255)
     # external_url = models.CharField(max_length=255)
+    max_num = models.IntegerField(default=1)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     status = models.IntegerField(default=0)
