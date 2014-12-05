@@ -2,7 +2,9 @@
 
 {% load staticfiles %}
 
-
+{% block css%}
+<link href="{% static 'css/vote_mainpage.css' %}"  rel="stylesheet" type="text/css" />
+{% endblock %}
 
 {% block title %}
 投票页面
@@ -14,7 +16,6 @@
 
 {% block content %}
 
-<link href="{% static 'css/vote_mainpage.css' %}"  rel="stylesheet" type="text/css" />
 
 <form id="voteItem" >
 {% for item in vote.items %}
