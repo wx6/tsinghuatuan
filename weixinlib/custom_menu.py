@@ -17,6 +17,7 @@ def get_custom_menu():
 
 def modify_custom_menu(buttons):
     #print buttons
+    print buttons
     print 'test point 3333333'
     access_token = get_access_token()
     url = WEIXIN_URLS['modify_custom_menu'](access_token)
