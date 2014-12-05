@@ -109,9 +109,9 @@ def get_custom_menu_with_book_acts(actbtns):
         book_btn['type'] = 'click'
         book_btn['key'] = WEIXIN_EVENT_KEYS['ticket_no_book_recommand']
     book_btn['sub_button'] = actbtns
-    print 'test point 111111'
+    # print 'test point 111111'
     tmpmenu['button'][2] = book_btn
-    print 'test point 222222'
-    print tmpmenu
+    # print 'test point 222222'
+    # print tmpmenu
     return tmpmenu
 
