@@ -365,9 +365,7 @@ def get_seat_status_tsinghua_hall(ticket):
 # Functions below are about voting
 # By: LiuJunlin
 def vote_main_view(request, voteid):
-    if not request.POST:
-        raise Http404
-
+    
     vote = Vote.objects.get(id=voteid)
     voteDict = {}
     voteDict['id'] = voteid
