@@ -33,8 +33,16 @@
                 'day': {{ vote.end_time.day }},
                 'hour': {{ vote.end_time.hour }},
                 'minute': {{ vote.end_time.minute }}
-            }
-            'items': {{ vote.items }},
+            },
+            'items': [
+            {% for item in vote.items %}
+                {
+                    'name': '{{ item.name|escapejs }}',
+                    'description': '{{ item.description|escapejs }}',
+                    'pic_url': '{{ item.pic_url }}'
+                },
+            {% endfor %}
+            ],
             'status': {{ vote.status }}{% else %},
             'items': [],
             'status': 0{% endif %}
