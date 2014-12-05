@@ -235,9 +235,9 @@ function showPublishByStatus(status, linetime) {
     if ((status >= 1) && (new Date() >= getDateByObj(linetime))) {
         $('#publishBtn').hide();
         $('#resetBtn').hide();
-        $('#submitBtn').hide();
+        $('#addItem').hide();
     } else {
-        $('#submitBtn').show();
+        $('#addItem').show();
         $('#resetBtn').show();
         $('#publishBtn').show();
     }
@@ -436,27 +436,27 @@ function addchoice() {
 };
 
 function dymBotton (){
-        $('.vote_delete').click(function(){
-            vote_choice_count = $('.vote_delete').length-1;
-            $(this).parent().parent().remove();
-            $.each($(".vote_choice"),function(i,item){
-                $(item).find("summary").html("投票项"+(i+1).toString()+'<span class="vote_delete" title="删除"></span>');
-                $(item).attr('id',"vote_choice_"+(i+1).toString());
-             });
-            dymBotton();
-        });
-        //dymBotton();
-}
-
     $('.vote_delete').click(function(){
         vote_choice_count = $('.vote_delete').length-1;
         $(this).parent().parent().remove();
         $.each($(".vote_choice"),function(i,item){
             $(item).find("summary").html("投票项"+(i+1).toString()+'<span class="vote_delete" title="删除"></span>');
             $(item).attr('id',"vote_choice_"+(i+1).toString());
-        });
+         });
         dymBotton();
     });
+    //dymBotton();
+}
+
+$('.vote_delete').click(function(){
+    vote_choice_count = $('.vote_delete').length-1;
+    $(this).parent().parent().remove();
+    $.each($(".vote_choice"),function(i,item){
+        $(item).find("summary").html("投票项"+(i+1).toString()+'<span class="vote_delete" title="删除"></span>');
+        $(item).attr('id',"vote_choice_"+(i+1).toString());
+    });
+    dymBotton();
+});
 
 function init_vote_choice(vote){
     if (vote.items.length==0){
@@ -507,7 +507,7 @@ function detectVoteChoiceError(formData,lackArray){
         return false;
     }
     formData.push({
-            name: 'choice_num',
+            name: 'item_num',
             required: false,
             type: 'number',
             value: vote_choice_count.toString()
