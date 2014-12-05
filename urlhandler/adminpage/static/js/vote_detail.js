@@ -473,9 +473,9 @@ function init_vote_choice(vote){
 function show_vote_choice(vote) {
     count = 0;
     while(count < vote.items.length){
-        $("input[name='name"+(count+1).toString()+"']").val(vote.items[count].choice_name);
-        $("input[name='description"+(count+1).toString()+"']").val(vote.items[count].choice_abstract);
-        $("input[name='pic_url"+(count+1).toString()+"']").val(vote.items[count].choice_photo);
+        $("input[name='name"+(count+1).toString()+"']").val(vote.items[count].name);
+        $("input[name='description"+(count+1).toString()+"']").val(vote.items[count].description);
+        $("input[name='pic_url"+(count+1).toString()+"']").val(vote.items[count].pic_url);
         ++count;
     }
 }

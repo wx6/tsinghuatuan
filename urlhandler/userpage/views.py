@@ -388,3 +388,16 @@ def vote_main_view(request, voteid):
     return render_to_response('vote_mainpage.html', {
         'vote': voteDict
     }, context_instance=RequestContext(request))
+
+
+def vote_user_post(request):
+    if not request.POST:
+        raise Http404
+
+    post = request.POST
+    print post
+
+    rtnJSON = {}
+
+    return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder), content_type='application/json')
+
