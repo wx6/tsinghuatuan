@@ -547,10 +547,10 @@ def get_vote_items(vote):
     print 'test point cccccddddeef'
     for item in vote_items:
         dict = {}
-        dict['name'] = item.name
-        dict['pic_url'] = item.pic_url
-        dict['description'] = item.description
-        dict['vote_num'] = int(item.vote_num)
+        dict["name"] = item.name
+        dict["pic_url"] = item.pic_url
+        dict["description"] = item.description
+        dict["vote_num"] = int(item.vote_num)
         ret.append(dict)
     return ret
 
