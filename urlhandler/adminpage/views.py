@@ -573,7 +573,7 @@ def vote_detail(request, voteid):
 def vote_post(request):
     print 'Enter function vote_post!'
 
-    if not request.user.is_authencicated():
+    if not request.user.is_authenticated():
         return HttpResponseRedirect(s_reverse_admin_home())
 
     if not request.POST:
@@ -583,10 +583,10 @@ def vote_post(request):
     rtnJSON = {}
 
     try:
-        if not ('id' in post):
-            print 'come test point 99999'
+        if 'id' in post:
             vote = vote_modify(post)
         else:
+            print 'come test point 99999'
             iskey = Vote.objects.filte(key=post['key'])
             if iskey:
                 now = datetime.now()
@@ -601,6 +601,7 @@ def vote_post(request):
         voteDict['items'] = get_vote_items(vote)
         rtnJSON['vote'] = voteDict
     except Exception as e:
+        print str(e)
         rtnJSON['error'] = str(e)
 
     return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder), content_type='application/json')
