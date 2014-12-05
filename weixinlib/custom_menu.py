@@ -20,9 +20,12 @@ def modify_custom_menu(buttons):
     print 'test point 5555555'
     print 'test point 3333333'
     access_token = get_access_token()
-    url = WEIXIN_URLS['modify_custom_menu'](access_token)
-    res = http_post(url, buttons)
+    # url = WEIXIN_URLS['modify_custom_menu'](access_token)
+    # res = http_post(url, buttons)
     print 'test point 4444444'
+    menu = get_custom_menu()
+    print menu
+    res = '{"errcode":0,"errmsg":"ok"}'
     print res
     return res
 
