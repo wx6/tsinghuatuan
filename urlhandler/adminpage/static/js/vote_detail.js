@@ -193,7 +193,7 @@ function lockForm() {
     }
     $('#publishBtn').hide();
     $('#saveBtn').hide();
-    $('#resetBtn').hide();
+    //$('#resetBtn').hide();
 }
 
 function lockByStatus(status, start_time, end_time) {
@@ -234,11 +234,11 @@ function lockByStatus(status, start_time, end_time) {
 function showPublishByStatus(status, linetime) {
     if ((status >= 1) && (new Date() >= getDateByObj(linetime))) {
         $('#publishBtn').hide();
-        $('#resetBtn').hide();
+        //$('#resetBtn').hide();
         $('#addItem').hide();
     } else {
         $('#addItem').show();
-        $('#resetBtn').show();
+        //$('#resetBtn').show();
         $('#publishBtn').show();
     }
 }
