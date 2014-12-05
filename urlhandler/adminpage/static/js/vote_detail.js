@@ -431,7 +431,7 @@ $('.form-control').on('focus', function() {var me = $(this); setTimeout(function
 
 function addchoice() {
     vote_choice_count = $('.vote_delete').length + 1;
-    $('<details open="open" id="vote_choice_'+vote_choice_count.toString()+'" class="vote_choice"><summary class="vote_option_summary">投票项'+vote_choice_count.toString()+'<span class="vote_delete" title="删除"></span></summary><div class="dynamic"><div class="form-group"><label for="input-item" class="col-sm-2 control-label">投票项名称</label><div class="col-sm-10"><input type="text" maxlength="12" name="choice_'+vote_choice_count.toString()+'" class="form-control"placeholder="投票项的名称，如刘强老师"></div></div><div class="form-group"><label for="input-item_description" class="col-sm-2 control-label">投票项简介</label><div class="col-sm-10"><input type="text" maxlength="12" name="choice_description_'+vote_choice_count.toString()+'" class="form-control"  placeholder="投票项的简介，如刘强老师为软件学院老师，开设软件工程等课程"></div></div><div class="form-group"><label for="input-item_pic_url" class="col-sm-2 control-label">投票项图片</label><div class="col-sm-10"><input type="text" maxlength="12" name="choice_pic_url_'+vote_choice_count.toString()+'" class="form-control" placeholder="请填入图片链接"></div></div></div></details>').insertBefore("#bottom_botton");
+    $('<details open="open" id="vote_choice_'+vote_choice_count.toString()+'" class="vote_choice"><summary class="vote_option_summary">投票项'+vote_choice_count.toString()+'<span class="vote_delete" title="删除"></span></summary><div class="dynamic"><div class="form-group"><label for="input-item" class="col-sm-2 control-label">投票项名称</label><div class="col-sm-10"><input type="text" maxlength="12" name="name'+vote_choice_count.toString()+'" class="form-control"placeholder="投票项的名称，如刘强老师"></div></div><div class="form-group"><label for="input-item_description" class="col-sm-2 control-label">投票项简介</label><div class="col-sm-10"><input type="text" maxlength="12" name="description'+vote_choice_count.toString()+'" class="form-control"  placeholder="投票项的简介，如刘强老师为软件学院老师，开设软件工程等课程"></div></div><div class="form-group"><label for="input-item_pic_url" class="col-sm-2 control-label">投票项图片</label><div class="col-sm-10"><input type="text" maxlength="12" name="pic_url'+vote_choice_count.toString()+'" class="form-control" placeholder="请填入图片链接"></div></div></div></details>').insertBefore("#bottom_botton");
     dymBotton();
 };
 
@@ -473,9 +473,9 @@ function init_vote_choice(vote){
 function show_vote_choice(vote) {
     count = 0;
     while(count < vote.items.length){
-        $("input[name='choice_"+(count+1).toString()+"']").val(vote.items[count].choice_name);
-        $("input[name='choice_description_"+(count+1).toString()+"']").val(vote.items[count].choice_abstract);
-        $("input[name='choice_pic_url_"+(count+1).toString()+"']").val(vote.items[count].choice_photo);
+        $("input[name='name"+(count+1).toString()+"']").val(vote.items[count].choice_name);
+        $("input[name='description"+(count+1).toString()+"']").val(vote.items[count].choice_abstract);
+        $("input[name='pic_url"+(count+1).toString()+"']").val(vote.items[count].choice_photo);
         ++count;
     }
 }
@@ -489,15 +489,15 @@ function detectVoteChoiceError(formData,lackArray){
     flag = false;
     for (i = 0; i < vote_choice_count; i++){
         for (j = 0; j < formData.length; j++){
-            if (!formData[j].value && formData[j].name=='choice_'+(i+1).toString()){
+            if (!formData[j].value && formData[j].name=='name'+(i+1).toString()){
                 lackArray.push('投票项'+(i+1).toString()+'的投票项名称');
                 flag = true;
             }
-            if (!formData[j].value && formData[j].name=='choice_description_'+(i+1).toString()){
+            if (!formData[j].value && formData[j].name=='description'+(i+1).toString()){
                 lackArray.push('投票项'+(i+1).toString()+'的投票项名称');
                 flag = true;
             }
-            if (!formData[j].value && formData[j].name=='choice_pic_url_'+(i+1).toString()){
+            if (!formData[j].value && formData[j].name=='pic_url'+(i+1).toString()){
                lackArray.push('投票项'+(i+1).toString()+'的投票项名称');
                flag = true;
             }
@@ -519,17 +519,17 @@ function lockItemsByStatus(status){
     if (status < 1){
         var i;
         for (i = 0; i < vote_choice_count; i++){
-            $("input[name='choice_"+(i+1).toString()+"']").prop('disabled',false);
-            $("input[name='choice_description_"+(i+1).toString()+"']").prop('disabled',false);
-            $("input[name='choice_pic_url_"+(i+1).toString()+"']").prop('disabled',false);
+            $("input[name='name"+(i+1).toString()+"']").prop('disabled',false);
+            $("input[name='description"+(i+1).toString()+"']").prop('disabled',false);
+            $("input[name='pic_url"+(i+1).toString()+"']").prop('disabled',false);
         }
     }
     else{
         var i;
         for (i = 0; i < vote_choice_count; i++){
-            $("input[name='choice_"+(i+1).toString()+"']").prop('disabled',true);
-            $("input[name='choice_description_"+(i+1).toString()+"']").prop('disabled',true);
-            $("input[name='choice_pic_url_"+(i+1).toString()+"']").prop('disabled',true);
+            $("input[name='name"+(i+1).toString()+"']").prop('disabled',true);
+            $("input[name='description"+(i+1).toString()+"']").prop('disabled',true);
+            $("input[name='pic_url"+(i+1).toString()+"']").prop('disabled',true);
         }
     }
 }
