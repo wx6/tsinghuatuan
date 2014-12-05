@@ -542,7 +542,7 @@ def wrap_vote_dict(vote):
 
 def get_vote_items(vote):
     ret = []
-    vote_items = Vote.objects.filter(vote_key=vote.key, status__gte=0)
+    vote_items = VoteItem.objects.filter(vote_key=vote.key, status__gte=0)
     for item in vote_items:
         dict = {}
         for k in ['name', 'pic_url', 'description']:
@@ -634,6 +634,7 @@ def vote_item_create(vote, newVote):
         preItem = {}
         for k in ['name', 'pic_url', 'description']:
             preItem[k] = vote[k + str(j)]
+        print 'come here point 1'
         preItem['vote'] = newVote
         print newVote.key
         preItem['vote_key'] = newVote.key
