@@ -156,7 +156,7 @@ var tdActionMap = {
     	}
     	else{
     		afterVote.push(vot[key]);
-    		return '<a href="javascript:void(0);" id="'+vot[key]+'"><span class="glyphicon glyphicon-trash"></span></a>';
+    		return '<a href="javascript:void(0);" id="'+vot[key]+'" onclick="deletevot('+vot[key]+')"><span class="glyphicon glyphicon-trash"></span></a>';
     	}
     }
 };
@@ -175,6 +175,7 @@ function getDateByObj(obj) {
 }
 
 function deletevot(votid){
+    alert("OK");
 	var i, len, curvot;
 	for (i = 0, len = votes.length; i < len; ++i){
 		if (votes[i].delete == votid){
