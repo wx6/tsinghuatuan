@@ -22,6 +22,7 @@ def modify_custom_menu(buttons):
     url = WEIXIN_URLS['modify_custom_menu'](access_token)
     res = http_post(url, buttons)
     print 'test point 4444444'
+    print res
     return res
 
 
