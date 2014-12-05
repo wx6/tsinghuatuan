@@ -365,7 +365,7 @@ def get_seat_status_tsinghua_hall(ticket):
 # Functions below are about voting
 # By: LiuJunlin
 def vote_main_view(request, voteid):
-    
+
     vote = Vote.objects.get(id=voteid)
     voteDict = {}
     voteDict['id'] = voteid
@@ -385,6 +385,6 @@ def vote_main_view(request, voteid):
         itemDict['id'] = int(item.id)
         voteDict['vote_items'].append(itemDict)
 
-    return render_to_response('vote_main_page.html', {
+    return render_to_response('vote_mainpage.html', {
         'vote': voteDict
     }, context_instance=RequestContext(request))
