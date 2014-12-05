@@ -359,3 +359,33 @@ def get_seat_status_tsinghua_hall(ticket):
                     row.append(1)
         res.append(row)
     return res
+
+
+
+# Functions below are about voting
+# By: LiuJunlin
+def vote_main_view(request, voteid):
+    if not request.POST:
+        raise Http404
+
+    vote = Vote.objects.get(id=voteid)
+    voteDict = {}
+    voteDict['id'] = voteid
+    voteDict['name'] = vote.name
+    voteDict['description'] = vote.description
+    voteDict['pic_url'] = vote.pic_url
+    voteDict['end_time'] = vote.end_time
+    voteDict['vote_items'] = []
+
+    voteItems = VoteItem.objects.filter(vote_key=vote.key)
+    for item in  voteItems:
+        itemDict = {}
+        itemDict['name'] = item.name
+        itemDict['pic_url'] = item.pic_url
+        itemDict['description'] = item.description
+        itemDict['vote_num'] = int(item.vote_num)
+        voteDict['vote_items'].append(itemDict)
+
+    return render_to_response('vote_main_page.html', {
+        'vote': voteDict
+    }, context_instance=RequestContext(request))
