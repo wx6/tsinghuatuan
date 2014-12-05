@@ -49,7 +49,7 @@
 {% block nav-li-ext %}
     <li class="{% block vote-detail-active %}active{% endblock %}">
         <a href="{% if vote.id %}
-        {% url "adminpage.views.vote_detail" actid=vote.id %}
+        {% url "adminpage.views.vote_detail" voteid=vote.id %}
         {% else %}
         {% url "adminpage.views.vote_add" %}
         {% endif %} ">{{ vote.name }}</a>
