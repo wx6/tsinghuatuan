@@ -156,7 +156,7 @@ var tdActionMap = {
     	}
     	else{
     		afterVote.push(vot[key]);
-    		return '<a href="javascript:void(0);" id="'+vot[key]+'" onclick="deleteact('+vot[key]+')"><span class="glyphicon glyphicon-trash"></span></a>';
+    		return '<a href="javascript:void(0);" id="'+vot[key]+'" onclick="deletevot('+vot[key]+')"><span class="glyphicon glyphicon-trash"></span></a>';
     	}
     }
 };
