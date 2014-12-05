@@ -27,7 +27,8 @@
 {% endfor %}
 </form>
 
-{% endblock %}
+<button type="button" onclick="commitVote();" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">确认</button>
+
 {% block js %}
 <script src="{% static 'js/vote_mainpage.js' %}"></script>
 {% endblock%}
