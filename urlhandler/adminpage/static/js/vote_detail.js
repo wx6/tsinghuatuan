@@ -384,7 +384,7 @@ function submitComplete(xhr) {
 
 
 function publishVote() {
-    if(!$('#activity-form').checkValidity || $('#activity-form').checkValidity()){
+    if(!$('#vote-form')[0].checkValidity || $('#vote-form')[0].checkValidity()){
         if(!checktime())
             return false;
         showProcessing();
@@ -396,7 +396,7 @@ function publishVote() {
             error: submitError,
             complete: submitComplete
         };
-        $('#activity-form').ajaxSubmit(options);
+        $('#vote-form').ajaxSubmit(options);
         return false;
     } else {
         $('#saveBtn').click();
@@ -408,7 +408,7 @@ init_vote_choice(vote);
 initializeForm(vote);
 showForm();
 
-$('#activity-form').submit(function() {
+$('#vote-form').submit(function() {
     showProcessing();
     setResult('');
     var options = {
