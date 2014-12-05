@@ -2,6 +2,7 @@ img{
 	width:16em;
 	height:16em;
 }
+
 .block{
 	text-align: center;
 	width:30%;
@@ -14,6 +15,7 @@ img{
 	height: 5em;
 	text-align: center;
 }
+
 label{
 	background-color: rgb(250, 250, 250);
 border-bottom-color: rgb(202, 206, 206);
