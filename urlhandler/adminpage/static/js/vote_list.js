@@ -175,7 +175,6 @@ function getDateByObj(obj) {
 }
 
 function deletevot(votid){
-    alert("OK");
 	var i, len, curvot;
 	for (i = 0, len = votes.length; i < len; ++i){
 		if (votes[i].delete == votid){
