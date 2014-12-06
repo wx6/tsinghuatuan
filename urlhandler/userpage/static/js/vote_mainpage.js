@@ -1,5 +1,4 @@
 function commitVote() {
- function commitSeat() {
     if(lastid == -1)
     {
         $("#hint")[0].innerHTML = "投票数目过多或者过少"
