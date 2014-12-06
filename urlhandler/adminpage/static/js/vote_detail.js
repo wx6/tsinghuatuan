@@ -295,6 +295,7 @@ function wrapDateString(dom, formData, name) {
             }
         }
     }
+    //if ()
     formData.push({
         name: name,
         required: false,
@@ -530,6 +531,28 @@ function detectVoteChoiceError(formData,lackArray){
     }
     if (flag){
         return false;
+    }
+    if ($('.input-name')[0].prop('disabled')){
+        for (var i = 0; i < vote.items.length; i++){
+            formData.push({
+                name: 'name'+(i+1).toString(),
+                required: false,
+                type: 'text',
+                value: vote.items[i].name
+            });
+            formData.push({
+                name: 'description'+(i+1).toString(),
+                required: false,
+                type: 'text',
+                value: vote.items[i].description
+            });
+            formData.push({
+                name: 'pic_url'+(i+1).toString(),
+                required: false,
+                type: 'text',
+                value: vote.items[i].pic_url
+            });
+        }
     }
     formData.push({
             name: 'item_num',
