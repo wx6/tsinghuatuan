@@ -136,8 +136,8 @@ function CookieOnLoad(){
     else{
         vote_counter = 0;
         var form = document.getElementsByTagName("Input");
-        for (item in form){
-            consult = findcookie(item.id);
+        for(var i = 0; i < form.length; i++){
+            consult = findcookie(form[i].id);
             if(consult == "True"){
                 item.checked = true;
                 vote_counter++;
