@@ -127,8 +127,8 @@ function CookieOnLoad(){
     var name = "activityName";
     var consult = findcookie(name);
     var key = "";
-    if(consult != vote_name{
-        var cookie = "activityName=" + escape(vote.name);
+    if(consult != vote_name){
+        var cookie = "activityName=" + escape(vote_name);
         for (item in vote_items){
             key = escape(vote_items.id);
             key += "False";
