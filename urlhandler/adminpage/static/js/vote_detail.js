@@ -588,7 +588,7 @@ function qsort(arr){
     return quickSort(arr,0,arr.length-1);
     function quickSort(arr,l,r){            
         if(l<r){         
-            var mid=arr[parseInt((l+r)/2)],i=l-1,j=r+1;         
+            var mid=arr[parseInt((l+r)/2)].vote_num,i=l-1,j=r+1;         
             while(true){
                 while(arr[++i].vote_num<mid);
                 while(arr[--j].vote_num>mid);             
