@@ -146,11 +146,11 @@ var tdActionMap = {
     		return;
     	}
     	var now = new Date();
-    	if (now < getDateByObj(vot.start_time)){
-    		beforeVote.push(vot[key]);
-    		return '<span id="del'+vot[key]+'" class="td-ban glyphicon glyphicon-ban-circle" ></span>';
-    	}
-    	else if(now < getDateByObj(vot.end_time)){
+    	// if (now < getDateByObj(vot.start_time)){
+    	// 	beforeVote.push(vot[key]);
+    	// 	return '<span id="del'+vot[key]+'" class="td-ban glyphicon glyphicon-ban-circle" ></span>';
+    	// }
+    	if(now < getDateByObj(vot.end_time) && now > getDateByObj(vot.start_time)){
     		duringVote.push(vot[key]);
     		return '<span id="del'+vot[key]+'" class="td-ban glyphicon glyphicon-ban-circle" ></span>';
     	}

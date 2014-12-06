@@ -241,3 +241,10 @@ def get_text_no_activity_menu():
     return '您好，该活动未提供节目单。'
 
 
+def get_text_unbinded_vote_event(openid):
+    return get_text_unbinded_template('投票', openid)
+
+
+def get_text_no_vote_event():
+    return '当前没有投票活动'
+

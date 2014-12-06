@@ -33,8 +33,17 @@
                 'day': {{ vote.end_time.day }},
                 'hour': {{ vote.end_time.hour }},
                 'minute': {{ vote.end_time.minute }}
-            }
-            'items': {{ vote.items }},
+            },
+            'items': [
+            {% for item in vote.items %}
+                {
+                    'name': '{{ item.name|escapejs }}',
+                    'description': '{{ item.description|escapejs }}',
+                    'pic_url': '{{ item.pic_url }}',
+                    'vote_num': {{ item.vote_num }}
+                },
+            {% endfor %}
+            ],
             'status': {{ vote.status }}{% else %},
             'items': [],
             'status': 0{% endif %}
@@ -49,7 +58,7 @@
 {% block nav-li-ext %}
     <li class="{% block vote-detail-active %}active{% endblock %}">
         <a href="{% if vote.id %}
-        {% url "adminpage.views.vote_detail" actid=vote.id %}
+        {% url "adminpage.views.vote_detail" voteid=vote.id %}
         {% else %}
         {% url "adminpage.views.vote_add" %}
         {% endif %} ">{{ vote.name }}</a>
@@ -216,9 +225,11 @@
                     <!-- <button type="reset" class="btn btn-warning" id="resetBtn">重置</button> -->
                 </div>
                 </br>
+                </br>
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="button" onclick="publishVote();" class="btn btn-primary" id="publishBtn">发布</button>
                     <button type="submit" class="btn btn-default" id="saveBtn">暂存</button>
+                    <button type="button" onclick="seeVoteResult();" class="btn btn-primary" id="resultBtn">结果</button>
                 </div>
             </div>
 

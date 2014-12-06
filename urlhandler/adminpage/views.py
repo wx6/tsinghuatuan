@@ -464,7 +464,7 @@ def custom_menu_modify_post(request):
                            'key': 'TSINGHUA_BOOK_' + str(menu['id']),
                            'sub_button': [],
                        }]
-    print 'come here test point point'
+    # print 'come here test point point'
     return HttpResponse(modify_custom_menu(json.dumps(get_custom_menu_with_book_acts(sub_button), ensure_ascii=False).encode('utf8')),
                         content_type='application/json')
 
@@ -560,15 +560,23 @@ def vote_detail(request, voteid):
         return HttpResponseRedirect(s_reverse_admin_home())
 
     try:
+        print 'vote_detail 111111'
         vote = Vote.objects.get(id=voteid)
+        print 'vote_detail 222222'
         unpublished = (vote.status == 0)
+        print 'vote_detail 333333'
         voteDict = wrap_vote_dict(vote)
+        print 'vote_detail 444444'
         voteDict['items'] = get_vote_items(vote)
+        print 'vote_detail 555555'
     except:
         raise Http404
 
+    for k in voteDict:
+        print voteDict[k]
+
     return render_to_response('vote_detail.html', {
-        'vote': vote,
+        'vote': voteDict,
         'unpublished': unpublished
     }, context_instance=RequestContext(request))
 

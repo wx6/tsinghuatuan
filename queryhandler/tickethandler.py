@@ -401,3 +401,44 @@ def response_xnlhwh(msg):
 	msg['Content'] = '节目单 新年联欢晚会'
 	return response_get_activity_menu(msg)
 
+
+# Functions below are about voting]
+# By: Liu Junlin
+def check_vote_event(msg):
+	return handler_check_text(msg, ['投票'])
+
+
+def response_vote_event(msg):
+	fromuser = get_msg_from(msg)
+	user = get_user(fromuser)
+	if user is None:
+		return get_reply_text_xml(msg, get_text_unbinded_vote_event(fromuser))
+
+	now = datetime.datetime.fromtimestamp(get_msg_create_time(msg))
+	votes = Vote.objects.filter(status=1, end_time__gte=now).order_by("start_time")
+
+	if len(votes) == 1:
+		vote = votes[0]
+		return get_reply_single_news_xml(msg, get_item_dict(
+			title = vote.name,
+			description = vote.description,
+			pic_url = vote.pic_url,
+			url = s_reverse_vote_mainpage(vote.id)
+		))
+
+	items = []
+
+	for vote in votes:
+		items.append(get_item_dict(
+			title = vote.name,
+			description = vote.description,
+			pic_url = vote.pic_url,
+			url = s_reverse_vote_mainpage(vote.id)
+		))
+		if (items >= 10):
+			break
+
+	if len(items) != 0:
+		return get_repy_news_xml(msg, items)
+	else:
+		return get_reply_text_xml(msg, get_text_no_vote_event())
