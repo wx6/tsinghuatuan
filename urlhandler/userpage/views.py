@@ -407,7 +407,8 @@ def vote_user_post(request, voteid):
         voteItems = VoteItem.objects.filter(vote_key=vote.key)
         print 'test point 3 in vote_user_post'
         for item in voteItems:
-            print post[str(item.id)]
+            if str(item.id) in post:
+                print post[str(item.id)]
 
         print 'test point 4 in vote_user_post'
         rtnJSON = {}
@@ -420,3 +421,14 @@ def vote_user_post(request, voteid):
     except Exception as e:
         print 'Error occured!!!!!' + str(e)
 
+
+def vote_item_detail(request, itemid):
+    vote = Vote.objects.get(id=itemid)
+    voteDict = {}
+    voteDict['name'] = vote.name
+    voteDict['pic_url'] = vote.pic_url
+    voteDict['description'] = vote.description
+
+    return render_to_response('vote_item_detail.html', {
+        'vote': voteDict,
+    }, context_instance=RequestContext(request))

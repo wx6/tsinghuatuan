@@ -145,6 +145,35 @@ function checktime(){
          $('#input-end-year').focus();
         return false;
     }
+    if(voteend < now){
+        $('#input-end-year').popover({
+            html: true,
+            placement: 'top',
+            title:'',
+            content: '<span style="color:red;">“投票结束时间”应晚于“当前时间”</span>',
+            trigger: 'focus',
+            container: 'body'
+        });
+         $('#input-end-year').focus();
+        return false;
+    }
+    return true;
+}
+
+function checkmax_num(){
+    var max_num = $("#input-max_num").val();
+    if (max_num < 1){
+        $('#input-max_num').popover({
+            html: true,
+            placement: 'top',
+            title:'',
+            content: '<span style="color:red;">“每人投票数量上限”应大于“0”</span>',
+            trigger: 'focus',
+            container: 'body'
+        });
+         $('#input-max_num').focus();
+        return false;
+    }
     return true;
 }
 
@@ -413,7 +442,7 @@ function submitComplete(xhr) {
 
 function publishVote() {
     if(!$('#vote-form')[0].checkValidity || $('#vote-form')[0].checkValidity()){
-        if(!checktime())
+        if(!checktime() || !checkmax_num())
             return false;
         showProcessing();
         setResult('');
@@ -532,7 +561,7 @@ function detectVoteChoiceError(formData,lackArray){
     if (flag){
         return false;
     }
-    if ($("input[name='name1']")[0].prop('disabled')){
+    if ($("input[name='name1']").prop('disabled')){
         for (var i = 0; i < vote.items.length; i++){
             formData.push({
                 name: 'name'+(i+1).toString(),
@@ -552,6 +581,12 @@ function detectVoteChoiceError(formData,lackArray){
                 type: 'text',
                 value: vote.items[i].pic_url
             });
+            formData.push({
+                name: 'max_num',
+                required: false,
+                type: 'number',
+                value: vote_choice_count.toString()
+            });
         }
     }
     formData.push({
@@ -570,6 +605,7 @@ function lockItemsByStatus(status, start_time){
             $("input[name='name"+(i+1).toString()+"']").prop('disabled',false);
             $("input[name='description"+(i+1).toString()+"']").prop('disabled',false);
             $("input[name='pic_url"+(i+1).toString()+"']").prop('disabled',false);
+            $("#input-max_num").prop('disabled',false);
         }
     }
     else{
@@ -578,6 +614,7 @@ function lockItemsByStatus(status, start_time){
             $("input[name='name"+(i+1).toString()+"']").prop('disabled',true);
             $("input[name='description"+(i+1).toString()+"']").prop('disabled',true);
             $("input[name='pic_url"+(i+1).toString()+"']").prop('disabled',true);
+            $("#input-max_num").prop('disabled',true);
         }
     }
 }

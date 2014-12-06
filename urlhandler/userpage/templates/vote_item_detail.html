@@ -1,0 +1,31 @@
+{% extends "mobile_base.html" %}
+
+{% load staticfiles %}
+
+{% block css%}
+<link href="{% static 'css/vote_item_detail.css' %}"  rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block title %}
+投票页面
+{% endblock %}
+
+{% block theme %}
+    {{ vote.name }}
+{% endblock %}
+
+{% block content %}
+<center>
+	<div class="main">
+	<img src="{{vote.pic_url}}"></img>
+	<p>{{vote.description}}</p>
+</div>
+</center>
+{% endblock %}
+	
+{% block js %}
+<script src="http://soso.qstatic.com/wenwen/deploy/js/sea_modules/jquery/1.7.2/jquery-1.7.2.min_a0069db.js"></script>
+<script src="{% static 'lib/jq/form/jquery.form.min.js' %}"></script>	
+<script src="{% static 'js/vote_item_detail.js' %}"></script>
+{% endblock%}
+
