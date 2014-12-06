@@ -1,3 +1,27 @@
+.wrap{
+	margin-top:10px;
+	}
+.wrap li{
+	width:152px; height:128px;
+	margin-left:8px;
+	margin-top:10px;
+	margin-bottom:10px;
+	float:left;
+	text-align:center;
+	display:inline;
+	}
+.wrap li h1{ font-size:12px;
+	color:#005eac;
+	line-height:22px;
+	text-align:center;
+	margin-top:5px;
+	font-weight:normal;
+}
+.wrap li p{ color:#666;
+	line-height:22px;
+	text-align:center;
+	}
+
 img{
 	width:5em;
 	height:5em;

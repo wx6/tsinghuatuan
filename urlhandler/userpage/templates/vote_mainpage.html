@@ -25,7 +25,7 @@
 	<input type ="checkbox" name={{item.name}}>
 	投票数目:{{item.vote_num}}
 </li>
-<num id={{item.counter}} class="voteOder"> </num>
+<num id={{forloop.counter}} class="voteOder"> </num>
 {% endfor %}
 </form>
 
