@@ -83,11 +83,11 @@ onCreate();
 
 function addcookie(){
     document.cookie="key=helloWorld"
-    document.cookie+="key1=Hi"
+    document.cookie="key1=Hi"
 }
 
 function alertcookie () {
-    var name = escape("key1")
+    var name = escape("key")
     name += "="
     var allcookies = document.cookie
     var pos = document.cookie.indexOf(name)
