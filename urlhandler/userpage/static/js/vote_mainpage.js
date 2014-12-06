@@ -128,13 +128,10 @@ function CookieOnLoad(){
     var consult = findcookie(name);
     var key = "";
     if(consult != vote_name){
-        var cookie = "activityName=" + vote_name;
+        document.cookie = "activityName=" + vote_name;
         for (item in vote_items){
-            key = escape(vote_items.id);
-            key += "False";
-            cookie += key;
+            document.cookie = vote_items.id += "=False";
         }
-        document.cookie = cookie;
     }
     else{
         vote_counter = 0;
