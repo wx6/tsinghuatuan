@@ -128,7 +128,7 @@ function CookieOnLoad(){
     var key = "";
     if(consult != vote.name){
         var cookie = "activityName=" + escape(vote.name);
-        for item in vote_items{
+        for (item in vote_items){
             key = escape(vote_items.id);
             key += "False";
             cookie += key;
@@ -138,7 +138,7 @@ function CookieOnLoad(){
     else{
         vote_counter = 0;
         var form = document.getElementsByTagName("Input");
-        for item in form{
+        for (item in form){
             consult = findcookie(item.id);
             if(consult == "True"){
                 item.checked = true;
