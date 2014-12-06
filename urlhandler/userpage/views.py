@@ -391,6 +391,7 @@ def vote_main_view(request, voteid, stuid):
     }, context_instance=RequestContext(request))
 
 
+@csrf_exempt
 def vote_user_post(request, voteid, stuid):
     if not request.POST:
         raise Http404
