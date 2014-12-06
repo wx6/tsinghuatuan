@@ -423,9 +423,6 @@ def vote_user_post(request, voteid):
 
 
 def vote_item_detail(request, itemid):
-    if not request.POST:
-        raise Http404
-
     vote = Vote.objects.get(id=itemid)
     voteDict = {}
     voteDict['name'] = vote.name
