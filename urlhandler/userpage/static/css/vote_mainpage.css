@@ -33,7 +33,7 @@ input[type="checkbox"]{
     margin-top: 0.5em;
     border-radius: 100%;
     position: relative;
-    left:2.5em;
+    margin: 0px auto;
 }
 
 .checkbox label {
