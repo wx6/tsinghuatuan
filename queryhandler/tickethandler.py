@@ -423,7 +423,7 @@ def response_vote_event(msg):
 			title = vote.name,
 			description = vote.description,
 			pic_url = vote.pic_url,
-			url = s_reverse_vote_mainpage(vote.id, user.stu_id)
+			url = s_reverse_vote_mainpage(vote.id, user.weixin_id)
 		))
 
 	items = []
@@ -433,7 +433,7 @@ def response_vote_event(msg):
 			title = vote.name,
 			description = vote.description,
 			pic_url = vote.pic_url,
-			url = s_reverse_vote_mainpage(vote.id, user.stu_id)
+			url = s_reverse_vote_mainpage(vote.id, user.weixin_id)
 		))
 		if (len(items) >= 10):
 			break

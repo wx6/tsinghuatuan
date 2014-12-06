@@ -542,9 +542,7 @@ def wrap_vote_dict(vote):
 
 def get_vote_items(vote):
     ret = []
-    print 'test point aaabbbcccddd'
     vote_items = VoteItem.objects.filter(vote_key=vote.key, status__gte=0)
-    print 'test point cccccddddeef'
     for item in vote_items:
         dict = {}
         dict['name'] = item.name
@@ -560,20 +558,12 @@ def vote_detail(request, voteid):
         return HttpResponseRedirect(s_reverse_admin_home())
 
     try:
-        print 'vote_detail 111111'
         vote = Vote.objects.get(id=voteid)
-        print 'vote_detail 222222'
         unpublished = (vote.status == 0)
-        print 'vote_detail 333333'
         voteDict = wrap_vote_dict(vote)
-        print 'vote_detail 444444'
         voteDict['items'] = get_vote_items(vote)
-        print 'vote_detail 555555'
     except:
         raise Http404
-
-    for k in voteDict:
-        print voteDict[k]
 
     return render_to_response('vote_detail.html', {
         'vote': voteDict,
@@ -582,8 +572,6 @@ def vote_detail(request, voteid):
 
 
 def vote_post(request):
-    print 'Enter function vote_post!'
-
     if not request.user.is_authenticated():
         return HttpResponseRedirect(s_reverse_admin_home())
 
@@ -597,7 +585,6 @@ def vote_post(request):
         if 'id' in post:
             vote = vote_modify(post)
         else:
-            print 'come test point 99999'
             iskey = Vote.objects.filter(key=post['key'])
             if iskey:
                 now = datetime.now()
@@ -606,12 +593,9 @@ def vote_post(request):
                         rtnJSON['error'] = u"当前有投票活动正在使用该活动代称"
                         return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),
                                             content_type='application/json')
-            print 'aaaaaaaaaaaaaaa'
             vote = vote_create(post)
             # rtnJSON['updateUrl'] = s_reverse_activity_detail(activity.id)
-        print 'bbbbbbbbbbbbbb'
         voteDict = wrap_vote_dict(vote)
-        print 'cccccccccccccc'
         voteDict['items'] = get_vote_items(vote)
         rtnJSON['vote'] = voteDict
     except Exception as e:
@@ -645,7 +629,6 @@ def vote_modify(vote):
 
 def vote_item_create(vote, newVote):
     item_num = int(vote['item_num'])
-    # next_id = VoteItem.objects.all().order_by('-id')
     for j in range(1, item_num + 1):
         preItem = {}
         for k in ['name', 'pic_url', 'description']:
