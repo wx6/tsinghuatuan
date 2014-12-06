@@ -570,7 +570,7 @@ function updateVoteResult (){
     var item,i;
     var items = vote.items;
     qsort(items);
-    for (i = 0; i < items.length; i++){
+    for (i = items.length-1; i >= 0; i--){
         item = vote.items[i];
         var tr = $('<tr></tr>');
         $("<td class='td-item_name'></td>").html(item.name).appendTo(tr);
