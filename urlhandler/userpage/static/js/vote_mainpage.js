@@ -127,10 +127,10 @@ function CookieOnLoad(){
     var name = "activityName";
     var consult = findcookie(name);
     var key = "";
-    if(consult != vote_name){
+    if(consult != ""+vote_name){
         document.cookie = "activityName=" + vote_name;
         for (item in vote_items){
-            document.cookie = vote_items.id += "=False";
+            document.cookie = item.id += "=False";
         }
     }
     else{
