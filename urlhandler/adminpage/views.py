@@ -677,12 +677,16 @@ def vote_delete(request):
     if not request.POST:
         raise Http404
 
-    post = request.POST
-    vote = Vote.objects.get(id=post.get('voteId', ''))
-    vote.status = -1
-    vote.save()
+    print 'come here vote delete'
 
-    vote_item_delete(vote.key)
+    try:
+        post = request.POST
+        vote = Vote.objects.get(id=post.get('voteId', ''))
+        vote.status = -1
+        vote.save()
+        vote_item_delete(vote.key)
+    except Exception as e:
+        print str(e)
 
     return HttpResponse('ok')
 
