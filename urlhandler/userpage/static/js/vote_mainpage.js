@@ -35,15 +35,15 @@ function onCreate(){
        switch(count % line)
        {
         case 0: 
-            td1 = "<tr><td> <img src = "+ item.pic_url +" > "+" <span></span><input type ='checkbox' name="+item.name+">投票数目:"+item.vote_num+"</td>"
+            td1 = "<tr><td> <img src = "+ item.pic_url +" > "+" <span></span><input type ='checkbox' name="+item.name+"><p>投票数目:"+item.vote_num+"</p></td>"
             newHtml += td1;
             break;
         case 1:
-            td2 = "<td> <img src = "+ item.pic_url +" > "+" <span></span><input type ='checkbox' name="+item.name+">投票数目:"+item.vote_num+"</td>"
+            td2 = "<td> <img src = "+ item.pic_url +" > "+" <span></span><input type ='checkbox' name="+item.name+"><p>投票数目:"+item.vote_num+"</p></td>"
             newHtml += td2;
             break;
         case 2:
-            td3 = "<td> <img src = "+ item.pic_url +" > "+" <span></span><input type ='checkbox' name="+item.name+">投票数目:"+item.vote_num+"</td></tr>"
+            td3 = "<td> <img src = "+ item.pic_url +" > "+" <span></span><input type ='checkbox' name="+item.name+"><p>投票数目:"+item.vote_num+"</p></td></tr>"
             newHtml += td3;
             break;
         default:
