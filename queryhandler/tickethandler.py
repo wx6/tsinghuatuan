@@ -414,37 +414,31 @@ def response_vote_event(msg):
 	if user is None:
 		return get_reply_text_xml(msg, get_text_unbinded_vote_event(fromuser))
 
-
-
-
-'''
-def response_book_event(msg):
-	fromuser = get_msg_from(msg)
-	user = get_user(fromuser)
-	if user is None:
-		return get_reply_text_xml(msg, get_text_unbinded_book_ticket(fromuser))
-
 	now = datetime.datetime.fromtimestamp(get_msg_create_time(msg))
+	votes = Vote.objects.filter(status=1, end_time__gte=now).order_by("start_time")
 
-	cmd_list = get_msg_event_key(msg).split('_')
-	activity_id = int(cmd_list[2])
-	activities = Activity.objects.filter(id=activity_id, status=1, end_time__gt=now)
-	if activities.exists():
-		activity = activities[0]
+	if len(votes) == 1:
+		vote = votes[0]
+		return get_reply_single_news_xml(msg, get_item_dict(
+			title = vote.name,
+			description = vote.description,
+			pic_url = vote.pic_url,
+			url = s_reverse_vote_mainpage(vote.id)
+		))
+
+	items = []
+
+	for vote in votes:
+		items.append(get_item_dict(
+			title = vote.name,
+			description = vote.description,
+			pic_url = vote.pic_url,
+			url = s_reverse_vote_mainpage(vote.id)
+		))
+		if (items >= 10):
+			break
+
+	if len(items) != 0:
+		return get_reply_news_xml(msg, items)
 	else:
-		return get_reply_text_xml(msg, get_text_no_such_activity())
-
-	if activity.book_start > now:
-		return get_reply_text_xml(msg, get_text_book_ticket_future(activity, now))
-
-	tickets = Ticket.objects.filter(stu_id=user.stu_id, activity=activity, status__gt=0)
-	if tickets.exists():
-		return get_reply_single_ticket(msg, tickets[0], now, get_text_existed_book_event())
-	if activity.book_end < now:
-		return get_reply_text_xml(msg, get_text_timeout_book_event())
-	ticket = book_ticket(user, activity.key, now)
-	if ticket is None:
-		return get_reply_text_xml(msg, get_text_fail_book_ticket(activities[0], now))
-	else:
-		return get_reply_single_ticket(msg, ticket, now, get_text_success_book_ticket())
-'''
+		return get_reply_text_xml(msg, get_text_no_vote_event())
