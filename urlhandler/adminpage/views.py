@@ -669,6 +669,7 @@ def vote_create(vote):
     return newVote
 
 
+@csrf_exempt
 def vote_delete(request):
     if not request.user.is_authencicated():
         return HttpResponseRedirect(s_reverse_admin_home())
