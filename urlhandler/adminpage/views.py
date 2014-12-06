@@ -669,15 +669,14 @@ def vote_create(vote):
     return newVote
 
 
-def vote_delete(request):
+def vote_delete(request, voteid):
     if not request.user.is_authencicated():
         return HttpResponseRedirect(s_reverse_admin_home())
 
     if not request.POST:
         raise Http404
 
-    post = request.POST
-    vote = Vote.objects.get(id=int(post['id']))
+    vote = Vote.objects.get(id=voteid)
     vote.status = -1
     vote.save()
 
@@ -687,7 +686,7 @@ def vote_delete(request):
 
 
 def vote_item_delete(key):
-    vote_items = VoteItem.objects.filter(vote_key=key)
+    vote_items = VoteItem.objects.filter(vote_key=key, status__gte=0)
     if vote_items.exists():
         for item in vote_items:
             item.status = -1
