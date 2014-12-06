@@ -10,13 +10,13 @@
 {% block content %}
 <center>
 <div id="seatArea">
-<div class = "head">
+    <div class = "head">
 	<img src="{% static 'img/stage.png' %}" style="width:80%;">
 	<div id="stage_sign" style="margin:5px;font-size:15px;">舞台</div>
 
-<div id="hint">当前没有选择座位</div>
+    <div id="hint">当前没有选择座位</div>
 
-</div>
+    </div>
 <div class = "view">
 	<table>
 	{% for row in seat_status %}
@@ -28,6 +28,7 @@
 	{% endfor %}
 	</table>
 </div>
+
 <table>
 	<td><img src= 'http://wx6.igeek.asia/static1/img/selectable.png'  style='width:25px;height:20px;'/>可选</td>
 	<td><img src= 'http://wx6.igeek.asia/static1/img/unselectable.png' style='width:25px;height:20px;'/>不可选</td>
@@ -40,6 +41,7 @@
 	<input type="text" name="row" id="n">
 	<input type="text" name="column" id="n">
 </form>
+
 <button type="button" onclick="commitSeat();" style="margin-bottom:20px;width:80px;height:41px;background-color: #fff;border-radius:9px;font-size:1.4em;">确认</button>
 </div>
 
