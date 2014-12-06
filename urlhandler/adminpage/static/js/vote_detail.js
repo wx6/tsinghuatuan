@@ -200,6 +200,7 @@ function lockByStatus(status, start_time, end_time) {
     // true means lock, that is true means disabled
     var now = new Date();
     if (!start_time){
+        $('#resultBtn').hide();
         return;
     }
     var statusLockMap = {
