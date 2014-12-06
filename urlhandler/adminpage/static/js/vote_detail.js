@@ -564,6 +564,12 @@ function detectVoteChoiceError(formData,lackArray){
                 type: 'text',
                 value: vote.items[i].pic_url
             });
+            formData.push({
+                name: 'max_num',
+                required: false,
+                type: 'number',
+                value: vote_choice_count.toString()
+            });
         }
     }
     formData.push({
@@ -582,6 +588,7 @@ function lockItemsByStatus(status, start_time){
             $("input[name='name"+(i+1).toString()+"']").prop('disabled',false);
             $("input[name='description"+(i+1).toString()+"']").prop('disabled',false);
             $("input[name='pic_url"+(i+1).toString()+"']").prop('disabled',false);
+            $("#input-max_num").prop('disabled',false);
         }
     }
     else{
@@ -590,6 +597,7 @@ function lockItemsByStatus(status, start_time){
             $("input[name='name"+(i+1).toString()+"']").prop('disabled',true);
             $("input[name='description"+(i+1).toString()+"']").prop('disabled',true);
             $("input[name='pic_url"+(i+1).toString()+"']").prop('disabled',true);
+            $("#input-max_num").prop('disabled',true);
         }
     }
 }
