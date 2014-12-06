@@ -396,17 +396,21 @@ def vote_user_post(request, voteid, stuid):
     if not request.POST:
         raise Http404
 
+    print 'test point 1 in vote_user_post'
     post = request.POST
     print post
 
+    print 'test point 2 in vote_user_post'
     vote = Vote.object.get(id=voteid)
     voteItems = VoteItem.objects.filter(vote_key=vote.key)
-    print 'test point 1 in vote_user_post'
+    print 'test point 3 in vote_user_post'
     for item in voteItems:
         print post[str(item.id)]
 
+    print 'test point 4 in vote_user_post'
     rtnJSON = {}
 
+    print 'test point 5 in vote_user_post'
     return HttpResponse(
         json.dumps(rtnJSON, cls=DatetimeJsonEncoder),
         content_type='application/json'
