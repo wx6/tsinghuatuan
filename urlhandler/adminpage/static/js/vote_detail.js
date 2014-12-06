@@ -160,6 +160,23 @@ function checktime(){
     return true;
 }
 
+function checkmax_num(){
+    var max_num = $("#input-max_num").val();
+    if (max_num < 1){
+        $('#input-max_num').popover({
+            html: true,
+            placement: 'top',
+            title:'',
+            content: '<span style="color:red;">“每人投票数量上限”应大于“0”</span>',
+            trigger: 'focus',
+            container: 'body'
+        });
+         $('#input-max_num').focus();
+        return false;
+    }
+    return true;
+}
+
 function initialProgress(checked, ordered, total) {
     $('#tickets-checked').css('width', check_percent(100.0 * checked / total) + '%')
         .tooltip('destroy').tooltip({'title': '已检入：' + checked + '/' + ordered + '=' + (100.0 * checked / ordered).toFixed(2) + '%'});
@@ -425,7 +442,7 @@ function submitComplete(xhr) {
 
 function publishVote() {
     if(!$('#vote-form')[0].checkValidity || $('#vote-form')[0].checkValidity()){
-        if(!checktime())
+        if(!checktime() || !checkmax_num())
             return false;
         showProcessing();
         setResult('');
