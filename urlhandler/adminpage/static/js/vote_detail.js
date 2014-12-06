@@ -513,9 +513,9 @@ function renderBtn (){
         $.each($(".vote_choice"),function(i,item){
             $(item).find("summary").html("投票项"+(i+1).toString()+'<span class="vote_delete" title="删除"></span>');
             $(item).attr('id',"vote_choice_"+(i+1).toString());
-            ($(item).find("input"))[0].attr("name","name"+(i+1).toString());
-            ($(item).find("input"))[1].attr("name","description"+(i+1).toString());
-            ($(item).find("input"))[2].attr("name","pic_url"+(i+1).toString());
+            ($(item).find("input:first")).attr("name","name"+(i+1).toString());
+            ($(item).find("input:eq(1)")).attr("name","description"+(i+1).toString());
+            ($(item).find("input:last")).attr("name","pic_url"+(i+1).toString());
          });
         renderBtn();
     });
