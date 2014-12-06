@@ -158,7 +158,7 @@ function initialProgress(checked, ordered, total) {
 }
 
 function changeView(id) {
-    var opt = ['noscript', 'form', 'processing', 'result'], len = opt.length, i;
+    var opt = ['noscript', 'form', 'processing', 'result', 'vote_result'], len = opt.length, i;
     for (i = 0; i < len; ++i) {
         $('#detail-' + opt[i]).hide();
     }
@@ -175,6 +175,10 @@ function showProcessing() {
 
 function showResult() {
     changeView('result');
+}
+
+function showVoteResult() {
+    changeView('vote_result');
 }
 
 function setResult(str) {
@@ -339,7 +343,7 @@ function beforeSubmit(formData, jqForm, options) {
             name: 'id',
             required: false,
             type: 'number',
-            value: activity.id.toString()
+            value: vote.id.toString()
         });
     }
     return true;
@@ -553,4 +557,25 @@ function lockItemsByStatus(status, start_time){
             $("input[name='pic_url"+(i+1).toString()+"']").prop('disabled',true);
         }
     }
+}
+
+function seeVoteResult (){
+    updateVoteResult();
+    showVoteResult();
+}
+
+function updateVoteResult (){
+    $("#tbody-vote_result").empty();
+    //$('#returnBtn').attr("href","/detail/"+vote.id+"/");
+    for (item in vote.items){
+        var tr = $('<tr></tr>');
+        $("<td></td>").html(item.name).appendTo(tr);
+        $("<td></td>").html((item.vote_num).toString()).appendTo(tr);
+        //$("<td></td>").html(item.name).appendTo(tr);
+        $('#tbody-vote_result').append(tr);
+    }
+}
+
+function returnToVoteDetail(){
+    showForm();
 }
