@@ -79,11 +79,6 @@ function onCreate(){
         $("table").append(newHtml);
         newHtml = "";
     }
-    CookieOnLoad();
-    var form = getElementsByTagName("Input");
-    for item in form{
-        item.onclick = "CookieOnSelect(this.id)";
-    }
 }
 
 onCreate();
