@@ -145,6 +145,18 @@ function checktime(){
          $('#input-end-year').focus();
         return false;
     }
+    if(voteend < now){
+        $('#input-end-year').popover({
+            html: true,
+            placement: 'top',
+            title:'',
+            content: '<span style="color:red;">“投票结束时间”应晚于“当前时间”</span>',
+            trigger: 'focus',
+            container: 'body'
+        });
+         $('#input-end-year').focus();
+        return false;
+    }
     return true;
 }
 
