@@ -392,38 +392,45 @@ def vote_main_view(request, voteid, stuid):
 
 
 @csrf_exempt
-def vote_user_post(request, voteid):
+def vote_user_post(request, voteid, stuid):
+    if not request.POST:
+        raise Http404
+
+    post = request.POST
+    rtnJSON = {}
+    print post
+
     try:
-        print 'test point 0 in vote_user_post'
-        if not request.POST:
-            raise Http404
-
-        print 'test point 1 in vote_user_post'
-        post = request.POST
-        print post
-
         print 'test point 2 in vote_user_post'
         vote = Vote.objects.get(id=voteid)
         voteItems = VoteItem.objects.filter(vote_key=vote.key)
+
+        for item in voteItems:
+            singleVotes = SingleVote.objects.filter(stu_id=stuid, item_id=item.id)
+            if singleVotes.exists():
+                rtnJSON['error'] = u'你已经投过票啦！'
+                return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),content_type='application/json')
+
         print 'test point 3 in vote_user_post'
         for item in voteItems:
-            if str(item.id) in post:
-                print post[str(item.id)]
+            k = str(item.id)
+            if (k in post) and (post[k] == 'on'):
+                preVote = {}
+                preVote['item_id'] = item.id
+                preVote['stu_id'] = stuid
+                SingleVote.objects.create(**preVote)
+                item.vote_num = item.vote_num + 1
+                item.save()
 
-        print 'test point 4 in vote_user_post'
-        rtnJSON = {}
-
-        print 'test point 5 in vote_user_post'
-        return HttpResponse(
-            json.dumps(rtnJSON, cls=DatetimeJsonEncoder),
-            content_type='application/json'
-        )
     except Exception as e:
         print 'Error occured!!!!!' + str(e)
+        rtnJSON['error'] = str(e)
+
+    HttpResponse(json.dumps(rtnJSON), content_type='application/json')
 
 
 def vote_item_detail(request, itemid):
-    vote = Vote.objects.get(id=itemid)
+    vote = VoteItem.objects.get(id=itemid)
     voteDict = {}
     voteDict['name'] = vote.name
     voteDict['pic_url'] = vote.pic_url
