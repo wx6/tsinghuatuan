@@ -407,7 +407,8 @@ def vote_user_post(request, voteid):
         voteItems = VoteItem.objects.filter(vote_key=vote.key)
         print 'test point 3 in vote_user_post'
         for item in voteItems:
-            print post[str(item.id)]
+            if post[str(item.id)]:
+                print post[str(item.id)]
 
         print 'test point 4 in vote_user_post'
         rtnJSON = {}
