@@ -402,7 +402,7 @@ def response_xnlhwh(msg):
 	return response_get_activity_menu(msg)
 
 
-# Functions below are about voting]
+# Functions below are about voting
 # By: Liu Junlin
 def check_vote_event(msg):
 	return handler_check_text(msg, ['投票'])
@@ -435,7 +435,7 @@ def response_vote_event(msg):
 			pic_url = vote.pic_url,
 			url = s_reverse_vote_mainpage(vote.id)
 		))
-		if (items >= 10):
+		if (length(items) >= 10):
 			break
 
 	if len(items) != 0:
