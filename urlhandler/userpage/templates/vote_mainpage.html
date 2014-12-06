@@ -65,6 +65,7 @@
                 }{% if forloop.last %}{% else %},{% endif %}
             {% endfor %}
         ];
+     var vote_name = {{vote.name}}
 </script>
 <script src="{% static 'js/vote_mainpage.js' %}"></script>
 {% endblock%}
