@@ -673,9 +673,7 @@ def vote_create(vote):
 def vote_delete(request):
     if not request.POST:
         raise Http404
-
-    print 'come here vote delete'
-
+    
     try:
         post = request.POST
         vote = Vote.objects.get(id=post.get('voteId', ''))
