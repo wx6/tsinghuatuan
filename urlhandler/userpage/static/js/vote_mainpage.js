@@ -80,3 +80,24 @@ function onCreate(){
 }
 
 onCreate();
+
+function addcookie(){
+    document.cookie="key=helloWorld"
+}
+
+function alertcookie () {
+    var name = escape("key")
+    name += "="
+    var allcookies = document.cookie
+    var pos = document.cookie.indexOf(name)
+    if(pos != -1){
+        var start = pos + name.length;                  //cookie值开始的位置  
+        var end = allcookies.indexOf(";",start);        //从cookie值开始的位置起搜索第一个";"的位置,即cookie值结尾的位置  
+        if (end == -1) end = allcookies.length;        //如果end值为-1说明cookie列表里只有一个cookie  
+        var value = allcookies.substring(start,end); //提取cookie的值  
+        alert(value)                           //对它解码 
+    }
+    else{
+        alert("")
+    }
+}
