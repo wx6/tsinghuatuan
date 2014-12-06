@@ -84,7 +84,7 @@ var dateInterfaceMap = {
 
 var curstatus = 0;
 
-function updateActivity(nact) {
+function updateVote(nact) {
     var key, key2, tdate;
     for (key in nact) {
         if (keyMap[key] == 'time') {
@@ -405,7 +405,7 @@ function beforePublish(formData, jqForm, options) {
 function submitResponse(data) {
     console.log("success");
     if (!data.error) {
-        updateActivity(data.vote);
+        updateVote(data.vote);
         init_vote_choice(vote);
         initializeForm(vote);
         appendResult('成功');
