@@ -1,23 +1,35 @@
 function commitVote() {
+ function commitSeat() {
+    if(lastid == -1)
+    {
+        $("#hint")[0].innerHTML = "投票数目过多或者过少"
+        return false
+    }
     var options = {
         dataType: 'json',
         success: function (data) {
             if(data.error==null)
             {
-                  
+                $("#success").show()
+                $("#voteArea").hide()   
             }
             else
             {
-               
+                $("#errorinfo")[0].innerHTML = data.error
+                $("#failure").show()
+                $("#voteArea").hide()
             }
         },
         error: function (xhr) {
-                                           
+            $("#errorinfo")[0].innerHTML = "网络错误"
+            $("#failure").show()
+            $("#voteArea").hide()                                   
         }
     };
     $('#voteItem').ajaxSubmit(options);
     return false;
-}
+} 
+
 
 function onCreate(){
     var line = 3;
