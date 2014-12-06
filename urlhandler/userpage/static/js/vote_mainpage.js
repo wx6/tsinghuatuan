@@ -24,7 +24,7 @@ function onCreate(){
     var count = 0;
     var newHtml = "";
     var td1,td2,td3;
-    for (count = 0;count < vote_items.length();count++)
+    for (count = 0;count < vote_items.length;count++)
     {
         var item = vote_items[count];
        if(newHtml && (count % line) == 0 )
