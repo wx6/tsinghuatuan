@@ -1,4 +1,4 @@
-img{
+a img{
     width:8em;
     height:8em;
 }
@@ -10,7 +10,7 @@ form{
 
 table{
     width: 90%;
-    padding-left: 5%;
+    margin: 0px auto;
 }
 
 tr{
@@ -33,7 +33,7 @@ input[type="checkbox"]{
     margin-top: 0.5em;
     border-radius: 100%;
     position: relative;
-    left:4em;
+    margin: 0px auto;
 }
 
 .checkbox label {
@@ -45,11 +45,11 @@ input[type="checkbox"]{
     top: 12.5%;
     left: 12.5%;
     z-index: 1;
-    background: #333;
+    background: white;
 }
 
 .checkbox input[type=checkbox]:checked + label {
-    background: #26ca28;
+    background: red;
 }
 
 .table{

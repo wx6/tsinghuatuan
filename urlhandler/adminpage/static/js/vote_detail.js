@@ -134,6 +134,7 @@ function checktime(){
     var voteend = new Date($('#input-end-year').val(), $('#input-end-month').val()-1, $('#input-end-day').val(), $('#input-end-hour').val(), $('#input-end-minute').val());
     var now = new Date();
     if(voteend < votestart){
+        $('#input-end-year').popover('destroy');
         $('#input-end-year').popover({
             html: true,
             placement: 'top',
@@ -146,6 +147,7 @@ function checktime(){
         return false;
     }
     if(voteend < now){
+        $('#input-end-year').popover('destroy');
         $('#input-end-year').popover({
             html: true,
             placement: 'top',
@@ -163,6 +165,7 @@ function checktime(){
 function checkmax_num(){
     var max_num = $("#input-max_num").val();
     if (max_num < 1){
+        $('#input-max_num').popover('destroy');
         $('#input-max_num').popover({
             html: true,
             placement: 'top',
@@ -175,6 +178,7 @@ function checkmax_num(){
         return false;
     }
     if (max_num > vote_choice_count){
+        $('#input-max_num').popover('destroy');
         $('#input-max_num').popover({
             html: true,
             placement: 'top',
