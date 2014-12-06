@@ -435,7 +435,7 @@ def response_vote_event(msg):
 			pic_url = vote.pic_url,
 			url = s_reverse_vote_mainpage(vote.id)
 		))
-		if (length(items) >= 10):
+		if (len(items) >= 10):
 			break
 
 	if len(items) != 0:
