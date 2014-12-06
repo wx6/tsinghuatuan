@@ -568,7 +568,9 @@ function updateVoteResult (){
     $("#tbody-vote_result").empty();
     //$('#returnBtn').attr("href","/detail/"+vote.id+"/");
     var item,i;
-    for (i = 0; i < vote.items.length; i++){
+    var items = vote.items;
+    qsort(items);
+    for (i = 0; i < items.length; i++){
         item = vote.items[i];
         var tr = $('<tr></tr>');
         $("<td></td>").html(item.name).appendTo(tr);
@@ -580,4 +582,8 @@ function updateVoteResult (){
 
 function returnToVoteDetail(){
     showForm();
+}
+
+function qsort (items){
+
 }
