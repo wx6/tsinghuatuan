@@ -2,8 +2,15 @@ function commitVote() {
     var options = {
         dataType: 'json',
         success: function (data) {
-      	alert("success"); 
-	   		},
+            if(data.error==null)
+            {
+                  
+            }
+            else
+            {
+               
+            }
+        },
         error: function (xhr) {
                                            
         }
@@ -28,19 +35,19 @@ function onCreate(){
        switch(count % line)
        {
         case 0: 
-            td1 = "<tr><td> <img src = "+ item.pic_url +" > "+" <span></span><p><input type ='checkbox' name="+item.name+"></p><p>投票数目:"+item.vote_num+"</p></td>"
+            td1 = "<tr><td><img src = "+ item.pic_url +" > "+"<div class = "+"checkbox"+"><input type ='checkbox' name="+item.id+" id="+item.id+"><label for="+item.id+"></label><br>投票数目:"+item.vote_num+"</div></td>"
             newHtml += td1;
             break;
         case 1:
-            td2 = "<td> <img src = "+ item.pic_url +" > "+" <span></span><p><input type ='checkbox' name="+item.name+"></p><p>投票数目:"+item.vote_num+"</p></td>"
+            td2 =  "<td> <img src = "+ item.pic_url +" > "+"<div class = "+"checkbox"+"><input type ='checkbox' name="+item.id+" id="+item.id+"><label for="+item.id+"></label><br>投票数目:"+item.vote_num+"</div></td>"
             newHtml += td2;
             break;
         case (line-1):
-            td3 = "<td> <img src = "+ item.pic_url +" > "+" <span></span><p><input type ='checkbox' name="+item.name+"></p><p>投票数目:"+item.vote_num+"</p></td></tr>"
+            td3 = " <td><img src = "+ item.pic_url +" > "+"<div class = "+"checkbox"+"><input type ='checkbox' name="+item.id+" id="+item.id+"><label for="+item.id+"></label><br>投票数目:"+item.vote_num+"</div></td></tr>"
             newHtml += td3;
             break;
         default:
-            td2 = "<td> <img src = "+ item.pic_url +" > "+" <span></span><p><input type ='checkbox' name="+item.name+"></p><p>投票数目:"+item.vote_num+"</p></td>"
+            td2 = "<td> <img src = "+ item.pic_url +" > "+"<div class = "+"checkbox"+"><input type ='checkbox' name="+item.id+" id="+item.id+"><label for="+item.id+"></label><br>投票数目:"+item.vote_num+"</div></td>"
             newHtml += td2;
             break;
        }
