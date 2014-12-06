@@ -403,7 +403,7 @@ def vote_user_post(request, voteid):
         print post
 
         print 'test point 2 in vote_user_post'
-        vote = Vote.object.get(id=voteid)
+        vote = Vote.objects.get(id=voteid)
         voteItems = VoteItem.objects.filter(vote_key=vote.key)
         print 'test point 3 in vote_user_post'
         for item in voteItems:
