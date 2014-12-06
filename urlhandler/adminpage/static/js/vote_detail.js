@@ -559,7 +559,7 @@ function lockItemsByStatus(status, start_time){
     }
 }
 
-function seeVoteResult (){
+function seeVoteResult(){
     updateVoteResult();
     showVoteResult();
 }
