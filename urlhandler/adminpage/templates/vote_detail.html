@@ -250,4 +250,29 @@
         </div>
     </div>
 
+    <div class="container" id="detail-vote_result" xmlns="http://www.w3.org/1999/html">
+
+        <div class="pageheader">
+            <h1 class="lead">投票结果</h1>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <input class="btn btn-default" onclick="returnToVoteDetail()"}>返回</input>
+            </div>
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                <th>投票项名称</th>
+                <th>票数</th>
+                <th></th>
+                </tr>
+                </thead>
+                <tbody id="tbody-vote_result">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 {% endblock %}
