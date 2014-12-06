@@ -20,7 +20,7 @@ function commitVote() {
             }
         },
         error: function (xhr) {
-            $("#errorinfo")[0].innerHTML = "网络错误"
+            $("#errorinfo")[0].innerHTML = data.error
             $("#failure").show()
             $("#voteArea").hide()                                   
         }
