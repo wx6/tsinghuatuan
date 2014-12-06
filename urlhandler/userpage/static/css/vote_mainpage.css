@@ -27,8 +27,8 @@ input[type="checkbox"]{
 }
 
 .checkbox {
-    width: 3em;
-    height: 3em;
+    width: 2.5em;
+    height: 2.5em;
     background: #ddd;
     margin-top: 0.5em;
     border-radius: 100%;
@@ -39,17 +39,17 @@ input[type="checkbox"]{
 .checkbox label {
     width: 2em;
     height: 2em;
-    border-radius: 4em;
+    border-radius: 3em;
     cursor: pointer;
     position: absolute;
-    top: 0.5em;
-    left: 0.5em;
+    top: 0.25em;
+    left: 0.25em;
     z-index: 1;
-    background: white;
+    background: #DDDDDD;
 }
 
 .checkbox input[type=checkbox]:checked + label {
-    background: red;
+    background: #990000;
 }
 
 .table{
