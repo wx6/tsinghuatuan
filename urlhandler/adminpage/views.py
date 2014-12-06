@@ -669,18 +669,19 @@ def vote_create(vote):
     return newVote
 
 
-def vote_delete(request, voteid):
-    if not request.user.is_authencicated():
-        return HttpResponseRedirect(s_reverse_admin_home())
-
+@csrf_exempt
+def vote_delete(request):
     if not request.POST:
         raise Http404
-
-    vote = Vote.objects.get(id=voteid)
-    vote.status = -1
-    vote.save()
-
-    vote_item_delete(vote.key)
+    
+    try:
+        post = request.POST
+        vote = Vote.objects.get(id=post.get('voteId', ''))
+        vote.status = -1
+        vote.save()
+        vote_item_delete(vote.key)
+    except Exception as e:
+        print str(e)
 
     return HttpResponse('ok')
 

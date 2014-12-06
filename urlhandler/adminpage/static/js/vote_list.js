@@ -195,10 +195,10 @@ function deletevot(votid){
 
 function delConfirm(){
 	var delid = $('#deleteid').val();
-	var tmp = "/delete/";
+	var tmp = "/vote_delete/";
 	$.post(tmp,{'voteId':delid}, function(ret) {
         $('#'+delid).css("background-color","#FFF");
-        window.location.href="/list/"
+        window.location.href="/vote_list/"
     });
 }
 
