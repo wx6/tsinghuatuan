@@ -629,6 +629,11 @@ def vote_modify(vote):
     if now < curVote.start_time:
         for k in ['start_time', 'end_time']:
             setattr(curVote, k, str_to_datetime(vote[k]))
+    if 'publish' in vote:
+        setattr(curVote, 'status', 1)
+    else:
+        setattr(curVote, 'status', 0)
+    setattr(curVote, 'max_num', int(vote['max_num']))
     curVote.save()
 
     vote_item_delete(curVote.key)
