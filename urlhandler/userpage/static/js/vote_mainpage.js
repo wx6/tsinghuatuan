@@ -35,19 +35,19 @@ function onCreate(){
        switch(count % line)
        {
         case 0: 
-            td1 = "<tr><td><img src = "+ item.pic_url +" > "+"<div class = "+"checkbox"+"><input type ='checkbox' name="+item.id+" id="+item.id+"><label for="+item.id+"></label><br>投票数目:"+item.vote_num+"</div></td>"
+            td1 = "<tr><td><a href='http://wx6.igeek.asia/u/vote_item_detail/"+item.id+"'><img src = "+ item.pic_url +" ></a> "+"<div class = "+"checkbox"+"><input type ='checkbox' name="+item.id+" id="+item.id+"><label for="+item.id+"></label><br>投票数目:"+item.vote_num+"</div></td>"
             newHtml += td1;
             break;
         case 1:
-            td2 =  "<td> <img src = "+ item.pic_url +" > "+"<div class = "+"checkbox"+"><input type ='checkbox' name="+item.id+" id="+item.id+"><label for="+item.id+"></label><br>投票数目:"+item.vote_num+"</div></td>"
+            td2 =  "<td> <a href='http://wx6.igeek.asia/u/vote_item_detail/"+item.id+"'><img src = "+ item.pic_url +" ></a> "+"<div class = "+"checkbox"+"><input type ='checkbox' name="+item.id+" id="+item.id+"><label for="+item.id+"></label><br>投票数目:"+item.vote_num+"</div></td>"
             newHtml += td2;
             break;
         case (line-1):
-            td3 = " <td><img src = "+ item.pic_url +" > "+"<div class = "+"checkbox"+"><input type ='checkbox' name="+item.id+" id="+item.id+"><label for="+item.id+"></label><br>投票数目:"+item.vote_num+"</div></td></tr>"
+            td3 = " <td><<a href='http://wx6.igeek.asia/u/vote_item_detail/"+item.id+"'><img src = "+ item.pic_url +" ></a> "+"<div class = "+"checkbox"+"><input type ='checkbox' name="+item.id+" id="+item.id+"><label for="+item.id+"></label><br>投票数目:"+item.vote_num+"</div></td></tr>"
             newHtml += td3;
             break;
         default:
-            td2 = "<td> <img src = "+ item.pic_url +" > "+"<div class = "+"checkbox"+"><input type ='checkbox' name="+item.id+" id="+item.id+"><label for="+item.id+"></label><br>投票数目:"+item.vote_num+"</div></td>"
+            td2 = "<td> <a href='http://wx6.igeek.asia/u/vote_item_detail/"+item.id+"'><img src = "+ item.pic_url +" ></a> "+"<div class = "+"checkbox"+"><input type ='checkbox' name="+item.id+" id="+item.id+"><label for="+item.id+"></label><br>投票数目:"+item.vote_num+"</div></td>"
             newHtml += td2;
             break;
        }
