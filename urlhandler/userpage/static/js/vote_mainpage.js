@@ -52,6 +52,8 @@ function onCreate(){
             break;
        }
     }
+    if(count % line != 0)
+        newHtml += "</tr>";
     if(newHtml)
     {
         $("table").append(newHtml);
