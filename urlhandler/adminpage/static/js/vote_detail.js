@@ -134,6 +134,7 @@ function checktime(){
     var voteend = new Date($('#input-end-year').val(), $('#input-end-month').val()-1, $('#input-end-day').val(), $('#input-end-hour').val(), $('#input-end-minute').val());
     var now = new Date();
     if(voteend < votestart){
+        $('#input-end-year').popover('destroy');
         $('#input-end-year').popover({
             html: true,
             placement: 'top',
@@ -146,6 +147,7 @@ function checktime(){
         return false;
     }
     if(voteend < now){
+        $('#input-end-year').popover('destroy');
         $('#input-end-year').popover({
             html: true,
             placement: 'top',
