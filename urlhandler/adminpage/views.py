@@ -669,14 +669,15 @@ def vote_create(vote):
     return newVote
 
 
-def vote_delete(request, voteid):
+def vote_delete(request):
     if not request.user.is_authencicated():
         return HttpResponseRedirect(s_reverse_admin_home())
 
     if not request.POST:
         raise Http404
 
-    vote = Vote.objects.get(id=voteid)
+    post = request.POST
+    vote = Vote.objects.get(id=post.get('voteId', ''))
     vote.status = -1
     vote.save()
 
