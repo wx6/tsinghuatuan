@@ -391,12 +391,18 @@ def vote_main_view(request, voteid, stuid):
     }, context_instance=RequestContext(request))
 
 
-def vote_user_post(request):
+def vote_user_post(request, voteid, stuid):
     if not request.POST:
         raise Http404
 
     post = request.POST
     print post
+
+    vote = Vote.object.get(id=voteid)
+    voteItems = VoteItem.objects.filter(vote_key=vote.key)
+    print 'test point 1 in vote_user_post'
+    for item in voteItems:
+        print post[str(item.id)]
 
     rtnJSON = {}
 
