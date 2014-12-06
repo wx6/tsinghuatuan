@@ -364,7 +364,7 @@ def get_seat_status_tsinghua_hall(ticket):
 
 # Functions below are about voting
 # By: LiuJunlin
-def vote_main_view(request, voteid, stuid):
+def vote_main_view(request, voteid, openid):
     vote = Vote.objects.get(id=voteid)
     voteDict = {}
     voteDict['id'] = voteid
@@ -387,12 +387,12 @@ def vote_main_view(request, voteid, stuid):
 
     return render_to_response('vote_mainpage.html', {
         'vote': voteDict,
-        'stuid': stuid
+        'openid': openid
     }, context_instance=RequestContext(request))
 
 
 @csrf_exempt
-def vote_user_post(request, voteid, stuid):
+def vote_user_post(request, voteid, openid):
     if not request.POST:
         raise Http404
 
@@ -401,6 +401,7 @@ def vote_user_post(request, voteid, stuid):
     print post
 
     try:
+        user = User.objects.filter(weixin_id=openid)[0]
         print 'test point 2 in vote_user_post'
         vote = Vote.objects.get(id=voteid)
         voteItems = VoteItem.objects.filter(vote_key=vote.key)
@@ -417,7 +418,7 @@ def vote_user_post(request, voteid, stuid):
             if (k in post) and (post[k] == 'on'):
                 preVote = {}
                 preVote['item_id'] = item.id
-                preVote['stu_id'] = stuid
+                preVote['stu_id'] = user.stu_id
                 SingleVote.objects.create(**preVote)
                 item.vote_num = item.vote_num + 1
                 item.save()
