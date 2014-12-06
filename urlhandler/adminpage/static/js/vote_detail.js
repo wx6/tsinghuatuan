@@ -567,6 +567,7 @@ function seeVoteResult(){
 function updateVoteResult (){
     $("#tbody-vote_result").empty();
     //$('#returnBtn').attr("href","/detail/"+vote.id+"/");
+    var item;
     for (item in vote.items){
         var tr = $('<tr></tr>');
         $("<td></td>").html(item.name).appendTo(tr);
