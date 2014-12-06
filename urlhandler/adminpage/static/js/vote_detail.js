@@ -165,6 +165,7 @@ function checktime(){
 function checkmax_num(){
     var max_num = $("#input-max_num").val();
     if (max_num < 1){
+        $('#input-end-year').popover('destroy');
         $('#input-max_num').popover({
             html: true,
             placement: 'top',
@@ -177,6 +178,7 @@ function checkmax_num(){
         return false;
     }
     if (max_num > vote_choice_count){
+        $('#input-end-year').popover('destroy');
         $('#input-max_num').popover({
             html: true,
             placement: 'top',
