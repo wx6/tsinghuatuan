@@ -20,5 +20,5 @@ def s_reverse_help():
 	return SITE_DOMAIN + reverse('userpage.views.help_view')
 
 
-def s_reverse_vote_mainpage(voteid, stuid):
+def s_reverse_vote_mainpage(voteid, openid):
 	return SITE_DOMAIN + reverse('userpage.views.vote_main_view', kwargs={'voteid': voteid, 'openid': openid})
