@@ -99,6 +99,6 @@ function alertcookie () {
         alert(value)                           //对它解码 
     }
     else{
-        alert("")
+        alert("ff")
     }
 }
