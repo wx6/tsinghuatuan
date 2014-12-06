@@ -129,8 +129,8 @@ function CookieOnLoad(){
     var key = "";
     if(consult != ""+vote_name){
         document.cookie = "activityName=" + vote_name;
-        for (item in vote_items){
-            document.cookie = item.id += "=False";
+        for (var i = 0; i < vote_items.length; i++){
+            document.cookie = vote_items[i].id += "=False";
         }
     }
     else{
