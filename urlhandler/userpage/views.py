@@ -364,8 +364,7 @@ def get_seat_status_tsinghua_hall(ticket):
 
 # Functions below are about voting
 # By: LiuJunlin
-def vote_main_view(request, voteid):
-
+def vote_main_view(request, voteid, stuid):
     vote = Vote.objects.get(id=voteid)
     voteDict = {}
     voteDict['id'] = voteid
@@ -373,6 +372,7 @@ def vote_main_view(request, voteid):
     voteDict['description'] = vote.description
     voteDict['pic_url'] = vote.pic_url
     voteDict['end_time'] = vote.end_time
+    voteDict['max_num'] = vote.max_num
     voteDict['items'] = []
 
     voteItems = VoteItem.objects.filter(vote_key=vote.key)
@@ -386,7 +386,8 @@ def vote_main_view(request, voteid):
         voteDict['items'].append(itemDict)
 
     return render_to_response('vote_mainpage.html', {
-        'vote': voteDict
+        'vote': voteDict,
+        'stuid': stuid
     }, context_instance=RequestContext(request))
 
 
@@ -399,5 +400,8 @@ def vote_user_post(request):
 
     rtnJSON = {}
 
-    return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder), content_type='application/json')
+    return HttpResponse(
+        json.dumps(rtnJSON, cls=DatetimeJsonEncoder),
+        content_type='application/json'
+    )
 
