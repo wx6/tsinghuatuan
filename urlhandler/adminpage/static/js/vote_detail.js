@@ -573,8 +573,8 @@ function updateVoteResult (){
     for (i = 0; i < items.length; i++){
         item = vote.items[i];
         var tr = $('<tr></tr>');
-        $("<td></td>").html(item.name).appendTo(tr);
-        $("<td></td>").html((item.vote_num).toString()).appendTo(tr);
+        $("<td class='td-item_name'></td>").html(item.name).appendTo(tr);
+        $("<td class='td-vote_num'></td>").html((item.vote_num).toString()).appendTo(tr);
         //$("<td></td>").html(item.name).appendTo(tr);
         $('#tbody-vote_result').append(tr);
     }
