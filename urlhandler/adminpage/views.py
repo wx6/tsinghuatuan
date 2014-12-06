@@ -671,9 +671,6 @@ def vote_create(vote):
 
 @csrf_exempt
 def vote_delete(request):
-    if not request.user.is_authencicated():
-        return HttpResponseRedirect(s_reverse_admin_home())
-
     if not request.POST:
         raise Http404
 
