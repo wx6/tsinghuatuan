@@ -27,13 +27,13 @@ input[type="checkbox"]{
 }
 
 .checkbox {
-    width: 40px;
-    height: 40px;
+    width: 3em;
+    height: 3em;
     background: #ddd;
-    margin-top: 20px;
+    margin-top: 0.5em;
     border-radius: 100%;
     position: relative;
-    left:43%;
+    left:4em;
 }
 
 .checkbox label {
