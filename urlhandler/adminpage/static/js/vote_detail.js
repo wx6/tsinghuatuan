@@ -532,7 +532,7 @@ function detectVoteChoiceError(formData,lackArray){
     if (flag){
         return false;
     }
-    if ($("input[name='name1']")[0].prop('disabled')){
+    if ($("input[name='name1']").prop('disabled')){
         for (var i = 0; i < vote.items.length; i++){
             formData.push({
                 name: 'name'+(i+1).toString(),
