@@ -626,7 +626,7 @@ def vote_modify(vote):
     for k in ['pic_url', 'description']:
         setattr(curVote, k, vote[k])
     now = datetime.now()
-    if now <curVote.start_time:
+    if now < curVote.start_time:
         for k in ['start_time', 'end_time']:
             setattr(curVote, k, str_to_datetime(vote[k]))
     curVote.save()
@@ -673,7 +673,7 @@ def vote_create(vote):
 def vote_delete(request):
     if not request.POST:
         raise Http404
-    
+
     try:
         post = request.POST
         vote = Vote.objects.get(id=post.get('voteId', ''))
