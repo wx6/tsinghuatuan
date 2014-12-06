@@ -139,7 +139,7 @@ function CookieOnLoad(){
         for(var i = 0; i < form.length; i++){
             consult = findcookie(form[i].id);
             if(consult == "True"){
-                item.checked = true;
+                form[i].checked = true;
                 vote_counter++;
             }
         }
