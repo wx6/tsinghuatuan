@@ -439,6 +439,6 @@ def response_vote_event(msg):
 			break
 
 	if len(items) != 0:
-		return get_repy_news_xml(msg, items)
+		return get_reply_news_xml(msg, items)
 	else:
 		return get_reply_text_xml(msg, get_text_no_vote_event())
