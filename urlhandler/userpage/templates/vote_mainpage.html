@@ -30,12 +30,15 @@
 <script src="http://soso.qstatic.com/wenwen/deploy/js/sea_modules/jquery/1.7.2/jquery-1.7.2.min_a0069db.js"></script>
 <script src="{% static 'js/vote_mainpage.js' %}"></script>
 <script type="text/javascript">
-    var temp = $(".voteOder")
-    for (var i = 0; i < temp.length; i++) {
-    	if( (i % 3) == 2)
-    	{
-    		$(".voteOder")[i].innerHTML = "<tr></tr>"
-    	}
-    };
+     var vote = [
+            {% for item in vote.items %}
+                {          
+                   	'name': {{item.name}},
+                   	'vote_num':{{item.vote_num}},
+                   	'pic_url':{{item.pic_url}},
+                   	'vote_num':{{item.vote_num}}
+                }{% if forloop.last %}{% else %},{% endif %}
+            {% endfor %}
+        ];
 </script>
 {% endblock%}
