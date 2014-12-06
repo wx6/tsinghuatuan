@@ -163,10 +163,10 @@ var tdActionMap = {
 
 var smartTimeMap = {
 	'start_time':function(vot){
-		return getChsFullDate(vot.start_time);
+		return getChsFullDate(vot.start_time) + " " + getTimeStr(vot.start_time);
 	},
 	'end_time':function(vot){
-		return getChsFullDate(vot.end_time);
+		return getChsFullDate(vot.end_time) + " " + getTimeStr(vot.end_time);
 	}
 };
 
