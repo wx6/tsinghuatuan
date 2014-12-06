@@ -198,6 +198,10 @@ function lockForm() {
 
 function lockByStatus(status, start_time, end_time) {
     // true means lock, that is true means disabled
+    var now = new Date();
+    if (now < getDateByObj(start_time)){
+        return;
+    }
     var statusLockMap = {
         // saved but not published
         '0': {
@@ -221,23 +225,39 @@ function lockByStatus(status, start_time, end_time) {
         }
         lockMap[keyMap[key]]($('#input-' + key), flag);
     }
-    lockItemsByStatus(status);
+    lockItemsByStatus(status, start_time);
     if (status >= 1) {
         $('#saveBtn').hide();
     } else {
         $('#saveBtn').show();
     }
-    showPublishByStatus(status, end_time);
+    showPublishByStatus(status, start_time, end_time);
     showPubTipsByStatus(status);
 }
 
-function showPublishByStatus(status, linetime) {
+function showPublishByStatus(status, start_time, linetime) {
+    if (status >= 1){
+        $('#resultBtn').show();
+    }
+    else{
+        $('#resultBtn').hide();
+    }
+    if (new Date() < getDateByObj(start_time) || status < 1){
+        $('#addItem').show();
+        $('.vote_delete').show();
+    }
+    else{
+        $('#addItem').hide();
+        $('.vote_delete').hide();       
+    }
     if ((status >= 1) && (new Date() >= getDateByObj(linetime))) {
         $('#publishBtn').hide();
         //$('#resetBtn').hide();
-        $('#addItem').hide();
+        //$('#addItem').hide();
+        //$('#resultBtn').show();
     } else {
-        $('#addItem').show();
+        //$('#resultBtn').hide();
+        //$('#addItem').show();
         //$('#resetBtn').show();
         $('#publishBtn').show();
     }
@@ -515,8 +535,8 @@ function detectVoteChoiceError(formData,lackArray){
     return true;
 }
 
-function lockItemsByStatus(status){
-    if (status < 1){
+function lockItemsByStatus(status, start_time){
+    if (status < 1 || new Date() < getDateByObj(start_time)){
         var i;
         for (i = 0; i < vote_choice_count; i++){
             $("input[name='name"+(i+1).toString()+"']").prop('disabled',false);
