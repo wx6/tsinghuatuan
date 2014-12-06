@@ -426,7 +426,7 @@ def vote_user_post(request, voteid, stuid):
         print 'Error occured!!!!!' + str(e)
         rtnJSON['error'] = str(e)
 
-    HttpResponse(json.dumps(rtnJSON), content_type='application/json')
+    return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
 
 
 def vote_item_detail(request, itemid):
