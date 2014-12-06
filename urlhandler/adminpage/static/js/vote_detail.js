@@ -177,7 +177,7 @@ function checkmax_num(){
          $('#input-max_num').focus();
         return false;
     }
-    if (max_num > vote_choice_count){
+    if (max_num > $('.vote_choice').length){
         $('#input-max_num').popover('destroy');
         $('#input-max_num').popover({
             html: true,
@@ -538,7 +538,7 @@ function init_vote_choice(vote){
         });
         return;
     }
-    var count = vote.items.length-vote_choice_count;
+    var count = vote.items.length-$('.vote_choice').length;
     if (count == 0){
         $('.vote_delete').click(function(){
             vote_choice_count = $('.vote_choice').length-1;
@@ -571,13 +571,13 @@ function show_vote_choice(vote) {
 }
 
 function detectVoteChoiceError(formData,lackArray){
-    if (vote_choice_count < 1){
+    if ($('.vote_choice').length < 1){
         lackArray.push('投票项不能为空');
         return false;
     }
     var i,j,flag;
     flag = false;
-    for (i = 0; i < vote_choice_count; i++){
+    for (i = 0; i < $('.vote_choice').length; i++){
         for (j = 0; j < formData.length; j++){
             if (!formData[j].value && formData[j].name=='name'+(i+1).toString()){
                 lackArray.push('投票项'+(i+1).toString()+'的投票项名称');
@@ -620,7 +620,7 @@ function detectVoteChoiceError(formData,lackArray){
                 name: 'max_num',
                 required: false,
                 type: 'number',
-                value: vote_choice_count.toString()
+                value: vote.max_num
             });
         }
     }
@@ -628,7 +628,7 @@ function detectVoteChoiceError(formData,lackArray){
             name: 'item_num',
             required: false,
             type: 'number',
-            value: vote_choice_count.toString()
+            value: ($('.vote_choice').length).toString()
     });
     return true;
 }
@@ -636,7 +636,7 @@ function detectVoteChoiceError(formData,lackArray){
 function lockItemsByStatus(status, start_time){
     if (status < 1 || new Date() < getDateByObj(start_time)){
         var i;
-        for (i = 0; i < vote_choice_count; i++){
+        for (i = 0; i < $('.vote_choice').length; i++){
             $("input[name='name"+(i+1).toString()+"']").prop('disabled',false);
             $("input[name='description"+(i+1).toString()+"']").prop('disabled',false);
             $("input[name='pic_url"+(i+1).toString()+"']").prop('disabled',false);
@@ -645,7 +645,7 @@ function lockItemsByStatus(status, start_time){
     }
     else{
         var i;
-        for (i = 0; i < vote_choice_count; i++){
+        for (i = 0; i < $('.vote_choice').length; i++){
             $("input[name='name"+(i+1).toString()+"']").prop('disabled',true);
             $("input[name='description"+(i+1).toString()+"']").prop('disabled',true);
             $("input[name='pic_url"+(i+1).toString()+"']").prop('disabled',true);
