@@ -393,6 +393,7 @@ def vote_main_view(request, voteid, stuid):
 
 @csrf_exempt
 def vote_user_post(request, voteid, stuid):
+    print 'test point 0 in vote_user_post'
     if not request.POST:
         raise Http404
 
