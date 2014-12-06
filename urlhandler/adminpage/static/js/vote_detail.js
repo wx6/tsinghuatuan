@@ -199,7 +199,7 @@ function lockForm() {
 function lockByStatus(status, start_time, end_time) {
     // true means lock, that is true means disabled
     var now = new Date();
-    if (now < getDateByObj(start_time)){
+    if (!start_time){
         return;
     }
     var statusLockMap = {
