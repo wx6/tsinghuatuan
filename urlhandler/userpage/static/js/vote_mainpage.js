@@ -1,3 +1,5 @@
+var vote_counter;
+
 function commitVote() {
     if(lastid == -1)
     {
@@ -77,6 +79,11 @@ function onCreate(){
         $("table").append(newHtml);
         newHtml = "";
     }
+    CookieOnLoad();
+    var form = getElementsByTagName("Input");
+    for item in form{
+        item.onclick = "CookieOnSelect(this.id)";
+    }
 }
 
 onCreate();
@@ -100,5 +107,60 @@ function alertcookie () {
     }
     else{
         alert("ff")
+    }
+}
+
+function findcookie (key) {
+    var name = escape(key);
+    name += "=";
+    var allcookies = document.cookie;
+    var pos = document.cookie.indexOf(name)
+    if(pos != -1){
+        var start = pos + name.length;                  //cookie值开始的位置  
+        var end = allcookies.indexOf(";",start);        //从cookie值开始的位置起搜索第一个";"的位置,即cookie值结尾的位置  
+        if (end == -1) end = allcookies.length;        //如果end值为-1说明cookie列表里只有一个cookie  
+        var value = allcookies.substring(start,end); //提取cookie的值  
+        return(value)                           //对它解码 
+    }
+    else{
+        return("")
+    }
+}
+
+function CookieOnLoad(){
+    var name = "activityName";
+    var consult = findcookie(name);
+    var key = "";
+    if(consult != vote.name){
+        var cookie = "activityName=" + escape(vote.name);
+        for item in vote_items{
+            key = escape(vote_items.id);
+            key += "False";
+            cookie += key;
+        }
+        document.cookie = cookie;
+    }
+    else{
+        vote_counter = 0;
+        var form = document.getElementsByTagName("Input");
+        for item in form{
+            consult = findcookie(item.id);
+            if(consult == "True"){
+                item.checked = true;
+                vote_counter++;
+            }
+        }
+    }
+}
+
+function CookieOnSelect(id){
+    var consult = findcookie(id);
+    if(consult == "True"){
+        document.cookie = escape(id) + "=False";
+        vote_counter--;
+    }
+    else{
+        document.cookie = escape(id) + "=True";
+        vote_counter++;
     }
 }
