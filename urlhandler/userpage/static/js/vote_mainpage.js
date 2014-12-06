@@ -47,7 +47,7 @@ function onCreate(){
             newHtml += td3;
             break;
         default:
-            td2 = "<tr><td><div class="+"table"+"><a href='http://wx6.igeek.asia/u/vote_item_detail/"+item.id+"'><img src = "+ item.pic_url +" ></a> "+"<div class = "+"checkbox"+"><input type ='checkbox' name="+item.id+" id="+item.id+"><label for="+item.id+"></label></div><span>投票数目:"+item.vote_num+"</span></div></td>"
+            td2 = "<td><div class="+"table"+"><a href='http://wx6.igeek.asia/u/vote_item_detail/"+item.id+"'><img src = "+ item.pic_url +" ></a> "+"<div class = "+"checkbox"+"><input type ='checkbox' name="+item.id+" id="+item.id+"><label for="+item.id+"></label></div><span>投票数目:"+item.vote_num+"</span></div></td>"
             newHtml += td2;
             break;
        }
