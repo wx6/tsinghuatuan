@@ -406,11 +406,16 @@ def vote_user_post(request, voteid, openid):
         vote = Vote.objects.get(id=voteid)
         voteItems = VoteItem.objects.filter(vote_key=vote.key)
 
+        now = datetime.now()
+        if vote.end_time < now:
+            rtnJSON['error'] = u'投票活动已经过了截止日期啦！'
+            return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
+
         for item in voteItems:
             singleVotes = SingleVote.objects.filter(stu_id=user.stu_id, item_id=item.id)
             if singleVotes.exists():
                 rtnJSON['error'] = u'你已经投过票啦！'
-                return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),content_type='application/json')
+                return HttpResponse(json.dumps(rtnJSON),content_type='application/json')
 
         print 'test point 3 in vote_user_post'
         for item in voteItems:
