@@ -89,11 +89,17 @@ def validate_through_student(userid, userpass):
 # Recently Modified by: Liu Junlin
 # Date: 2014-11-17 16:32
 def validate_through_auth(userpass):
+    print 'validate process test point 1'
     req_url = 'http://auth.igeek.asia/v1'
+    print 'validate process test point 2'
     req_data = urllib.urlencode({'secret': userpass})
+    print 'validate process test point 3'
     req = urllib2.Request(url=req_url, data=req_data)
+    print 'validate process test point 4'
     res_data = urllib2.urlopen(req).read()
+    print 'validate process test point 5'
     res_dict = eval(res_data)
+    print 'validate process test point 6'
     if res_dict['code'] == 0:
         return 'Accepted'
     else:
@@ -112,28 +118,43 @@ def validate_post(request):
     # userpass = request.POST['password'].encode('gb2312')
     # validate_result = validate_through_learn(userid, userpass)
     userpass = request.POST['password']
+    print 'validate test point 1'
     validate_result = validate_through_auth(userpass)
+    print 'validate test point 2'
     if validate_result == 'Accepted':
+        print 'validate test point 3'
         openid = request.POST['openid']
         try:
+            print 'validate test point 4'
             User.objects.filter(stu_id=userid).update(status=0)
+            print 'validate test point 5'
             User.objects.filter(weixin_id=openid).update(status=0)
         except:
+            print 'validate test point 6'
             return HttpResponse('Error')
         try:
+            print 'validate test point 7'
             currentUser = User.objects.get(stu_id=userid)
+            print 'validate test point 8'
             currentUser.weixin_id = openid
+            print 'validate test point 9'
             currentUser.status = 1
             try:
+                print 'validate test point 9'
                 currentUser.save()
             except:
+                print 'validate test point 10'
                 return HttpResponse('Error')
         except:
             try:
+                print 'validate test point 11'
                 newuser = User.objects.create(weixin_id=openid, stu_id=userid, status=1)
+                print 'validate test point 12'
                 newuser.save()
             except:
+                print 'validate test point 13'
                 return HttpResponse('Error')
+
     return HttpResponse(validate_result)
 
 
