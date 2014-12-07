@@ -67,6 +67,12 @@ WEIXIN_CUSTOM_MENU_TEMPLATE = {
             "sub_button": [
                 {
                     "type": "click",
+                    "name": "投票",
+                    "key": WEIXIN_EVENT_KEYS['vote_query'],
+                    "sub_button": []
+                },
+                {
+                    "type": "click",
                     "name": "抢啥",
                     "key": WEIXIN_EVENT_KEYS['ticket_book_what'],
                     "sub_button": []
@@ -93,12 +99,6 @@ WEIXIN_CUSTOM_MENU_TEMPLATE = {
                     "type": "click",
                     "name": "帮助",
                     "key": WEIXIN_EVENT_KEYS['help'],
-                    "sub_button": []
-                },
-                {
-                    "type": "click",
-                    "name": "投票",
-                    "key": WEIXIN_EVENT_KEYS['vote_query'],
                     "sub_button": []
                 }
             ]
