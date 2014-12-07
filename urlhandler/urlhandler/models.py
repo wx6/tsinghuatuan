@@ -51,7 +51,7 @@ class Ticket(models.Model):
 class Vote(models.Model):
     name = models.CharField(max_length=255)
     key = models.CharField(max_length=255)
-    description = models.CharField()
+    description = models.TextField()
     pic_url = models.CharField(max_length=255)
     # external_url = models.CharField(max_length=255)
     max_num = models.IntegerField(default=1)
@@ -66,7 +66,7 @@ class Vote(models.Model):
 class VoteItem(models.Model):
     name = models.CharField(max_length=255)
     pic_url = models.CharField(max_length=255)
-    description = models.CharField()
+    description = models.TextField()
     vote = models.ForeignKey(Vote)
     vote_key = models.CharField(max_length=255)
     vote_num = models.IntegerField(default=0)
