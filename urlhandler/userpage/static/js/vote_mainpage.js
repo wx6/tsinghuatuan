@@ -161,6 +161,7 @@ function CookieOnSelect(id){
             votenum++;
         }
     }
+    setBackground();
 }
 
 onCreate();
