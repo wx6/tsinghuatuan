@@ -1,5 +1,3 @@
-var vote_counter;
-
 function commitVote() {
     if(votenum <=0 || votenum > maxVote)
     {
@@ -110,13 +108,13 @@ function CookieOnLoad(){
         }
     }
     else{
-        vote_counter = 0;
+        votenum = 0;
         var form = document.getElementsByTagName("Input");
         for(var i = 0; i < form.length; i++){
             consult = findcookie(form[i].id);
             if(consult == "True"){
                 form[i].checked = true;
-                vote_counter++;
+                votenum++;
             }
         }
     }
@@ -126,11 +124,11 @@ function CookieOnSelect(id){
     var consult = findcookie(id);
     if(consult == "True"){
         document.cookie = escape(id) + "=False";
-        vote_counter--;
+        votenum--;
     }
     else{
         document.cookie = escape(id) + "=True";
-        vote_counter++;
+        votenum++;
     }
 }
 
