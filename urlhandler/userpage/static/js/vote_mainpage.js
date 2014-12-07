@@ -80,7 +80,6 @@ function onCreate(){
         newHtml = "";
     }
     CookieOnLoad();
-    setBackground();
 }
 
 function findcookie (key) {
@@ -123,17 +122,6 @@ function CookieOnLoad(){
     }
 }
 
-function setBackground(){
-    var label = document.getElementsByTagName("label");
-    var input = document.getElementsByTagName("Input");
-    for(var i = 0; i < label.length; i++){
-        if(input[i].checked == false)
-            label[i].style.background = "white";
-        else
-            label[i].style.background = "#CC66FF";
-    }
-}
-
 function CookieOnSelect(id){
     var consult = findcookie(id);
     if(consult == "True"){
@@ -161,7 +149,6 @@ function CookieOnSelect(id){
             votenum++;
         }
     }
-    setBackground();
 }
 
 onCreate();
