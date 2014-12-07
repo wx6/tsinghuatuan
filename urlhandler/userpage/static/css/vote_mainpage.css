@@ -45,6 +45,11 @@ input[type="checkbox"]{
     top: 0.25em;
     left: 0.25em;
     z-index: 1;
+    background: white;
+}
+
+.checkbox input[type=checkbox]:checked + label {
+    background: #CC66FF;
 }
 
 .table{
@@ -59,6 +64,5 @@ input[type="checkbox"]{
 }
 #hint
 {
-	margin-top:2em;
-	margin-bottom:2em;
+	margin-bottom:4em;
 }
