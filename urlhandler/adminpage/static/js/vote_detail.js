@@ -261,7 +261,7 @@ function lockByStatus(status, start_time, end_time) {
             'name': true,
             'key': true,
             'start_time': function() {
-                return (new Date() >= getDateByObj(end_time));
+                return (new Date() >= getDateByObj(start_time));
             },
             'end_time': function() {
                 return (new Date() >= getDateByObj(end_time));
@@ -275,7 +275,7 @@ function lockByStatus(status, start_time, end_time) {
         }
         lockMap[keyMap[key]]($('#input-' + key), flag);
     }
-    lockItemsByStatus(status, start_time);
+    lockItemsByStatus(status, start_time, end_time);
     if (status >= 1) {
         $('#saveBtn').hide();
     } else {
@@ -340,7 +340,6 @@ function wrapDateString(dom, formData, name) {
             }
         }
     }
-    //if ()
     formData.push({
         name: name,
         required: false,
@@ -574,55 +573,70 @@ function detectVoteChoiceError(formData,lackArray){
     if (flag){
         return false;
     }
-    if ($("input[name='name1']").prop('disabled')){
-        passLockedText(formData);
-    }
+    passLockedText(formData);
     formData.push({
-            name: 'item_num',
-            required: false,
-            type: 'number',
-            value: ($('.vote_choice').length).toString()
+        name: 'item_num',
+        required: false,
+        type: 'number',
+        value: ($('.vote_choice').length).toString()
     });
     return true;
 }
 
 function passLockedText(formData){
-    for (var i = 0; i < vote.items.length; i++){
+    if ($("input[name='name1']").prop('disabled')){
+        for (var i = 0; i < vote.items.length; i++){
+            formData.push({
+                name: 'name'+(i+1).toString(),
+                required: false,
+                type: 'text',
+                value: vote.items[i].name
+            });
+            formData.push({
+                name: 'description'+(i+1).toString(),
+                required: false,
+                type: 'text',
+                value: vote.items[i].description
+            });
+            formData.push({
+                name: 'pic_url'+(i+1).toString(),
+                required: false,
+                type: 'text',
+                value: vote.items[i].pic_url
+            });
+        }
+    }
+    if ($("#input-max_num").prop('disabled')){
         formData.push({
-            name: 'name'+(i+1).toString(),
+            name: 'max_num',
             required: false,
-            type: 'text',
-            value: vote.items[i].name
-        });
-        formData.push({
-            name: 'description'+(i+1).toString(),
-            required: false,
-            type: 'text',
-            value: vote.items[i].description
-        });
-        formData.push({
-            name: 'pic_url'+(i+1).toString(),
-            required: false,
-            type: 'text',
-            value: vote.items[i].pic_url
+            type: 'number',
+            value: vote.max_num
         });
     }
-    formData.push({
-        name: 'max_num',
-        required: false,
-        type: 'number',
-        value: vote.max_num
-    });
+    if ($("#input-start-year").prop('disabled')){
+        formData.push({
+            name: 'start_time',
+            required: false,
+            type: 'string',
+            value: getDateString(vote.start_time)
+        });
+    }
 }
 
-function lockItemsByStatus(status, start_time){
+function lockItemsByStatus(status, start_time, end_time){
     if (status < 1 || new Date() < getDateByObj(start_time)){
+        $("#input-max_num").prop('disabled',false);
+    }
+    else{
+        $("#input-max_num").prop('disabled',true);
+    }
+    if (status < 1 || new Date() < getDateByObj(end_time)){
         var i;
         for (i = 0; i < $('.vote_choice').length; i++){
             $("input[name='name"+(i+1).toString()+"']").prop('disabled',false);
             $("input[name='description"+(i+1).toString()+"']").prop('disabled',false);
             $("input[name='pic_url"+(i+1).toString()+"']").prop('disabled',false);
-            $("#input-max_num").prop('disabled',false);
         }
     }
     else{
@@ -631,7 +645,6 @@ function lockItemsByStatus(status, start_time){
             $("input[name='name"+(i+1).toString()+"']").prop('disabled',true);
             $("input[name='description"+(i+1).toString()+"']").prop('disabled',true);
             $("input[name='pic_url"+(i+1).toString()+"']").prop('disabled',true);
-            $("#input-max_num").prop('disabled',true);
         }
     }
 }
