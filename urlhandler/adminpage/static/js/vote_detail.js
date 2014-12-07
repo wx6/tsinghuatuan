@@ -502,7 +502,7 @@ $('.form-control').on('focus', function() {var me = $(this); setTimeout(function
 
 function addchoice() {
     var vote_choice_count = $('.vote_choice').length + 1;
-    $('<details open="open" id="vote_choice_'+vote_choice_count.toString()+'" class="vote_choice"><summary class="vote_option_summary">投票项'+vote_choice_count.toString()+'<span class="vote_delete" title="删除"></span></summary><div class="dynamic"><div class="form-group"><label for="input-item" class="col-sm-2 control-label">投票项名称</label><div class="col-sm-10"><input type="text" name="name'+vote_choice_count.toString()+'" class="form-control"placeholder="投票项的名称，如刘强老师"></div></div><div class="form-group"><label for="input-item_description" class="col-sm-2 control-label">投票项简介</label><div class="col-sm-10"><input type="text" name="description'+vote_choice_count.toString()+'" class="form-control"  placeholder="投票项的简介，如刘强老师为软件学院老师，开设软件工程等课程"></div></div><div class="form-group"><label for="input-item_pic_url" class="col-sm-2 control-label">投票项图片</label><div class="col-sm-10"><input type="text" name="pic_url'+vote_choice_count.toString()+'" class="form-control" placeholder="请填入图片链接"></div></div></div></details>').insertBefore("#bottom_botton");
+    $('<details open="open" id="vote_choice_'+vote_choice_count.toString()+'" class="vote_choice"><summary class="vote_option_summary">投票项'+vote_choice_count.toString()+'<span class="vote_delete" title="删除"></span></summary><div class="dynamic"><div class="form-group"><label for="input-item" class="col-sm-2 control-label">投票项名称</label><div class="col-sm-10"><input type="text" name="name'+vote_choice_count.toString()+'" class="form-control"placeholder="投票项的名称，如刘强老师"></div></div><div class="form-group"><label for="input-item_description" class="col-sm-2 control-label">投票项简介</label><div class="col-sm-10"><input type="text" name="description'+vote_choice_count.toString()+'" class="form-control"  placeholder="投票项的简介，如刘强老师为软件学院老师，开设软件工程等课程"></div></div><div class="form-group"><label for="input-item_pic_url" class="col-sm-2 control-label">投票项图片</label><div class="col-sm-10"><input type="text" name="pic_url'+vote_choice_count.toString()+'" class="form-control" placeholder="请填入图片链接"></div></div></div></details>').insertBefore("#bottom_button");
     renderBtn();
 };
 
@@ -524,34 +524,12 @@ function renderBtn (){
 
 function init_vote_choice(vote){
     if (vote.items.length==0){
-        $('.vote_delete').click(function(){
-            var vote_choice_count = $('.vote_choice').length-1;
-            $(this).parent().parent().remove();
-            $.each($(".vote_choice"),function(i,item){
-                $(item).find("summary").html("投票项"+(i+1).toString()+'<span class="vote_delete" title="删除"></span>');
-                $(item).attr('id',"vote_choice_"+(i+1).toString());
-                ($(item).find("input:first")).attr("name","name"+(i+1).toString());
-                ($(item).find("input:eq(1)")).attr("name","description"+(i+1).toString());
-                ($(item).find("input:last")).attr("name","pic_url"+(i+1).toString());
-            });
-            renderBtn();
-        });
+        renderBtn();
         return;
     }
     var count = vote.items.length-$('.vote_choice').length;
     if (count == 0){
-        $('.vote_delete').click(function(){
-            var vote_choice_count = $('.vote_choice').length-1;
-            $(this).parent().parent().remove();
-            $.each($(".vote_choice"),function(i,item){
-                $(item).find("summary").html("投票项"+(i+1).toString()+'<span class="vote_delete" title="删除"></span>');
-                $(item).attr('id',"vote_choice_"+(i+1).toString());
-                ($(item).find("input:first")).attr("name","name"+(i+1).toString());
-                ($(item).find("input:eq(1)")).attr("name","description"+(i+1).toString());
-                ($(item).find("input:last")).attr("name","pic_url"+(i+1).toString());
-            });
-            renderBtn();
-        });
+        renderBtn();
     }
     while(count > 0){
         addchoice();
@@ -597,32 +575,7 @@ function detectVoteChoiceError(formData,lackArray){
         return false;
     }
     if ($("input[name='name1']").prop('disabled')){
-        for (var i = 0; i < vote.items.length; i++){
-            formData.push({
-                name: 'name'+(i+1).toString(),
-                required: false,
-                type: 'text',
-                value: vote.items[i].name
-            });
-            formData.push({
-                name: 'description'+(i+1).toString(),
-                required: false,
-                type: 'text',
-                value: vote.items[i].description
-            });
-            formData.push({
-                name: 'pic_url'+(i+1).toString(),
-                required: false,
-                type: 'text',
-                value: vote.items[i].pic_url
-            });
-            formData.push({
-                name: 'max_num',
-                required: false,
-                type: 'number',
-                value: vote.max_num
-            });
-        }
+        passLockedText(formData);
     }
     formData.push({
             name: 'item_num',
@@ -631,6 +584,35 @@ function detectVoteChoiceError(formData,lackArray){
             value: ($('.vote_choice').length).toString()
     });
     return true;
+}
+
+function passLockedText(formData){
+    for (var i = 0; i < vote.items.length; i++){
+        formData.push({
+            name: 'name'+(i+1).toString(),
+            required: false,
+            type: 'text',
+            value: vote.items[i].name
+        });
+        formData.push({
+            name: 'description'+(i+1).toString(),
+            required: false,
+            type: 'text',
+            value: vote.items[i].description
+        });
+        formData.push({
+            name: 'pic_url'+(i+1).toString(),
+            required: false,
+            type: 'text',
+            value: vote.items[i].pic_url
+        });
+    }
+    formData.push({
+        name: 'max_num',
+        required: false,
+        type: 'number',
+        value: vote.max_num
+    });
 }
 
 function lockItemsByStatus(status, start_time){
@@ -664,7 +646,7 @@ function updateVoteResult (){
     //$('#returnBtn').attr("href","/detail/"+vote.id+"/");
     var item,i;
     var items = vote.items;
-    qsort(items);
+    sort(items);
     for (i = items.length-1; i >= 0; i--){
         item = vote.items[i];
         var tr = $('<tr></tr>');
@@ -679,7 +661,7 @@ function returnToVoteDetail(){
     showForm();
 }
 
-function qsort(arr){
+function sort(arr){
     return quickSort(arr,0,arr.length-1);
     function quickSort(arr,l,r){            
         if(l<r){         
