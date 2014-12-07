@@ -55,13 +55,10 @@ input[type="checkbox"]{
 .table{
     text-align: center;
     width:100%;
+	margin-top:1em;
+	margin-bottom:1em;
 }
 .voteitem
 {
 	margin:0em;
-}
-.table
-{
-	margin-top:1em;
-	margin-bottom:1em;
 }
