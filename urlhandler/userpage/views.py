@@ -99,8 +99,9 @@ def validate_through_auth(userpass):
     res_data = urllib2.urlopen(req).read()
     print 'validate process test point 5'
     # res_dict = eval(res_data)
+    print res_data
     print 'validate process test point 6'
-    if res_dict['code'] == 0:
+    if res_data['code'] == 0:
         return 'Accepted'
     else:
         return 'Rejected'
