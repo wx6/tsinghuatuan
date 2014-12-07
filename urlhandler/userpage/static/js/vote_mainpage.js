@@ -127,8 +127,15 @@ function CookieOnSelect(id){
         votenum--;
     }
     else{
-        document.cookie = escape(id) + "=True";
-        votenum++;
+        if(votenum >= maxVote){
+            var input = document.getElementById(id);
+            input.checked = false;
+            alert("您的投票数已经达到上限！");
+        }
+        else{
+            document.cookie = escape(id) + "=True";
+            votenum++;
+        }
     }
 }
 
