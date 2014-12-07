@@ -415,7 +415,7 @@ def vote_user_post(request, voteid, openid):
             singleVotes = SingleVote.objects.filter(stu_id=user.stu_id, item_id=item.id)
             if singleVotes.exists():
                 rtnJSON['error'] = u'你已经投过票啦！'
-                return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),content_type='application/json')
+                return HttpResponse(json.dumps(rtnJSON),content_type='application/json')
 
         print 'test point 3 in vote_user_post'
         for item in voteItems:
