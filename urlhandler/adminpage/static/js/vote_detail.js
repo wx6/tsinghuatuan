@@ -383,6 +383,7 @@ function beforeSubmit(formData, jqForm, options) {
         showResult();
         return false;
     }
+    passLockedText(formData);
     if (vote.id) {
         formData.push({
             name: 'id',
@@ -573,7 +574,6 @@ function detectVoteChoiceError(formData,lackArray){
     if (flag){
         return false;
     }
-    passLockedText(formData);
     formData.push({
         name: 'item_num',
         required: false,
