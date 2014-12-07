@@ -61,7 +61,7 @@ function onCreate(){
             newHtml += td2;
             break;
         case (line-1):
-            td3 = "<td><div class="+"table"+"><a href='http://wx6.igeek.asia/u/vote_item_detail/"+item.id+"'><img src = "+ item.pic_url +" ></a> "+"<p class='voteitem'>"+item.name+"</p><div class = "+"checkbox"+"><input type ='checkbox' name="+item.id+" id="+item.id+" onclick = "+"CookieOnSelect(this.id)"+"><label for="+item.id+"></label></div><span>人气:"+item.vote_num+"</span></div></td></tr><br></br>"
+            td3 = "<td><div class="+"table"+"><a href='http://wx6.igeek.asia/u/vote_item_detail/"+item.id+"'><img src = "+ item.pic_url +" ></a> "+"<p class='voteitem'>"+item.name+"</p><div class = "+"checkbox"+"><input type ='checkbox' name="+item.id+" id="+item.id+" onclick = "+"CookieOnSelect(this.id)"+"><label for="+item.id+"></label></div><span>人气:"+item.vote_num+"</span></div></td></tr>"
             newHtml += td3;
             break;
         default:
