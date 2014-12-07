@@ -1,3 +1,5 @@
+var lastSelect;
+
 function commitVote() {
     if(votenum <=0 || votenum > maxVote)
     {
@@ -128,11 +130,21 @@ function CookieOnSelect(id){
     }
     else{
         if(votenum >= maxVote){
-            var input = document.getElementById(id);
-            input.checked = false;
-            alert("您的投票数已经达到上限！");
+            if(maxVote == 1){
+                var input = document.getElementById(lastSelect);
+                input.checked = false;
+                document.cookie = escape(lastSelect) + "=False";
+                document.cookie = escape(id) + "=True";
+                lastSelect = id;
+            }
+            else{
+                var input = document.getElementById(id);
+                input.checked = false;
+                alert("您的投票数已经达到上限！");
+            }
         }
         else{
+            lastSelect = id;
             document.cookie = escape(id) + "=True";
             votenum++;
         }
