@@ -116,7 +116,7 @@ function CookieOnLoad(){
             consult = findcookie(form[i].id);
             if(consult == "True"){
                 form[i].checked = true;
-                lastSelect = id;
+                lastSelect = form[i].id;
                 votenum++;
                 if(votenum >= maxVote)
                     break;
