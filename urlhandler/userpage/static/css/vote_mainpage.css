@@ -49,7 +49,7 @@ input[type="checkbox"]{
 }
 
 .checkbox input[type=checkbox]:checked + label {
-    background: #660099;
+    background: #663366;
 }
 
 .table{
@@ -63,11 +63,14 @@ input[type="checkbox"]{
 	margin:0em;
 }
 button{
-	margin-bottom:5em;
+	margin-bottom:20px;
 	width:80px;
 	height:41px;
 	background-color: #fff;
 	border-radius:9px;
 	font-size:1.4em;
 }
-
+#hint
+{
+	margin-bottom:5em;
+}
