@@ -104,7 +104,7 @@ def validate_through_auth(userpass):
     res_dict = json.loads(res_data)
     print res_dict
     print 'validate process test point 6'
-    if res_data['code'] == 0:
+    if res_dict['code'] == 0:
         return 'Accepted'
     else:
         return 'Rejected'
