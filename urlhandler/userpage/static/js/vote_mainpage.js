@@ -1,7 +1,7 @@
 var vote_counter;
 
 function commitVote() {
-    if(lastid == -1)
+    if(votenum <=0 || votenum > maxnum)
     {
         $("#hint")[0].innerHTML = "投票数目过多或者过少"
         return false
