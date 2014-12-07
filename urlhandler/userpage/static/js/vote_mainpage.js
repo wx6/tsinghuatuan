@@ -116,7 +116,10 @@ function CookieOnLoad(){
             consult = findcookie(form[i].id);
             if(consult == "True"){
                 form[i].checked = true;
+                lastSelect = id;
                 votenum++;
+                if(votenum >= maxVote)
+                    break;
             }
         }
     }
