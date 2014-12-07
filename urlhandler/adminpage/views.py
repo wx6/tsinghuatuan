@@ -620,9 +620,9 @@ def vote_modify(vote):
     setattr(curVote, 'max_num', int(vote['max_num']))
     curVote.save()
 
-    vote_item_delete(curVote.key)
-
-    vote_item_create(vote, curVote)
+    if (now < curVote.start_time):
+        vote_item_delete(curVote.key)
+        vote_item_create(vote, curVote)
 
     return curVote
 
