@@ -623,6 +623,8 @@ def vote_modify(vote):
     if (now < curVote.start_time):
         vote_item_delete(curVote.key)
         vote_item_create(vote, curVote)
+    else:
+        vote_item_modify(vote, curVote)
 
     return curVote
 
@@ -640,6 +642,16 @@ def vote_item_create(vote, newVote):
         preItem['vote_num'] = 0
         preItem['status'] = newVote.status
         VoteItem.objects.create(**preItem)
+
+
+def vote_item_modify(vote, newVote):
+    voteItems = VoteItem.objects.filter(vote_key=newVote.key)
+    count = 0
+    for item in voteItems:
+        count = count + 1
+        for k in ['name', 'pic_url', 'description']:
+            setattr(item, k, vote[k + str(count)])
+        item.save()
 
 
 def vote_create(vote):
