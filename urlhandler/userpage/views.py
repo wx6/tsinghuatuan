@@ -404,7 +404,7 @@ def vote_user_post(request, voteid, openid):
         user = User.objects.filter(weixin_id=openid)[0]
         print 'test point 2 in vote_user_post'
         vote = Vote.objects.get(id=voteid)
-        voteItems = VoteItem.objects.filter(vote_key=vote.key)
+        voteItems = VoteItem.objects.filter(vote_key=vote.key, status__gte=0)
 
         for item in voteItems:
             singleVotes = SingleVote.objects.filter(stu_id=user.stu_id, item_id=item.id)
