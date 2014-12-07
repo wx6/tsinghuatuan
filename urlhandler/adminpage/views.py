@@ -611,8 +611,8 @@ def vote_modify(vote):
         setattr(curVote, k, vote[k])
     now = datetime.now()
     if now < curVote.start_time:
-        for k in ['start_time', 'end_time']:
-            setattr(curVote, k, str_to_datetime(vote[k]))
+        setattr(curVote, 'start_time', str_to_datetime(vote['start_time']))
+    setattr(curVote, 'end_time', str_to_datetime(vote['end_time']))
     if 'publish' in vote:
         setattr(curVote, 'status', 1)
     else:
