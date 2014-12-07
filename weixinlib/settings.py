@@ -22,6 +22,7 @@ WEIXIN_EVENT_KEYS = {
     'ticket_no_book_recommand': 'TSINGHUA_NO_BOOK_ACTS',
     'ticket_book_header': 'TSINGHUA_BOOK_',
     'modern_figure': 'V1001_MODERN_FIGURE',
+    'vote_query': 'TSINGHUA_VOTE',
 }
 
 WEIXIN_CUSTOM_MENU_TEMPLATE = {
@@ -93,11 +94,17 @@ WEIXIN_CUSTOM_MENU_TEMPLATE = {
                     "name": "帮助",
                     "key": WEIXIN_EVENT_KEYS['help'],
                     "sub_button": []
+                },
+                {
+                    "type": "click",
+                    "name": "投票",
+                    "key": WEIXIN_EVENT_KEYS['vote_query'],
+                    "sub_button": []
                 }
             ]
         },
         {
-            "name": "抢票/投票",
+            "name": "抢票",
             "sub_button": []
         },
     ]

@@ -405,7 +405,7 @@ def response_xnlhwh(msg):
 # Functions below are about voting
 # By: Liu Junlin
 def check_vote_event(msg):
-	return handler_check_text(msg, ['投票'])
+	return handler_check_text(msg, ['投票']) or handler_check_event_click(msg, [WEIXIN_EVENT_KEYS['vote_query']])
 
 
 def response_vote_event(msg):

@@ -375,7 +375,7 @@ def vote_main_view(request, voteid, openid):
     voteDict['max_num'] = vote.max_num
     voteDict['items'] = []
 
-    voteItems = VoteItem.objects.filter(vote_key=vote.key)
+    voteItems = VoteItem.objects.filter(vote_key=vote.key, status__gte=0)
     for item in  voteItems:
         itemDict = {}
         itemDict['name'] = item.name
