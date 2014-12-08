@@ -16,6 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from weixinlib.base_support import get_access_token
 from urlhandler.models import Vote, VoteItem, SingleVote
+from django.http import HttpResponseRedirect
 
 
 def home(request):
