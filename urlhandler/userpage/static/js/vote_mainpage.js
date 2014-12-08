@@ -9,16 +9,17 @@ function commitVote() {
             name_list += names[i].innerHTML + ","
     }
     name_list = name_list.substring(0, name_list.length-1);
+	if(votenum <=0 )
+    {
+		alert("请投票之后再提交")
+        return false
+    }
     if(confirm(name_list))
         ;
     else{
         return false;
     }
-    if(votenum <=0 || votenum > maxVote)
-    {
-        $("#hint")[0].innerHTML = "请投票后再提交"
-        return false
-    }
+    
     var options = {
         dataType: 'json',
         success: function (data) {
