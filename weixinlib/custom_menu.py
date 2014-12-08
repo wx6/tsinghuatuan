@@ -8,29 +8,25 @@ import datetime
 
 
 def get_custom_menu():
+    return False;
     access_token = get_access_token()
     url = WEIXIN_URLS['get_custom_menu'](access_token)
     res = http_get(url)
     rjson = json.loads(res)
-    # print rjson
     return rjson.get('menu', {}).get('button', [])
 
 
 def modify_custom_menu(buttons):
-    # print buttons
-    # print 'test point 5555555'
-    # print 'test point 3333333'
+    return False;
+    #print buttons
     access_token = get_access_token()
     url = WEIXIN_URLS['modify_custom_menu'](access_token)
     res = http_post(url, buttons)
-    # print 'test point 4444444'
-    # get_custom_menu()
-    # res = '{"errcode":0,"errmsg":"ok"}'
-    # print res
     return res
 
 
 def check_if_activity_out(actid, actsHolder):
+    return False;
     try:
         activity = Activity.objects.get(id=actid, status=1)
         if actsHolder:
@@ -43,6 +39,7 @@ def check_if_activity_out(actid, actsHolder):
 
 
 def auto_clear_old_menus(buttons):
+    return False;
     activities = {}
     toremove = []
     flag = False
@@ -66,6 +63,7 @@ def auto_clear_old_menus(buttons):
 
 
 def add_new_custom_menu(name, key):
+    return False;
     buttons = get_custom_menu()
     current_menu = []
     flag = False

@@ -3,7 +3,7 @@
 {% load staticfiles %}
 
 {% block title %}
-绑定学号 - 紫荆之声
+绑定学号 - 清华紫荆之声
 {% endblock %}
 
 {% block css %}
@@ -17,7 +17,7 @@
     <script src="{% static "js/validation_student.js" %}?_=1"></script>
     <script>
     function ajaxForm() {
-        submitValidation('{{ openid }}', '{{ timestamp }}');
+        submitValidation('{{ openid }}');
     }
     window.addEventListener('load', function() {showValidation({{ isValidated }});}, false);
     </script>

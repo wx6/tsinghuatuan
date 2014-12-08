@@ -26,4 +26,4 @@ def auto_clean_custom_menus():
         modify_custom_menu(json.dumps(get_custom_menu_with_book_acts(current_menu), ensure_ascii=False).encode('utf8'))
 
 
-auto_clean_custom_menus()
+#auto_clean_custom_menus()

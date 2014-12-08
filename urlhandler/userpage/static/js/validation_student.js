@@ -102,35 +102,23 @@ function readyStateChanged() {
     }
 }
 
-
-/**
- * Function: submitValidation()
- * Modified by: Liu Junlin
- * Date: 2014-11-17 16:31
- */
-function submitValidation(openid, timestamp) {
+function submitValidation(openid) {
     if (checkUsername() & checkPassword()) {
         disableAll(true);
         showLoading(true);
-
         var form = document.getElementById('validationForm'),
             elems = form.elements,
             url = form.action,
             params = "openid=" + encodeURIComponent(openid),
             i, len;
-
         setMaxDigits(150);
-
-        var username = document.getElementById('inputUsername').value;
-        var password = document.getElementById('inputPassword').value;
-        var key = new RSAKeyPair("10001", "", "89323ab0fba8422ba79b2ef4fb4948ee5158f927f63daebd35c7669fc1af6501ceed5fd13ac1d236d144d39808eb8da53aa0af26b17befd1abd6cfb1dcfba937438e4e95cd061e2ba372d422edbb72979f4ccd32f75503ad70769e299a4143a428380a2bd43c30b0c37fda51d6ee7adbfec1a9d0ad1891e1ae292d8fb992821b");
-        var encrypted = encryptedString(key, timestamp + "|" + username + "|" + password);
-        document.getElementById('inputPassword').value = encrypted;
-
+        var key = new RSAKeyPair("10001","","8687cb31a720dd8712201cc4cf5ae481f7239d986b3b53673cfc5e38f468a87304af2968ee54d63acd7f90d67a52ff0d63c23a231e69477df0230a28b9db4067");
+		var currentPass = document.getElementById('inputPassword').value;
+        currentPass = ':' + currentPass.substr(0, 32);
+        document.getElementById('inputPassword').value = encryptedString(key, currentPass);
         for (i = 0, len = elems.length; i < len; ++i) {
             params += '&' + elems[i].name + '=' + encodeURIComponent(elems[i].value);
         }
-
         xmlhttp = new XMLHttpRequest();
         xmlhttp.open('POST', url, true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

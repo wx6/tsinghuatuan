@@ -3,55 +3,12 @@
     padding-bottom: 8px;
     text-align: center;
 }
-.button-wrapper{
-    padding-left: 10px;
-    padding-bottom: 8px;
-    text-align: left;
+.details-wrapper{
+    text-align: center;
+    padding-bottom: 5px;
 }
-.button-wrapper a{
-    text-decoration: none;
-}
-.info-wrapper{
-    height: 10rem;
-    padding-left: 5%;
-    padding-bottom: 0px;
-    width: 90%;
-}
-.img-inner{
-    float: left;
-    width: 40%;
-    margin:0; 
-    padding:0;
-    overflow:hidden; 
-}
-.text-inner{
-    float: left;
-    width: 60%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-.text-inner .ticket-wrapper{
-    padding-bottom: 8px;
-    text-align: left;
-}
-
-.img-inner img{
-    max-width: 100%;
-}
-.ticket-wrapper img{
-    height: 1rem;
-    width: 1rem;
-    padding-right: 5px;
-}
-.ticket-wrapper b{
-    padding-bottom: 4px;
-}
-.ticket-wrapper .icon{
-    background-color: #eb426a;
-    margin-right: 5px;
-    color: white;
-    font-family: 微软雅黑
+img{
+    width: 25%;
 }
 .status-size{
     font-size: 18px;
@@ -66,19 +23,6 @@
     color: orangered;
 }
 .img-caption{
-    text-align: left;
-    padding-top: 3px;
-}
-.button{
-	padding: 10px;
-	background-color: EA0000;
-	font-size: 24px;
-	color: black;
-}
-.barcode-img{
     text-align: center;
-}
-.barcode-img img{
-    width: 80%;
-    margin-bottom: 10px;
+    padding-top: 3px;
 }

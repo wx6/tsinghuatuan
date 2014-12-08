@@ -178,16 +178,6 @@ def activity_create(activity):
         preDict[k] = str_to_datetime(activity[k])
     preDict['status'] = 1 if ('publish' in activity) else 0
     preDict['remain_tickets'] = preDict['total_tickets']
-
-    activities = Activity.objects.order_by("-seat_end")
-    if activities.exists():
-        preDict['seat_start'] = activities[0].seat_end + 1
-    else:
-        preDict['seat_start'] = 1
-    total_tickets = preDict['total_tickets']
-    total_tickets = int(total_tickets)
-    preDict['seat_end'] = preDict['seat_start'] + total_tickets - 1
-
     newact = Activity.objects.create(**preDict)
     return newact
 
@@ -231,7 +221,7 @@ def activity_delete(request):
     curact = Activity.objects.get(id=requestdata.get('activityId', ''))
     curact.status = -1
     curact.save()
-    # 删除后刷新界面
+    #删除后刷新界面
     return HttpResponse('OK')
 
 
@@ -306,10 +296,12 @@ def activity_post(request):
             activity = activity_create(post)
             rtnJSON['updateUrl'] = s_reverse_activity_detail(activity.id)
         rtnJSON['activity'] = wrap_activity_dict(activity)
-        if 'publish' in post:
-            updateErr = json.loads(add_new_custom_menu(name=activity.key, key=WEIXIN_BOOK_HEADER + str(activity.id))).get('errcode', 'err')
-            if updateErr != 0:
-                rtnJSON['error'] = u'活动创建成功，但更新微信菜单失败，请手动更新:(  \r\n错误代码：%s' % updateErr
+        ### deleted by xiaohe ###
+        #if 'publish' in post:
+        #    updateErr = json.loads(add_new_custom_menu(name=activity.key, key=WEIXIN_BOOK_HEADER + str(activity.id))).get('errcode', 'err')
+        #    if updateErr != 0:
+        #        rtnJSON['error'] = u'活动创建成功，但更新微信菜单失败，请手动更新:(  \r\n错误代码：%s' % updateErr
+       ### end by xiaohe ####
     except Exception as e:
         rtnJSON['error'] = str(e)
     return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder), content_type='application/json')
@@ -399,7 +391,7 @@ def print_ticket(request, unique_id):
     try:
         ticket = Ticket.objects.get(unique_id = unique_id)
         activity = Activity.objects.get(id = ticket.activity_id)
-        qr_addr = "http://tsinghuaqr.duapp.com/fit/" + unique_id
+        qr_addr = "http://115.28.212.177:6060/fit/" + unique_id
     except:
         raise Http404
 
@@ -411,6 +403,7 @@ def print_ticket(request, unique_id):
 
 
 def adjust_menu_view(request):
+    return False
     if not request.user.is_authenticated():
         return HttpResponseRedirect(s_reverse_admin_home())
     if not request.user.is_superuser:
@@ -422,6 +415,7 @@ def adjust_menu_view(request):
 
 
 def custom_menu_get(request):
+    return False
     if not request.user.is_authenticated():
         return HttpResponseRedirect(s_reverse_admin_home())
     if not request.user.is_superuser:
@@ -447,6 +441,9 @@ def custom_menu_get(request):
 
 
 def custom_menu_modify_post(request):
+    ### add by xiaohe###
+    raise Http404
+    ### end by xiaohe ##
     if not request.user.is_authenticated():
         raise Http404
     if not request.user.is_superuser:
@@ -464,7 +461,6 @@ def custom_menu_modify_post(request):
                            'key': 'TSINGHUA_BOOK_' + str(menu['id']),
                            'sub_button': [],
                        }]
-    # print 'come here test point point'
     return HttpResponse(modify_custom_menu(json.dumps(get_custom_menu_with_book_acts(sub_button), ensure_ascii=False).encode('utf8')),
                         content_type='application/json')
 
@@ -503,6 +499,7 @@ def activity_export_stunum(request, actid):
     ##########################################保存
     wb.save(response)
     return response
+
 
 
 
@@ -692,4 +689,6 @@ def vote_item_delete(key):
         for item in vote_items:
             item.status = -1
             item.save()
+
+
 

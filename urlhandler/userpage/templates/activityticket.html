@@ -11,14 +11,6 @@
 {% endblock %}
 
 {% block js %}
-    <script type="text/javascript">
-        console.log({{ ticket_status }});
-        console.log({{ abd }});
-        console.log("{{ mainmenu }}");
-        console.log("{{ act_uid }}");
-        console.log("row {{ seat_row }}");
-        console.log("column {{ seat_column }}");
-    </script>
     <script src="{% static "js/ticket.js" %}"></script>
 {% endblock %}
 
@@ -28,70 +20,48 @@
 
 {% block content %}
 
-    <div class="info-wrapper">
-        <div class="img-inner">
-            <img class="details-img" src="{{ act_photo  }}" />
-        </div>
-        <div class="text-inner">
-            <div class="ticket-wrapper">
-                <img src="http://m.damai.cn/images/ico_time.png"><b>{{ act_begintime|date:"Y.m.d H:i" }}</b>
-            </div>
-            <div class="ticket-wrapper">
-                <img src="http://m.damai.cn/images/ico_area.png"><b>{{ act_place }}</b>
-            </div>
-            <div class="ticket-wrapper">
-            {% ifequal seat_row  0 %}
-                <span class="icon">座</span><b>您还未选座</b>
-                {% else %}
-                <span class="icon">座</span><b>第{{ seat_row }}行，第{{ seat_column }}列</b>
-                {% endifequal %}
-            </div>
+    {% include 'activityphoto.html' %}
 
-            <div class="ticket-wrapper">
-                <span class="icon">注</span><b>活动开始前45分钟凭本电子票入场</b>
-            </div>
-
-            {% if ticket_status > 0 %}
-                {% if ticket_seat == 'B' %}
-                    <div class="ticket-wrapper">
-                        说明：<span class="status-size ticket-used">您的座位在B区 请从二楼北侧进入</span>
-                    </div>
-                {% elif ticket_seat == 'C' %}
-                    <div class="ticket-wrapper">
-                        说明：<span class="status-size ticket-used">您的座位在C区 请从二楼南侧进入</span>
-                    </div>
-                {% endif %}
-            {% endif %}
-        </div>
+    <div class="ticket-wrapper">
+        <b>电子票状态：</b>
+        {% if ticket_status == 0 %}
+            <span class="status-size ticket-invalid">无效</span>
+        {% elif ticket_status == 1 %}
+            <span class="status-size ticket-valid">未使用</span>
+        {% elif ticket_status == 2 %}
+            <span class="status-size ticket-used">已使用</span>
+        {% elif ticket_status == 3 %}
+            <span class="status-size ticket-used">活动已结束</span>
+        {% else %}
+        {% endif %}
     </div>
-
-    <div>
-        <br/>
-        <br/>
+    <div class="ticket-wrapper">
+        活动地点：<b>{{ act_place }}</b>
     </div>
-
-    <div class="button-wrapper">
-		<button class="button" style="margin-bottom:20px; margin-left:15px; margin-right:5px; width:80px; height:41px; background-color:#fff; border-radius:9px; font-size:1.4em" onclick="find()">发现</button>
-		{% if ticket_status == 1 %}
-		<a href="{% url 'userpage.views.seat_mainmenu_view' uid %}">
-		    <button class="button" style="margin-bottom:20px; margin-left:5px; margin-right:5px; width:80px; height:41px; background-color:#fff; border-radius:9px; font-size:1.4em">选座</button>
-		</a>
-		{% else %}
-		    {% if ticket_status == 3 %}
-		    <button class="button" onclick="comment()" style="margin-bottom:20px; margin-left:10px; margin-right:10px; width:80px; height:41px; background-color:#fff; border-radius:9px; font-size:1.4em">评价</button>
-		    {% else %}
-		    <button class="button" style="margin-bottom:20px; margin-left:10px; margin-right:10px; width:80px; height:41px; background-color:#fff; border-radius:9px; font-size:1.4em">其它</button>
-		    {% endif %}
-		{% endif %}
-		<button class="button" onclick="share()" style="margin-bottom:20px; margin-left:5px; margin-right:15px; width:80px; height:41px; background-color:#fff; border-radius:9px; font-size:1.4em">分享</button>
-	</div>
-
-    <div class = "barcode-img">
-        <img class="details-img" src="{{ act_photo  }}" />
+    {% if ticket_status > 0 %}
+        {% if ticket_seat == 'B' %}
+            <div class="ticket-wrapper">
+                说明：<span class="status-size ticket-used">您的座位在B区 请从二楼北侧进入</span>
+            </div>
+        {% elif ticket_seat == 'C' %}
+            <div class="ticket-wrapper">
+                说明：<span class="status-size ticket-used">您的座位在C区 请从二楼南侧进入</span>
+            </div>
+        {% endif %}
+    {% endif %}
+    <div class="ticket-wrapper">
+        活动开始时间：<b>{{ act_begintime|date:"Y年m月d日 H:i" }}</b>
     </div>
-
+    <div class="ticket-wrapper">
+        活动结束时间：<b>{{ act_endtime|date:"Y年m月d日 H:i" }}</b>
+    </div>
+    {% if ticket_status == 1 %}
+    <div class="ticket-wrapper">
+        <span class="status-size ticket-valid">活动开始前45分钟凭本电子票入场</span>
+    </div>
     <div class="ticket-wrapper">
         <b>回复“退票 {{ act_key }}”即可退票</b>
     </div>
+    {% endif %}
 
 {% endblock %}

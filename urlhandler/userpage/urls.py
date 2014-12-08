@@ -10,12 +10,8 @@ urlpatterns = patterns('',
                        url(r'^helpact/$','userpage.views.helpact_view'),
                        url(r'^helpclub/$','userpage.views.helpclub_view'),
                        url(r'^helplecture/$','userpage.views.helplecture_view'),
-                       url(r'^activity/(?P<actid>\d+)/menu/$','userpage.views.activity_menu_view'),
-
-                       url(r'^choose_seat/try/(?P<uid>\S+)/$', 'userpage.views.choose_seat_post'),
-                       url(r'^mainseat/(?P<uid>\S+)/$','userpage.views.seat_mainmenu_view'),
-                       url(r'^subseat/(?P<uid>\S+)/(?P<block_id>\d+)/$','userpage.views.seat_submenu'),
-
+                       url(r'^activity/(?P<actid>\d+)/menu/$', 'userpage.views.activity_menu_view'),
+                       
                        url(r'^vote_main/(?P<voteid>\d+)/(?P<openid>\S+)/$', 'userpage.views.vote_main_view'),
                        url(r'^vote_user_post/(?P<voteid>\d+)/(?P<openid>\S+)/$', 'userpage.views.vote_user_post'),
                        url(r'^vote_item_detail/(?P<itemid>\d+)/$', 'userpage.views.vote_item_detail'),

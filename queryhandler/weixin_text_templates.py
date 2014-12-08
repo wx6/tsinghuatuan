@@ -30,9 +30,7 @@ def get_text_time_standard(dt):
 
 
 def get_text_ticket_pic(ticket):
-    # return QRCODE_URL + str(ticket.unique_id)
-    print ticket.activity.pic_url
-    return ticket.activity.pic_url
+    return QRCODE_URL + str(ticket.unique_id)
 
 
 def get_text_link(href, title):
@@ -259,4 +257,5 @@ def get_text_vote_description(vote):
     return vote.description \
             + '\n投票结束时间：\n' + get_text_time_standard(vote.end_time) \
             + '\n最大投票数量：' + str(vote.max_num)
+
 

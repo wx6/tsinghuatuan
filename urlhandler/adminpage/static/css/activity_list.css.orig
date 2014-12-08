@@ -1,0 +1,34 @@
+.td-status {
+    min-width: 90px;
+}
+.td-name {
+    min-width: 90px;
+}
+.td-description {
+    word-break: break-all;
+    min-width: 100px;
+}
+.td-activity_time {
+    width: 135px;
+}
+.td-book_time {
+    width: 135px;
+}
+.td-place {
+    min-width: 90px;
+}
+<<<<<<< HEAD
+.td-operations {
+    min-width: 62px;
+=======
+.td-detail_url {
+    min-width: 70px;
+}
+.td-delete {
+    min-width: 50px;
+    text-align: center;
+}
+.td-ban{
+    color: red;
+>>>>>>> 38a53ceedb58098c9c87de6d190befa2c126a2bc
+}
