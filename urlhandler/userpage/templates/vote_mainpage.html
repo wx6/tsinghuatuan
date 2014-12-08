@@ -56,7 +56,7 @@
 	 var maxVote = {{vote.max_num}}
      var vote_items = [
             {% for item in vote.items %}
-                {          
+                {
                     'voted':{{item.voted}},
                    	'name': '{{item.name}}',
                    	'vote_num':{{item.vote_num}},
@@ -65,7 +65,7 @@
                 }{% if forloop.last %}{% else %},{% endif %}
             {% endfor %}
         ];
-     var vote_name = {{vote.name}}
+     var vote_name = '{{vote.name}}'
 	 var voted = {{vote.voted}}
 </script>
 <script src="{% static 'js/vote_mainpage.js' %}"></script>
