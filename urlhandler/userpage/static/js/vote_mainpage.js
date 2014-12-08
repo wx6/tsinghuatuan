@@ -24,27 +24,21 @@ function commitVote() {
         success: function (data) {
             if(data.error==null)
             {
-                $("#success").show()
-                $("#voteArea").hide()   
             }
             else
             {
-                $("#errorinfo")[0].innerHTML = data.error
-                $("#failure").show()
-                $("#voteArea").hide()
+                alert(data.error)
             }
         },
         error: function (xhr) {
             if(data.error == null)
             {
-                $("#errorinfo")[0].innerHTML = "网络错误"
+                alert("网络错误")
             }
             else
             {
-                 $("#errorinfo")[0].innerHTML = data.error
+                 alert(data.error)
             }
-            $("#failure").show()
-            $("#voteArea").hide()                                   
         }
     };
     $('#voteItem').ajaxSubmit(options);
