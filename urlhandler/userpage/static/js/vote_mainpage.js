@@ -1,19 +1,6 @@
 var lastSelect;
 
 function commitVote() {
-    var name_list = "您选择了：";
-    var names = $(".voteitem");
-    var votes = $("input");
-    for(var i = 0; i < names.length; i++){
-        if(votes[i].checked)
-            name_list += names[i].innerHTML + ","
-    }
-    name_list = name_list.substring(0, name_list.length-1);
-	if(confirm(name_list))
-        ;
-	else{
-   	    return false;
-	}
     if(votenum <=0 || votenum > maxVote)
     {
         $("#hint")[0].innerHTML = "请投票后再提交"
