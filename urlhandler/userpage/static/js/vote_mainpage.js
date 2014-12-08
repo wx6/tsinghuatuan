@@ -132,7 +132,8 @@ function onCreate_voted(){
         }
     }
     name_list = name_list.substring(0,name_list.length-1)
-    $("#info").innerHTML = "您已经投了："+name_list+"点击图片查看详情。"
+
+    $("#info")[0].innerHTML = "您已经投了："+name_list+"，点击图片查看详情。"
 }
 
 function onCreate(){
