@@ -19,5 +19,5 @@ urlpatterns = patterns('',
                        url(r'^vote_main/(?P<voteid>\d+)/$', 'userpage.views.vote_main_view'),
                        url(r'^vote_user_post/(?P<voteid>\d+)/(?P<openid>\S+)/$', 'userpage.views.vote_user_post'),
                        url(r'^vote_item_detail/(?P<itemid>\d+)/$', 'userpage.views.vote_item_detail'),
-                       url(r'^vote_validate_user/(?P<voteid>\d+)/', 'userpage.views.vote_validate_user'),
+                       url(r'^vote_validate_user/(?P<voteid>\d+)/$', 'userpage.views.vote_validate_user'),
                        )
