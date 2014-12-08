@@ -88,6 +88,8 @@ function onCreate_unvoted(){
         $("table").append(newHtml);
         newHtml = "";
     }
+    $("a img").style.width = document.body.clientWidth * 0.3;
+    $("a img").style.height = document.body.clientWidth * 0.3;
     CookieOnLoad();
 }
 
