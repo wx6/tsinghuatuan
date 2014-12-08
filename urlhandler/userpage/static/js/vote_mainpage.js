@@ -192,17 +192,15 @@ function findcookie (key) {
 }
 
 function CookieOnLoad(){
-    var name = "activityName";
+    var name = "activityID";
     var consult = findcookie(name);
     var key = "";
-    if(consult != vote_name){
-        var n = "activityName=" + vote_name;
-        alert(n);
+    if(consult != voteId){
+        var n = "activityID=" + voteId;
         document.cookie = n;
         for (var i = 0; i < vote_items.length; i++){
             document.cookie = vote_items[i].id + "=False";
         }
-        alert(document.cookie);
     }
     else{
         votenum = 0;
