@@ -24,6 +24,7 @@ function commitVote() {
         success: function (data) {
             if(data.error==null)
             {
+				alert("投票成功")
             }
             else
             {
