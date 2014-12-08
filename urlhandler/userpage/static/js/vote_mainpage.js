@@ -174,8 +174,9 @@ function CookieOnLoad(){
     var consult = findcookie(name);
     var key = "";
     if(consult != vote_name){
-        alert(vote_name);
-        document.cookie = "activityName=" + vote_name;
+        var n = "activityName=" + vote_name;
+        alert(n);
+        document.cookie = n;
         for (var i = 0; i < vote_items.length; i++){
             document.cookie = vote_items[i].id + "=False";
         }
