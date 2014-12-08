@@ -368,7 +368,7 @@ def get_seat_status_tsinghua_hall(ticket):
 
 ################################## Voting #################################
 # By: LiuJunlin
-def vote_validate_user(voteid):
+def vote_validate_user(request, voteid):
     url = 'https://open.weixin.qq.com/connect/oauth2/authorize?'\
               'appid=' + WEIXIN_APPID + \
               '&redirect_uri=' + s_reverse_vote_mainpage(voteid) + \
