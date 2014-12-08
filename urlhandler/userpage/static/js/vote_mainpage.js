@@ -192,6 +192,7 @@ function CookieOnLoad(){
                     break;
             }
         }
+        alert("Cookie");
     }
 }
 
