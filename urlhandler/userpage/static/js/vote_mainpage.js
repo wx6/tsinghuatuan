@@ -8,7 +8,7 @@ function commitVote() {
         if(votes[i].checked)
             name_list += names[i].innerHTML + ","
     }
-    name_list[name_list.length - 1] = "."
+    name_list = name_list.substring(0, name_list.length-1);
 	if(confirm(name_list))
         ;
 	else{
