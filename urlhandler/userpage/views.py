@@ -366,6 +366,12 @@ def get_seat_status_tsinghua_hall(ticket):
 ################################## Voting #################################
 # By: LiuJunlin
 def vote_main_view(request, voteid, openid):
+    if request.POST:
+        info = request.POST
+    else:
+        info = request.GET
+    print type(info)
+
     vote = Vote.objects.get(id=voteid)
     voteDict = {}
     voteDict['id'] = voteid
