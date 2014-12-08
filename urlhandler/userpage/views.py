@@ -20,6 +20,7 @@ from urlhandler.models import Vote, VoteItem, SingleVote
 from django.http import HttpResponseRedirect
 from django.forms.models import model_to_dict
 from weixinlib.settings import WEIXIN_APPID, WEIXIN_SECRET, WEIXIN_APPID
+from django.db.models import F
 
 
 def home(request):
