@@ -110,6 +110,7 @@ function onCreate_unvoted(){
         $("table").append(newHtml);
         newHtml = "";
     }
+	$(".table span").html("");
     CookieOnLoad();
 }
 
