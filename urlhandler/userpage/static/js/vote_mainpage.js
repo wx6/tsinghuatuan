@@ -137,7 +137,7 @@ function onCreate_voted(){
         if(vote_items[i].voted == 1)
         {
             name_list += vote_items[i].name+"、";
-            $($(".table")[i]).append("<p>已投票<p>")
+//            $($(".table")[i]).append("<p>已投票<p>")
         }
     }
     name_list = name_list.substring(0,name_list.length-1)
