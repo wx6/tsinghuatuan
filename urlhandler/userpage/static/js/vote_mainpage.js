@@ -175,12 +175,10 @@ function CookieOnLoad(){
     var key = "";
     if(consult != voteId){
         var n = "activityID=" + voteId;
-        alert(n);
         document.cookie = n;
         for (var i = 0; i < vote_items.length; i++){
             document.cookie = vote_items[i].id + "=False";
         }
-        alert(document.cookie);
     }
     else{
         votenum = 0;
