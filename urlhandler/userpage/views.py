@@ -426,7 +426,7 @@ def vote_user_post(request, voteid, openid):
                 rtnJSON['error'] = u'你已经投过票啦！'
                 return HttpResponse(json.dumps(rtnJSON),content_type='application/json')
 
-        vote['items'] = []
+        items = []
         for item in voteItems:
             k = str(item.id)
             itemDict = model_to_dict(item)
@@ -438,7 +438,8 @@ def vote_user_post(request, voteid, openid):
                 item.vote_num = item.vote_num + 1
                 item.save()
                 itemDict['vote_num'] = item.vote_num
-            vote['items'].append(itemDict)
+            items.append(itemDict)
+        rtnJSON['items'] = items
     except Exception as e:
         print 'Error occured!!!!!' + str(e)
         rtnJSON['error'] = str(e)
