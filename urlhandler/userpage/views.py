@@ -16,6 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from weixinlib.base_support import get_access_token
 from urlhandler.models import Vote, VoteItem, SingleVote
+from django.http import HttpResponseRedirect
 
 
 def home(request):
@@ -366,13 +367,6 @@ def get_seat_status_tsinghua_hall(ticket):
 ################################## Voting #################################
 # By: LiuJunlin
 def vote_main_view(request, voteid, openid):
-    if request.POST:
-        info = request.POST
-    else:
-        info = request.GET
-    print type(info)
-    print info
-
     vote = Vote.objects.get(id=voteid)
     voteDict = {}
     voteDict['id'] = voteid
@@ -415,7 +409,6 @@ def vote_user_post(request, voteid, openid):
 
     post = request.POST
     rtnJSON = {}
-    print post
 
     try:
         user = User.objects.filter(weixin_id=openid)[0]
@@ -445,8 +438,12 @@ def vote_user_post(request, voteid, openid):
     except Exception as e:
         print 'Error occured!!!!!' + str(e)
         rtnJSON['error'] = str(e)
+        return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
 
-    return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
+    try:
+        return HttpResponseRedirect(s_reverse_vote_mainpage(voteid, openid))
+    except Exception as e:
+        print 'Hahahahhahaha error occurred!!!!!!' + str(e)
 
 
 def vote_item_detail(request, itemid):
