@@ -5,4 +5,4 @@ os.environ.setdefault('SSAST_DEPLOYMENT', 'tsinghuatuan')
 
 from app import app
 
-application = app
+application=app
