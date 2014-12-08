@@ -25,7 +25,7 @@ function commitVote() {
         success: function (data) {
             if(data.error==null)
             {
-				alert("投票成功")
+				successLoad(data)
             }
             else
             {
@@ -48,6 +48,26 @@ function commitVote() {
 } 
 
 
+function successLoad(vote)
+{
+	var items = vote.items
+	$("button").hide()
+	for(var i = 0; i < items.length;i++)
+	{
+		$(".table span")[i].innerHTML = "人气:"+items.num;
+	}
+
+    var name_list = "";
+    for(var i = 0; i < items.length; i++){
+        if(items[i].voted == 1)
+        {
+            name_list += items[i].name+"、";
+        }
+    }
+    name_list = name_list.substring(0,name_list.length-1)
+
+    $("#info")[0].innerHTML = "您已经投了："+name_list+"，点击图片查看详情。"
+}
 function onCreate_unvoted(){
     var line = 3;
     var count = 0;
