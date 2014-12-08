@@ -442,3 +442,23 @@ def response_vote_event(msg):
 		return get_reply_news_xml(msg, items)
 	else:
 		return get_reply_text_xml(msg, get_text_no_vote_event())
+
+
+def check_clear_vote_record(msg):
+	return handler_check_text(msg, ['清除'])
+
+
+def response_clear_vote_record(msg):
+	fromuser = get_msg_from(msg)
+	user = get_user(fromuser)
+	if user is None:
+		return get_reply_text_xml(msg, get_text_unbinded_vote_event(fromuser))
+
+	singleVotes = SingleVote.objects.filter(stu_id=user.stu_id)
+	for singleVote in singleVotes:
+		item = VoteItem.objects.get(id=singleVote.item_id)
+		item.vote_num = item.vote_num - 1
+		item.save()
+	singleVotes.delete()
+
+	return get_reply_text_xml(msg, get_text_clear_record_success())
