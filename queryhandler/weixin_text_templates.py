@@ -256,6 +256,7 @@ def get_text_clear_record_success():
 
 
 def get_text_vote_description(vote):
-    return vote.name + '\n' + vote.description \
-            + '\n投票结束时间：\n' + get_text_time_standard(vote.end_time)
+    return + vote.description \
+            + '\n投票结束时间：\n' + get_text_time_standard(vote.end_time) \
+            + '\n最大投票数量：' + vote.max_num
 
