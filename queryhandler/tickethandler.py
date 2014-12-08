@@ -461,4 +461,4 @@ def response_clear_vote_record(msg):
 		item.save()
 	singleVotes.delete()
 
-	get_reply_text_xml(msg, get_text_clear_record_success())
+	return get_reply_text_xml(msg, get_text_clear_record_success())
