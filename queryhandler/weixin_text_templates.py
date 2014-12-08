@@ -254,3 +254,8 @@ def get_text_no_vote_event():
 def get_text_clear_record_success():
     return '你的所有投票记录已成功清除！'
 
+
+def get_text_vote_description(vote):
+    return vote.title + '\n' + vote.description \
+            + '\n投票结束时间：' + get_text_time_standard(vote.end_time)
+
