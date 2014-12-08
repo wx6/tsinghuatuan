@@ -12,7 +12,6 @@ from django.utils import timezone
 
 from userpage.safe_reverse import *
 from weixinlib.settings import WEIXIN_TOKEN
-from userpage.barcode import *
 import json
 from django.views.decorators.csrf import csrf_exempt
 
