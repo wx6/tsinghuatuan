@@ -76,6 +76,7 @@ function onCreate_unvoted(){
     var count = 0;
     var newHtml = "";
     var td1,td2,td3;
+    var size = document.body.clientWidth * 0.3;
     for (count = 0;count < vote_items.length;count++)
     {
         var item = vote_items[count];
@@ -125,6 +126,7 @@ function onCreate_voted(){
     var count = 0;
     var newHtml = "";
     var td1,td2,td3;
+    var size = document.body.clientWidth * 0.3;
     for (count = 0;count < vote_items.length;count++)
     {
         var item = vote_items[count];
