@@ -177,7 +177,7 @@ function CookieOnLoad(){
         alert(vote_name);
         document.cookie = "activityName=" + vote_name;
         for (var i = 0; i < vote_items.length; i++){
-            document.cookie = vote_items[i].id += "=False";
+            document.cookie = vote_items[i].id + "=False";
         }
         alert(document.cookie);
     }
