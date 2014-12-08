@@ -170,6 +170,7 @@ function findcookie (key) {
 }
 
 function CookieOnLoad(){
+    alert("enter cookie");
     var name = "activityName";
     var consult = findcookie(name);
     var key = "";
