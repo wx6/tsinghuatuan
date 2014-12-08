@@ -205,7 +205,7 @@ def ticket_view(request, uid):
         ticket_status = 3
     ticket_seat = ticket[0].seat
 
-    if (ticket[0].seat_id == 0):
+    if ticket[0].seat_id == 0:
         seat_row = 0
         seat_column = 0
     else:
@@ -365,7 +365,6 @@ def get_seat_status_tsinghua_hall(ticket):
     return res
 
 
-
 ################################## Voting #################################
 # By: LiuJunlin
 def vote_validate_user(request, voteid):
@@ -380,7 +379,8 @@ def vote_validate_user(request, voteid):
     return HttpResponseRedirect(url)
 
 
-def vote_main_view(request, voteid):
+def vote_main_view(request, voteid, openid):
+    '''
     if not ('code' in request.GET):
         return HttpResponseRedirect(s_reverse_vote_validate_user(voteid))
     else:
@@ -397,6 +397,7 @@ def vote_main_view(request, voteid):
         users = User.objects.filter(weixin_id=openid)
         if not users.exists():
             return HttpResponseRedirect(s_reverse_validate(openid))
+    '''
 
     vote = Vote.objects.get(id=voteid)
     voteDict = {}
