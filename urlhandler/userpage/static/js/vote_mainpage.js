@@ -123,6 +123,16 @@ function onCreate_voted(){
         newHtml = "";
     }
     $("button").remove();
+    var name_list = "";
+    for(var i = 0; i < item.length; i++){
+        if(item[i].voted == 1)
+        {
+            name_list += item[i].name+"、";
+            $(".table")[i].append("<p>已投票<p>")
+        }
+    }
+    name_list = name_list.substring(0,name_list.length-1)
+    $("#info").innerHTML = "您已经投了："+name_list+"点击图片查看详情。"
 }
 
 function onCreate(){
