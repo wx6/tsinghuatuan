@@ -2,6 +2,6 @@
 
 # global settings here
 
-LUCKY_URL = "/weixin"
+LUCKY_URL = "/weixin/"
 
-LOCAL_PORT = 8000
+LOCAL_PORT = 4606
