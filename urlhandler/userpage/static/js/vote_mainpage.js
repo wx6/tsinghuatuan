@@ -190,14 +190,19 @@ function findcookie (key) {
 }
 
 function CookieOnLoad(){
+    alert("enter cookie");
     var name = "activityName";
     var consult = findcookie(name);
     var key = "";
-    if(consult != ""+vote_name){
+    if(consult != vote_name){
+        alert(consult+","+vote_name);
         document.cookie = "activityName=" + vote_name;
         for (var i = 0; i < vote_items.length; i++){
             document.cookie = vote_items[i].id += "=False";
         }
+        var name = "activityName";
+        var consult = findcookie(name);
+        alert(consult+","+vote_name);
     }
     else{
         votenum = 0;
@@ -212,6 +217,7 @@ function CookieOnLoad(){
                     break;
             }
         }
+        alert("Cookie");
     }
 }
 

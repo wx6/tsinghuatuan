@@ -440,10 +440,14 @@ def vote_user_post(request, voteid, openid):
         rtnJSON['error'] = str(e)
         return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
 
+    return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
+
+    '''
     try:
         return HttpResponseRedirect(s_reverse_vote_mainpage(voteid, openid))
     except Exception as e:
         print 'Hahahahhahaha error occurred!!!!!!' + str(e)
+    '''
 
 
 def vote_item_detail(request, itemid):
