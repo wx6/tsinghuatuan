@@ -18,7 +18,7 @@ from weixinlib.base_support import get_access_token
 from urlhandler.models import Vote, VoteItem, SingleVote
 from django.http import HttpResponseRedirect
 from django.forms.models import model_to_dict
-from weixinlib.settings import WEIXIN_APPID
+from weixinlib.settings import WEIXIN_APPID, WEIXIN_SECRET, WEIXIN_APPID
 
 
 def home(request):
@@ -368,21 +368,46 @@ def get_seat_status_tsinghua_hall(ticket):
 
 ################################## Voting #################################
 # By: LiuJunlin
-def vote_main_view(request, voteid, openid):
-    '''
-    req_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?'\
-              'appid=' + WEIXIN_APPID \
-              '&redirect_uri=' + s_reverse_vote_mainpage(voteid, openid) \
-              '&response_type=code' \
-              '&scope=snsapi_base' \
-              '&state=STATE' \
+def get_users(voteid, openid):
+    url = 'https://open.weixin.qq.com/connect/oauth2/authorize?'\
+              'appid=' + WEIXIN_APPID + \
+              '&redirect_uri=' + s_reverse_vote_mainpage(voteid, openid) + \
+              '&response_type=code' + \
+              '&scope=snsapi_base' + \
+              '&state=STATE' + \
               '#wechat_redirect'
 
-    req = urllib2.Request(url=req_url)
+    print 'test point 1'
+    get_res = HttpResponseRedirect(url)
+    print 'test point 2'
+    print type(get_res)
+    print get_res
+    code = get_res.GET['code']
+    print 'test point 3'
+    print code
+
+    req_url2 = 'https://api.weixin.qq.com/sns/oauth2/access_token' + \
+               '?appid=' + WEIXIN_APPID + \
+               '&secret=' + WEIXIN_SECRET + \
+               '&code=' + code + \
+               '&grant_type=authorization_code'
+
+    req = urllib2.Request(url=req_url2)
     res_data = urllib2.urlopen(req).read()
     res_dict = json.loads(res_data)
-    '''
 
+    openid = res_dict['openid']
+
+    users = User.objects.filter(weixin_id=openid)
+    return users
+
+
+def vote_main_view(request, voteid, openid):
+
+    users = get_users(voteid, openid)
+
+    if not users.exists():
+        return HttpResponseRedirect(s_reverse_validate(openid))
 
     vote = Vote.objects.get(id=voteid)
     voteDict = {}
