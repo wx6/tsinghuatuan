@@ -68,7 +68,6 @@ function successLoad(data)
     $("#info")[0].innerHTML = "您已经投了："+name_list+"，点击图片查看详情。"
 
 	alert("投票成功")
-	alert(data)
 }
 
 function onCreate_unvoted(){
