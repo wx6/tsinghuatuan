@@ -241,7 +241,7 @@ def get_text_no_activity_menu():
     return '您好，该活动未提供节目单。'
 
 
-# Functions below are about voting
+################################## Voting #################################
 # By: Liu Junlin
 def get_text_unbinded_vote_event(openid):
     return get_text_unbinded_template('投票', openid)

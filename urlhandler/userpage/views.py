@@ -363,7 +363,7 @@ def get_seat_status_tsinghua_hall(ticket):
 
 
 
-########################### Voting #########################################
+################################## Voting #################################
 # By: LiuJunlin
 def vote_main_view(request, voteid, openid):
     vote = Vote.objects.get(id=voteid)
@@ -377,7 +377,7 @@ def vote_main_view(request, voteid, openid):
     voteDict['items'] = []
     voteDict['voted'] = 0
 
-    user = User.objects.get(weixin_id=openid)
+    user = User.objects.filter(weixin_id=openid)[0]
     stu_id = user.stu_id
 
     voteItems = VoteItem.objects.filter(vote_key=vote.key, status__gte=0)
