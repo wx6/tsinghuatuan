@@ -402,7 +402,7 @@ def response_xnlhwh(msg):
 	return response_get_activity_menu(msg)
 
 
-# Functions below are about voting
+############################# Voting ###################################
 # By: Liu Junlin
 def check_vote_event(msg):
 	return handler_check_text(msg, ['投票']) or handler_check_event_click(msg, [WEIXIN_EVENT_KEYS['vote_query']])
@@ -421,7 +421,7 @@ def response_vote_event(msg):
 		vote = votes[0]
 		return get_reply_single_news_xml(msg, get_item_dict(
 			title = vote.name,
-			description = vote.description,
+			description = get_text_vote_description(vote),
 			pic_url = vote.pic_url,
 			url = s_reverse_vote_mainpage(vote.id, user.weixin_id)
 		))
@@ -431,7 +431,7 @@ def response_vote_event(msg):
 	for vote in votes:
 		items.append(get_item_dict(
 			title = vote.name,
-			description = vote.description,
+			description = get_text_vote_description(vote),
 			pic_url = vote.pic_url,
 			url = s_reverse_vote_mainpage(vote.id, user.weixin_id)
 		))
