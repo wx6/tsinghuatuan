@@ -199,6 +199,7 @@ def helplecture_view(request):
 
 ################################## Voting #################################
 # By: LiuJunlin
+'''
 def vote_validate_user(request, voteid):
     url = 'https://open.weixin.qq.com/connect/oauth2/authorize?'\
               'appid=' + WEIXIN_APPID + \
@@ -209,6 +210,7 @@ def vote_validate_user(request, voteid):
               '#wechat_redirect'
 
     return HttpResponseRedirect(url)
+'''
 
 
 def vote_main_view(request, voteid, openid):
@@ -288,14 +290,17 @@ def vote_user_post(request, voteid, openid):
             singleVotes = SingleVote.objects.filter(stu_id=user.stu_id, item_id=item.id)
             if singleVotes.exists():
                 rtnJSON['error'] = u'你已经投过票啦！'
-                return HttpResponse(json.dumps(rtnJSON),content_type='application/json')
+                return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
 
         items = []
+        count = 0
+
         for item in voteItems:
             k = str(item.id)
             itemDict = model_to_dict(item)
             itemDict['voted'] = 0
             if (k in post) and (post[k] == 'on'):
+                count = count + 1
                 preVote = {}
                 preVote['item_id'] = item.id
                 preVote['stu_id'] = user.stu_id
@@ -305,7 +310,13 @@ def vote_user_post(request, voteid, openid):
                 itemDict['vote_num'] = item.vote_num
                 itemDict['voted'] = 1
             items.append(itemDict)
+
+        if count > vote.max_num:
+            rtnJSON['error'] = u'你投的票数超过了上限哦！'
+            return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
+        
         rtnJSON['items'] = items
+
     except Exception as e:
         print 'Error occured!!!!!' + str(e)
         rtnJSON['error'] = str(e)
