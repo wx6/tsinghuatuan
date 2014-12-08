@@ -506,7 +506,7 @@ def activity_export_stunum(request, actid):
 
 
 
-# Functions below are about vote activities
+################################## Voting #################################
 # By: Liu Junlin
 def vote_add(request):
     if not request.user.is_authenticated():

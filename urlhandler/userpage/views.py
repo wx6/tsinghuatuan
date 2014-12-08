@@ -363,7 +363,7 @@ def get_seat_status_tsinghua_hall(ticket):
 
 
 
-# Functions below are about voting
+########################### Voting #########################################
 # By: LiuJunlin
 def vote_main_view(request, voteid, openid):
     vote = Vote.objects.get(id=voteid)
@@ -403,9 +403,8 @@ def vote_user_post(request, voteid, openid):
 
     try:
         user = User.objects.filter(weixin_id=openid)[0]
-        print 'test point 2 in vote_user_post'
         vote = Vote.objects.get(id=voteid)
-        voteItems = VoteItem.objects.filter(vote_key=vote.key)
+        voteItems = VoteItem.objects.filter(vote_key=vote.key, status__gte=0)
 
         now = datetime.now()
         if vote.end_time < now:
@@ -418,7 +417,6 @@ def vote_user_post(request, voteid, openid):
                 rtnJSON['error'] = u'你已经投过票啦！'
                 return HttpResponse(json.dumps(rtnJSON),content_type='application/json')
 
-        print 'test point 3 in vote_user_post'
         for item in voteItems:
             k = str(item.id)
             if (k in post) and (post[k] == 'on'):
@@ -428,7 +426,6 @@ def vote_user_post(request, voteid, openid):
                 SingleVote.objects.create(**preVote)
                 item.vote_num = item.vote_num + 1
                 item.save()
-
     except Exception as e:
         print 'Error occured!!!!!' + str(e)
         rtnJSON['error'] = str(e)
