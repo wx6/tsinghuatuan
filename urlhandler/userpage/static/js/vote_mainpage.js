@@ -52,7 +52,7 @@ function successLoad(data)
 	$("button").remove();
 	$("checkbox").remove();
 	var item = data.items;
-	for(var i = 0; i < item.length.i++)
+	for(var i = 0; i < item.length;i++)
 	{
 		$(".table span")[i].innerHTML = "人气:"+item[i].vote_num;
 	}
