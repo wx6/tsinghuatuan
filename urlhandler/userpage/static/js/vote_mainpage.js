@@ -124,11 +124,11 @@ function onCreate_voted(){
     }
     $("button").remove();
     var name_list = "";
-    for(var i = 0; i < item.length; i++){
-        if(item[i].voted == 1)
+    for(var i = 0; i < vote_items.length; i++){
+        if(vote_items[i].voted == 1)
         {
-            name_list += item[i].name+"、";
-            $(".table")[i].append("<p>已投票<p>")
+            name_list += vote_items[i].name+"、";
+            $($(".table")[i]).append("<p>已投票<p>")
         }
     }
     name_list = name_list.substring(0,name_list.length-1)
