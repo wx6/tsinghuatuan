@@ -426,8 +426,10 @@ def vote_user_post(request, voteid, openid):
                 rtnJSON['error'] = u'你已经投过票啦！'
                 return HttpResponse(json.dumps(rtnJSON),content_type='application/json')
 
+        vote['items'] = []
         for item in voteItems:
             k = str(item.id)
+            itemDict = model_to_dict(item)
             if (k in post) and (post[k] == 'on'):
                 preVote = {}
                 preVote['item_id'] = item.id
@@ -435,6 +437,8 @@ def vote_user_post(request, voteid, openid):
                 SingleVote.objects.create(**preVote)
                 item.vote_num = item.vote_num + 1
                 item.save()
+                itemDict['vote_num'] = item.vote_num
+            vote['items'].append(itemDict)
     except Exception as e:
         print 'Error occured!!!!!' + str(e)
         rtnJSON['error'] = str(e)
