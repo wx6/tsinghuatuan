@@ -53,18 +53,18 @@ ROOT_URLCONF = 'urlhandler.urls'
 
 WSGI_APPLICATION = 'urlhandler.wsgi.application'
 
-'''
+
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 if 'SERVER_SOFTWARE' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'NYenZfWMVWuqtUGNuQsI',
-            'USER': '6jIVijhGUVreXBNI6jYzZGlt',
-            'PASSWORD': 'AxB1w67ddB4cwkCLw3gQSoBjGUcICUL3',
-            'HOST': 'sqld.duapp.com',
-            'PORT': '4050',
+            'NAME': 'wx6_test',
+            'USER': 'wx6',
+            'PASSWORD': 'KaKqBLXzlHIbqJvq',
+            'HOST': 'db.igeek.asia',
+            'PORT': '3306',
             }
     }
     #con = MySQLdb.Connect(host = "sqld.duapp.com",
@@ -78,35 +78,25 @@ elif (os.environ.get('USER', '') == 'ssastadmin') or ('SSAST_DEPLOYMENT' in os.e
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'tsinghuatuan',
-            'USER': 'tsinghuatuan',
-            'PASSWORD': 'MA4vXQSAdcWkoZfI',
-            'HOST': '',
-            'PORT': '',
+            'NAME': 'wx6_test',
+            'USER': 'wx6',
+            'PASSWORD': 'KaKqBLXzlHIbqJvq',
+            'HOST': 'db.igeek.asia',
+            'PORT': '3306',
             }
     }
 else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'tsinghuatuan',
-            'USER': 'root',
-            'PASSWORD': '123456789',
-            'HOST': '127.0.0.1',
+            'NAME': 'wx6_test',
+            'USER': 'wx6',
+            'PASSWORD': 'KaKqBLXzlHIbqJvq',
+            'HOST': 'db.igeek.asia',
             'PORT': '3306',
-        }
+            }
     }
-'''
-DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'tsinghuatuan',
-            'USER': 'root',
-            'PASSWORD': '123456789',
-            'HOST': '127.0.0.1',
-            'PORT': '3306',
-	}
-} 
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -125,7 +115,7 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static1/'
 
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static').replace('\\', '/')
 
@@ -140,7 +130,6 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(BASE_DIR, 'userpage/templates').replace('\\', '/'),
     os.path.join(BASE_DIR, 'adminpage/templates').replace('\\', '/'),
-
 )
 
 # List of callables that know how to import templates from various sources.
@@ -149,4 +138,3 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
 )
-
