@@ -250,3 +250,7 @@ def get_text_unbinded_vote_event(openid):
 def get_text_no_vote_event():
     return '当前没有投票活动'
 
+
+def get_text_clear_record_success():
+    return '你的所有投票记录已成功清除！'
+
