@@ -17,6 +17,7 @@ from django.views.decorators.csrf import csrf_exempt
 from weixinlib.base_support import get_access_token
 from urlhandler.models import Vote, VoteItem, SingleVote
 from django.http import HttpResponseRedirect
+from django.forms.models import model_to_dict
 
 
 def home(request):
@@ -426,8 +427,10 @@ def vote_user_post(request, voteid, openid):
                 rtnJSON['error'] = u'你已经投过票啦！'
                 return HttpResponse(json.dumps(rtnJSON),content_type='application/json')
 
+        items = []
         for item in voteItems:
             k = str(item.id)
+            itemDict = model_to_dict(item)
             if (k in post) and (post[k] == 'on'):
                 preVote = {}
                 preVote['item_id'] = item.id
@@ -435,19 +438,15 @@ def vote_user_post(request, voteid, openid):
                 SingleVote.objects.create(**preVote)
                 item.vote_num = item.vote_num + 1
                 item.save()
+                itemDict['vote_num'] = item.vote_num
+            items.append(itemDict)
+        rtnJSON['items'] = items
     except Exception as e:
         print 'Error occured!!!!!' + str(e)
         rtnJSON['error'] = str(e)
         return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
 
     return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
-
-    '''
-    try:
-        return HttpResponseRedirect(s_reverse_vote_mainpage(voteid, openid))
-    except Exception as e:
-        print 'Hahahahhahaha error occurred!!!!!!' + str(e)
-    '''
 
 
 def vote_item_detail(request, itemid):
