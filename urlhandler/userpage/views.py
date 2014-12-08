@@ -199,7 +199,6 @@ def helplecture_view(request):
 
 ################################## Voting #################################
 # By: LiuJunlin
-'''
 def vote_validate_user(request, voteid):
     url = 'https://open.weixin.qq.com/connect/oauth2/authorize?'\
               'appid=' + WEIXIN_APPID + \
@@ -210,7 +209,6 @@ def vote_validate_user(request, voteid):
               '#wechat_redirect'
 
     return HttpResponseRedirect(url)
-'''
 
 
 def vote_main_view(request, voteid, openid):
