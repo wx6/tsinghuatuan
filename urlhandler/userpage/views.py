@@ -18,6 +18,7 @@ from weixinlib.base_support import get_access_token
 from urlhandler.models import Vote, VoteItem, SingleVote
 from django.http import HttpResponseRedirect
 from django.forms.models import model_to_dict
+from weixinlib.settings import WEIXIN_APPID
 
 
 def home(request):
@@ -368,6 +369,21 @@ def get_seat_status_tsinghua_hall(ticket):
 ################################## Voting #################################
 # By: LiuJunlin
 def vote_main_view(request, voteid, openid):
+    '''
+    req_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?'\
+              'appid=' + WEIXIN_APPID \
+              '&redirect_uri=' + s_reverse_vote_mainpage(voteid, openid) \
+              '&response_type=code' \
+              '&scope=snsapi_base' \
+              '&state=STATE' \
+              '#wechat_redirect'
+
+    req = urllib2.Request(url=req_url)
+    res_data = urllib2.urlopen(req).read()
+    res_dict = json.loads(res_data)
+    '''
+
+
     vote = Vote.objects.get(id=voteid)
     voteDict = {}
     voteDict['id'] = voteid
@@ -431,6 +447,7 @@ def vote_user_post(request, voteid, openid):
         for item in voteItems:
             k = str(item.id)
             itemDict = model_to_dict(item)
+            itemDict['voted'] = 0
             if (k in post) and (post[k] == 'on'):
                 preVote = {}
                 preVote['item_id'] = item.id
@@ -439,6 +456,7 @@ def vote_user_post(request, voteid, openid):
                 item.vote_num = item.vote_num + 1
                 item.save()
                 itemDict['vote_num'] = item.vote_num
+                itemDict['voted'] = 1
             items.append(itemDict)
         rtnJSON['items'] = items
     except Exception as e:

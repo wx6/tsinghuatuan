@@ -25,7 +25,7 @@ function commitVote() {
         success: function (data) {
             if(data.error==null)
             {
-				alert("投票成功")
+				successLoad(data);
             }
             else
             {
@@ -47,6 +47,28 @@ function commitVote() {
     return false;
 } 
 
+function successLoad(data)
+{
+	$("button").remove();
+	$(".checkbox").remove();
+	var item = data.items;
+	for(var i = 0; i < item.length;i++)
+	{
+		$(".table span")[i].innerHTML = "人气:"+item[i].vote_num;
+	}
+    var name_list = "";
+    for(var i = 0; i < item.length; i++){
+        if(item[i].voted == 1)
+        {
+            name_list += item[i].name+"、";
+        }
+    }
+    name_list = name_list.substring(0,name_list.length-1)
+
+    $("#info")[0].innerHTML = "您已经投了："+name_list+"，点击图片查看详情。"
+
+	alert("投票成功")
+}
 
 function onCreate_unvoted(){
     var line = 3;
