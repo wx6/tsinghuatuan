@@ -170,11 +170,11 @@ function findcookie (key) {
 }
 
 function CookieOnLoad(){
-    var name = "activityName";
+    var name = "activityID";
     var consult = findcookie(name);
     var key = "";
-    if(consult != vote_name){
-        var n = "activityName=" + vote_name;
+    if(consult != voteId){
+        var n = "activityID=" + voteId;
         alert(n);
         document.cookie = n;
         for (var i = 0; i < vote_items.length; i++){
