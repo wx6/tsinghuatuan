@@ -110,8 +110,11 @@ function onCreate_unvoted(){
         $("table").append(newHtml);
         newHtml = "";
     }
-    $("a img").style.width = document.body.clientWidth * 0.3;
-    $("a img").style.height = document.body.clientWidth * 0.3;
+    var img = $("a img");
+    for(var i = 0; i < img.length; i++){
+        img[i].style.width = document.body.clientWidth * 0.3;
+        img[i].style.height = document.body.clientWidth * 0.3;
+    }
     CookieOnLoad();
 }
 
@@ -165,7 +168,11 @@ function onCreate_voted(){
         }
     }
     name_list = name_list.substring(0,name_list.length-1)
-
+    var img = $("a img");
+    for(var i = 0; i < img.length; i++){
+        img[i].style.width = document.body.clientWidth * 0.3;
+        img[i].style.height = document.body.clientWidth * 0.3;
+    }
     $("#info")[0].innerHTML = "您已经投了："+name_list+"，点击图片查看详情。"
 }
 
