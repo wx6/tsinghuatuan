@@ -33,13 +33,13 @@ function commitVote() {
             }
         },
         error: function (xhr) {
-            if(data.error == null)
+            if(xhr.error == null)
             {
                 alert("网络错误")
             }
             else
             {
-                 alert(data.error)
+                 alert(xhr.error)
             }
         }
     };
