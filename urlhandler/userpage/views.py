@@ -376,7 +376,7 @@ def vote_main_view(request, voteid, openid):
     voteDict['max_num'] = vote.max_num
     voteDict['items'] = []
 
-    user = User.obejcts.get(weixin_id=openid)
+    user = User.objects.get(weixin_id=openid)
     stu_id = user.stu_id
 
     voteItems = VoteItem.objects.filter(vote_key=vote.key, status__gte=0)
