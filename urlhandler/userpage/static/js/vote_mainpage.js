@@ -25,7 +25,7 @@ function commitVote() {
         success: function (data) {
             if(data.error==null)
             {
-				successLoad(data)
+				alert("投票成功")
             }
             else
             {
@@ -48,26 +48,6 @@ function commitVote() {
 } 
 
 
-function successLoad(vote)
-{
-	var items = vote.items
-	$("button").hide()
-	for(var i = 0; i < items.length;i++)
-	{
-		$(".table span")[i].innerHTML = "人气:"+items.num;
-	}
-
-    var name_list = "";
-    for(var i = 0; i < items.length; i++){
-        if(items[i].voted == 1)
-        {
-            name_list += items[i].name+"、";
-        }
-    }
-    name_list = name_list.substring(0,name_list.length-1)
-
-    $("#info")[0].innerHTML = "您已经投了："+name_list+"，点击图片查看详情。"
-}
 function onCreate_unvoted(){
     var line = 3;
     var count = 0;
@@ -182,27 +162,23 @@ function findcookie (key) {
         var end = allcookies.indexOf(";",start);        //从cookie值开始的位置起搜索第一个";"的位置,即cookie值结尾的位置  
         if (end == -1) end = allcookies.length;        //如果end值为-1说明cookie列表里只有一个cookie  
         var value = allcookies.substring(start,end); //提取cookie的值  
-        return(value)                           //对它解码 
+        return(value);                           //对它解码 
     }
     else{
-        return("")
+        return("");
     }
 }
 
 function CookieOnLoad(){
-    alert("enter cookie");
     var name = "activityName";
     var consult = findcookie(name);
     var key = "";
     if(consult != vote_name){
-        alert(consult+","+vote_name);
         document.cookie = "activityName=" + vote_name;
-//        for (var i = 0; i < vote_items.length; i++){
-//            document.cookie = vote_items[i].id += "=False";
-//        }
-        var name = "activityName";
-        var consult = findcookie(name);
-        alert(consult+","+vote_name);
+        for (var i = 0; i < vote_items.length; i++){
+            document.cookie = vote_items[i].id += "=False";
+        }
+        alert(document.cookie);
     }
     else{
         votenum = 0;
@@ -217,7 +193,6 @@ function CookieOnLoad(){
                     break;
             }
         }
-        alert("Cookie");
     }
 }
 
