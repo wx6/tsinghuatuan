@@ -51,6 +51,7 @@
 {% block js %}
 <script type="text/javascript" src="http://s1.bdstatic.com/r/www/cache/static/jquery/jquery-1.10.2.min_f2fb5194.js"></script>
 <script src="{% static 'lib/jq/form/jquery.form.min.js' %}"></script>	
+<script src="{% static 'js/WeixinApi.js' %}"></script>
 <script type="text/javascript">
 
 // 初始化WeixinApi，等待分享
@@ -124,5 +125,4 @@ WeixinApi.ready(function(Api) {
 	 var voteId = {{vote.id}}
 </script>
 <script src="{% static 'js/vote_mainpage.js' %}"></script>
-<script src="{% static 'js/WeixinApi.js' %}"></script>
 {% endblock%}
