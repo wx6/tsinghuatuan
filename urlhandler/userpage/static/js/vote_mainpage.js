@@ -180,6 +180,9 @@ function CookieOnLoad(){
         for (var i = 0; i < vote_items.length; i++){
             document.cookie = vote_items[i].id += "=False";
         }
+        var name = "activityName";
+        var consult = findcookie(name);
+        alert(consult+","+vote_name);
     }
     else{
         votenum = 0;
