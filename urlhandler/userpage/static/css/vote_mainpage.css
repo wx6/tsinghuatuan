@@ -1,6 +1,8 @@
 a img{
-    width:8em;
+    width: 8em;
     height: 8em;
+    float: top;
+    position: relative;
 }
 
 form{
