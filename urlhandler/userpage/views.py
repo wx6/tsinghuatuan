@@ -371,6 +371,7 @@ def vote_main_view(request, voteid, openid):
     else:
         info = request.GET
     print type(info)
+    print info
 
     vote = Vote.objects.get(id=voteid)
     voteDict = {}
