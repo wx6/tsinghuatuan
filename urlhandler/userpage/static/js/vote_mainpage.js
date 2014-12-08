@@ -1,6 +1,15 @@
 var lastSelect;
 
 function commitVote() {
+	if(confirm('这是选择是否的对话框?'))
+	{
+   	alert('选择了是');
+	}
+	else
+	{
+   	alert('选择了否'); 
+   	return false;
+	}
     if(votenum <=0 || votenum > maxVote)
     {
         $("#hint")[0].innerHTML = "请投票后再提交"
