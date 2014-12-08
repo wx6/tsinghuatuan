@@ -376,6 +376,9 @@ def vote_main_view(request, voteid, openid):
     voteDict['max_num'] = vote.max_num
     voteDict['items'] = []
 
+    user = User.obejcts.get(weixin_id=openid)
+    stu_id = user.stu_id
+
     voteItems = VoteItem.objects.filter(vote_key=vote.key, status__gte=0)
     for item in  voteItems:
         itemDict = {}
@@ -384,6 +387,12 @@ def vote_main_view(request, voteid, openid):
         itemDict['description'] = item.description
         itemDict['vote_num'] = int(item.vote_num)
         itemDict['id'] = int(item.id)
+        singleVotes = SingleVote.objects.filter(stu_id=stu_id, item_id=itemDict['id'])
+        if singleVotes.exists():
+            itemDict['voted'] = 1
+            voteDict['voted'] = 1
+        else:
+            itemDict['voted'] = 0
         voteDict['items'].append(itemDict)
 
     return render_to_response('vote_mainpage.html', {
