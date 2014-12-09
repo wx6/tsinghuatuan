@@ -70,6 +70,109 @@ function successLoad(data)
 	location.reload(true);
 }
 
+function onCreate_ended()
+{
+     $("button").remove();
+    var line = 3;
+    var count = 0;
+    var newHtml = "";
+    var td1,td2,td3;
+    var size = document.body.clientWidth * 0.3;
+    for (count = 0;count < vote_items.length;count++)
+    {
+        var item = vote_items[count];
+       if(newHtml && (count % line) == 0 )
+       {
+           $("table").append(newHtml);
+           newHtml = "";
+       }
+       switch(count % line)
+       {
+        case 0: 
+            td1 = "<tr><td><div class="+"table"+"><a href='http://wx6.igeek.asia/u/vote_item_detail/"+item.id+"'><img src = "+ item.pic_url +" style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem'>"+item.name+"</p><span>人气:"+item.vote_num+"</span></div></td>"
+            newHtml += td1;
+            break;
+        case 1:
+            td2 =  "<td><div class="+"table"+"><a href='http://wx6.igeek.asia/u/vote_item_detail/"+item.id+"'><img src = "+ item.pic_url +" style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem'>"+item.name+"</p><span>人气:"+item.vote_num+"</span></div></td>"
+            newHtml += td2;
+            break;
+        case (line-1):
+            td3 = "<td><div class="+"table"+"><a href='http://wx6.igeek.asia/u/vote_item_detail/"+item.id+"'><img src = "+ item.pic_url +" style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem'>"+item.name+"</p><span>人气:"+item.vote_num+"</span></div></td></tr>"
+            newHtml += td3;
+            break;
+        default:
+            td2 = "<td><div class="+"table"+"><a href='http://wx6.igeek.asia/u/vote_item_detail/"+item.id+"'><img src = "+ item.pic_url +" style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem;>"+item.name+"</p><span>人气:"+item.vote_num+"</span></div></td>"
+            newHtml += td2;
+            break;
+       }
+    }
+    if(count % line != 0)
+        newHtml += "</tr>";
+    if(newHtml)
+    {
+        $("table").append(newHtml);
+        newHtml = "";
+    }
+    var img = $("a img");
+    for(var i = 0; i < img.length; i++){
+        img[i].style.width = document.body.clientWidth * 0.3;
+        img[i].style.height = document.body.clientWidth * 0.3;
+    }
+    $("#info")[0].innerHTML = "投票活动已经结束,点击图片查看详情。"
+}
+
+function onCreate_unstarted()
+{
+    $("button").remove();
+    var line = 3;
+    var count = 0;
+    var newHtml = "";
+    var td1,td2,td3;
+    var size = document.body.clientWidth * 0.3;
+    for (count = 0;count < vote_items.length;count++)
+    {
+        var item = vote_items[count];
+       if(newHtml && (count % line) == 0 )
+       {
+           $("table").append(newHtml);
+           newHtml = "";
+       }
+       switch(count % line)
+       {
+        case 0: 
+            td1 = "<tr><td><div class="+"table"+"><a href='http://wx6.igeek.asia/u/vote_item_detail/"+item.id+"'><img src = "+ item.pic_url +" style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem'>"+item.name+"</p><span></span></div></td>"
+            newHtml +=
+             td1;
+            break;
+        case 1:
+            td2 =  "<td><div class="+"table"+"><a href='http://wx6.igeek.asia/u/vote_item_detail/"+item.id+"'><img src = "+ item.pic_url +" style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem'>"+item.name+"</p><span></span></div></td>"
+            newHtml += td2;
+            break;
+        case (line-1):
+            td3 = "<td><div class="+"table"+"><a href='http://wx6.igeek.asia/u/vote_item_detail/"+item.id+"'><img src = "+ item.pic_url +" style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem'>"+item.name+"</p><span></span></div></td></tr>"
+            newHtml += td3;
+            break;
+        default:
+            td2 = "<td><div class="+"table"+"><a href='http://wx6.igeek.asia/u/vote_item_detail/"+item.id+"'><img src = "+ item.pic_url +" style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem;>"+item.name+"</p><span></span></div></td>"
+            newHtml += td2;
+            break;
+       }
+    }
+    if(count % line != 0)
+        newHtml += "</tr>";
+    if(newHtml)
+    {
+        $("table").append(newHtml);
+        newHtml = "";
+    }
+    var img = $("a img");
+    for(var i = 0; i < img.length; i++){
+        img[i].style.width = document.body.clientWidth * 0.3;
+        img[i].style.height = document.body.clientWidth * 0.3;
+    }
+    $("#info")[0].innerHTML = "点击图片查看详情。" 
+}
+
 function onCreate_unvoted(){
 	$("button").show();
     var line = 3;
@@ -181,7 +284,15 @@ function onCreate_voted(){
 }
 
 function onCreate(){
-    if(voted == 0)
+    if(started == 0)
+    {
+        onCreate_unstarted();
+    }
+    else if(ended == 1)
+    {
+        onCreate_ended()
+    }
+    else if(voted == 0)
         onCreate_unvoted();
     else
         onCreate_voted();
