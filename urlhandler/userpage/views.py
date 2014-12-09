@@ -244,8 +244,14 @@ def vote_main_view(request, voteid, openid):
     voteDict['voted'] = 0
 
     now = datetime.datetime.now()
-    voteDict['started'] = (now > vote.start_time)
-    voteDict['ended'] = (now > vote.end_time)
+    if (now > vote.start_time):
+        voteDict['started'] = 1
+    else:
+        voteDict['started'] = 0
+    if (now > vote.end_time):
+        voteDict['ended'] = 1
+    else:
+        voteDict['ended'] = 0
 
     user = User.objects.filter(weixin_id=openid)[0]
     stu_id = user.stu_id
