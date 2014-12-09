@@ -116,7 +116,8 @@ WeixinApi.ready(function(Api) {
                    	'name': '{{item.name}}',
                    	'vote_num':{{item.vote_num}},
                    	'pic_url':'{{item.pic_url}}',
-					'id':{{item.id}}
+					'id':{{item.id}},
+                    'url':"{% url 'userpage.views.vote_item_detail' item.id %}"
                 }{% if forloop.last %}{% else %},{% endif %}
             {% endfor %}
         ];
