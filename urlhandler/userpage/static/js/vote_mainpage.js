@@ -72,7 +72,8 @@ function successLoad(data)
 
 function onCreate_ended()
 {
-     $("button").remove();
+    $("#info")[0].innerHTML = "投票活动已经结束,点击图片查看详情。"
+    $("button").remove();
     var line = 3;
     var count = 0;
     var newHtml = "";
@@ -118,11 +119,11 @@ function onCreate_ended()
         img[i].style.width = document.body.clientWidth * 0.3;
         img[i].style.height = document.body.clientWidth * 0.3;
     }
-    $("#info")[0].innerHTML = "投票活动已经结束,点击图片查看详情。"
 }
 
 function onCreate_unstarted()
 {
+    $("#info")[0].innerHTML = "活动尚未开始，点击图片查看详情。" 
     $("button").remove();
     var line = 3;
     var count = 0;
@@ -170,10 +171,10 @@ function onCreate_unstarted()
         img[i].style.width = document.body.clientWidth * 0.3;
         img[i].style.height = document.body.clientWidth * 0.3;
     }
-    $("#info")[0].innerHTML = "点击图片查看详情。" 
 }
 
 function onCreate_unvoted(){
+    $("#info")[0].innerHTML = "您可以投" + maxVote + "项，点击图片查看详情"
 	$("button").show();
     var line = 3;
     var count = 0;
@@ -225,6 +226,7 @@ function onCreate_unvoted(){
 }
 
 function onCreate_voted(){
+    $("#info")[0].innerHTML = "您已经投了："+name_list+"，点击图片查看详情。"
     $("button").remove();
     var line = 3;
     var count = 0;
@@ -280,7 +282,6 @@ function onCreate_voted(){
         img[i].style.width = document.body.clientWidth * 0.3;
         img[i].style.height = document.body.clientWidth * 0.3;
     }
-    $("#info")[0].innerHTML = "您已经投了："+name_list+"，点击图片查看详情。"
 }
 
 function onCreate(){
