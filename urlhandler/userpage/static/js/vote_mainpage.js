@@ -39,7 +39,7 @@ function commitVote() {
             }
             else
             {
-                 alert(xhr.error)
+                 alert("网络错误")
             }
         }
     };
@@ -67,11 +67,11 @@ function successLoad(data)
 
     $("#info")[0].innerHTML = "您已经投了："+name_list+"，点击图片查看详情。"
 
-	alert("投票成功")
 	location.reload(true);
 }
 
 function onCreate_unvoted(){
+	$("button").show();
     var line = 3;
     var count = 0;
     var newHtml = "";
@@ -122,6 +122,7 @@ function onCreate_unvoted(){
 }
 
 function onCreate_voted(){
+    $("button").remove();
     var line = 3;
     var count = 0;
     var newHtml = "";
@@ -162,7 +163,6 @@ function onCreate_voted(){
         $("table").append(newHtml);
         newHtml = "";
     }
-    $("button").remove();
     var name_list = "";
     for(var i = 0; i < vote_items.length; i++){
         if(vote_items[i].voted == 1)
