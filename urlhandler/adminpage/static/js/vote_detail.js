@@ -655,6 +655,8 @@ function lockItemsByStatus(status, start_time, end_time){
             $("input[name='name"+(i+1).toString()+"']").prop('disabled',true);
             $("input[name='description"+(i+1).toString()+"']").prop('disabled',true);
             $("input[name='pic_url"+(i+1).toString()+"']").prop('disabled',true);
+            $("#input-pic_url").prop('disabled',true);
+            $("#input-description").prop('disabled',true);
         }
     }
 }
