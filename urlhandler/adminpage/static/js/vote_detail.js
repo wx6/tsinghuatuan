@@ -392,26 +392,36 @@ function beforeSubmit(formData, jqForm, options) {
             value: vote.id.toString()
         });
     }
-    return true;
-}
-
-function beforePublish(formData, jqForm, options) {
-    if (beforeSubmit(formData, jqForm, options)) {
-        showProcessing();
-        if (vote.id) {
-            formData.push({
-                name: 'id',
-                required: false,
-                type: 'number',
-                value: vote.id.toString()
-            });
-        }
+    if (vote.status > 0){
         formData.push({
             name: 'publish',
             required: false,
             type: 'number',
             value: '1'
         });
+    }
+    return true;
+}
+
+function beforePublish(formData, jqForm, options) {
+    if (beforeSubmit(formData, jqForm, options)) {
+        showProcessing();
+        // if (vote.id) {
+        //     formData.push({
+        //         name: 'id',
+        //         required: false,
+        //         type: 'number',
+        //         value: vote.id.toString()
+        //     });
+        // }
+        if (vote.status == 0){
+            formData.push({
+                name: 'publish',
+                required: false,
+                type: 'number',
+                value: '1'
+            });
+        }
         return true;
     } else {
         return false;
