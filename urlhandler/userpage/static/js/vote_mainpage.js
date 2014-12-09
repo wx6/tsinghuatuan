@@ -72,6 +72,7 @@ function successLoad(data)
 }
 
 function onCreate_unvoted(){
+	$("button").show();
     var line = 3;
     var count = 0;
     var newHtml = "";
@@ -118,7 +119,6 @@ function onCreate_unvoted(){
         img[i].style.height = document.body.clientWidth * 0.3;
     }
 	$(".table span").html("");
-	$("button").show();
     CookieOnLoad();
 }
 
