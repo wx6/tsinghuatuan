@@ -1,7 +1,7 @@
 var lastSelect;
 
 function commitVote() {
-    var name_list = "您选择了：";
+    var name_list = "您要投的是：";
     var names = $(".voteitem");
     var votes = $("input");
     for(var i = 0; i < names.length; i++){
