@@ -604,10 +604,12 @@ def vote_post(request):
 
 def vote_modify(vote):
     curVote = Vote.objects.get(id=vote['id'])
+    old_start_time = curVote.start_time
+
     for k in ['pic_url', 'description']:
         setattr(curVote, k, vote[k])
     now = datetime.now()
-    if now < curVote.start_time:
+    if now < old_start_time:
         setattr(curVote, 'start_time', str_to_datetime(vote['start_time']))
     setattr(curVote, 'end_time', str_to_datetime(vote['end_time']))
     if 'publish' in vote:
@@ -617,7 +619,7 @@ def vote_modify(vote):
     setattr(curVote, 'max_num', int(vote['max_num']))
     curVote.save()
 
-    if (now < curVote.start_time):
+    if (now < old_start_time):
         vote_item_delete(curVote.key)
         vote_item_create(vote, curVote)
     else:
@@ -642,7 +644,7 @@ def vote_item_create(vote, newVote):
 
 
 def vote_item_modify(vote, newVote):
-    voteItems = VoteItem.objects.filter(vote_key=newVote.key)
+    voteItems = VoteItem.objects.filter(vote_key=newVote.key, status__gte=0)
     count = 0
     for item in voteItems:
         count = count + 1
