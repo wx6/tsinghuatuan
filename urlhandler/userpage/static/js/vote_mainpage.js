@@ -72,7 +72,7 @@ function successLoad(data)
 
 function onCreate_ended()
 {
-    $("#info")[0].innerHTML = "投票活动已经结束,点击图片查看详情。"
+    $("#info")[0].innerHTML = "投票活动已经结束，点击图片查看详情。"
     $("button").remove();
     var line = 3;
     var count = 0;
