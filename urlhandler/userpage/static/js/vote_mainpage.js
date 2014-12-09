@@ -226,6 +226,15 @@ function onCreate_unvoted(){
 }
 
 function onCreate_voted(){
+    var name_list = "";
+    for(var i = 0; i < vote_items.length; i++){
+        if(vote_items[i].voted == 1)
+        {
+            name_list += vote_items[i].name+"、";
+//            $($(".table")[i]).append("<p>已投票<p>")
+        }
+    }
+    name_list = name_list.substring(0,name_list.length-1)
     $("#info")[0].innerHTML = "您已经投了："+name_list+"，点击图片查看详情。"
     $("button").remove();
     var line = 3;
@@ -268,15 +277,7 @@ function onCreate_voted(){
         $("table").append(newHtml);
         newHtml = "";
     }
-    var name_list = "";
-    for(var i = 0; i < vote_items.length; i++){
-        if(vote_items[i].voted == 1)
-        {
-            name_list += vote_items[i].name+"、";
-//            $($(".table")[i]).append("<p>已投票<p>")
-        }
-    }
-    name_list = name_list.substring(0,name_list.length-1)
+
     var img = $("a img");
     for(var i = 0; i < img.length; i++){
         img[i].style.width = document.body.clientWidth * 0.3;
