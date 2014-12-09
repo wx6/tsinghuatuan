@@ -39,7 +39,7 @@ function commitVote() {
             }
             else
             {
-                 alert(xhr.error)
+                 alert("网络错误")
             }
         }
     };
