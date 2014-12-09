@@ -150,7 +150,7 @@ var tdActionMap = {
     	// 	beforeVote.push(vot[key]);
     	// 	return '<span id="del'+vot[key]+'" class="td-ban glyphicon glyphicon-ban-circle" ></span>';
     	// }
-    	if(now < getDateByObj(vot.end_time) && now > getDateByObj(vot.start_time)){
+    	if(now < getDateByObj(vot.end_time) && now > getDateByObj(vot.start_time) && vote.status != 0){
     		duringVote.push(vot[key]);
     		return '<span id="del'+vot[key]+'" class="td-ban glyphicon glyphicon-ban-circle" ></span>';
     	}
