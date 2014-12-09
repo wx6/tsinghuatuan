@@ -51,6 +51,7 @@ function successLoad(data)
 {
 	$("button").remove();
 	$(".checkbox").remove();
+    /*
 	var item = data.items;
 	for(var i = 0; i < item.length;i++)
 	{
@@ -66,6 +67,7 @@ function successLoad(data)
     name_list = name_list.substring(0,name_list.length-1)
 
     $("#info")[0].innerHTML = "您已经投了："+name_list+"，点击图片查看详情。"
+    */
 
 	location.reload(true);
 }
