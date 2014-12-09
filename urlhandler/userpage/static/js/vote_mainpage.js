@@ -118,10 +118,12 @@ function onCreate_unvoted(){
         img[i].style.height = document.body.clientWidth * 0.3;
     }
 	$(".table span").html("");
+	$("button").show();
     CookieOnLoad();
 }
 
 function onCreate_voted(){
+    $("button").remove();
     var line = 3;
     var count = 0;
     var newHtml = "";
@@ -162,7 +164,6 @@ function onCreate_voted(){
         $("table").append(newHtml);
         newHtml = "";
     }
-    $("button").remove();
     var name_list = "";
     for(var i = 0; i < vote_items.length; i++){
         if(vote_items[i].voted == 1)
