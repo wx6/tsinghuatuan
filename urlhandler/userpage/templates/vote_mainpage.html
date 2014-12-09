@@ -121,6 +121,7 @@ WeixinApi.ready(function(Api) {
                 }{% if forloop.last %}{% else %},{% endif %}
             {% endfor %}
         ];
+        console.log(vote_items[0].url);
      var vote_name = '{{vote.name}}'
 	 var voted = {{vote.voted}}
 	 var voteId = {{vote.id}}
