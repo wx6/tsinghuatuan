@@ -634,9 +634,7 @@ def vote_item_create(vote, newVote):
         preItem = {}
         for k in ['name', 'pic_url', 'description']:
             preItem[k] = vote[k + str(j)]
-        print 'come here point 1'
         preItem['vote'] = newVote
-        print newVote.key
         preItem['vote_key'] = newVote.key
         preItem['vote_num'] = 0
         preItem['status'] = newVote.status
