@@ -63,7 +63,7 @@ if 'SERVER_SOFTWARE' in os.environ:
             'NAME': 'wx6_test',
             'USER': 'wx6',
             'PASSWORD': 'KaKqBLXzlHIbqJvq',
-            'HOST': 'db.igeek.asia',
+            'HOST': '127.0.0.1',
             'PORT': '3306',
             }
     }
@@ -81,7 +81,7 @@ elif (os.environ.get('USER', '') == 'ssastadmin') or ('SSAST_DEPLOYMENT' in os.e
             'NAME': 'wx6_test',
             'USER': 'wx6',
             'PASSWORD': 'KaKqBLXzlHIbqJvq',
-            'HOST': 'db.igeek.asia',
+            'HOST': '127.0.0.1',
             'PORT': '3306',
             }
     }
@@ -92,7 +92,7 @@ else:
             'NAME': 'wx6_test',
             'USER': 'wx6',
             'PASSWORD': 'KaKqBLXzlHIbqJvq',
-            'HOST': 'db.igeek.asia',
+            'HOST': '127.0.0.1',
             'PORT': '3306',
             }
     }
