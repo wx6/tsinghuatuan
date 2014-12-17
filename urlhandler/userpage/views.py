@@ -200,38 +200,7 @@ def helplecture_view(request):
 
 ################################## Voting #################################
 # By: LiuJunlin
-def vote_validate_user(request, voteid):
-    url = 'https://open.weixin.qq.com/connect/oauth2/authorize?'\
-              'appid=' + WEIXIN_APPID + \
-              '&redirect_uri=' + s_reverse_vote_mainpage(voteid) + \
-              '&response_type=code' + \
-              '&scope=snsapi_base' + \
-              '&state=STATE' + \
-              '#wechat_redirect'
-
-    return HttpResponseRedirect(url)
-
-
 def vote_main_view(request, voteid, openid):
-    '''
-    if not ('code' in request.GET):
-        return HttpResponseRedirect(s_reverse_vote_validate_user(voteid))
-    else:
-        code = request.GET['code']
-        req_url = 'https://api.weixin.qq.com/sns/oauth2/access_token' + \
-                   '?appid=' + WEIXIN_APPID + \
-                   '&secret=' + WEIXIN_SECRET + \
-                   '&code=' + code + \
-                   '&grant_type=authorization_code'
-        req = urllib2.Request(url=req_url)
-        res_data = urllib2.urlopen(req).read()
-        res_dict = json.loads(res_data)
-        openid = res_dict['openid']
-        users = User.objects.filter(weixin_id=openid)
-        if not users.exists():
-            return HttpResponseRedirect(s_reverse_validate(openid))
-    '''
-
     vote = Vote.objects.get(id=voteid)
     voteDict = {}
     voteDict['id'] = voteid
@@ -314,9 +283,6 @@ def vote_user_post(request, voteid, openid):
                 preVote['item_id'] = item.id
                 preVote['stu_id'] = user.stu_id
                 SingleVote.objects.create(**preVote)
-                # item.vote_num = item.vote_num + 1
-                # item.save()
-                # item.update(vote_num=F('vote_num')+1)
                 VoteItem.objects.filter(id=item.id).update(vote_num=F('vote_num')+1)
                 itemDict['vote_num'] = item.vote_num
                 itemDict['voted'] = 1
