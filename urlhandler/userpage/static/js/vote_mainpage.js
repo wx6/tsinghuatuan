@@ -87,7 +87,8 @@ function addVoteNumber()
 
 function createBasicVoteItem()
 {
-     for (count = 0;count < vote_items.length;count++)
+    var newHtml = "";
+    for (count = 0;count < vote_items.length;count++)
     {
         var item = vote_items[count];
         var imgTag =  "<a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a>";
