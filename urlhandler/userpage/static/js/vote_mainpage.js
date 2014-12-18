@@ -301,5 +301,6 @@ function CookieOnSelect(id){
     }
 }
 
+var line = 3;
 var size = document.body.clientWidth * 0.3;
 onCreate();
