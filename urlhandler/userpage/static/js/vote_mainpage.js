@@ -67,7 +67,7 @@ function addCheckBox()
      for (var count = 0; count < vote_items.length;count++)
     {
         var item = vote_items[count];
-        var checkboxTag = "<input type ='checkbox' name="+item.id+" id="+item.id;
+        var checkboxTag = "<input type ='checkbox' name="+item.id+" id='"+item.id+"'";
         var onclickTag = "onclick = "+"CookieOnSelect(this.id)>";
         var labelTag = "<label for="+item.id+"></label>";
         $(".checkbox")[count].innerHTML = checkboxTag+onclickTag+labelTag;
