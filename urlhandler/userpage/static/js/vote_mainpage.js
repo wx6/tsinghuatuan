@@ -265,13 +265,12 @@ function CookieOnSelect(id){
 //        }
 //    }
     var input = document.getElementById(id);
-    if(votenum >= maxVote)
+    document.cookie = escape(id) + "=" + input.checked;
+    votenum += input.checked? 1 : -1;
+    if(votenum > maxVote)
         voteNumOverflow(maxVote,id);
-    else{
+    else
         lastSelect = id;
-        document.cookie = escape(id) + "=" + input.checked;
-        votenum += input.checked? 1 : -1;
-    }
 }
 
 function voteNumOverflow(vtLim,id){
