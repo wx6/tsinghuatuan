@@ -19,8 +19,14 @@ function commitVote() {
     else{
         return false;
     }
-    
-    var options = {
+    var options = generateOptions();
+    $('#voteItem').ajaxSubmit(options);
+    return false;
+} 
+
+function generateOptions()
+{
+     var options = {
         dataType: 'json',
         success: function (data) {
             if(data.error==null)
@@ -43,9 +49,8 @@ function commitVote() {
             }
         }
     };
-    $('#voteItem').ajaxSubmit(options);
-    return false;
-} 
+    return options;
+}
 
 function successLoad(data)
 {
@@ -54,6 +59,7 @@ function successLoad(data)
     location.reload(true);
 }
 
+
 function addImg()
 {
     for (var count = 0; count < vote_items.length;count++)
@@ -61,6 +67,7 @@ function addImg()
         $(".table img")[count].src = vote_items[count].pic_url;
     }
 }
+
 
 function addCheckBox()
 {
@@ -74,6 +81,7 @@ function addCheckBox()
     }
 }
 
+
 function addVoteNumber()
 {
     for (var count = 0; count < vote_items.length;count++)
@@ -84,40 +92,17 @@ function addVoteNumber()
 }
 
 
-
 function createBasicVoteItem()
 {
     var newHtml = "";
     for (count = 0;count < vote_items.length;count++)
     {
-        var item = vote_items[count];
-        var imgTag =  "<a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a>";
-        var nameTag =  "<p class='voteitem'>"+item.name+"</p>";
-        var item = vote_items[count];
        if(newHtml && (count % line) == 0 )
        {
            $("table").append(newHtml);
            newHtml = "";
        }
-       switch(count % line)
-       {
-        case 0: 
-            td1 = "<tr><td><div class="+"table"+">"+imgTag+nameTag+"<span></span></div></td>";
-            newHtml += td1;
-            break;
-        case 1:
-            td2 =  "<td><div class="+"table"+">"+imgTag+nameTag+"<span></span></div></td>";
-            newHtml += td2;
-            break;
-        case (line-1):
-            td3 = "<td><div class="+"table"+">"+imgTag+nameTag+"<span></span></div></td></tr>";
-            newHtml += td3;
-            break;
-        default:
-            td2 = "<td><div class="+"table"+">"+imgTag+nameTag+"<span></span></div></td>";
-            newHtml += td2;
-            break;
-       }
+       newHtml += createSingalItem(count,line,vote_items);
     }
     if(count % line != 0)
         newHtml += "</tr>";
@@ -126,6 +111,31 @@ function createBasicVoteItem()
         $("table").append(newHtml);
         newHtml = "";
     }
+}
+
+function createSingalItem(count,line,vote_items)
+{
+    var item = vote_items[count];
+    var td = "";
+    var imgTag =  "<a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a>";
+    var nameTag =  "<p class='voteitem'>"+item.name+"</p>";
+    var item = vote_items[count];
+    switch(count % line)
+    {
+        case 0: 
+            td = "<tr><td><div class="+"table"+">"+imgTag+nameTag+"<span></span></div></td>";
+            break;
+        case 1:
+            td =  "<td><div class="+"table"+">"+imgTag+nameTag+"<span></span></div></td>";
+            break;
+        case (line-1):
+            td = "<td><div class="+"table"+">"+imgTag+nameTag+"<span></span></div></td></tr>";
+            break;
+        default:
+            td = "<td><div class="+"table"+">"+imgTag+nameTag+"<span></span></div></td>";
+            break;
+       }
+    return td;
 }
 
 function adjustImg()
