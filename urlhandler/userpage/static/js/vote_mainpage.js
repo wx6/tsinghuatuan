@@ -9,9 +9,9 @@ function commitVote() {
             name_list += names[i].innerHTML + ","
     }
     name_list = name_list.substring(0, name_list.length-1);
-	if(votenum <=0 )
+    if(votenum <=0 )
     {
-		alert("请投票之后再提交")
+        alert("请投票之后再提交")
         return false
     }
     if(confirm(name_list))
@@ -25,7 +25,7 @@ function commitVote() {
         success: function (data) {
             if(data.error==null)
             {
-				successLoad(data);
+                successLoad(data);
             }
             else
             {
@@ -49,27 +49,9 @@ function commitVote() {
 
 function successLoad(data)
 {
-	$("button").remove();
-	$(".checkbox").remove();
-    /*
-	var item = data.items;
-	for(var i = 0; i < item.length;i++)
-	{
-		$(".table span")[i].innerHTML = "人气:"+item[i].vote_num;
-	}
-    var name_list = "";
-    for(var i = 0; i < item.length; i++){
-        if(item[i].voted == 1)
-        {
-            name_list += item[i].name+"、";
-        }
-    }
-    name_list = name_list.substring(0,name_list.length-1)
-
-    $("#info")[0].innerHTML = "您已经投了："+name_list+"，点击图片查看详情。"
-    */
-
-	location.reload(true);
+    $("button").remove();
+    $(".checkbox").remove();
+    location.reload(true);
 }
 
 function addImg()
@@ -77,6 +59,71 @@ function addImg()
     for (var count = 0; count < vote_items.length;count++)
     {
         $(".table img")[count].src = vote_items[count].pic_url;
+    }
+}
+
+function addCheckBox()
+{
+     for (var count = 0; count < vote_items.length;count++)
+    {
+        var item = vote_items[count];
+        var checkboxTag = "<input type ='checkbox' name="+item.id+" id="+item.id;
+        var onclickTag = "onclick = "+"CookieOnSelect(this.id)>";
+        var labelTag = "<label for="+item.id+"></label>";
+        $(".checkbox")[count].append(checkboxTag+onclickTag+labelTag);
+    }
+}
+
+function addVoteNumber()
+{
+    for (var count = 0; count < vote_items.length;count++)
+    {
+        var item = vote_items[count];
+        $("span")[count].append("<span>人气:"+item.vote_num+"</span>");
+    }
+}
+
+
+
+function createBasicVoteItem()
+{
+     for (count = 0;count < vote_items.length;count++)
+    {
+        var imgTag =  "<a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a>";
+        var nameTag =  "<p class='voteitem'>"+item.name+"</p>";
+        var blankCheckboxTag = "<div class = "+"checkbox"+"></div>";
+        var item = vote_items[count];
+       if(newHtml && (count % line) == 0 )
+       {
+           $("table").append(newHtml);
+           newHtml = "";
+       }
+       switch(count % line)
+       {
+        case 0: 
+            td1 = "<tr><td><div class="+"table"+">"+imgTag+nameTag+blankCheckboxTag+"<span></span></div></td>";
+            newHtml += td1;
+            break;
+        case 1:
+            td2 =  "<td><div class="+"table"+">"+imgTag+nameTag+blankCheckboxTag+"<span></span></div></td>";
+            newHtml += td2;
+            break;
+        case (line-1):
+            td3 = "<td><div class="+"table"+">"+imgTag+nameTag+blankCheckboxTag+"<span></span></div></td></tr>";
+            newHtml += td3;
+            break;
+        default:
+            td2 = "<td><div class="+"table"+">"+imgTag+nameTag+blankCheckboxTag+"<span></span></div></td>";
+            newHtml += td2;
+            break;
+       }
+    }
+    if(count % line != 0)
+        newHtml += "</tr>";
+    if(newHtml)
+    {
+        $("table").append(newHtml);
+        newHtml = "";
     }
 }
 
@@ -89,46 +136,13 @@ function onCreate_ended()
     var newHtml = "";
     var td1,td2,td3;
     var size = document.body.clientWidth * 0.3;
-    for (count = 0;count < vote_items.length;count++)
-    {
-        var item = vote_items[count];
-       if(newHtml && (count % line) == 0 )
-       {
-           $("table").append(newHtml);
-           newHtml = "";
-       }
-       switch(count % line)
-       {
-        case 0: 
-            td1 = "<tr><td><div class="+"table"+"><a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem'>"+item.name+"</p><span>人气:"+item.vote_num+"</span></div></td>"
-            newHtml += td1;
-            break;
-        case 1:
-            td2 =  "<td><div class="+"table"+"><a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem'>"+item.name+"</p><span>人气:"+item.vote_num+"</span></div></td>"
-            newHtml += td2;
-            break;
-        case (line-1):
-            td3 = "<td><div class="+"table"+"><a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem'>"+item.name+"</p><span>人气:"+item.vote_num+"</span></div></td></tr>"
-            newHtml += td3;
-            break;
-        default:
-            td2 = "<td><div class="+"table"+"><a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem;>"+item.name+"</p><span>人气:"+item.vote_num+"</span></div></td>"
-            newHtml += td2;
-            break;
-       }
-    }
-    if(count % line != 0)
-        newHtml += "</tr>";
-    if(newHtml)
-    {
-        $("table").append(newHtml);
-        newHtml = "";
-    }
+   createBasicVoteItem();
     var img = $("a img");
     for(var i = 0; i < img.length; i++){
         img[i].style.width = document.body.clientWidth * 0.3;
         img[i].style.height = document.body.clientWidth * 0.3;
     }
+    addVoteNumber();
     addImg();
 }
 
@@ -141,42 +155,7 @@ function onCreate_unstarted()
     var newHtml = "";
     var td1,td2,td3;
     var size = document.body.clientWidth * 0.3;
-    for (count = 0;count < vote_items.length;count++)
-    {
-        var item = vote_items[count];
-       if(newHtml && (count % line) == 0 )
-       {
-           $("table").append(newHtml);
-           newHtml = "";
-       }
-       switch(count % line)
-       {
-        case 0: 
-            td1 = "<tr><td><div class="+"table"+"><a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem'>"+item.name+"</p><span></span></div></td>"
-            newHtml +=
-             td1;
-            break;
-        case 1:
-            td2 =  "<td><div class="+"table"+"><a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem'>"+item.name+"</p><span></span></div></td>"
-            newHtml += td2;
-            break;
-        case (line-1):
-            td3 = "<td><div class="+"table"+"><a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem'>"+item.name+"</p><span></span></div></td></tr>"
-            newHtml += td3;
-            break;
-        default:
-            td2 = "<td><div class="+"table"+"><a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem;>"+item.name+"</p><span></span></div></td>"
-            newHtml += td2;
-            break;
-       }
-    }
-    if(count % line != 0)
-        newHtml += "</tr>";
-    if(newHtml)
-    {
-        $("table").append(newHtml);
-        newHtml = "";
-    }
+    createBasicVoteItem();
     var img = $("a img");
     for(var i = 0; i < img.length; i++){
         img[i].style.width = document.body.clientWidth * 0.3;
@@ -187,54 +166,22 @@ function onCreate_unstarted()
 
 function onCreate_unvoted(){
     $("#info")[0].innerHTML = "您可以投" + maxVote + "项，点击图片查看详情"
-	$("button").show();
+    $("button").show();
     var line = 3;
     var count = 0;
     var newHtml = "";
     var td1,td2,td3;
     var size = document.body.clientWidth * 0.3;
-    for (count = 0;count < vote_items.length;count++)
-    {
-        var item = vote_items[count];
-       if(newHtml && (count % line) == 0 )
-       {
-           $("table").append(newHtml);
-           newHtml = "";
-       }
-       switch(count % line)
-       {
-        case 0: 
-            td1 = "<tr><td><div class="+"table"+"><a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem'>"+item.name+"</p><div class = "+"checkbox"+"><input type ='checkbox' name="+item.id+" id="+item.id+" onclick = "+"CookieOnSelect(this.id)"+"><label for="+item.id+"></label></div><span>人气:"+item.vote_num+"</span></div></td>"
-            newHtml += td1;
-            break;
-        case 1:
-            td2 =  "<td><div class="+"table"+"><a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem'>"+item.name+"</p><div class = "+"checkbox"+"><input type ='checkbox' name="+item.id+" id="+item.id+" onclick = "+"CookieOnSelect(this.id)"+"><label for="+item.id+"></label></div><span>人气:"+item.vote_num+"</span></div></td>"
-            newHtml += td2;
-            break;
-        case (line-1):
-            td3 = "<td><div class="+"table"+"><a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem'>"+item.name+"</p><div class = "+"checkbox"+"><input type ='checkbox' name="+item.id+" id="+item.id+" onclick = "+"CookieOnSelect(this.id)"+"><label for="+item.id+"></label></div><span>人气:"+item.vote_num+"</span></div></td></tr>"
-            newHtml += td3;
-            break;
-        default:
-            td2 = "<td><div class="+"table"+"><a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem;>"+item.name+"</p><div class = "+"checkbox"+"><input type ='checkbox' name="+item.id+" id="+item.id+" onclick = "+"CookieOnSelect(this.id)"+"><label for="+item.id+"></label></div><span>人气:"+item.vote_num+"</span></div></td>"
-            newHtml += td2;
-            break;
-       }
-    }
-    if(count % line != 0)
-        newHtml += "</tr>";
-    if(newHtml)
-    {
-        $("table").append(newHtml);
-        newHtml = "";
-    }
+   createBasicVoteItem();
     var img = $("a img");
     for(var i = 0; i < img.length; i++){
         img[i].style.width = document.body.clientWidth * 0.3;
         img[i].style.height = document.body.clientWidth * 0.3;
     }
-	$(".table span").html("");
+    $(".table span").html("");
     CookieOnLoad();
+    addVoteNumber();
+    addCheckBox();
     addImg();
 }
 
@@ -244,7 +191,6 @@ function onCreate_voted(){
         if(vote_items[i].voted == 1)
         {
             name_list += vote_items[i].name+"、";
-//            $($(".table")[i]).append("<p>已投票<p>")
         }
     }
     name_list = name_list.substring(0,name_list.length-1)
@@ -255,47 +201,13 @@ function onCreate_voted(){
     var newHtml = "";
     var td1,td2,td3;
     var size = document.body.clientWidth * 0.3;
-    for (count = 0;count < vote_items.length;count++)
-    {
-        var item = vote_items[count];
-       if(newHtml && (count % line) == 0 )
-       {
-           $("table").append(newHtml);
-           newHtml = "";
-       }
-       switch(count % line)
-       {
-        case 0: 
-            td1 = "<tr><td><div class="+"table"+"><a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem'>"+item.name+"</p><span>人气:"+item.vote_num+"</span></div></td>"
-            newHtml += td1;
-            break;
-        case 1:
-            td2 =  "<td><div class="+"table"+"><a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem'>"+item.name+"</p><span>人气:"+item.vote_num+"</span></div></td>"
-            newHtml += td2;
-            break;
-        case (line-1):
-            td3 = "<td><div class="+"table"+"><a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem'>"+item.name+"</p><span>人气:"+item.vote_num+"</span></div></td></tr>"
-            newHtml += td3;
-            break;
-        default:
-            td2 = "<td><div class="+"table"+"><a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a> "+"<p class='voteitem;>"+item.name+"</p><span>人气:"+item.vote_num+"</span></div></td>"
-            newHtml += td2;
-            break;
-       }
-    }
-    if(count % line != 0)
-        newHtml += "</tr>";
-    if(newHtml)
-    {
-        $("table").append(newHtml);
-        newHtml = "";
-    }
-
+    createBasicVoteItem();
     var img = $("a img");
     for(var i = 0; i < img.length; i++){
         img[i].style.width = document.body.clientWidth * 0.3;
         img[i].style.height = document.body.clientWidth * 0.3;
     }
+    addVoteNumber();
     addImg();
 }
 
