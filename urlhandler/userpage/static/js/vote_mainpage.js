@@ -221,58 +221,71 @@ function findcookie (key) {
 }
 
 function CookieOnLoad(){
-    var name = "activityID";
-    var consult = findcookie(name);
-    var key = "";
-    if(consult != voteId){
-        var n = "activityID=" + voteId;
-        document.cookie = n;
-        for (var i = 0; i < vote_items.length; i++){
-            document.cookie = vote_items[i].id + "=False";
-        }
+    var consult = findcookie("activityID");
+    if(consult != voteId)
+        initCookie(voteId, vote_items);
+    else
+        loadCookie();
+}
+
+function initCookie(id, items){
+    var n = "activityID=" + id;
+    document.cookie = n;
+    for (var i = 0; i < items.length; i++){
+        document.cookie = items[i].id + "=false";
     }
-    else{
-        votenum = 0;
-        var form = document.getElementsByTagName("Input");
-        for(var i = 0; i < form.length; i++){
-            consult = findcookie(form[i].id);
-            if(consult == "True"){
-                form[i].checked = true;
-                lastSelect = form[i].id;
-                votenum++;
-                if(votenum >= maxVote)
-                    break;
-            }
+}
+
+function loadCookie(){
+    votenum = 0;
+    var form = document.getElementsByTagName("Input");
+    for(var i = 0; i < form.length; i++){
+        consult = findcookie(form[i].id);
+        if(consult == "true" && votenum < maxVote){
+            form[i].checked = true;
+            lastSelect = form[i].id;
+            votenum++;
         }
     }
 }
 
 function CookieOnSelect(id){
-    var consult = findcookie(id);
-    if(consult == "True"){
-        document.cookie = escape(id) + "=False";
-        votenum--;
+//    var consult = findcookie(id);
+//    if(consult == "true"){
+//        document.cookie = escape(id) + "=false";
+//        votenum--;
+//    }
+//    else{
+//        if(votenum >= maxVote)
+//            voteNumOverflow(maxVote,id);
+//        else{
+//            lastSelect = id;
+//            document.cookie = escape(id) + "=true";
+//            votenum++;
+//        }
+//    }
+    var input = document.getElementById(id);
+    if(votenum >= maxVote)
+        voteNumOverflow(maxVote,id);
+    else{
+        lastSelect = id;
+        document.cookie = escape(id) + "=" + input.checked.toLocalString();
+        votenum += input.checked? 1 : -1;
+    }
+}
+
+function voteNumOverflow(vtLim,id){
+    if(maxVote == 1){
+        var input = document.getElementById(lastSelect);
+        input.checked = false;
+        document.cookie = escape(lastSelect) + "=false";
+        document.cookie = escape(id) + "=true";
+        lastSelect = id;
     }
     else{
-        if(votenum >= maxVote){
-            if(maxVote == 1){
-                var input = document.getElementById(lastSelect);
-                input.checked = false;
-                document.cookie = escape(lastSelect) + "=False";
-                document.cookie = escape(id) + "=True";
-                lastSelect = id;
-            }
-            else{
-                var input = document.getElementById(id);
-                input.checked = false;
-                alert("您的投票数已经达到上限！");
-            }
-        }
-        else{
-            lastSelect = id;
-            document.cookie = escape(id) + "=True";
-            votenum++;
-        }
+        var input = document.getElementById(id);
+        input.checked = false;
+        alert("您的投票数已经达到上限！");
     }
 }
 
