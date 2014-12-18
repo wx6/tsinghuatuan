@@ -25,7 +25,7 @@ handler_list = [
 
     #### add by liu junlin ####
     {'check': check_vote_event,             'response': response_vote_event},
-    # {'check': check_clear_vote_record,      'response': response_clear_vote_record}
+    {'check': check_clear_vote_record,      'response': response_clear_vote_record}
     #### end by liu junlin ####
 ]
 
