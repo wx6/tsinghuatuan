@@ -269,7 +269,7 @@ function CookieOnSelect(id){
         voteNumOverflow(maxVote,id);
     else{
         lastSelect = id;
-        document.cookie = escape(id) + "=" + input.checked.toLocalString();
+        document.cookie = escape(id) + "=" + input.checked;
         votenum += input.checked? 1 : -1;
     }
 }
