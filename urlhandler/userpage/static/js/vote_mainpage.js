@@ -1,14 +1,7 @@
 var lastSelect;
 
 function commitVote() {
-    var name_list = "您要投的是：";
-    var names = $(".voteitem");
-    var votes = $("input");
-    for(var i = 0; i < names.length; i++){
-        if(votes[i].checked)
-            name_list += names[i].innerHTML + ","
-    }
-    name_list = name_list.substring(0, name_list.length-1);
+    var name_list = generateVoteNames();
     if(votenum <=0 )
     {
         alert("请投票之后再提交")
@@ -23,6 +16,19 @@ function commitVote() {
     $('#voteItem').ajaxSubmit(options);
     return false;
 } 
+
+function generateVoteNames()
+{
+    var name_list = "您要投的是：";
+    var names = $(".voteitem");
+    var votes = $("input");
+    for(var i = 0; i < names.length; i++){
+        if(votes[i].checked)
+            name_list += names[i].innerHTML + ","
+    }
+    name_list = name_list.substring(0, name_list.length-1);
+    return name_list;
+}
 
 function generateOptions()
 {
@@ -180,14 +186,7 @@ function onCreate_unvoted(){
 }
 
 function onCreate_voted(){
-    var name_list = "";
-    for(var i = 0; i < vote_items.length; i++){
-        if(vote_items[i].voted == 1)
-        {
-            name_list += vote_items[i].name+"、";
-        }
-    }
-    name_list = name_list.substring(0,name_list.length-1)
+    var name_list = generateVoteNames();
     $("#info")[0].innerHTML = "您已经投了："+name_list+"，点击图片查看详情。"
     $("button").remove();
     createBasicVoteItem();
