@@ -70,7 +70,7 @@ function addCheckBox()
         var checkboxTag = "<input type ='checkbox' name="+item.id+" id='"+item.id+"'";
         var onclickTag = "onclick = "+"CookieOnSelect(this.id)>";
         var labelTag = "<label for="+item.id+"></label>";
-        $(".checkbox")[count].innerHTML = checkboxTag+onclickTag+labelTag;
+        $("p")[count].innerHTML = "<div class = 'checkbox'>"+checkboxTag+onclickTag+labelTag + "</div>";
     }
 }
 
@@ -93,7 +93,6 @@ function createBasicVoteItem()
         var item = vote_items[count];
         var imgTag =  "<a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a>";
         var nameTag =  "<p class='voteitem'>"+item.name+"</p>";
-        var blankCheckboxTag = "<div class = "+"checkbox"+"></div>";
         var item = vote_items[count];
        if(newHtml && (count % line) == 0 )
        {
@@ -103,19 +102,19 @@ function createBasicVoteItem()
        switch(count % line)
        {
         case 0: 
-            td1 = "<tr><td><div class="+"table"+">"+imgTag+nameTag+blankCheckboxTag+"<span></span></div></td>";
+            td1 = "<tr><td><div class="+"table"+">"+imgTag+nameTag+"<span></span></div></td>";
             newHtml += td1;
             break;
         case 1:
-            td2 =  "<td><div class="+"table"+">"+imgTag+nameTag+blankCheckboxTag+"<span></span></div></td>";
+            td2 =  "<td><div class="+"table"+">"+imgTag+nameTag+"<span></span></div></td>";
             newHtml += td2;
             break;
         case (line-1):
-            td3 = "<td><div class="+"table"+">"+imgTag+nameTag+blankCheckboxTag+"<span></span></div></td></tr>";
+            td3 = "<td><div class="+"table"+">"+imgTag+nameTag+"<span></span></div></td></tr>";
             newHtml += td3;
             break;
         default:
-            td2 = "<td><div class="+"table"+">"+imgTag+nameTag+blankCheckboxTag+"<span></span></div></td>";
+            td2 = "<td><div class="+"table"+">"+imgTag+nameTag+"<span></span></div></td>";
             newHtml += td2;
             break;
        }
