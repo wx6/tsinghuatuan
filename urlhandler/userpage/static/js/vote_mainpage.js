@@ -45,14 +45,7 @@ function generateOptions()
             }
         },
         error: function (xhr) {
-            if(xhr.error == null)
-            {
                 alert("网络错误")
-            }
-            else
-            {
-                 alert("网络错误")
-            }
         }
     };
     return options;
