@@ -280,10 +280,12 @@ function voteNumOverflow(vtLim,id){
         document.cookie = escape(lastSelect) + "=false";
         document.cookie = escape(id) + "=true";
         lastSelect = id;
+        votenum--;
     }
     else{
         var input = document.getElementById(id);
         input.checked = false;
+        votenum--;
         alert("您的投票数已经达到上限！");
     }
 }
