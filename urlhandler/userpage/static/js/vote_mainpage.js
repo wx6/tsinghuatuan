@@ -70,7 +70,7 @@ function addCheckBox()
         var checkboxTag = "<input type ='checkbox' name="+item.id+" id="+item.id;
         var onclickTag = "onclick = "+"CookieOnSelect(this.id)>";
         var labelTag = "<label for="+item.id+"></label>";
-        $(".checkbox")[count].append(checkboxTag+onclickTag+labelTag);
+        $(".checkbox")[count].innerHTML = checkboxTag+onclickTag+labelTag;
     }
 }
 
@@ -79,7 +79,7 @@ function addVoteNumber()
     for (var count = 0; count < vote_items.length;count++)
     {
         var item = vote_items[count];
-        $("span")[count].append("<span>人气:"+item.vote_num+"</span>");
+        $("span")[count].innerHTML =  "人气:"+item.vote_num;
     }
 }
 
