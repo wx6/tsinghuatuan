@@ -286,21 +286,21 @@ function init (){
 	var items = vote.items;
     sort(items);
     var newItems = [];
-    for (item in tiems){
+    for (item in items){
     	newItems.push({
     		"name":item.name,
-    		"per":item.vote_num.toString()
+    		"per":(item.vote_num).toString()
     	})
     }
 	new histogram().init(newItems);
 	var times = [];
 	for (time in vote.times){
-		tiems.push({
+		times.push({
     		x:time.interval,
     		y:time.height
     	})
 	}
-	var data = {values:{[value0:times]}};
+	var data = {values:[{value0:times}]};
 	LineChart.setKey(["纵坐标为人数，横坐标为时间"]);
 	LineChart.setData("canvas",data,60,"red","#333",true,true);
 	$("#histogram-container").show();
