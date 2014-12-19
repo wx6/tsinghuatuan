@@ -26,4 +26,5 @@ urlpatterns = patterns('',
                        url(r'^vote_add/$', 'adminpage.views.vote_add'),
                        url(r'^vote_modify/$', 'adminpage.views.vote_post'),
                        url(r'^vote_delete/$', 'adminpage.views.vote_delete'),
+                       url(r'^vote_modify_display/$', 'adminpage.views.vote_modify_display'),
                        )

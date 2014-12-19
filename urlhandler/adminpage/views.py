@@ -692,4 +692,16 @@ def vote_item_delete(key):
             item.save()
 
 
+@csrf_exempt
+def vote_modify_display(request):
+    if not request.POST:
+        raise Http404
 
+    try:
+        vote = Vote.objects.get(id=int(request.POST['voteid']))
+        vote.display = 1 - vote.display
+        vote.save()
+    except Exception as e:
+        print str(e)
+
+    return HttpResponseRedirect(s_reverse_vote_list())

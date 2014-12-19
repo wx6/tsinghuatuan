@@ -424,7 +424,7 @@ def response_vote_event(msg):
         return get_reply_text_xml(msg, get_text_unbinded_vote_event(fromuser))
 
     now = datetime.datetime.fromtimestamp(get_msg_create_time(msg))
-    votes = Vote.objects.filter(status=1).order_by("start_time")
+    votes = Vote.objects.filter(display=1).order_by("end_time")
 
     if len(votes) == 1:
         vote = votes[0]
