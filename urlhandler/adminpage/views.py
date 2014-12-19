@@ -811,9 +811,11 @@ def vote_statistics(request, voteid):
         t2 = vote.start_time + gap * i
         timeDict = {}
         timeDict['interval'] = str(t1) + '~' + str(t2)
+        count = 0
         for item in voteItems:
             singleVotes = SingleVote.objects.filter(item_id=item.id, time__gte=t1, time__lte=t2, status=1)
-            timeDict['height'] = singleVotes.length()
+            count = count + singleVotes.length()
+        timeDict['height'] = count
         voteDict['times'].append(timeDict)
 
     return render_to_response('vote_statistics.html', {

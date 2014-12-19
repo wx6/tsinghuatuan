@@ -463,11 +463,12 @@ def response_clear_vote_record(msg):
     if user is None:
         return get_reply_text_xml(msg, get_text_unbinded_vote_event(fromuser))
 
-    singleVotes = SingleVote.objects.filter(stu_id=user.stu_id, status=1)
+    singleVotes = SingleVote.objects.filter(stu_id=user.stu_id)
     for singleVote in singleVotes:
         VoteItem.objects.filter(id=singleVote.item_id).update(vote_num=F('vote_num')-1)
-        singleVote.status = 0
-        singleVote.save()
+        # singleVote.status = 0
+        # singleVote.save()
+    singleVotes.delete()
 
     return get_reply_text_xml(msg, get_text_clear_record_success())
 
