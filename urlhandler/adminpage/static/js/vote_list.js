@@ -135,10 +135,10 @@ var tdActionMap = {
 	'operation_links':function(vot,key){
         var links = vot[key], result = [], i, len;
         if (vot['display'] == 0){
-            result.push('<a href="' + vot['operations']['display'] + '" target=""><span class="glyphicon glyphicon-eye-open"></span>开启推送</a>');
+            result.push('<a href="' + vot['display_url'] + '" target=""><span class="glyphicon glyphicon-eye-open"></span>开启推送</a>');
         }
         else{
-            result.push('<a href="' + vot['operations']['display'] + '" target=""><span class="glyphicon glyphicon-eye-close"></span>取消推送</a>');
+            result.push('<a href="' + vot['display_url'] + '" target=""><span class="glyphicon glyphicon-eye-close"></span>取消推送</a>');
         }
         for (i in links) {
             if (operationMap[i](vot)) {

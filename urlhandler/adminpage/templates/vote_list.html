@@ -26,9 +26,8 @@
                     'end_time': new Date('{{ vote.end_time|date:"r" }}'),
                     'display':{{ vote.display }},
                     'delete':{{ vote.id}},
-                    'operations':{'detail':'{% url "adminpage.views.vote_detail" voteid=vote.id %}',
-                        'display':'{% url "adminpage.views.vote_modify_display" voteid=vote.id %}'
-                    }
+                    'display_url':'{% url "adminpage.views.vote_modify_display" voteid=vote.id %}',
+                    'operations':{'detail':'{% url "adminpage.views.vote_detail" voteid=vote.id %}'}
                 }{% if forloop.last %}{% else %},{% endif %}
             {% endfor %}
         ];
