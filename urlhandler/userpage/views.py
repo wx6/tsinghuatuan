@@ -209,6 +209,8 @@ def vote_main_view(request, voteid, openid):
     voteDict['pic_url'] = vote.pic_url
     voteDict['end_time'] = vote.end_time
     voteDict['max_num'] = vote.max_num
+    voteDict['start_time'] = vote.start_time
+    voteDict['end_time'] = vote.end_time
     voteDict['items'] = []
     voteDict['voted'] = 0
 
