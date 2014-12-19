@@ -258,7 +258,7 @@ function lockByStatus(status, start_time, end_time) {
         },
         // published but not determined
         '1': {
-            'name': true,
+            //'name': true,
             'key': true,
             'start_time': function() {
                 return (new Date() >= getDateByObj(start_time));
@@ -655,6 +655,7 @@ function lockItemsByStatus(status, start_time, end_time){
             $("input[name='name"+(i+1).toString()+"']").prop('disabled',true);
             $("textarea[name='description"+(i+1).toString()+"']").prop('disabled',true);
             $("input[name='pic_url"+(i+1).toString()+"']").prop('disabled',true);
+            $("#input-name").prop('disabled',true);
             $("#input-pic_url").prop('disabled',true);
             $("#input-description").prop('disabled',true);
         }

@@ -143,10 +143,10 @@ var tdActionMap = {
             }
         }
         if (vot['display'] == 0){
-            result.push('<a href="' + vot['display_url'] + '" target=""><span class="glyphicon glyphicon-eye-open"></span>开启推送</a>');
+            result.push('<a href="' + vot['display_url'] + '" target=""><span class="glyphicon glyphicon-eye-open"></span> 开启推送</a>');
         }
         else{
-            result.push('<a href="' + vot['display_url'] + '" target=""><span class="glyphicon glyphicon-eye-close"></span>取消推送</a>');
+            result.push('<a href="' + vot['display_url'] + '" target=""><span class="glyphicon glyphicon-eye-close"></span> 取消推送</a>');
         }
         return result.join('<br/>');
     },
