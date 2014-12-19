@@ -113,6 +113,9 @@ var operationMap = {
 	'detail':function(vot){
 		return true;
 	}
+    'display':function(vot){
+        return true;
+    }
 };
 
 var tdActionMap = {

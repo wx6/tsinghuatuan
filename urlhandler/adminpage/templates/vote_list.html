@@ -25,13 +25,15 @@
                     'start_time': new Date('{{ vote.start_time|date:"r" }}'),
                     'end_time': new Date('{{ vote.end_time|date:"r" }}'),
                     'delete':{{ vote.id}},
-                    'operations':{'detail':'{% url "adminpage.views.vote_detail" voteid=vote.id %}'}
+                    'operations':{'detail':'{% url "adminpage.views.vote_detail" voteid=vote.id %}',
+                        'display':'{% url "adminpage.views.vote_modify_display" voteid=vote.id %}'
+                    }
                 }{% if forloop.last %}{% else %},{% endif %}
             {% endfor %}
         ];
-        var operations_name = {'detail':'详情'};
+        var operations_name = {'detail':'详情',{% if vote.display %} 'display':'推送' {% else %} 'display':'取消推送' {% endif %}};
         var operations_icon = {'detail':'pencil'};
-        var operations_target = {'detail':''};
+        var operations_target = {'detail':'','display':''};
 
     </script>
     <script src="{% static "js/vote_list.js" %}"></script>
