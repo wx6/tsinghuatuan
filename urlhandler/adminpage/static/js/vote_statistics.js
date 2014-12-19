@@ -295,7 +295,7 @@ function init (){
 	new histogram().init(newItems);
 	var times = [];
 	for (time in vote.times){
-		tiems.push({
+		times.push({
     		x:time.interval,
     		y:time.height
     	})
