@@ -76,9 +76,36 @@ function addCheckBox()
         var checkboxTag = "<input type ='checkbox' name="+item.id+" id='"+item.id+"'";
         var onclickTag = "onclick = "+"CookieOnSelect(this.id)>";
         var labelTag = "<label for="+item.id+"></label>";
-        $($(".voteitem")[count]).after("<div class = 'checkbox'>"+checkboxTag+onclickTag+labelTag + "</div>");
+        $($(".addcheckbox")[count]).append("<div class = 'checkbox'>"+checkboxTag+onclickTag+labelTag + "</div>");
     }
 }
+
+// function createSingalCheckBox(count,line,vote_items)
+// {
+//     var item = vote_items[count];
+//     var checkboxTag = "<input type ='checkbox' name="+item.id+" id='"+item.id+"'";
+//     var onclickTag = "onclick = "+"CookieOnSelect(this.id)>";
+//     var labelTag = "<label for="+item.id+"></label>";
+//     var cb = "";
+//     switch(count % line)
+//     {
+//         case 0: 
+//             td = "<tr><td><div class = 'checkbox'>"+checkboxTag+onclickTag+labelTag + "</div></td>";
+//             break;
+//         case 1:
+//             td =  "<td><div class = 'checkbox'>"+checkboxTag+onclickTag+labelTag + "</div></td>";
+//             break;
+//         case (line-1):
+//             td = "<td><div class = 'checkbox'>"+checkboxTag+onclickTag+labelTag + "</div></td></tr>";
+//             break;
+//         default:
+//             td = "<td><div class = 'checkbox'>"+checkboxTag+onclickTag+labelTag + "</div></td>";
+//             break;
+
+//        }
+//     return td;
+// }
+
 
 
 function addVoteNumber()
@@ -94,35 +121,37 @@ function addVoteNumber()
 function createBasicVoteItem()
 {
     var newHtml = "";
-    var newName = "";
+    var newCb = "";
+    var blankCheckBox = "<tr><td class='addcheckbox'></td><td class='addcheckbox'></td><td class='addcheckbox'></td></tr>"
     for (count = 0;count < vote_items.length;count++)
     {
        if(newHtml && (count % line) == 0 )
        {
-           $("table").append(newHtml+newName);
+           $("table").append(newHtml+newCb+blankCheckBox);
            newHtml = "";
-           newName = "";
+           newCb = "";
        }
        newHtml += createSingalItem(count,line,vote_items);
-       newName += createSingalItemName(count,line,vote_items);
+       newCb += createSingalItemName(count,line,vote_items);
     }
     if(count % line != 0)
     {
         newHtml += "</tr>";
-        newName += "</tr>";
+        newCb += "</tr>";
     }
     if(newHtml)
     {
-        $("table").append(newHtml+newName);
+        $("table").append(newHtml+newCb+blankCheckBox);
         newHtml = "";
-        newName = "";
+        newCb = "";
     }
 }
 
 function createSingalItemName(count,line,vote_items)
 {
+    var item = vote_items[count];
     var td = "";
-    var nameTag =  "<p class='voteitem'>"+vote_items[count].name+"</p>";
+    var nameTag =  "<p class='voteitem'>"+item.name+"</p>";
     switch(count % line)
     {
         case 0: 
@@ -141,6 +170,8 @@ function createSingalItemName(count,line,vote_items)
     return td;
 }
 
+
+
 function createSingalItem(count,line,vote_items)
 {
     var item = vote_items[count];
@@ -150,16 +181,16 @@ function createSingalItem(count,line,vote_items)
     switch(count % line)
     {
         case 0: 
-            td = "<tr><td><div class="+"table"+">"+imgTag+"<span></span></div></td>";
+            td = "<tr><td><div class="+"table"+">"+imgTag+"<br></br><span></span></div></td>";
             break;
         case 1:
-            td =  "<td><div class="+"table"+">"+imgTag+"<span></span></div></td>";
+            td =  "<td><div class="+"table"+">"+imgTag+"<br></br><span></span></div></td>";
             break;
         case (line-1):
-            td = "<td><div class="+"table"+">"+imgTag+"<span></span></div></td></tr>";
+            td = "<td><div class="+"table"+">"+imgTag+"<br></br><span></span></div></td></tr>";
             break;
         default:
-            td = "<td><div class="+"table"+">"+imgTag+"<span></span></div></td>";
+            td = "<td><div class="+"table"+">"+imgTag+"<br></br><span></span></div></td>";
             break;
        }
     return td;
