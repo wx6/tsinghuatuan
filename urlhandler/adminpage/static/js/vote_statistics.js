@@ -286,7 +286,7 @@ function init (){
 	var items = vote.items;
     sort(items);
     var newItems = [];
-    for (item in tiems){
+    for (item in items){
     	newItems.push({
     		"name":item.name,
     		"per":item.vote_num.toString()
