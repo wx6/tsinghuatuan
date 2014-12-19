@@ -112,7 +112,7 @@ var operationMap = {
 	},
 	'detail':function(vot){
 		return true;
-	}
+	},
     'statistics':function(vot){
         return true;
     }
