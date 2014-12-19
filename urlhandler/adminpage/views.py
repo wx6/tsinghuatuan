@@ -693,12 +693,12 @@ def vote_item_delete(key):
 
 
 @csrf_exempt
-def vote_modify_display(request):
+def vote_modify_display(request, voteid):
     if not request.POST:
         raise Http404
 
     try:
-        vote = Vote.objects.get(id=int(request.POST['voteid']))
+        vote = Vote.objects.get(id=voteid)
         vote.display = 1 - vote.display
         vote.save()
     except Exception as e:
