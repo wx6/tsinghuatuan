@@ -1,0 +1,68 @@
+{% extends "vote_list.html" %}
+
+{% block vote-title %}
+{{vote.name }}
+{% endblock %}
+
+{% load staticfiles %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/vote_statistics.css" %}"/>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static "lib/jq/form/jquery.form.min.js" %}"></script>
+    <script>
+        var vote = {
+            'items': [
+            	{% for item in vote.items %}
+                {
+                    'name': '{{ item.name|escapejs }}',
+                    'percent': {{ item.percent }},
+                    'vote_num': {{ item.vote_num }}
+                },
+            	{% endfor %}
+            ],
+            'times': [
+            	{% for time in vote.times %}
+                {
+                    'interval': '{{ time.interval|escapejs }}',
+                    'height': {{ time.height }}
+                },
+            	{% endfor %}
+            ]
+        }
+    </script>
+    <script src="{% static "js/vote_statistics.js" %}"></script>
+{% endblock %}
+
+{% block vote-list-active %}{% endblock %}
+
+{% block nav-li-ext %}
+    <li class="{% block vote-detail-active %}active{% endblock %}">
+        <a href="{% if vote.id %}
+        {% url "adminpage.views.vote_detail" voteid=vote.id %}
+        {% else %}
+        {% url "adminpage.views.vote_add" %}
+        {% endif %} ">{{ vote.name }}</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="css.css" type="text/css" rel="stylesheet" />
+<script src="jquery-1.8.2.min.js" type="text/javascript"></script>
+<script src="histogram.js" type="text/javascript"></script>
+</head>
+<body> -->
+<button type="button" onclick="showHistogram();" class="btn btn-primary" id="Histogram">柱状图</button>
+<button type="button" onclick="showLineargram();" class="btn btn-primary" id="Lineargram">折线图</button>
+<div class="histogram-container" id="histogram-container"></div>
+<canvas width="700" height="400" id="canvas"> </canvas>
+<!-- <p class="xiaoboy"><a href="http://www.xiaoboy.com" target="_blank">BY 小虾虎鱼http://www.xiaoboy.com</a></p>
+</body>
+</html> -->
+{% endblock %}
