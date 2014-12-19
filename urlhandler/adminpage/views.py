@@ -26,6 +26,7 @@ from django.utils.http import urlquote
 from django.utils.encoding import smart_str
 
 from urlhandler.models import Vote, VoteItem, SingleVote
+from datetime import timedelta
 
 
 
@@ -560,6 +561,7 @@ def vote_detail(request, voteid):
         vote = Vote.objects.get(id=voteid)
         print 'start_time:', vote.start_time
         print 'end_time:', vote.end_time
+        print 'time_gap', (vote.end_time - vote.start_time)
         unpublished = (vote.status == 0)
         voteDict = wrap_vote_dict(vote)
         voteDict['items'] = get_vote_items(vote)
