@@ -289,7 +289,7 @@ function init (){
     for (item in items){
     	newItems.push({
     		"name":item.name,
-    		"per":item.vote_num.toString()
+    		"per":(item.vote_num).toString()
     	})
     }
 	new histogram().init(newItems);
