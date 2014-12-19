@@ -793,7 +793,7 @@ def vote_statistics(request, voteid):
         count = 0
         for item in voteItems:
             singleVotes = SingleVote.objects.filter(item_id=item.id, time__gte=t1, time__lte=t2, status=1)
-            count = count + singleVotes.length()
+            count = count + len(singleVotes)
         timeDict['height'] = count
         voteDict['times'].append(timeDict)
 
