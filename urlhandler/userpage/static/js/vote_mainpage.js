@@ -181,16 +181,16 @@ function createSingalItem(count,line,vote_items)
     switch(count % line)
     {
         case 0: 
-            td = "<tr><td><div class="+"table"+">"+imgTag+"<span></span></div></td>";
+            td = "<tr><td><div class="+"table"+">"+imgTag+"<br></br><span></span></div></td>";
             break;
         case 1:
-            td =  "<td><div class="+"table"+">"+imgTag+"<span></span></div></td>";
+            td =  "<td><div class="+"table"+">"+imgTag+"<br></br><span></span></div></td>";
             break;
         case (line-1):
-            td = "<td><div class="+"table"+">"+imgTag+"<span></span></div></td></tr>";
+            td = "<td><div class="+"table"+">"+imgTag+"<br></br><span></span></div></td></tr>";
             break;
         default:
-            td = "<td><div class="+"table"+">"+imgTag+"<span></span></div></td>";
+            td = "<td><div class="+"table"+">"+imgTag+"<br></br><span></span></div></td>";
             break;
        }
     return td;
