@@ -745,32 +745,8 @@ def vote_export(request, voteid):
         write_row(ws2, row, [''])
         row = row + 1
 
-'''
-def activity_export_stunum(request, actid):
-    if not request.user.is_authenticated():
-        return HttpResponseRedirect(s_reverse_admin_home())
-    try:
-        activity = Activity.objects.get(id=actid)
-    except:
-        raise Http404
-
-    tickets = Ticket.objects.filter(activity=activity)
-    wb = xlwt.Workbook()
-
-    def write_row(ws, row, data):
-        for index, cell in enumerate(data):
-            ws.write(row, index, cell)
-
-    ws = wb.add_sheet(activity.name)
-    row = 1
-    write_row(ws, 0, [u'学号', u'状态', u'座位'])
-    statusMap = [u'已取消', u'未入场', u'已入场']
-    for ticket in tickets:
-        write_row(ws, row, [ticket.stu_id, statusMap[ticket.status], ticket.seat])
-        row = row + 1
-
     ##########################################定义Content-Disposition，让浏览器能识别，弹出下载框
-    fname = 'activity' + actid + '.xls'
+    fname = vote.name + '.xls'
     agent=request.META.get('HTTP_USER_AGENT')
     if agent and re.search('MSIE',agent):
         response = HttpResponse(content_type="application/vnd.ms-excel")  # 解决ie不能下载的问题
@@ -782,7 +758,7 @@ def activity_export_stunum(request, actid):
 
     wb.save(response)
     return response
-'''
+
 
 def vote_statistics(request, voteid):
     if not request.user.is_authenticated():
@@ -800,7 +776,10 @@ def vote_statistics(request, voteid):
     for item in voteItems:
         itemDict = {}
         itemDict['vote_num'] = item.vote_num
-        itemDict['percent'] = float(item.vote_num) / total_votes
+        if total_votes != 0:
+            itemDict['percent'] = float(item.vote_num) / total_votes
+        else:
+            itemDict['percent'] = 0
         itemDict['name'] = item.name
         voteDict['items'].append(itemDict)
 
