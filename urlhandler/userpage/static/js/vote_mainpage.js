@@ -76,7 +76,7 @@ function addCheckBox()
         var checkboxTag = "<input type ='checkbox' name="+item.id+" id='"+item.id+"'";
         var onclickTag = "onclick = "+"CookieOnSelect(this.id)>";
         var labelTag = "<label for="+item.id+"></label>";
-        $($(".checkbox")[count]).after("<div class = 'checkbox'>"+checkboxTag+onclickTag+labelTag + "</div>");
+        $($(".addcheckbox")[count]).after("<div class = 'checkbox'>"+checkboxTag+onclickTag+labelTag + "</div>");
     }
 }
 
@@ -121,7 +121,7 @@ function addVoteNumber()
 function createBasicVoteItem()
 {
     var newHtml = "";
-    var blankCheckBox = "<tr><td class='checkbox'></td><td class='checkbox'></td><td class='checkbox'></td></tr>"
+    var blankCheckBox = "<tr><td class='addcheckbox'></td><td class='addcheckbox'></td><td class='addcheckbox'></td></tr>"
     for (count = 0;count < vote_items.length;count++)
     {
        if(newHtml && (count % line) == 0 )
