@@ -294,10 +294,10 @@ function init (){
     }
 	new histogram().init(newItems);
 	var times = [];
-	for (time in vote.times){
+	for (var i = 0; i < vote.times.length; i++){
 		times.push({
-    		x:time.interval,
-    		y:time.height
+    		x:vote.times[i].interval,
+    		y:vote.times[i].height
     	})
 	}
 	var data = {values:[{value0:times}]};
