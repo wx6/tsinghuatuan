@@ -31,7 +31,7 @@
                 }{% if forloop.last %}{% else %},{% endif %}
             {% endfor %}
         ];
-        var operations_name = {'detail':'详情',{% if vote.display %} 'display':'推送' {% else %} 'display':'取消推送' {% endif %}};
+        var operations_name = {'detail':'详情',{% if vote.display %} 'display':'开启推送' {% else %} 'display':'取消推送' {% endif %}};
         var operations_icon = {'detail':'pencil'};
         var operations_target = {'detail':'','display':''};
 
