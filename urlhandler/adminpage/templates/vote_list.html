@@ -27,13 +27,16 @@
                     'display':{{ vote.display }},
                     'delete':{{ vote.id}},
                     'display_url':'{% url "adminpage.views.vote_modify_display" voteid=vote.id %}',
-                    'operations':{'detail':'{% url "adminpage.views.vote_detail" voteid=vote.id %}'}
+                    'operations':{'detail':'{% url "adminpage.views.vote_detail" voteid=vote.id %}',
+                        'export':'',
+                        'statistics':''
+                    }
                 }{% if forloop.last %}{% else %},{% endif %}
             {% endfor %}
         ];
-        var operations_name = {'detail':'详情'};
-        var operations_icon = {'detail':'pencil'};
-        var operations_target = {'detail':''};
+        var operations_name = {'detail':'详情','export':'导出','statistics':'统计'};
+        var operations_icon = {'detail':'pencil','export':'export','statistics':'stats'};
+        var operations_target = {'detail':'','export':'','statistics':''};
         console.log(votes);
     </script>
     <script src="{% static "js/vote_list.js" %}"></script>
