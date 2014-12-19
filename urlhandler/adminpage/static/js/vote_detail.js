@@ -512,7 +512,7 @@ $('.form-control').on('focus', function() {var me = $(this); setTimeout(function
 
 function addchoice() {
     var vote_choice_count = $('.vote_choice').length + 1;
-    $('<details open="open" id="vote_choice_'+vote_choice_count.toString()+'" class="vote_choice"><summary class="vote_option_summary">投票项'+vote_choice_count.toString()+'<span class="vote_delete" title="删除"></span></summary><div class="dynamic"><div class="form-group"><label for="input-item" class="col-sm-2 control-label">投票项名称</label><div class="col-sm-10"><input type="text" name="name'+vote_choice_count.toString()+'" class="form-control"placeholder="投票项的名称，如刘强老师"></div></div><div class="form-group"><label for="input-item_description" class="col-sm-2 control-label">投票项简介</label><div class="col-sm-10"><input type="text" name="description'+vote_choice_count.toString()+'" class="form-control"  placeholder="投票项的简介，如刘强老师为软件学院老师，开设软件工程等课程"></div></div><div class="form-group"><label for="input-item_pic_url" class="col-sm-2 control-label">投票项图片</label><div class="col-sm-10"><input type="url" name="pic_url'+vote_choice_count.toString()+'" class="form-control" placeholder="请填入图片链接"></div></div></div></details>').insertBefore("#bottom_button");
+    $('<details open="open" id="vote_choice_'+vote_choice_count.toString()+'" class="vote_choice"><summary class="vote_option_summary">投票项'+vote_choice_count.toString()+'<span class="vote_delete" title="删除"></span></summary><div class="dynamic"><div class="form-group"><label for="input-item" class="col-sm-2 control-label">投票项名称</label><div class="col-sm-10"><input type="text" name="name'+vote_choice_count.toString()+'" class="form-control"placeholder="投票项的名称，如刘强老师"></div></div><div class="form-group"><label for="input-item_description" class="col-sm-2 control-label">投票项简介</label><div class="col-sm-10"><textarea row="3" style="resize: none;" type="text" name="description'+vote_choice_count.toString()+'" class="form-control"  placeholder="投票项的简介，如刘强老师为软件学院老师，开设软件工程等课程"></div></div><div class="form-group"><label for="input-item_pic_url" class="col-sm-2 control-label">投票项图片</label><div class="col-sm-10"><input type="url" name="pic_url'+vote_choice_count.toString()+'" class="form-control" placeholder="请填入图片链接"></div></div></div></details>').insertBefore("#bottom_button");
     renderBtn();
 };
 
@@ -524,7 +524,7 @@ function renderBtn (){
             $(item).find("summary").html("投票项"+(i+1).toString()+'<span class="vote_delete" title="删除"></span>');
             $(item).attr('id',"vote_choice_"+(i+1).toString());
             ($(item).find("input:first")).attr("name","name"+(i+1).toString());
-            ($(item).find("input:eq(1)")).attr("name","description"+(i+1).toString());
+            ($(item).find("textarea")).attr("name","description"+(i+1).toString());
             ($(item).find("input:last")).attr("name","pic_url"+(i+1).toString());
          });
         renderBtn();
@@ -552,7 +552,7 @@ function show_vote_choice(vote) {
     count = 0;
     while(count < vote.items.length){
         $("input[name='name"+(count+1).toString()+"']").val(vote.items[count].name);
-        $("input[name='description"+(count+1).toString()+"']").val(vote.items[count].description);
+        $("textarea[name='description"+(count+1).toString()+"']").val(vote.items[count].description);
         $("input[name='pic_url"+(count+1).toString()+"']").val(vote.items[count].pic_url);
         ++count;
     }
@@ -645,7 +645,7 @@ function lockItemsByStatus(status, start_time, end_time){
         var i;
         for (i = 0; i < $('.vote_choice').length; i++){
             $("input[name='name"+(i+1).toString()+"']").prop('disabled',false);
-            $("input[name='description"+(i+1).toString()+"']").prop('disabled',false);
+            $("textarea[name='description"+(i+1).toString()+"']").prop('disabled',false);
             $("input[name='pic_url"+(i+1).toString()+"']").prop('disabled',false);
         }
     }
@@ -653,7 +653,7 @@ function lockItemsByStatus(status, start_time, end_time){
         var i;
         for (i = 0; i < $('.vote_choice').length; i++){
             $("input[name='name"+(i+1).toString()+"']").prop('disabled',true);
-            $("input[name='description"+(i+1).toString()+"']").prop('disabled',true);
+            $("textarea[name='description"+(i+1).toString()+"']").prop('disabled',true);
             $("input[name='pic_url"+(i+1).toString()+"']").prop('disabled',true);
             $("#input-pic_url").prop('disabled',true);
             $("#input-description").prop('disabled',true);
