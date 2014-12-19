@@ -659,6 +659,7 @@ def vote_create(vote):
         preVote[k] = str_to_datetime(vote[k])
     preVote['status'] = 1 if ('publish' in vote) else 0
     preVote['max_num'] = int(vote['max_num'])
+    preVote['display'] = 1
     newVote = Vote.objects.create(**preVote)
 
     vote_item_create(vote, newVote)

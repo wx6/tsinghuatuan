@@ -282,6 +282,8 @@ def vote_user_post(request, voteid, openid):
                 preVote = {}
                 preVote['item_id'] = item.id
                 preVote['stu_id'] = user.stu_id
+                preVote['time'] = now
+                preVote['status'] = 1
                 SingleVote.objects.create(**preVote)
                 VoteItem.objects.filter(id=item.id).update(vote_num=F('vote_num')+1)
                 itemDict['vote_num'] = item.vote_num
