@@ -129,7 +129,7 @@ function createSingalItemName(count,line,vote_items)
             td = "<tr><td>"+nameTag+"</td>";
             break;
         case 1:
-            td =  "<td>"+nameTag"</td>";
+            td =  "<td>"+nameTag+"</td>";
             break;
         case (line-1):
             td = "<td>"+nameTag+"</td></tr>";
