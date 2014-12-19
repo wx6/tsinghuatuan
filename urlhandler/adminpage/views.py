@@ -25,7 +25,7 @@ import re
 from django.utils.http import urlquote
 from django.utils.encoding import smart_str
 
-from urlhandler.models import Vote, VoteItem
+from urlhandler.models import Vote, VoteItem, SingleVote
 
 
 
@@ -487,7 +487,8 @@ def activity_export_stunum(request, actid):
     for ticket in tickets:
         write_row(ws, row, [ticket.stu_id, statusMap[ticket.status], ticket.seat])
         row = row + 1
-##########################################定义Content-Disposition，让浏览器能识别，弹出下载框
+
+    ##########################################定义Content-Disposition，让浏览器能识别，弹出下载框
     fname = 'activity' + actid + '.xls'
     agent=request.META.get('HTTP_USER_AGENT')
     if agent and re.search('MSIE',agent):
@@ -497,6 +498,7 @@ def activity_export_stunum(request, actid):
         response = HttpResponse(content_type="application/ms-excel")  # 解决ie不能下载的问题
         response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(fname)  # 解决文件名乱码/不显示的问题
     ##########################################保存
+
     wb.save(response)
     return response
 
@@ -556,6 +558,8 @@ def vote_detail(request, voteid):
 
     try:
         vote = Vote.objects.get(id=voteid)
+        print 'start_time:', vote.start_time
+        print 'end_time:', vote.end_time
         unpublished = (vote.status == 0)
         voteDict = wrap_vote_dict(vote)
         voteDict['items'] = get_vote_items(vote)
@@ -612,6 +616,7 @@ def vote_modify(vote):
     if now < old_start_time:
         setattr(curVote, 'start_time', str_to_datetime(vote['start_time']))
     setattr(curVote, 'end_time', str_to_datetime(vote['end_time']))
+
     if 'publish' in vote:
         setattr(curVote, 'status', 1)
     else:
@@ -702,3 +707,101 @@ def vote_modify_display(request, voteid):
         print str(e)
 
     return HttpResponseRedirect(s_reverse_vote_list())
+
+
+def vote_export(request, voteid):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(s_reverse_admin_home())
+    try:
+        vote = Vote.objects.get(id=voteid)
+    except:
+        raise Http404
+
+    wb = xlwt.Workbook()
+    ws1 = wb.add_sheet(u'投票排名')
+    ws2 = wb.add_sheet(u'支持者情况')
+
+    def write_row(ws, row, data):
+        for index, content in enumerate(data):
+            ws.write(row, index, content)
+
+    voteItems = VoteItem.objects.filter(vote_key=vote.key, status=1).order_by('-vote_num')
+
+    total_votes = 0
+    for item in voteItems:
+        total_votes += item.vote_num
+
+    write_row(ws1, 0, [u'投票项名称', u'得票数', u'得票数占总票数百分比'])
+    for index, item in enumerate(voteItems):
+        write_row(ws1, index + 1, [item.name, item.vote_num, float(item.vote_num)/total_votes])
+
+    row = 0
+    for item in voteItems:
+        write_row(ws2, row, [item.name, u'投票人学号', u'投票时间'])
+        row = row + 1
+        singleVotes = SingleVote.objects.filter(item_id=item.id, status=1)
+        for sv in singleVotes:
+            write_row(ws2, row, ['', sv.stu_id, sv.time])
+            row = row + 1
+        write_row(ws2, row, [''])
+        row = row + 1
+
+'''
+def activity_export_stunum(request, actid):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(s_reverse_admin_home())
+    try:
+        activity = Activity.objects.get(id=actid)
+    except:
+        raise Http404
+
+    tickets = Ticket.objects.filter(activity=activity)
+    wb = xlwt.Workbook()
+
+    def write_row(ws, row, data):
+        for index, cell in enumerate(data):
+            ws.write(row, index, cell)
+
+    ws = wb.add_sheet(activity.name)
+    row = 1
+    write_row(ws, 0, [u'学号', u'状态', u'座位'])
+    statusMap = [u'已取消', u'未入场', u'已入场']
+    for ticket in tickets:
+        write_row(ws, row, [ticket.stu_id, statusMap[ticket.status], ticket.seat])
+        row = row + 1
+
+    ##########################################定义Content-Disposition，让浏览器能识别，弹出下载框
+    fname = 'activity' + actid + '.xls'
+    agent=request.META.get('HTTP_USER_AGENT')
+    if agent and re.search('MSIE',agent):
+        response = HttpResponse(content_type="application/vnd.ms-excel")  # 解决ie不能下载的问题
+        response['Content-Disposition'] = 'attachment; filename=%s' % urlquote(fname)  # 解决文件名乱码/不显示的问题
+    else:
+        response = HttpResponse(content_type="application/ms-excel")  # 解决ie不能下载的问题
+        response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(fname)  # 解决文件名乱码/不显示的问题
+    ##########################################保存
+
+    wb.save(response)
+    return response
+'''
+
+def vote_statistics(request, voteid):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(s_reverse_admin_home())
+
+    vote = Vote.objects.get(id=voteid)
+    voteItems = VoteItem.objects.filter(vote_key=vote.key)
+
+    total_votes = 0
+    for item in voteItems:
+        total_votes  = total_votes + item.vote_num
+
+    voteDict = {}
+    voteDict['items'] = []
+    for item in voteItems:
+        itemDict = {}
+        itemDict['vote_num'] = item.vote_num
+        itemDict['percent'] = float(item.vote_num) / total_votes
+        voteDict['items'].append(itemDict)
+
+
