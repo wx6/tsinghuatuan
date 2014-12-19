@@ -200,10 +200,8 @@ function adjustImg()
 {
     var img = $("a img");
     for(var i = 0; i < img.length; i++){
-        //img[i].style.width = document.body.clientWidth * 0.3;
-        //img[i].style.height = document.body.clientWidth * 0.3;
-        img[i].style.width = "30%";
-        img[i].style.height =  "30%";
+        img[i].style.width = document.body.clientWidth * 0.3;
+        img[i].style.height = document.body.clientWidth * 0.3;
     }
 }
 
@@ -334,6 +332,10 @@ function CookieOnSelect(id){
         lastSelect = id;
 }
 
+function orientationChange() { 
+        adjustImg();
+    };
+
 function voteNumOverflow(vtLim,id){
     if(maxVote == 1){
         var input = document.getElementById(lastSelect);
@@ -405,3 +407,9 @@ WeixinApi.ready(function(Api) {
 });
 
 onCreate();
+
+// 添加事件监听 
+addEventListener('load', function(){ 
+    orientationChange(); 
+    window.onorientationchange = orientationChange; 
+});
