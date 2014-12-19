@@ -560,7 +560,6 @@ def vote_detail(request, voteid):
         vote = Vote.objects.get(id=voteid)
         print 'start_time:', vote.start_time
         print 'end_time:', vote.end_time
-        print 'middle_time', (vote.start_time + vote.end_time) / 2
         unpublished = (vote.status == 0)
         voteDict = wrap_vote_dict(vote)
         voteDict['items'] = get_vote_items(vote)
