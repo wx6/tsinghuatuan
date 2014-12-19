@@ -286,10 +286,10 @@ function init (){
 	var items = vote.items;
     sort(items);
     var newItems = [];
-    for (item in items){
+    for (var i = 0; i < items.length; i++){
     	newItems.push({
-    		"name":item.name,
-    		"per":(item.vote_num).toString()
+    		"name":items[i].name,
+    		"per":(items[i].vote_num).toString()
     	})
     }
 	new histogram().init(newItems);
