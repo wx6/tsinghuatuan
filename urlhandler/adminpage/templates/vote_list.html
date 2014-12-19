@@ -31,8 +31,8 @@
                 }{% if forloop.last %}{% else %},{% endif %}
             {% endfor %}
         ];
-        var operations_name = {'detail':'详情',{% if vote.display == 1 %} 'display':'开启推送' {% else %} 'display':'取消推送' {% endif %}};
-        var operations_icon = {'detail':'pencil',{% if vote.display == 1 %} 'display':'eye-open' {% else %} 'display':'eye-close' {% endif %}};
+        var operations_name = {'detail':'详情',{% if vote.display == 0 %} 'display':'开启推送' {% else %} 'display':'取消推送' {% endif %}};
+        var operations_icon = {'detail':'pencil',{% if vote.display == 0 %} 'display':'eye-open' {% else %} 'display':'eye-close' {% endif %}};
         var operations_target = {'detail':'','display':''};
 
     </script>
