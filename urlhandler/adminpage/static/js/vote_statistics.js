@@ -300,7 +300,7 @@ function init (){
     		y:time.height
     	})
 	}
-	var data = {values:{[value0:times]}};
+	var data = {values:[{value0:times}]};
 	LineChart.setKey(["纵坐标为人数，横坐标为时间"]);
 	LineChart.setData("canvas",data,60,"red","#333",true,true);
 	$("#histogram-container").show();
