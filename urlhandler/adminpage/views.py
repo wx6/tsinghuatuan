@@ -559,9 +559,6 @@ def vote_detail(request, voteid):
 
     try:
         vote = Vote.objects.get(id=voteid)
-        print 'start_time:', vote.start_time
-        print 'end_time:', vote.end_time
-        print 'time_gap', (vote.end_time - vote.start_time)
         unpublished = (vote.status == 0)
         voteDict = wrap_vote_dict(vote)
         voteDict['items'] = get_vote_items(vote)
@@ -804,6 +801,21 @@ def vote_statistics(request, voteid):
         itemDict = {}
         itemDict['vote_num'] = item.vote_num
         itemDict['percent'] = float(item.vote_num) / total_votes
+        itemDict['name'] = item.name
         voteDict['items'].append(itemDict)
 
+    gap = (vote.end_time - vote.start_time) / 20
+    voteDict['times'] = []
+    for i in range(1, 21):
+        t1 = vote.start_time + gap * (i - 1)
+        t2 = vote.start_time + gap * i
+        timeDict = {}
+        timeDict['interval'] = str(t1) + '~' + str(t2)
+        for item in voteItems:
+            singleVotes = SingleVote.objects.filter(item_id=item.id, time__gte=t1, time__lte=t2, status=1)
+            timeDict['height'] = singleVotes.length()
+        voteDict['times'].append(timeDict)
 
+    return render_to_response('vote_statistics.html', {
+        'vote': voteDict,
+    }, context_instance=RequestContext(request))
