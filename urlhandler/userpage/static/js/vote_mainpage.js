@@ -113,7 +113,7 @@ function addVoteNumber()
     for (var count = 0; count < vote_items.length;count++)
     {
         var item = vote_items[count];
-        $("span")[count].innerHTML =  "人气:"+item.vote_num;
+        $(".votes")[count].innerHTML =  "人气:"+item.vote_num;
     }
 }
 
@@ -181,16 +181,16 @@ function createSingalItem(count,line,vote_items)
     switch(count % line)
     {
         case 0: 
-            td = "<tr><td><div class="+"table"+">"+imgTag+"<br></br><span></span></div></td>";
+            td = "<tr><td><div class="+"table"+">"+imgTag+"<br></br><span class='votes'></span></div></td>";
             break;
         case 1:
-            td =  "<td><div class="+"table"+">"+imgTag+"<br></br><span></span></div></td>";
+            td =  "<td><div class="+"table"+">"+imgTag+"<br></br><span class='votes'></span></div></td>";
             break;
         case (line-1):
-            td = "<td><div class="+"table"+">"+imgTag+"<br></br><span></span></div></td></tr>";
+            td = "<td><div class="+"table"+">"+imgTag+"<br></br><span class='votes'></span></div></td></tr>";
             break;
         default:
-            td = "<td><div class="+"table"+">"+imgTag+"<br></br><span></span></div></td>";
+            td = "<td><div class="+"table"+">"+imgTag+"<br></br><span class='votes'></span></div></td>";
             break;
        }
     return td;
@@ -207,7 +207,7 @@ function adjustImg()
 
 function onCreate_ended()
 {
-    $("#info")[0].innerHTML = "投票活动已经结束，点击图片查看详情。"
+    $("#info")[0].innerHTML = "投票活动已经结束，点击名称查看详情。"
     $("button").remove();
     createBasicVoteItem();
     adjustImg();
@@ -217,7 +217,7 @@ function onCreate_ended()
 
 function onCreate_unstarted()
 {
-    $("#info")[0].innerHTML = "活动尚未开始，点击图片查看详情。" 
+    $("#info")[0].innerHTML = "活动尚未开始，点击名称查看详情。" 
     $("button").remove();
     var size = document.body.clientWidth * 0.3;
     createBasicVoteItem();
@@ -226,7 +226,7 @@ function onCreate_unstarted()
 }
 
 function onCreate_unvoted(){
-    $("#info")[0].innerHTML = "您可以投" + maxVote + "项，点击图片查看详情"
+    $("#info")[0].innerHTML = "您可以投" + maxVote + "项，点击名称查看详情"
     $("button").show();
     createBasicVoteItem();
     adjustImg();
@@ -239,7 +239,7 @@ function onCreate_unvoted(){
 
 function onCreate_voted(){
     var name_list = generateVoteNames();
-    $("#info")[0].innerHTML = "您已经投了："+name_list+"，点击图片查看详情。"
+    $("#info")[0].innerHTML = "您已经投了："+name_list+"，点击名称查看详情。"
     $("button").remove();
     createBasicVoteItem();
     adjustImg();
