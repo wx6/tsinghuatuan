@@ -1,4 +1,6 @@
-canvas{background-color:white;position:relative;margin-left:20px;margin-top:10px;margin-bottom:25px;/*box-shadow: 3px 3px 3px #7e7a7c;*/}
+#button{position:relative;margin-left:5px;}
+
+canvas{background-color:white;position:relative;margin-left:5px;margin-top:10px;margin-bottom:25px;/*box-shadow: 3px 3px 3px #7e7a7c;*/}
 
 body{margin:0;padding:0;margin:20px;}
 ul,li,dl,dd,dt,p{margin:0;padding:0;}
