@@ -732,7 +732,7 @@ def vote_export(request, voteid):
 
     write_row(ws1, 0, [u'投票项名称', u'得票数', u'得票数占总票数百分比'])
     for index, item in enumerate(voteItems):
-        write_row(ws1, index + 1, [item.name, item.vote_num, float(item.vote_num)/total_votes])
+        write_row(ws1, index + 1, [item.name, item.vote_num, str(round(float(item.vote_num) / total_votes * 100, 2)) + '%'])
 
     row = 0
     for item in voteItems:
@@ -740,12 +740,11 @@ def vote_export(request, voteid):
         row = row + 1
         singleVotes = SingleVote.objects.filter(item_id=item.id, status=1)
         for sv in singleVotes:
-            write_row(ws2, row, ['', sv.stu_id, sv.time])
+            write_row(ws2, row, ['', sv.stu_id, str(sv.time)])
             row = row + 1
         write_row(ws2, row, [''])
         row = row + 1
 
-    ##########################################定义Content-Disposition，让浏览器能识别，弹出下载框
     fname = vote.name + '.xls'
     agent=request.META.get('HTTP_USER_AGENT')
     if agent and re.search('MSIE',agent):
@@ -754,7 +753,6 @@ def vote_export(request, voteid):
     else:
         response = HttpResponse(content_type="application/ms-excel")  # 解决ie不能下载的问题
         response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(fname)  # 解决文件名乱码/不显示的问题
-    ##########################################保存
 
     wb.save(response)
     return response

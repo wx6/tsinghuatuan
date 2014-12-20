@@ -286,18 +286,18 @@ function init (){
 	var items = vote.items;
     sort(items);
     var newItems = [];
-    for (item in items){
+    for (var i = 0; i < items.length; i++){
     	newItems.push({
-    		"name":item.name,
-    		"per":(item.vote_num).toString()
+    		"name":items[i].name,
+    		"per":(items[i].vote_num).toString()
     	})
     }
 	new histogram().init(newItems);
 	var times = [];
-	for (time in vote.times){
+	for (var i = 0; i < vote.times.length; i++){
 		times.push({
-    		x:time.interval,
-    		y:time.height
+    		x:vote.times[i].interval,
+    		y:vote.times[i].height
     	})
 	}
 	var data = {values:[{value0:times}]};
