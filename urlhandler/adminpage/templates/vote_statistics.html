@@ -40,11 +40,7 @@
 
 {% block nav-li-ext %}
     <li class="{% block vote-detail-active %}active{% endblock %}">
-        <a href="{% if vote.id %}
-        {% url "adminpage.views.vote_detail" voteid=vote.id %}
-        {% else %}
-        {% url "adminpage.views.vote_add" %}
-        {% endif %} ">{{ vote.name }}</a>
+        <a href="">投票详情</a>
     </li>
 {% endblock %}
 
@@ -60,8 +56,10 @@
 <body> -->
 <button type="button" onclick="showHistogram();" class="btn btn-primary" id="Histogram">柱状图</button>
 <button type="button" onclick="showLineargram();" class="btn btn-primary" id="Lineargram">折线图</button>
+</br>
+</br>
 <div class="histogram-container" id="histogram-container"></div>
-<canvas width="700" height="400" id="canvas"> </canvas>
+<div><canvas width="700" height="400" id="canvas"> </canvas></div>
 <!-- <p class="xiaoboy"><a href="http://www.xiaoboy.com" target="_blank">BY 小虾虎鱼http://www.xiaoboy.com</a></p>
 </body>
 </html> -->
