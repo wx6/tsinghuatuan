@@ -2,10 +2,9 @@ var lastSelect;
 
 function commitVote() {
     var name_list = generateVoteNames();
-    if(votenum <=0 )
-    {
-        alert("请投票之后再提交")
-        return false
+    if(votenum <= 0) {
+        alert("请投票之后再提交");
+        return false;
     }
     if(confirm(name_list))
         ;
@@ -70,7 +69,7 @@ function addImg()
 
 function addCheckBox()
 {
-     for (var count = 0; count < vote_items.length;count++)
+    for (var count = 0; count < vote_items.length;count++)
     {
         var item = vote_items[count];
         var checkboxTag = "<input type ='checkbox' name="+item.id+" id='"+item.id+"'";
@@ -166,7 +165,7 @@ function createSingalVotes(count,line,vote_items)
     } else if (count % line == (line - 1)) {
         td = td + "</tr>";
     }
-    
+
     return td;
 }
 
@@ -245,7 +244,7 @@ function onCreate_unvoted(){
     adjustImg();
     CookieOnLoad();
     addVoteNumber();
-    addCheckBox();
+    //saddCheckBox();
     addImg();
 }
 
@@ -277,6 +276,7 @@ function onCreate(){
         onCreate_voted();
     } 
 }
+
 
 function findcookie (key) {
     var name = escape(key);
@@ -349,8 +349,8 @@ function CookieOnSelect(id){
 }
 
 function orientationChange() { 
-        adjustImg();
-    };
+    adjustImg();
+};
 
 function voteNumOverflow(vtLim,id){
     if(maxVote == 1){
@@ -368,6 +368,7 @@ function voteNumOverflow(vtLim,id){
         alert("您的投票数已经达到上限！");
     }
 }
+
 
 // 初始化WeixinApi，等待分享
 WeixinApi.ready(function(Api) {
@@ -421,6 +422,7 @@ WeixinApi.ready(function(Api) {
     // iOS上，可以直接调用这个API进行分享，一句话搞定
     Api.generalShare(wxData,wxCallbacks);
 });
+
 
 onCreate();
 
