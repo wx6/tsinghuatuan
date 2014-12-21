@@ -208,7 +208,7 @@ function adjustImg()
         img[i].style.height = document.body.clientWidth * 0.3+"px";
     }
     var table = $(".table")
-    for(var i = 0; i < img.length; i++){
+    for(var i = 0; i < table.length; i++){
         table[i].style.height = document.body.clientWidth * 0.3+"px";
     }
 
