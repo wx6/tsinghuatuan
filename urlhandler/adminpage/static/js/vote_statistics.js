@@ -316,22 +316,28 @@ function init (){
 	LineChart.setData("canvas",data,60,"red","#333",true,true);
 	$("#histogram-container").show();
 	$("#histogram-table").show();
+	$("#histogram-caption").show();
 	$("#canvas").hide();
 	$("#lineargram-table").hide();
+	$("#lineargram-caption").hide();
 }
 
 function showHistogram (){
 	$("#histogram-container").show();
 	$("#histogram-table").show();
+	$("#histogram-caption").show();
 	$("#canvas").hide();
 	$("#lineargram-table").hide();
+	$("#lineargram-caption").hide();
 }
 
 function showLineargram() {
 	$("#histogram-container").hide();
 	$("#histogram-table").hide();
+	$("#histogram-caption").hide();
 	$("#canvas").show();
 	$("#lineargram-table").show();
+	$("#lineargram-caption").show();
 }
 
 function sort(arr){
