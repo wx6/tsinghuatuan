@@ -27,7 +27,7 @@
             <section class="info">
                 <figure>
                     <div class="mask"></div>
-                    <div id="activity_title_image" style="background-size:cover;" class="m-cover"></div>
+                    <div id="activity_title_image" class="m-cover"></div>
                 </figure> 
                 <figure>
                     <figcaption style="margin-left:28px">
@@ -58,7 +58,8 @@ var activity_extra_info=[];
 
 $('title').text(activity_page_title);
 $('#activity_title').text(activity_title);
-$('#activity_title_image').css("background","url("+activity_title_image+") no-repeat")
+$('#activity_title_image').css("background-size", "cover")
+                          .css("background","url("+activity_title_image+") no-repeat")
                           .css("max-height", "100px");
 </script>
 
