@@ -206,8 +206,8 @@ function createSingalItem(count,line,vote_items)
     var item = vote_items[count];
     var td = "";
     var left = 2.5;
-    var imgTag =  "<a href='" + item.url + "'><img class='itemimg' style = '"+"width:"+size+"px;height:"+size+"px'></a>";
-    var selectedImgTag = "<img src='"+selectedImg+"' style='position:relative;left:"+left+"%;top:-"+size+"px;z-index=2;opacity=0.5;'>"+"</img>";
+    var imgTag =  "<a href='" + item.url + "'><img class='itemimg' style = '"+"width:"+size+"px;height:"+size+"px;'/></a>";
+    var selectedImgTag = "<img src='"+selectedImg+"' style='position:relative;z-index=2;opacity=0.5;'>"+"</img>";
     switch(count % line)
     {
         case 0: 
