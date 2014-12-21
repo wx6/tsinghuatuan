@@ -235,8 +235,8 @@ function adjustImg()
     // }
     var table = $(".table")
     for(var i = 0; i < table.length; i++){
-         table[i].style.height = document.body.clientWidth * 0.3+"px";
-     
+        table[i].style.height = document.body.clientWidth * 0.3+"px";
+    }
 }
 
 function onCreate_ended()
