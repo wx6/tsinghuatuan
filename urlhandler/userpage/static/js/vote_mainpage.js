@@ -210,7 +210,6 @@ function createSingalItem(count,line,vote_items)
     var left = 2.5;
     var imgTag =  "<a href='" + item.url + "'><img class='itemimg' style = '"+"width:"+size+"px;height:"+size+"px'></a>";
     var selectedImgTag = "<img src='"+selectedImg+"' style='position:relative;left:"+left+"%;top:-"+size+"px;z-index=2;opacity=0.5;'>"+"</img>";
-    var item = vote_items[count];
     switch(count % line)
     {
         case 0: 
@@ -225,7 +224,7 @@ function createSingalItem(count,line,vote_items)
         default:
             td = "<td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+selectedImgTag+"<br></br><span class='votes'></span></div></td>";
             break;
-       }
+    }
     return td;
 }
 
@@ -239,7 +238,7 @@ function adjustImg()
     var table = $(".table")
     for(var i = 0; i < table.length; i++){
          table[i].style.height = document.body.clientWidth * 0.3+"px";
-     }
+     
 }
 
 function onCreate_ended()
@@ -294,9 +293,14 @@ function onCreate(){
         onCreate_ended()
     }
     else if(voted == 0)
+    {
         onCreate_unvoted();
+    }
     else
+    {
         onCreate_voted();
+    }
+        
 }
 
 function findcookie (key) {

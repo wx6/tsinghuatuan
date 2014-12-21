@@ -1,19 +1,19 @@
-form{
+form {
     width: 100%;
     text-align: center;
     font-family: Microsoft YaHei
 }
 
-table{
+table {
     width: 90%;
     margin: 0px auto;
 }
 
-tr{
+tr {
     width: 100%;
 }
 
-td{
+td {
     white-space:normal; 
     word-break:break-all;
     width: 20%;
@@ -21,7 +21,7 @@ td{
     text-align:center;
 }
 
-input[type="checkbox"]{
+input[type="checkbox"] {
     display: none;
 }
 
@@ -51,17 +51,17 @@ input[type="checkbox"]{
     background: #CC66FF;
 }
 
-.table{
+.table {
     text-align: center;
     width:100%;
 	margin-top:1em;
 	margin-bottom:1em;
 }
-.voteitem
-{
+
+.voteitem {
 	margin:0em;
 }
-#hint
-{
+
+#hint {
 	margin-bottom:4em;
 }
