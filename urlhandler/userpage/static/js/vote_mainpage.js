@@ -129,7 +129,7 @@ function createBasicVoteItem()
     {
        if(newHtml && (count % line) == 0 )
        {
-           $("table").append(newHtml+blankDiv+newCb+newVotes+blankCheckBox);
+           $("table").append(newHtml+blankDiv+newCb+newVotes+blankCheckBox+newVotes);
            newHtml = "";
            newCb = "";
            newVotes = "";
