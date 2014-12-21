@@ -112,7 +112,7 @@ function addVoteNumber()
     for (var count = 0; count < vote_items.length;count++)
     {
         var item = vote_items[count];
-        $(".votes2")[count].innerHTML =  "人气:"+item.vote_num;
+        $(".votes2")[count].innerHTML = "人气 : "+item.vote_num;
     }
 }
 
@@ -193,7 +193,7 @@ function createSingalItem(count,line,vote_items)
     var selectedImgTag = "<img src='"+selectedImg+"' style='opacity=0.5;'>"+"</img>";
     
     var td =  "<td><div class='table' style='position:relative;'>"+imgTag+"</div>" 
-            + "<div style='position:relative;bottom:"+(size)+"px;margin-bottom:-"+(size)+"px;z-index=2;'>" + selectedImgTag + "</div>" + "</td>";
+            + "<div style='display:none;position:relative;bottom:"+(size)+"px;margin-bottom:-"+(size)+"px;z-index=2;'>" + selectedImgTag + "</div>" + "</td>";
 
     if (count % line == 0) {
         td = "<tr>" + td;
