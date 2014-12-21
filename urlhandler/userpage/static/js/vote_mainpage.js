@@ -290,17 +290,17 @@ function onCreate(){
     }
     else if(ended == 1)
     {
-        onCreate_ended()
+        onCreate_ended();
     }
     else if(voted == 0)
     {
+        console.log("enter here");
         onCreate_unvoted();
     }
     else
     {
         onCreate_voted();
     }
-        
 }
 
 function findcookie (key) {
