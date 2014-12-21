@@ -275,7 +275,7 @@ function sendvot(votid){
 
 function sendConfirm(){
     var sendid = $('#sendid').val();
-    var tmp = "/vote_modify_display/";
+    var tmp = "/vote_modify_display/"+sendid+"/";
     $.post(tmp,{'voteId':sendid}, function(ret) {
         $('#'+sendid).css("background-color","#FFF");
         window.location.href="/vote_list/"
