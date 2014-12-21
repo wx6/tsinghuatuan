@@ -180,20 +180,21 @@ function createSingalItem(count,line,vote_items)
     var td = "";
     var left = 2.5;
     var imgTag =  "<a href='" + item.url + "'><img  style = '"+"width:"+size+"px;height:"+size+"px'></a>";
+    var selectedImgTag = "<img src='"+selectedImg+" style='position:relative;left:"+left+"%;z-index=-1;opacity=0.5;'>"+"</img>";
     var item = vote_items[count];
     switch(count % line)
     {
         case 0: 
-            td = "<tr><td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+"<br></br><span class='votes'></span></div></td>";
+            td = "<tr><td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+selectedImgTag+"<br></br><span class='votes'></span></div></td>";
             break;
         case 1:
-            td =  "<td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+"<br></br><span class='votes'></span></div></td>";
+            td =  "<td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+selectedImgTag+"<br></br><span class='votes'></span></div></td>";
             break;
         case (line-1):
-            td = "<td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+"<br></br><span class='votes'></span></div></td></tr>";
+            td = "<td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+selectedImgTag+"<br></br><span class='votes'></span></div></td></tr>";
             break;
         default:
-            td = "<td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+"<br></br><span class='votes'></span></div></td>";
+            td = "<td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+selectedImgTag+"<br></br><span class='votes'></span></div></td>";
             break;
        }
     return td;
