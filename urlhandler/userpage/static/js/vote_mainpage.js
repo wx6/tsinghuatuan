@@ -159,7 +159,7 @@ function createSingalVotes(count,line,vote_items)
     var item = vote_items[count];
     var voteTag =  "<p class='votes2'></p>";
 
-    var td = "<td style='position:relative;left:"+left+"%;'>"+voteTag+"</td>";
+    var td = "<td>"+voteTag+"</td>";
 
     switch(count % line)
     {
