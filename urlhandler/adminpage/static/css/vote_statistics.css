@@ -1,4 +1,6 @@
 #button{position:relative;margin-left:40px;}
+#histogram-table{position:relative;margin-left:40px;text-align:center;}
+#lineargram-table{position:relative;margin-left:40px;text-align:center;}
 
 canvas{background-color:white;position:relative;margin-left:5px;margin-top:10px;margin-bottom:25px;/*box-shadow: 3px 3px 3px #7e7a7c;*/}
 

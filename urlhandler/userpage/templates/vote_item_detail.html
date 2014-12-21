@@ -1,31 +1,93 @@
-{% extends "mobile_base.html" %}
-
 {% load staticfiles %}
 
-{% block css%}
-<link href="{% static 'css/vote_item_detail.css' %}"  rel="stylesheet" type="text/css" />
-{% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=no">
+    <title></title>
+    <link type="text/css" href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+    <link href="{% static 'css/vote_item_detail.css' %}"  rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="{% static 'js/jquery-2.1.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'lib/jq/form/jquery.form.min.js' %}"></script>
+    <script type="text/javascript">
+        window.onerror = function() {
+            return true;
+        }
+    </script>
+</head>
 
-{% block title %}
-{{vote.name}}
-{% endblock %}
+<body>
+    <div id="robot" class="robot">
+        <article id="container" class="ticket">
+            <section class="info">
+                <figure>
+                    <div class="mask"></div>
+                    <div id="activity_title_image" style="background-size: 100%;-webkit-animation:inherit" class="m-cover"></div>
+                </figure>
+                <figure>
+                    <figcaption style="margin-left:28px">
+                        <p class="time">XXX投票活动</p>
+                        <h1 id="activity_title"></h1>
+                    </figcaption>
+                </figure>
+                <div class="lead" id="activity_extra_info">
+                    <center>
+                        <img src="{{vote.pic_url}}"/>
+                    </center>
+                </div>
+                <div class="corner"></div>
+                <div class="details">
+                    <div class="body">
+                        <p> {{ vote.description }}</p>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </div>
 
+<script src="{% static 'js/WeixinApi.js' %}"></script>
+<script type="text/javascript">
+//需要动态添加的信息
 
-{% block theme %}
-    {{ vote.name }}
-{% endblock %}
+//var activity_get_ticket_time="11月22日(本周六)中午11:30--13:30";//领票时间
 
-{% block content %}
-<center>
-	<div class="main">
-	<img src="{{vote.pic_url}}"></img>
-	<p>{{vote.description}}</p>
-</div>
-</center>
-{% endblock %}
-	
-{% block js %}
-<script src="http://soso.qstatic.com/wenwen/deploy/js/sea_modules/jquery/1.7.2/jquery-1.7.2.min_a0069db.js"></script>
-<script src="{% static 'lib/jq/form/jquery.form.min.js' %}"></script>
-{% endblock%}
+var activity_page_title= "XXX投票活动";//页面标题名称
+var activity_title= {{ vote.name }};//活动名称
 
+var activity_title_image="http://www.ssxncc.com/admin/UploadFiles/20131218195718990.jpg";
+
+var activity_extra_info=[];
+
+$('title').text(activity_page_title);
+$('#activity_title').text(activity_title);
+
+/*
+for (var i in activity_extra_info)
+{
+    if(i==3)
+    {
+         $('#activity_extra_info').append(
+    '<div><span>'+activity_extra_info[i].t+':</span>'+
+       '<label id="info">'+activity_extra_info[i].c+'</label>'+
+    '</div>');
+    }
+    else
+    {
+        $('#activity_extra_info').append(
+     '<div><span>'+activity_extra_info[i].t+':</span>'+
+        '<label>'+activity_extra_info[i].c+'</label>'+
+     '</div>');
+    }
+}
+*/
+
+$('#activity_title_image').css("background","url("+activity_title_image+") no-repeat")
+</script>
+
+</body>
+</html>

@@ -288,33 +288,50 @@ function init (){
     var newItems = [];
     for (var i = 0; i < items.length; i++){
     	newItems.push({
-    		"name":items[i].name,
+    		"name":(i+1).toString(),
     		"per":(items[i].vote_num).toString()
     	})
+    	var tr = $('<tr></tr>');
+        $("<td class='td-item_name'></td>").html((i+1).toString()).appendTo(tr);
+        $("<td class='td-vote_num'></td>").html(items[i].name).appendTo(tr);
+        //$("<td></td>").html(item.name).appendTo(tr);
+        $('#histogram-table').append(tr);
     }
 	new histogram().init(newItems);
+
 	var times = [];
 	for (var i = 0; i < vote.times.length; i++){
 		times.push({
-    		x:vote.times[i].interval,
+    		x:(i+1).toString(),
     		y:vote.times[i].height
     	})
+    	var tr = $('<tr></tr>');
+        $("<td class='td-item_name'></td>").html((i+1).toString()).appendTo(tr);
+        $("<td class='td-vote_num'></td>").html(vote.times[i].interval).appendTo(tr);
+        //$("<td></td>").html(item.name).appendTo(tr);
+        $('#lineargram-table').append(tr);
 	}
 	var data = {values:[{value0:times}]};
-	LineChart.setKey(["纵坐标为人数，横坐标为时间"]);
+	LineChart.setKey([""]);
 	LineChart.setData("canvas",data,60,"red","#333",true,true);
 	$("#histogram-container").show();
+	$("#histogram-table").show();
 	$("#canvas").hide();
+	$("#lineargram-table").hide();
 }
 
 function showHistogram (){
 	$("#histogram-container").show();
+	$("#histogram-table").show();
 	$("#canvas").hide();
+	$("#lineargram-table").hide();
 }
 
 function showLineargram() {
 	$("#histogram-container").hide();
+	$("#histogram-table").hide();
 	$("#canvas").show();
+	$("#lineargram-table").show();
 }
 
 function sort(arr){
