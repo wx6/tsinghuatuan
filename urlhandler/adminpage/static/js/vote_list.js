@@ -143,10 +143,10 @@ var tdActionMap = {
             }
         }
         if (vot['display'] == 0){
-            result.push('<a href="' + vot['display_url'] + '" target=""><span class="glyphicon glyphicon-eye-open"></span> 开启推送</a>');
+            result.push('<a href="javascript:void(0);" onclick="sendvot('+vot['delete']+')"><span class="glyphicon glyphicon-eye-open"></span> 开启推送</a>');
         }
         else{
-            result.push('<a href="' + vot['display_url'] + '" target=""><span class="glyphicon glyphicon-eye-close"></span> 取消推送</a>');
+            result.push('<a href="javascript:void(0);" onclick="sendvot('+vot['delete']+')"><span class="glyphicon glyphicon-eye-close"></span> 取消推送</a>');
         }
         return result.join('<br/>');
     },
@@ -244,6 +244,45 @@ function initialVotes(){
 		appendVot(votes[i]);
 	}
 	createtips();
+}
+
+function sendvot(votid){
+    var i, len, curvot;
+    for (i = 0, len = votes.length; i < len; ++i){
+        if (votes[i].delete == votid){
+            curvot = votes[i];
+            break;
+        }
+    }
+    if (curvot.display == 0){
+        var content = '确认开启推送<span style="color:red"></span>投票：<span style="color:red">'+curvot.name+'</span>？';
+        $('#'+votid).css("background-color","#9999CC");
+    }
+    else{
+        var content = '确认取消推送<span style="color:red"></span>投票：<span style="color:red">'+curvot.name+'</span>？';
+        $('#'+votid).css("background-color","#6FB7B7");
+    }
+    $('#sendmodalcontent').html(content);
+    $('#sendid').val(votid);
+    $('#sendModal').modal({
+      keyboard: false,
+      backdrop:false
+    });
+    return;
+}
+
+function sendConfirm(){
+    var sendid = $('#sendid').val();
+    var tmp = "/vote_modify_display/";
+    $.post(tmp,{'voteId':sendid}, function(ret) {
+        $('#'+sendid).css("background-color","#FFF");
+        window.location.href="/vote_list/"
+    });
+}
+
+function sendCancel(){
+    var sendid = $('#sendid').val();
+    $('#'+sendid).css('background-color',"#FFF");
 }
 
 clearVotes();
