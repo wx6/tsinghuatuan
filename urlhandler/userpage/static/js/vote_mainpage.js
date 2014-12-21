@@ -153,7 +153,7 @@ function createSingalItemName(count,line,vote_items)
     var left = 2.5;
     var item = vote_items[count];
     var td = "";
-    var nameTag =  "<p class='voteitem'>"+item.name+"</p><br></br><p class='votes2'>""</p>";
+    var nameTag =  "<p class='voteitem'>"+item.name+"</p><br></br><p class='votes2'></p>";
     switch(count % line)
     {
         case 0: 
