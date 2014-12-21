@@ -307,13 +307,17 @@ def vote_user_post(request, voteid, openid):
 
 
 def vote_item_detail(request, itemid):
-    vote = VoteItem.objects.get(id=itemid)
-    voteDict = {}
-    voteDict['name'] = vote.name
-    voteDict['pic_url'] = vote.pic_url
-    voteDict['description'] = vote.description
+    item = VoteItem.objects.get(id=itemid)
+    itemDict = {}
+    itemDict['name'] = item.name
+    itemDict['pic_url'] = item.pic_url
+    itemDict['description'] = item.description
+
+    vote = Vote.objects.filter(key=item.vote_key)[0]
+    itemDict['vote_pic'] = vote.pic_url
+    itemDict['vote_name'] = vote.name
 
     return render_to_response('vote_item_detail.html', {
-        'vote': voteDict,
+        'item': itemDict,
     }, context_instance=RequestContext(request))
 

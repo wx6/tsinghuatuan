@@ -31,17 +31,19 @@
                 </figure>
                 <figure>
                     <figcaption style="margin-left:28px">
-                        <p class="time">XXX投票活动</p>
+                        <p class="time">{{item.vote_name}}</p>
                         <h1 id="activity_title"></h1>
                     </figcaption>
                 </figure>
                 <div class="lead" id="activity_extra_info">
-                    <img style="width:200px;height:150px;" src="{{vote.pic_url}}"/>
+                    <center>
+                        <img style="width:200px;height:150px;" src="{{item.pic_url}}"/>
+                    </center>
                 </div>
                 <div class="corner"></div>
                 <div class="details">
                     <div class="body">
-                        <p> {{ vote.description }}</p>
+                        <p> {{ item.description }}</p>
                     </div>
                 </div>
             </section>
@@ -51,39 +53,13 @@
 <script src="{% static 'js/WeixinApi.js' %}"></script>
 <script type="text/javascript">
 //需要动态添加的信息
-
-//var activity_get_ticket_time="11月22日(本周六)中午11:30--13:30";//领票时间
-
 var activity_page_title= "XXX投票活动";//页面标题名称
-var activity_title="{{vote.name}}";//活动名称
-
-var activity_title_image="http://www.ssxncc.com/admin/UploadFiles/20131218195718990.jpg";
-
+var activity_title="{{item.name}}";//活动名称
+var activity_title_image="{{item.vote_pic}}";
 var activity_extra_info=[];
 
 $('title').text(activity_page_title);
 $('#activity_title').text(activity_title);
-
-/*
-for (var i in activity_extra_info)
-{
-    if(i==3)
-    {
-         $('#activity_extra_info').append(
-    '<div><span>'+activity_extra_info[i].t+':</span>'+
-       '<label id="info">'+activity_extra_info[i].c+'</label>'+
-    '</div>');
-    }
-    else
-    {
-        $('#activity_extra_info').append(
-     '<div><span>'+activity_extra_info[i].t+':</span>'+
-        '<label>'+activity_extra_info[i].c+'</label>'+
-     '</div>');
-    }
-}
-*/
-
 $('#activity_title_image').css("background","url("+activity_title_image+") no-repeat")
 </script>
 
