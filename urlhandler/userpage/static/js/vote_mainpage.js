@@ -176,7 +176,7 @@ function createSingalItem(count,line,vote_items)
 {
     var item = vote_items[count];
     var td = "";
-    var left = (count%line)*30 + 5;
+    var left = (count%line)*32.5 + 2.5;
     var imgTag =  "<a href='" + item.url + "'><img  style = 'position:absolute;left:"+left+"%;"+"width:"+size+"px;height:"+size+"px'></a>";
     var item = vote_items[count];
     switch(count % line)
