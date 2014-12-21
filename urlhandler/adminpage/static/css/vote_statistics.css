@@ -1,6 +1,6 @@
 #button{position:relative;margin-left:40px;}
 #histogram-table{font-size:15px;position:relative;margin-left:40px;text-align:center;border:1px groove;}
-#lineargram-table{font-size:15px;position:relative;margin-left:40px;text-align:center;border:1px groove;}
+#lineargram-table{font-size:15px;position:relative;margin-left:60px;text-align:center;border:1px groove;}
 .caption{text-align:center;font-weight:10px;font-size:20px;}
 .table-item{border:1px groove;min-height:30px;}
 
