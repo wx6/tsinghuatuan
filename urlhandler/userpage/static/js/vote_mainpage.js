@@ -129,7 +129,7 @@ function createBasicVoteItem()
     {
        if(newHtml && (count % line) == 0 )
        {
-           $("table").append(newHtml+blankDiv+newCb+newVotes+blankCheckBox+newVotes);
+           $("table").append(newHtml+blankDiv+newCb+blankCheckBox+newVotes);
            newHtml = "";
            newCb = "";
            newVotes = "";
@@ -200,8 +200,6 @@ function createSingalItemName(count,line,vote_items)
        }
     return td;
 }
-
-
 
 function createSingalItem(count,line,vote_items)
 {
@@ -290,17 +288,16 @@ function onCreate(){
     }
     else if(ended == 1)
     {
-        onCreate_ended();
+        onCreate_ended()
     }
     else if(voted == 0)
     {
-        console.log("enter here");
         onCreate_unvoted();
     }
     else
     {
         onCreate_voted();
-    }
+    } 
 }
 
 function findcookie (key) {
