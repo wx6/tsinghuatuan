@@ -150,22 +150,23 @@ function createBasicVoteItem()
 
 function createSingalItemName(count,line,vote_items)
 {
+    var left = (count%line)*32.5 + 2.5;
     var item = vote_items[count];
     var td = "";
     var nameTag =  "<p class='voteitem'>"+item.name+"</p>";
     switch(count % line)
     {
         case 0: 
-            td = "<tr><td>"+nameTag+"</td>";
+            td = "<tr><td style='position:absolute;left:"+left+"%;'>"+nameTag+"</td>";
             break;
         case 1:
-            td =  "<td>"+nameTag+"</td>";
+            td =  "<td style='position:absolute;left:"+left+"%;'>"+nameTag+"</td>";
             break;
         case (line-1):
-            td = "<td>"+nameTag+"</td></tr>";
+            td = "<td style='position:absolute;left:"+left+"%;'>"+nameTag+"</td></tr>";
             break;
         default:
-            td = "<td>"+nameTag+"</td>";
+            td = "<td style='position:absolute;left:"+left+"%;'>"+nameTag+"</td>";
             break;
        }
     return td;
