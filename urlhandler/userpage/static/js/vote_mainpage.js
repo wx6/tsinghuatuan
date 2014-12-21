@@ -122,12 +122,13 @@ function createBasicVoteItem()
 {
     var newHtml = "";
     var newCb = "";
+    var blankDiv ="<div style='height:1px;'></div>"
     var blankCheckBox = "<tr><td class='addcheckbox'></td><td class='addcheckbox'></td><td class='addcheckbox'></td></tr>"
     for (count = 0;count < vote_items.length;count++)
     {
        if(newHtml && (count % line) == 0 )
        {
-           $("table").append(newHtml+newCb+blankCheckBox);
+           $("table").append(newHtml+blankDiv+newCb+blankCheckBox);
            newHtml = "";
            newCb = "";
        }
@@ -141,7 +142,7 @@ function createBasicVoteItem()
     }
     if(newHtml)
     {
-        $("table").append(newHtml+newCb+blankCheckBox);
+        $("table").append(newHtml+blankDiv+newCb+blankCheckBox);
         newHtml = "";
         newCb = "";
     }
@@ -149,22 +150,23 @@ function createBasicVoteItem()
 
 function createSingalItemName(count,line,vote_items)
 {
+    var left = 2.5;
     var item = vote_items[count];
     var td = "";
     var nameTag =  "<p class='voteitem'>"+item.name+"</p>";
     switch(count % line)
     {
         case 0: 
-            td = "<tr><td>"+nameTag+"</td>";
+            td = "<tr><td style='position:relative;left:"+left+"%;'>"+nameTag+"</td>";
             break;
         case 1:
-            td =  "<td>"+nameTag+"</td>";
+            td =  "<td style='position:relative;left:"+left+"%;'>"+nameTag+"</td>";
             break;
         case (line-1):
-            td = "<td>"+nameTag+"</td></tr>";
+            td = "<td style='position:relative;left:"+left+"%;'>"+nameTag+"</td></tr>";
             break;
         default:
-            td = "<td>"+nameTag+"</td>";
+            td = "<td style='position:relative;left:"+left+"%;'>"+nameTag+"</td>";
             break;
        }
     return td;
@@ -176,21 +178,22 @@ function createSingalItem(count,line,vote_items)
 {
     var item = vote_items[count];
     var td = "";
-    var imgTag =  "<a href='" + item.url + "'><img  style = "+"width:"+size+"px;height:"+size+"px></a>";
+    var left = 2.5;
+    var imgTag =  "<a href='" + item.url + "'><img  style = '"+"width:"+size+"px;height:"+size+"px'></a>";
     var item = vote_items[count];
     switch(count % line)
     {
         case 0: 
-            td = "<tr><td><div class="+"table"+">"+imgTag+"<br></br><span class='votes'></span></div></td>";
+            td = "<tr><td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+"<br></br><span class='votes'></span></div></td>";
             break;
         case 1:
-            td =  "<td><div class="+"table"+">"+imgTag+"<br></br><span class='votes'></span></div></td>";
+            td =  "<td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+"<br></br><span class='votes'></span></div></td>";
             break;
         case (line-1):
-            td = "<td><div class="+"table"+">"+imgTag+"<br></br><span class='votes'></span></div></td></tr>";
+            td = "<td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+"<br></br><span class='votes'></span></div></td></tr>";
             break;
         default:
-            td = "<td><div class="+"table"+">"+imgTag+"<br></br><span class='votes'></span></div></td>";
+            td = "<td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+"<br></br><span class='votes'></span></div></td>";
             break;
        }
     return td;
