@@ -122,30 +122,59 @@ function createBasicVoteItem()
 {
     var newHtml = "";
     var newCb = "";
+    var newVotes = "";
     var blankDiv ="<div style='height:1px;'></div>"
     var blankCheckBox = "<tr><td class='addcheckbox'></td><td class='addcheckbox'></td><td class='addcheckbox'></td></tr>"
     for (count = 0;count < vote_items.length;count++)
     {
        if(newHtml && (count % line) == 0 )
        {
-           $("table").append(newHtml+blankDiv+newCb+blankCheckBox);
+           $("table").append(newHtml+blankDiv+newCb+newVotes+blankCheckBox);
            newHtml = "";
            newCb = "";
+           newVotes = "";
        }
        newHtml += createSingalItem(count,line,vote_items);
        newCb += createSingalItemName(count,line,vote_items);
+       newVotes += createSingalVotes(count,line,vote_items);
     }
     if(count % line != 0)
     {
         newHtml += "</tr>";
         newCb += "</tr>";
+        newVotes += "</tr>";
     }
     if(newHtml)
     {
-        $("table").append(newHtml+blankDiv+newCb+blankCheckBox);
+        $("table").append(newHtml+blankDiv+newCb+blankCheckBox+newVotes);
         newHtml = "";
         newCb = "";
+        newVotes = "";
     }
+}
+
+function createSingalVotes(count,line,vote_items)
+{
+    var left = 2.5;
+    var item = vote_items[count];
+    var td = "";
+    var Tag =  "<p class='votes2'></p>";
+    switch(count % line)
+    {
+        case 0: 
+            td = "<tr><td style='position:relative;left:"+left+"%;'>"+voteTag+"</td>";
+            break;
+        case 1:
+            td =  "<td style='position:relative;left:"+left+"%;'>"+voteTag+"</td>";
+            break;
+        case (line-1):
+            td = "<td style='position:relative;left:"+left+"%;'>"+voteTag+"</td></tr>";
+            break;
+        default:
+            td = "<td style='position:relative;left:"+left+"%;'>"+voteTag+"</td>";
+            break;
+       }
+    return td;
 }
 
 function createSingalItemName(count,line,vote_items)
@@ -153,7 +182,7 @@ function createSingalItemName(count,line,vote_items)
     var left = 2.5;
     var item = vote_items[count];
     var td = "";
-    var nameTag =  "<p class='voteitem'>"+item.name+"</p><br></br><p class='votes2'></p>";
+    var nameTag =  "<p class='voteitem'>"+item.name+"</p>";
     switch(count % line)
     {
         case 0: 
