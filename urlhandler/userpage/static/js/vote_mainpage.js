@@ -157,21 +157,25 @@ function createSingalVotes(count,line,vote_items)
 {
     var left = 2.5;
     var item = vote_items[count];
-    var td = "";
     var voteTag =  "<p class='votes2'></p>";
+
+    var td = "<td style='position:relative;left:"+left+"%;'>"+voteTag+"</td>";
+
     switch(count % line)
     {
-        case 0: 
-            td = "<tr><td style='position:relative;left:"+left+"%;'>"+voteTag+"</td>";
+        case 0:
+            td = "<tr>" + td; 
+            //td = "<tr><td style='position:relative;left:"+left+"%;'>"+voteTag+"</td>";
             break;
         case 1:
-            td =  "<td style='position:relative;left:"+left+"%;'>"+voteTag+"</td>";
+            //td =  "<td style='position:relative;left:"+left+"%;'>"+voteTag+"</td>";
             break;
         case (line-1):
-            td = "<td style='position:relative;left:"+left+"%;'>"+voteTag+"</td></tr>";
+            td = td + "</tr>";
+            //td = "<td style='position:relative;left:"+left+"%;'>"+voteTag+"</td></tr>";
             break;
         default:
-            td = "<td style='position:relative;left:"+left+"%;'>"+voteTag+"</td>";
+            //td = "<td style='position:relative;left:"+left+"%;'>"+voteTag+"</td>";
             break;
        }
     return td;
@@ -181,21 +185,25 @@ function createSingalItemName(count,line,vote_items)
 {
     var left = 2.5;
     var item = vote_items[count];
-    var td = "";
     var nameTag =  "<p class='voteitem'>"+item.name+"</p>";
+
+    var td = "<td>"+nameTag+"</td>";
+
     switch(count % line)
     {
-        case 0: 
-            td = "<tr><td style='position:relative;left:"+left+"%;'>"+nameTag+"</td>";
+        case 0:
+            td = "<tr>" + td; 
+            //td = "<tr><td style='position:relative;left:"+left+"%;'>"+nameTag+"</td>";
             break;
         case 1:
-            td =  "<td style='position:relative;left:"+left+"%;'>"+nameTag+"</td>";
+            //td =  "<td style='position:relative;left:"+left+"%;'>"+nameTag+"</td>";
             break;
         case (line-1):
-            td = "<td style='position:relative;left:"+left+"%;'>"+nameTag+"</td></tr>";
+            td = td + "</tr>";
+            //td = "<td style='position:relative;left:"+left+"%;'>"+nameTag+"</td></tr>";
             break;
         default:
-            td = "<td style='position:relative;left:"+left+"%;'>"+nameTag+"</td>";
+            //td = "<td style='position:relative;left:"+left+"%;'>"+nameTag+"</td>";
             break;
        }
     return td;
@@ -204,12 +212,11 @@ function createSingalItemName(count,line,vote_items)
 function createSingalItem(count,line,vote_items)
 {
     var item = vote_items[count];
-    var td = "";
     var left = 2.5;
     var imgTag =  "<a href='" + item.url + "'><img class='itemimg' style = '"+"width:"+size+"px;height:"+size+"px;'/></a>";
     var selectedImgTag = "<img src='"+selectedImg+"' style='position:relative;top:-"+size+"px;z-index=2;opacity=0.5;'>"+"</img>";
     
-    td =  "<td style='position:relative;'><div class="+"table"+">"+imgTag+selectedImgTag+"<br></br><span class='votes'></span></div></td>";
+    var td =  "<td style='position:relative;'><div class="+"table"+">"+imgTag+selectedImgTag+"<br></br><span class='votes'></span></div></td>";
 
     switch(count % line)
     {
