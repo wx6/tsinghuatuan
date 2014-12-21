@@ -56,9 +56,9 @@
             </section>
         </article>
     </div>
+
 <script src="{% static 'js/WeixinApi.js' %}"></script>
 <script type="text/javascript">
-
 var votenum = 0;
 var maxVote = {{vote.max_num}};
 var vote_items = [
@@ -119,8 +119,8 @@ for (var i in activity_extra_info)
 }
 
 $('#activity_title_image').css("background","url("+activity_title_image+") no-repeat");
-
 </script>
+
 <script src="{% static 'js/vote_mainpage.js' %}"></script>
 
 </body>

@@ -284,18 +284,22 @@ function onCreate_voted(){
 function onCreate(){
     if(started == 0)
     {
+        console.log("test point 1");
         onCreate_unstarted();
     }
     else if(ended == 1)
     {
+        console.log("test point 2");
         onCreate_ended()
     }
     else if(voted == 0)
     {
+        console.log("test point 3");
         onCreate_unvoted();
     }
     else
     {
+        console.log("test point 4");
         onCreate_voted();
     } 
 }
