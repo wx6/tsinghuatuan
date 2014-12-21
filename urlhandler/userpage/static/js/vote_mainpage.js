@@ -216,7 +216,7 @@ function createSingalItem(count,line,vote_items)
     var selectedImgTag = "<img src='"+selectedImg+"' style='opacity=0.5;'>"+"</img>";
     
     var td =  "<td><div class='table' style='position:relative;'>"+imgTag+"</div>" 
-            + "<div style='position:relative;bottom:"+(10+size)+"px;z-index=2;'>" + selectedImgTag + "</div>" + "</td>";
+            + "<div style='position:relative;margin-bottom:"+size+"px;z-index=2;'>" + selectedImgTag + "</div>" + "</td>";
 
     switch(count % line)
     {
