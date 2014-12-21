@@ -202,15 +202,16 @@ function createSingalItem(count,line,vote_items)
 
 function adjustImg()
 {
-    var img = $(".itemimg");
-    for(var i = 0; i < img.length; i++){
-        img[i].style.width = document.body.clientWidth * 0.3+"px";
-        img[i].style.height = document.body.clientWidth * 0.3+"px";
-    }
+    // var img = $(".itemimg");
+    // for(var i = 0; i < img.length; i++){
+    //     img[i].style.width = document.body.clientWidth * 0.3+"px";
+    //     img[i].style.height = document.body.clientWidth * 0.3+"px";
+    // }
     // var table = $(".table")
     // for(var i = 0; i < table.length; i++){
     //     table[i].style.height = document.body.clientWidth * 0.3+"px";
     // }
+}
 
 function onCreate_ended()
 {
