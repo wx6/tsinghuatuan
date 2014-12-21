@@ -161,23 +161,12 @@ function createSingalVotes(count,line,vote_items)
 
     var td = "<td>"+voteTag+"</td>";
 
-    switch(count % line)
-    {
-        case 0:
-            td = "<tr>" + td; 
-            //td = "<tr><td style='position:relative;left:"+left+"%;'>"+voteTag+"</td>";
-            break;
-        case 1:
-            //td =  "<td style='position:relative;left:"+left+"%;'>"+voteTag+"</td>";
-            break;
-        case (line-1):
-            td = td + "</tr>";
-            //td = "<td style='position:relative;left:"+left+"%;'>"+voteTag+"</td></tr>";
-            break;
-        default:
-            //td = "<td style='position:relative;left:"+left+"%;'>"+voteTag+"</td>";
-            break;
-       }
+    if (count % line == 0) {
+        td = "<tr>" + td;
+    } else if (count % line == (line - 1)) {
+        td = td + "</tr>";
+    }
+    
     return td;
 }
 
@@ -189,23 +178,12 @@ function createSingalItemName(count,line,vote_items)
 
     var td = "<td>"+nameTag+"</td>";
 
-    switch(count % line)
-    {
-        case 0:
-            td = "<tr>" + td; 
-            //td = "<tr><td style='position:relative;left:"+left+"%;'>"+nameTag+"</td>";
-            break;
-        case 1:
-            //td =  "<td style='position:relative;left:"+left+"%;'>"+nameTag+"</td>";
-            break;
-        case (line-1):
-            td = td + "</tr>";
-            //td = "<td style='position:relative;left:"+left+"%;'>"+nameTag+"</td></tr>";
-            break;
-        default:
-            //td = "<td style='position:relative;left:"+left+"%;'>"+nameTag+"</td>";
-            break;
-       }
+    if (count % line == 0) {
+        td = "<tr>" + td;
+    } else if (count % line == (line - 1)) {
+        td = td + "</tr>";
+    }
+
     return td;
 }
 
@@ -216,25 +194,14 @@ function createSingalItem(count,line,vote_items)
     var selectedImgTag = "<img src='"+selectedImg+"' style='opacity=0.5;'>"+"</img>";
     
     var td =  "<td><div class='table' style='position:relative;'>"+imgTag+"</div>" 
-            + "<div style='position:relative;bottom:-"+(size)+"px;margin-bottom:-"+(size)+"px;z-index=2;'>" + selectedImgTag + "</div>" + "</td>";
+            + "<div style='position:relative;bottom:"+(size)+"px;margin-bottom:-"+(size)+"px;z-index=2;'>" + selectedImgTag + "</div>" + "</td>";
 
-    switch(count % line)
-    {
-        case 0: 
-            td = "<tr>" + td;
-            // td = "<tr><td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+selectedImgTag+"<br></br><span class='votes'></span></div></td>";
-            break;
-        case 1:
-            // td =  "<td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+selectedImgTag+"<br></br><span class='votes'></span></div></td>";
-            break;
-        case (line-1):
-            td = td + "</tr>";
-            //td = "<td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+selectedImgTag+"<br></br><span class='votes'></span></div></td></tr>";
-            break;
-        default:
-            // td = "<td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+selectedImgTag+"<br></br><span class='votes'></span></div></td>";
-            break;
+    if (count % line == 0) {
+        td = "<tr>" + td;
+    } else if (count % line == (line - 1)) {
+        td = td + "</tr>";
     }
+    
     return td;
 }
 
