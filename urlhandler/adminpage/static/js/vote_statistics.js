@@ -312,7 +312,7 @@ function init (){
         $('#lineargram-table').append(tr);
 	}
 	var data = {values:[{value0:times}]};
-	LineChart.setKey(["纵坐标为人数，横坐标为时间"]);
+	LineChart.setKey([""]);
 	LineChart.setData("canvas",data,60,"red","#333",true,true);
 	$("#histogram-container").show();
 	$("#histogram-table").show();
@@ -322,12 +322,16 @@ function init (){
 
 function showHistogram (){
 	$("#histogram-container").show();
+	$("#histogram-table").show();
 	$("#canvas").hide();
+	$("#lineargram-table").hide();
 }
 
 function showLineargram() {
 	$("#histogram-container").hide();
+	$("#histogram-table").hide();
 	$("#canvas").show();
+	$("#lineargram-table").show();
 }
 
 function sort(arr){
