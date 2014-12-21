@@ -63,7 +63,7 @@ function addImg()
 {
     for (var count = 0; count < vote_items.length;count++)
     {
-        $(".table img")[count].src = vote_items[count].pic_url;
+        $(".itemimg")[count].src = vote_items[count].pic_url;
     }
 }
 
@@ -179,7 +179,7 @@ function createSingalItem(count,line,vote_items)
     var item = vote_items[count];
     var td = "";
     var left = 2.5;
-    var imgTag =  "<a href='" + item.url + "'><img  style = '"+"width:"+size+"px;height:"+size+"px'></a>";
+    var imgTag =  "<a href='" + item.url + "'><img class='itemimg' style = '"+"width:"+size+"px;height:"+size+"px'></a>";
     var selectedImgTag = "<img src='"+selectedImg+"' style='position:relative;left:"+left+"%;z-index=-1;opacity=0.5;'>"+"</img>";
     var item = vote_items[count];
     switch(count % line)
@@ -202,7 +202,7 @@ function createSingalItem(count,line,vote_items)
 
 function adjustImg()
 {
-    var img = $("a img");
+    var img = $(".itemimg");
     for(var i = 0; i < img.length; i++){
         img[i].style.width = document.body.clientWidth * 0.3;
         img[i].style.height = document.body.clientWidth * 0.3;
