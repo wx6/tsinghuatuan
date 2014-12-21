@@ -185,16 +185,16 @@ function createSingalItem(count,line,vote_items)
     switch(count % line)
     {
         case 0: 
-            td = "<tr><td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+"<br></br><span class='votes'></span></div></td>"+selectedImgTag;
+            td = "<tr><td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+selectedImgTag+"<br></br><span class='votes'></span></div></td>";
             break;
         case 1:
-            td =  "<td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+"<br></br><span class='votes'></span></div></td>"+selectedImgTag;
+            td =  "<td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+selectedImgTag+"<br></br><span class='votes'></span></div></td>";
             break;
         case (line-1):
-            td = "<td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+"<br></br><span class='votes'></span></div></td>"+selectedImgTag+"</tr>";
+            td = "<td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+selectedImgTag+"<br></br><span class='votes'></span></div></td></tr>";
             break;
         default:
-            td = "<td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+"<br></br><span class='votes'></span></div></td>"+selectedImgTag;
+            td = "<td style='position:relative;left:"+left+"%;'><div class="+"table"+">"+imgTag+selectedImgTag+"<br></br><span class='votes'></span></div></td>";
             break;
        }
     return td;
