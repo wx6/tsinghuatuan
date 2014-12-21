@@ -113,7 +113,7 @@ function addVoteNumber()
     for (var count = 0; count < vote_items.length;count++)
     {
         var item = vote_items[count];
-        $(".votes")[count].innerHTML =  "人气:"+item.vote_num;
+        $(".votes2")[count].innerHTML =  "人气:"+item.vote_num;
     }
 }
 
@@ -153,7 +153,7 @@ function createSingalItemName(count,line,vote_items)
     var left = 2.5;
     var item = vote_items[count];
     var td = "";
-    var nameTag =  "<p class='voteitem'>"+item.name+"</p>";
+    var nameTag =  "<p class='voteitem'>"+item.name+"</p><br></br><p class='votes2'>""</p>";
     switch(count % line)
     {
         case 0: 
@@ -207,10 +207,10 @@ function adjustImg()
     //     img[i].style.width = document.body.clientWidth * 0.3+"px";
     //     img[i].style.height = document.body.clientWidth * 0.3+"px";
     // }
-    // var table = $(".table")
-    // for(var i = 0; i < table.length; i++){
-    //     table[i].style.height = document.body.clientWidth * 0.3+"px";
-    // }
+    var table = $(".table")
+    for(var i = 0; i < table.length; i++){
+         table[i].style.height = document.body.clientWidth * 0.3+"px";
+     }
 }
 
 function onCreate_ended()
