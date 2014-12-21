@@ -256,12 +256,12 @@ function sendvot(votid){
     }
     if (curvot.display == 0){
         var content = '确认开启推送<span style="color:red"></span>投票：<span style="color:red">'+curvot.name+'</span>？';
-        $('#'+votid).css("background-color","#9999CC");
+        $('#'+votid).css("background-color","#A3D1D1");
         $('#sendModalLabel').html("开启推送");
     }
     else{
         var content = '确认取消推送<span style="color:red"></span>投票：<span style="color:red">'+curvot.name+'</span>？';
-        $('#'+votid).css("background-color","#6FB7B7");
+        $('#'+votid).css("background-color","#C7C7E2");
         $('#sendModalLabel').html("取消推送");
     }
     $('#sendmodalcontent').html(content);
