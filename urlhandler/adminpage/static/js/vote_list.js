@@ -257,10 +257,12 @@ function sendvot(votid){
     if (curvot.display == 0){
         var content = '确认开启推送<span style="color:red"></span>投票：<span style="color:red">'+curvot.name+'</span>？';
         $('#'+votid).css("background-color","#9999CC");
+        $('#sendModalLabel').html("开启推送");
     }
     else{
         var content = '确认取消推送<span style="color:red"></span>投票：<span style="color:red">'+curvot.name+'</span>？';
         $('#'+votid).css("background-color","#6FB7B7");
+        $('#sendModalLabel').html("取消推送");
     }
     $('#sendmodalcontent').html(content);
     $('#sendid').val(votid);
