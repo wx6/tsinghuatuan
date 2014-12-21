@@ -207,7 +207,10 @@ function adjustImg()
         img[i].style.width = document.body.clientWidth * 0.3;
         img[i].style.height = document.body.clientWidth * 0.3;
     }
-}
+    var table = $(".table")
+    for(var i = 0; i < img.length; i++){
+        table[i].style.height = document.body.clientWidth * 0.3;
+    }}
 
 function onCreate_ended()
 {
