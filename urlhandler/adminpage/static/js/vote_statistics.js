@@ -292,8 +292,8 @@ function init (){
     		"per":(items[i].vote_num).toString()
     	})
     	var tr = $('<tr></tr>');
-        $("<td class='td-item_name'></td>").html((i+1).toString()).appendTo(tr);
-        $("<td class='td-vote_num'></td>").html(items[i].name).appendTo(tr);
+        $("<td class='table-item'></td>").html((i+1).toString()).appendTo(tr);
+        $("<td class='table-item'></td>").html(items[i].name).appendTo(tr);
         //$("<td></td>").html(item.name).appendTo(tr);
         $('#histogram-table').append(tr);
     }
@@ -306,8 +306,8 @@ function init (){
     		y:vote.times[i].height
     	})
     	var tr = $('<tr></tr>');
-        $("<td class='td-item_name'></td>").html((i+1).toString()).appendTo(tr);
-        $("<td class='td-vote_num'></td>").html(vote.times[i].interval).appendTo(tr);
+        $("<td class='table-item'></td>").html((i+1).toString()).appendTo(tr);
+        $("<td class='table-item'></td>").html(vote.times[i].interval).appendTo(tr);
         //$("<td></td>").html(item.name).appendTo(tr);
         $('#lineargram-table').append(tr);
 	}
