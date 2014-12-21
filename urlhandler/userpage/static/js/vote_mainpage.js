@@ -122,12 +122,13 @@ function createBasicVoteItem()
 {
     var newHtml = "";
     var newCb = "";
+    var blankDiv ="<div style='height:1px;'></div>"
     var blankCheckBox = "<tr><td class='addcheckbox'></td><td class='addcheckbox'></td><td class='addcheckbox'></td></tr>"
     for (count = 0;count < vote_items.length;count++)
     {
        if(newHtml && (count % line) == 0 )
        {
-           $("table").append(newHtml+newCb+blankCheckBox);
+           $("table").append(newHtml+blankDiv+newCb+blankCheckBox);
            newHtml = "";
            newCb = "";
        }
@@ -141,7 +142,7 @@ function createBasicVoteItem()
     }
     if(newHtml)
     {
-        $("table").append(newHtml+newCb+blankCheckBox);
+        $("table").append(newHtml+blankDiv+newCb+blankCheckBox);
         newHtml = "";
         newCb = "";
     }
