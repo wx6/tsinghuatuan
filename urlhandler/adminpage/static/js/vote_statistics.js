@@ -274,9 +274,9 @@ Array.prototype.max = function(){//最大值
       		this.ctx.beginPath();
       		this.ctx.strokeStyle = color;
       		this.ctx.font="10px";
-      		this.ctx.moveTo(x,y);
-      		this.ctx.lineTo(x+50,y);
-      		this.ctx.fillText(":"+keyname,x+80,y,30);
+      		// this.ctx.moveTo(x,y);
+      		// this.ctx.lineTo(x+50,y);
+      		// this.ctx.fillText(":"+keyname,x+80,y,30);
       		this.ctx.stroke();
       		this.ctx.closePath();
       	}
