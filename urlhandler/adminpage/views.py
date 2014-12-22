@@ -763,7 +763,7 @@ def vote_statistics(request, voteid):
         return HttpResponseRedirect(s_reverse_admin_home())
 
     vote = Vote.objects.get(id=voteid)
-    voteItems = VoteItem.objects.filter(vote_key=vote.key)
+    voteItems = VoteItem.objects.filter(vote_key=vote.key, status=1)
 
     total_votes = 0
     for item in voteItems:
