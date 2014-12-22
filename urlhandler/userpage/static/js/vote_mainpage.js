@@ -34,17 +34,14 @@ function generateOptions()
      var options = {
         dataType: 'json',
         success: function (data) {
-            if(data.error==null)
-            {
+            if(data.error==null) {
                 successLoad(data);
-            }
-            else
-            {
-                alert(data.error)
+            } else {
+                alert(data.error);
             }
         },
         error: function (xhr) {
-                alert("网络错误")
+            alert("网络错误");
         }
     };
     return options;
@@ -221,11 +218,16 @@ function onCreate_unstarted()
 function onCreate_unvoted(){
     $("#info")[0].innerHTML = "您可以投" + maxVote + "项，点击名称查看详情"
     $("button").show();
+    console.log("test point 1");
     createBasicVoteItem();
+    console.log("test point 2");
     adjustImg();
+    console.log("test point 3");
     CookieOnLoad();
+    console.log("test point 4");
     addVoteNumber();
     //addCheckBox();
+    console.log("test point 5");
     addImg();
 }
 
@@ -347,6 +349,17 @@ function voteNumOverflow(vtLim, id){
     }
 }
 
+onCreate();
+
+// 添加事件监听 
+addEventListener('load', function(){ 
+    orientationChange(); 
+    //window.onorientationchange = orientationChange; 
+    //setTimeout(function(){ window.scrollTo(0, 1); }, 100);
+});
+
+
+
 
 // 初始化WeixinApi，等待分享
 WeixinApi.ready(function(Api) {
@@ -399,14 +412,4 @@ WeixinApi.ready(function(Api) {
 
     // iOS上，可以直接调用这个API进行分享，一句话搞定
     Api.generalShare(wxData,wxCallbacks);
-});
-
-
-onCreate();
-
-// 添加事件监听 
-addEventListener('load', function(){ 
-    orientationChange(); 
-    //window.onorientationchange = orientationChange; 
-    //setTimeout(function(){ window.scrollTo(0, 1); }, 100);
 });
