@@ -41,6 +41,7 @@ function generateOptions()
             }
         },
         error: function (xhr) {
+            console.log(xhr);
             alert("网络错误");
         }
     };
