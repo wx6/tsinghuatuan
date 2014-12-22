@@ -8,18 +8,18 @@
     <meta content="telephone=no" name="format-detection">
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=no">
     <title></title>
-    <link type="text/css" href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
-    <link href="{% static 'css/vote_mainpage.css' %}"  rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/vote_mainpage.css' %}" type="text/css">
     <script type="text/javascript" src="{% static 'js/jquery-2.1.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'lib/jq/form/jquery.form.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/WeixinApi.js' %}"></script>
     <script type="text/javascript">
         window.onerror = function() {
             return true;
         }
     </script>
 </head>
-
 <body>
     <div id="robot" class="robot">
         <article id="container" class="ticket">
@@ -57,66 +57,61 @@
         </article>
     </div>
 
-<script src="{% static 'js/WeixinApi.js' %}"></script>
-<script type="text/javascript">
-var votenum = 0;
-var maxVote = {{ vote.max_num }};
-var vote_items = [
-    {% for item in vote.items %}
-        {
-            'voted':{{item.voted}},
-            'name': '{{item.name}}',
-            'vote_num':{{item.vote_num}},
-            'pic_url':'{{item.pic_url}}',
-            'id':{{item.id}},
-            'url':"{% url 'userpage.views.vote_item_detail' item.id %}"
-        }{% if forloop.last %}{% else %},{% endif %}
-    {% endfor %}
-];
-var vote_name = '{{ vote.name }}';
-var voted = {{ vote.voted }};
-var voteId = {{ vote.id }};
-var started = {{ vote.started }};
-var ended = {{ vote.ended }};
-var bound = {{ bound }};
-var vote_pic_url = '{{ vote.pic_url }}';
-var vote_description = '{{ vote.description }}';
-var line = 3;
-var size = Math.min(window.screen.availHeight, window.screen.availWidth) * 0.3;
-var selectedImg = "{% static 'img/tick.png' %}";
-var detailImg = "{% static 'img/detail.jpg' %}";
+    <script type="text/javascript">
+        var votenum = 0;
+        var maxVote = {{ vote.max_num }};
+        var vote_items = [
+            {% for item in vote.items %}
+                {
+                    'voted':{{item.voted}},
+                    'name': '{{item.name}}',
+                    'vote_num':{{item.vote_num}},
+                    'pic_url':'{{item.pic_url}}',
+                    'id':{{item.id}},
+                    'url':"{% url 'userpage.views.vote_item_detail' item.id %}"
+                }{% if forloop.last %}{% else %},{% endif %}
+            {% endfor %}
+        ];
+        var vote_name = '{{ vote.name }}';
+        var voted = {{ vote.voted }};
+        var voteId = {{ vote.id }};
+        var started = {{ vote.started }};
+        var ended = {{ vote.ended }};
+        var bound = {{ bound }};
+        var vote_pic_url = '{{ vote.pic_url }}';
+        var vote_description = '{{ vote.description }}';
+        var line = 3;
+        var size = Math.min(window.screen.availHeight, window.screen.availWidth) * 0.3;
+        var selectedImg = "{% static 'img/tick.png' %}";
+        var detailImg = "{% static 'img/detail.jpg' %}";
+        var start_time = '{{ vote.start_time|date:"Y年m月d日 H:i" }}';
+        var end_time = '{{ vote.end_time|date:"Y年m月d日 H:i" }}';
+        var max_vote = maxVote;
+        var vote_status = '';
 
-var start_time = '{{ vote.start_time|date:"Y年m月d日 H:i" }}';
-var end_time = '{{ vote.end_time|date:"Y年m月d日 H:i" }}';
+        //页面标题名称
+        var activity_page_title = vote_name + "投票详情";
+        //活动名称
+        var activity_title = vote_name;
+        //最好是横着的图片
+        var activity_title_image = vote_pic_url;
+        //提示信息
+        var activity_extra_info = [{t:'投票开始',c:start_time},{t:'投票结束',c:end_time},{t:'最大投票数',c:max_vote},{t:'投票状态',c:vote_status}];
 
-var max_vote = maxVote;
-var vote_status = '投票尚未开始';
+        $('title').text(activity_page_title);
+        $('#activity_title').text(activity_title);
 
-//页面标题名称
-var activity_page_title = vote_name + "投票详情";
-//活动名称
-var activity_title = vote_name;
-//最好是横着的图片
-var activity_title_image = vote_pic_url;
+        for (var i in activity_extra_info) {
+            if(i == 3) {
+                $('#activity_extra_info').append('<div><span>'+activity_extra_info[i].t+':</span>'+'<label id="info">'+activity_extra_info[i].c+'</label>'+'</div>');
+            } else {
+                $('#activity_extra_info').append('<div><span>'+activity_extra_info[i].t+':</span>'+'<label>'+activity_extra_info[i].c+'</label>'+'</div>');
+            }
+        }
 
-var activity_extra_info = [{t:'开始时间',c:start_time},{t:'结束时间',c:end_time},{t:'最大投票数',c:max_vote},{t:'投票状态',c:vote_status}];
-
-$('title').text(activity_page_title);
-$('#activity_title').text(activity_title);
-
-for (var i in activity_extra_info) {
-    if(i == 3) {
-        $('#activity_extra_info').append('<div><span>'+activity_extra_info[i].t+':</span>'+'<label id="info">'+activity_extra_info[i].c+'</label>'+'</div>');
-    } else {
-        $('#activity_extra_info').append('<div><span>'+activity_extra_info[i].t+':</span>'+'<label>'+activity_extra_info[i].c+'</label>'+'</div>');
-    }
-}
-
-$('#activity_title_image').css("background","url("+activity_title_image+") no-repeat")
-                          .css("max-height", "100px").css("background-size", "cover");
-</script>
-
-<script src="{% static 'js/vote_mainpage.js' %}"></script>
-
+        $('#activity_title_image').css("background","url("+activity_title_image+") no-repeat")
+                                  .css("max-height", "100px").css("background-size", "cover");
+    </script>
+    <script type="text/javascript" src="{% static 'js/vote_mainpage.js' %}"></script>
 </body>
 </html>
