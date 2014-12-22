@@ -280,7 +280,7 @@ function onCreate(){
         onCreate_unvoted();
     } else {
         onCreate_voted();
-    } 
+    }
 }
 
 
@@ -289,14 +289,13 @@ function findcookie (key) {
     name += "=";
     var allcookies = document.cookie;
     var pos = document.cookie.indexOf(name)
-    if(pos != -1){
+    if(pos != -1) {
         var start = pos + name.length;                  //cookie值开始的位置  
         var end = allcookies.indexOf(";",start);        //从cookie值开始的位置起搜索第一个";"的位置,即cookie值结尾的位置  
         if (end == -1) end = allcookies.length;        //如果end值为-1说明cookie列表里只有一个cookie  
         var value = allcookies.substring(start,end); //提取cookie的值  
         return(value);                           //对它解码 
-    }
-    else{
+    } else {
         return("");
     }
 }
@@ -340,42 +339,31 @@ function changeItemCover(id) {
         td.attr("value", "on");
         item.css("opacity", "0.4");
         votenum = votenum + 1;
+        document.cookie = escape(id) + "=true";
     } else {
         tick.hide();
         td.attr("value", "off");
         item.css("opacity", "1.0");
         votenum = votenum - 1;
+        document.cookie = escape(id) + "=false";
     }
 }
 
 function CookieOnSelect(id) {
-    /*
-    var td = $("#" + id);
-    var checked = (td.attr("value") == "on");
-    document.cookie = escape(id) + "=" + checked;
-    votenum += checked ? 1 : -1;
-    */
-    if(votenum == maxVote && id != lastSelect) {
+    changeItemCover(id);
+    if(votenum > maxVote) {
         voteNumOverflow(maxVote, id);
     } else {
         lastSelect = id;
-        changeItemCover(id);
     } 
 }
 
 function voteNumOverflow(vtLim, id){
     if(vtLim == 1) {
         changeItemCover(lastSelect);
-        changeItemCover(id);
-        document.cookie = escape(lastSelect) + "=false";
-        document.cookie = escape(id) + "=true";
         lastSelect = id;
     } else {
-        //var input = document.getElementById(id);
-        //var td = $("#" + id);
-        //input.checked = false;
-        //td.attr("value", "off");
-        //votenum--;
+        changeItemCover(id);
         alert("您的投票数已经达到上限！");
     }
 }
