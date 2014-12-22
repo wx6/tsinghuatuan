@@ -116,8 +116,6 @@ function createBasicVoteItem()
         newCb = "";
         newVotes = "";
     }
-
-    bindClickEvent();
 }
 
 function createSingleVotes(count,line,vote_items)
@@ -181,8 +179,7 @@ function adjustImg()
     }
 }
 
-function onCreate_ended()
-{
+function onCreate_ended() {
     $("#info")[0].innerHTML = "投票已结束。"
     $("button").remove();
     createBasicVoteItem();
@@ -191,8 +188,7 @@ function onCreate_ended()
     addImg();
 }
 
-function onCreate_unstarted()
-{
+function onCreate_unstarted() {
     $("#info")[0].innerHTML = "投票尚未开始。" 
     $("button").remove();
 //    var size = Math.min(window.screen.availWidth,window.screen.availHeight) * 0.3;
@@ -201,23 +197,31 @@ function onCreate_unstarted()
     addImg();
 }
 
-function onCreate_unvoted(){
+function onCreate_unvoted() {
     $("#info")[0].innerHTML = "投票正在进行中！"
     $("button").show();
     createBasicVoteItem();
+    bindClickEvent();
     adjustImg();
     CookieOnLoad();
     addVoteNumber();
     addImg();
 }
 
-function onCreate_voted(){
-    var name_list = generateVoteNames();
+function onCreate_voted() {
     $("#info")[0].innerHTML = "你已经投过票啦，感谢你的参与！"
     $("button").remove();
     createBasicVoteItem();
     adjustImg();
     addVoteNumber();
+    addImg();
+}
+
+function onCreate_unbound() {
+    $("#info")[0].innerHTML = "您尚未绑定，不能参与投票。" 
+    $("button").remove();
+    createBasicVoteItem();
+    adjustImg();
     addImg();
 }
 
@@ -230,6 +234,8 @@ function onCreate(){
         onCreate_unstarted();
     } else if(ended == 1) {
         onCreate_ended();
+    } else if (bound == 0) {
+        onCreate_unbound();
     } else if(voted == 0) {
         onCreate_unvoted();
     } else {
