@@ -81,7 +81,7 @@ var ended = {{ vote.ended }};
 var vote_pic_url = '{{ vote.pic_url }}';
 var vote_description = '{{ vote.description }}';
 var line = 3;
-var size = document.body.clientWidth * 0.3;
+var size = Math.min(window.screen.availHeight, window.screen.availWidth) * 0.3;
 var selectedImg = "{% static 'img/tick.png' %}";
 var detailImg = "{% static 'img/detail.jpg' %}";
 

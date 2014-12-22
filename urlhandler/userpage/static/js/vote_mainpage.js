@@ -178,7 +178,7 @@ function createSingleItem(count,line,vote_items)
 function adjustImg()
 {
     var table = $(".table");
-    var size = Math.min(window.screen.availHeight,window.screen.availWidth) * 0.3;
+//    var size = Math.min(window.screen.availHeight,window.screen.availWidth) * 0.3;
     for(var i = 0; i < table.length; i++) {
         table[i].style.height = size+"px";
     }
@@ -198,7 +198,7 @@ function onCreate_unstarted()
 {
     $("#info")[0].innerHTML = "投票尚未开始。" 
     $("button").remove();
-    var size = Math.min(window.screen.availWidth,window.screen.availHeight) * 0.3;
+//    var size = Math.min(window.screen.availWidth,window.screen.availHeight) * 0.3;
     createBasicVoteItem();
     adjustImg();
     addImg();
