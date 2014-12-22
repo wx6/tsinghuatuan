@@ -118,21 +118,7 @@ function addVoteNumber()
 
 function bindClickEvent() {
     $(".item-td").click(function(){
-        var td = $(this);
-        var tick = td.children(".tick");
-        var item = td.children(".table");
-        
-        if (td.attr("value") == "off") {
-            tick.show();
-            td.attr("value", "on");
-            item.css("opacity", "0.4");
-        } else {
-            tick.hide();
-            td.attr("value", "off");
-            item.css("opacity", "1.0");
-        }
-
-        CookieOnSelect(td.attr("id"));
+        CookieOnSelect($(this).attr("id"));
     });
 }
 
@@ -351,58 +337,51 @@ function loadCookie(){
     }
 }
 
-function CookieOnSelect(id){
-//    var consult = findcookie(id);
-//    if(consult == "true"){
-//        document.cookie = escape(id) + "=false";
-//        votenum--;
-//    }
-//    else{
-//        if(votenum >= maxVote)
-//            voteNumOverflow(maxVote,id);
-//        else{
-//            lastSelect = id;
-//            document.cookie = escape(id) + "=true";
-//            votenum++;
-//        }
-//    }
+function changeItemCover(id) {
+    var td = $("#" + id);
+    var tick = td.children(".tick");
+    var item = td.children(".table");
+        
+    if (td.attr("value") == "off") {
+        tick.show();
+        td.attr("value", "on");
+        item.css("opacity", "0.4");
+    } else {
+        tick.hide();
+        td.attr("value", "off");
+        item.css("opacity", "1.0");
+    }
+}
+
+function CookieOnSelect(id) {
     /*
-    var input = document.getElementById(id);
-    document.cookie = escape(id) + "=" + input.checked;
-    votenum += input.checked? 1 : -1;
-    if(votenum > maxVote)
-        voteNumOverflow(maxVote,id);
-    else
-        lastSelect = id;
-    */
     var td = $("#" + id);
     var checked = (td.attr("value") == "on");
     document.cookie = escape(id) + "=" + checked;
     votenum += checked ? 1 : -1;
-    if(votenum > maxVote) {
+    */
+    if(votenum == maxVote) {
         voteNumOverflow(maxVote, id);
     } else {
         lastSelect = id;
+        changeItemCover(id);
+        votenum++;
     } 
 }
 
-function voteNumOverflow(vtLim,id){
-    if(maxVote == 1){
-        //var input = document.getElementById(lastSelect);
-        var td = $("#" + lastSelect);
-        //input.checked = false;
-        td.attr("value", "off");
+function voteNumOverflow(vtLim, id){
+    if(vtLim == 1) {
+        changeItemCover(lastSelect);
+        changeItemCover(id);
         document.cookie = escape(lastSelect) + "=false";
         document.cookie = escape(id) + "=true";
         lastSelect = id;
-        votenum--;
-    }
-    else{
+    } else {
         //var input = document.getElementById(id);
-        var td = $("#" + id);
+        //var td = $("#" + id);
         //input.checked = false;
-        td.attr("value", "off");
-        votenum--;
+        //td.attr("value", "off");
+        //votenum--;
         alert("您的投票数已经达到上限！");
     }
 }

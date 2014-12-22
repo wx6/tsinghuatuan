@@ -21,36 +21,6 @@ td {
     text-align:center;
 }
 
-input[type="checkbox"] {
-    display: none;
-}
-
-.checkbox {
-    width: 2.5em;
-    height: 2.5em;
-    background: #CCCCCC;
-    margin-top: 0.5em;
-    border-radius: 100%;
-    position: relative;
-    margin: 0px auto;
-}
-
-.checkbox label {
-    width: 2em;
-    height: 2em;
-    border-radius: 3em;
-    cursor: pointer;
-    position: absolute;
-    top: 0.25em;
-    left: 0.25em;
-    z-index: 1;
-    background: white;
-}
-
-.checkbox input[type=checkbox]:checked + label {
-    background: #CC66FF;
-}
-
 .table {
     text-align: center;
     width:100%;
