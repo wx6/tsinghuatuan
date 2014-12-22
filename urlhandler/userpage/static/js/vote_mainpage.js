@@ -1,20 +1,24 @@
 var lastSelect;
 
 function commitVote() {
+    console.log("test point 1");
     var name_list = generateVoteNames();
+    console.log("test point 2");
     if(votenum <= 0) {
         alert("请投票之后再提交");
         return false;
     }
-    
+    console.log("test point 3");
     if(confirm(name_list))
         ;
     else{
         return false;
     }
-    
+    console.log("test point 4");
     var options = generateOptions();
+    console.log("test point 5");
     $('#voteItem').ajaxSubmit(options);
+    console.log("test point 6");
     return false;
 } 
 
