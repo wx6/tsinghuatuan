@@ -79,7 +79,7 @@ function addCheckBox()
     }
 }
 
-// function createSingalCheckBox(count,line,vote_items)
+// function createSingleCheckBox(count,line,vote_items)
 // {
 //     var item = vote_items[count];
 //     var checkboxTag = "<input type ='checkbox' name="+item.id+" id='"+item.id+"'";
@@ -112,10 +112,27 @@ function addVoteNumber()
     for (var count = 0; count < vote_items.length;count++)
     {
         var item = vote_items[count];
-        $(".votes2")[count].innerHTML = "人气 : "+item.vote_num;
+        $(".votes2")[count].innerHTML = "人气:"+item.vote_num;
     }
 }
 
+function bindClickEvent() {
+    $(".item-td").click(function(){
+        var td = $(this);
+        var tick = td.children(".tick");
+        var item = td.children(".table");
+        
+        if (td.attr("value") == "off") {
+            tick.show();
+            td.attr("value", "on");
+            item.css("opacity", "0.4");
+        } else {
+            tick.hide();
+            td.attr("value", "off");
+            item.css("opacity", "1.0");
+        }
+    });
+}
 
 function createBasicVoteItem()
 {
@@ -133,9 +150,9 @@ function createBasicVoteItem()
            newCb = "";
            newVotes = "";
        }
-       newHtml += createSingalItem(count,line,vote_items);
-       newCb += createSingalItemName(count,line,vote_items);
-       newVotes += createSingalVotes(count,line,vote_items);
+       newHtml += createSingleItem(count,line,vote_items);
+       newCb += createSingleItemName(count,line,vote_items);
+       newVotes += createSingleVotes(count,line,vote_items);
     }
     if(count % line != 0)
     {
@@ -151,26 +168,10 @@ function createBasicVoteItem()
         newVotes = "";
     }
 
-    $(".item-td").click(function(){
-        
-        var td = $(this);
-        var tick = td.children(".tick");
-        var item = td.children(".table");
-        
-        if (td.attr("value") == "off") {
-            tick.show();
-            td.attr("value", "on");
-            item.css("opacity", "0.2");
-        } else {
-            tick.hide();
-            td.attr("value", "off");
-            item.css("opacity", "1.0");
-        }
-        
-    });
+    bindClickEvent();
 }
 
-function createSingalVotes(count,line,vote_items)
+function createSingleVotes(count,line,vote_items)
 {
     var left = 2.5;
     var item = vote_items[count];
@@ -187,7 +188,7 @@ function createSingalVotes(count,line,vote_items)
     return td;
 }
 
-function createSingalItemName(count,line,vote_items)
+function createSingleItemName(count,line,vote_items)
 {
     var left = 2.5;
     var item = vote_items[count];
@@ -204,7 +205,7 @@ function createSingalItemName(count,line,vote_items)
     return td;
 }
 
-function createSingalItem(count,line,vote_items)
+function createSingleItem(count,line,vote_items)
 {
     var item = vote_items[count];
     var imgTag =  "<img class='itemimg' style = '"+"width:"+size+"px;height:"+size+"px;'/>";
