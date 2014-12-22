@@ -609,7 +609,7 @@ def vote_modify(vote):
     curVote = Vote.objects.get(id=vote['id'])
     old_start_time = curVote.start_time
 
-    for k in ['pic_url', 'description']:
+    for k in ['name', 'pic_url', 'description']:
         setattr(curVote, k, vote[k])
     now = datetime.now()
     if now < old_start_time:
