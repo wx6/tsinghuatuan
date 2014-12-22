@@ -60,7 +60,7 @@
 <script src="{% static 'js/WeixinApi.js' %}"></script>
 <script type="text/javascript">
 var votenum = 0;
-var maxVote = {{vote.max_num}};
+var maxVote = {{ vote.max_num }};
 var vote_items = [
     {% for item in vote.items %}
         {
@@ -73,20 +73,20 @@ var vote_items = [
         }{% if forloop.last %}{% else %},{% endif %}
     {% endfor %}
 ];
-var vote_name = '{{vote.name}}';
-var voted = {{vote.voted}};
-var voteId = {{vote.id}};
-var started = {{vote.started}};
-var ended = {{vote.ended}};
-var vote_pic_url = '{{vote.pic_url}}';
-var vote_description = '{{vote.description}}';
+var vote_name = '{{ vote.name }}';
+var voted = {{ vote.voted }};
+var voteId = {{ vote.id }};
+var started = {{ vote.started }};
+var ended = {{ vote.ended }};
+var vote_pic_url = '{{ vote.pic_url }}';
+var vote_description = '{{ vote.description }}';
 var line = 3;
-var size = document.body.clientWidth * 0.27;
+var size = document.body.clientWidth * 0.3;
 var selectedImg = "{% static 'img/tick.png' %}";
 var detailImg = "{% static 'img/detail.jpg' %}";
 
-var start_time= '{{vote.start_time}}';
-var end_time= '{{vote.end_time}}';
+var start_time= '{{ vote.start_time }}';
+var end_time= '{{ vote.end_time }}';
 var max_vote= maxVote;
 var vote_status='投票尚未开始';
 

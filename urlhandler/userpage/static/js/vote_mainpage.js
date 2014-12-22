@@ -162,12 +162,12 @@ function createSingleItemName(count,line,vote_items)
 function createSingleItem(count,line,vote_items)
 {
     var item = vote_items[count];
-    var imgTag =  "<img class='itemimg' style = '"+"width:"+size+"px;height:"+size+"px;'/>";
-    var selectedImgTag = "<img src='"+selectedImg+"' style='opacity=0.5;'>"+"</img>";
+    var imgTag =  "<img class='itemimg' style = '" + "width:" + size + "px;height:" + size + "px;'/>";
+    var selectedImgTag = "<img src='" + selectedImg + "' style='opacity=0.5;'>" + "</img>";
     
     var td =  "<td class='item-td' id='" + (item.id) + "' name='" + (item.id) + "' value='off'>"
-            + "<div class='table' style='position:relative;'>"+imgTag+"</div>" 
-            + "<div class='tick' style='display:none;position:relative;bottom:"+(6+size)+"px;margin-bottom:-"+(6+size)+"px;z-index=2;'>"
+            + "<div class='table' style='position:relative;'>" + imgTag + "</div>" 
+            + "<div class='tick' style='display:none;position:relative;bottom:" + (6+size) + "px;margin-bottom:-" + (6+size) + "px;z-index=2;'>"
             + selectedImgTag + "</div>" + "</td>";
 
     if (count % line == 0) {
