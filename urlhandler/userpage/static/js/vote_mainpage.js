@@ -10,18 +10,8 @@ function commitVote() {
     if (conf == false) {
         return false;
     }
-    /*
-    if(confirm(name_list))
-        ;
-    else{
-        return false;
-    }
-    */
-    console.log("test point 4");
     var options = generateOptions();
-    console.log("test point 5");
     $('#voteItem').ajaxSubmit(options);
-    console.log("test point 6");
     return false;
 } 
 
@@ -32,7 +22,7 @@ function generateVoteNames()
     var votes = $(".item-td");
     for(var i = 0; i < names.length; i++) {
         if($(votes[i]).attr("value") == "on") {
-            name_list += names[i].innerHTML + ","
+            name_list += names[i].innerHTML + ", "
         }
     }
     name_list = name_list.substring(0, name_list.length-1);
@@ -44,7 +34,7 @@ function generateOptions()
     var options = {
         dataType: 'json',
         success: function (data) {
-            if(data.error==null) {
+            if(data.error == null) {
                 successLoad(data);
             } else {
                 alert(data.error);

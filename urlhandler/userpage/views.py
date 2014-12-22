@@ -250,11 +250,17 @@ def vote_main_view(request, voteid, openid):
 
 @csrf_exempt
 def vote_user_post(request, voteid, openid):
+    print 'test point 1'
+
     if not request.POST:
         raise Http404
 
+    print 'test point 2'
+
     post = request.POST
     rtnJSON = {}
+
+    print post
 
     try:
         user = User.objects.filter(weixin_id=openid)[0]
