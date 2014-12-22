@@ -300,13 +300,9 @@ function initCookie(id, items){
 
 function loadCookie(){
     votenum = 0;
-    //var form = document.getElementsByTagName("Input");
     var tds = $(".item-td");
-    console.log(tds.length);
     for(var i = 0; i < tds.length; i++) {
-        console.log("i="+i);
-        var id = tds[i].attr("id");
-        console.log(id);
+        var id = $(tds[i]).attr("id");
         var result = findcookie(id);
         if(result == "true" && votenum < maxVote) {
             changeItemCover(id);
