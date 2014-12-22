@@ -1,14 +1,11 @@
 var lastSelect;
 
 function commitVote() {
-    console.log("test point 1");
     var name_list = generateVoteNames();
-    console.log("test point 2");
     if(votenum <= 0) {
         alert("请投票之后再提交");
         return false;
     }
-    console.log("test point 3");
     var conf = confirm(name_list);
     if (conf == false) {
         return false;
@@ -38,7 +35,7 @@ function generateVoteNames()
             name_list += names[i].innerHTML + ","
         }
     }
-    //name_list = name_list.substring(0, name_list.length-1);
+    name_list = name_list.substring(0, name_list.length-1);
     return name_list;
 }
 
