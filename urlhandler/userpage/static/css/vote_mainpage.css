@@ -19,7 +19,6 @@ td {
     width: 20%;
     padding-top: 0px; 
     text-align: center;
-    position: relative;
 }
 
 .table {
@@ -45,8 +44,6 @@ td {
 
 .votes2 {
     float: left;
-    position: absolute;
-    left: 23%;
 }
 
 .vote-number-box {
