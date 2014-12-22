@@ -302,8 +302,10 @@ function loadCookie(){
     votenum = 0;
     //var form = document.getElementsByTagName("Input");
     var tds = $(".item-td");
+    console.log(tds.length);
     for(var i = 0; i < tds.length; i++) {
         var id = tds[i].attr("id");
+        console.log(id);
         var result = findcookie(id);
         if(result == "true" && votenum < maxVote) {
             changeItemCover(id);
