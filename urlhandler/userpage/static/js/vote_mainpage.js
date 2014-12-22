@@ -304,6 +304,7 @@ function loadCookie(){
     var tds = $(".item-td");
     console.log(tds.length);
     for(var i = 0; i < tds.length; i++) {
+        console.log("i="+i);
         var id = tds[i].attr("id");
         console.log(id);
         var result = findcookie(id);
