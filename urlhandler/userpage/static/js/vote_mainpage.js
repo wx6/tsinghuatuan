@@ -153,15 +153,15 @@ function createBasicVoteItem()
 
     $(".item-td").click(function(){
         
-        var this = $(this);
-        var tick = this.children(".tick");
+        var td = $(this);
+        var tick = td.children(".tick");
         
-        if (this.attr("value") == "off") {
+        if (td.attr("value") == "off") {
             tick.show();
-            this.attr("value", "on");
+            td.attr("value", "on");
         } else {
             tick.hide();
-            this.attr("value", "off");
+            td.attr("value", "off");
         }
         
     });
