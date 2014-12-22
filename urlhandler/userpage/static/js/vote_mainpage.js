@@ -178,8 +178,9 @@ function createSingleItem(count,line,vote_items)
 function adjustImg()
 {
     var table = $(".table");
+    var size = Math.min(window.screen.availHeight,window.screen.availWidth) * 0.3;
     for(var i = 0; i < table.length; i++) {
-        table[i].style.height = document.body.clientWidth * 0.3+"px";
+        table[i].style.height = size+"px";
     }
 }
 
