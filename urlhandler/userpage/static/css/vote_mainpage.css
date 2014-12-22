@@ -43,7 +43,13 @@ td {
 }
 
 .vote2 {
-    text-align: center;
+    float: left;
+    position: relative;
+    left: 23%;
+}
+
+.vote-number-box {
+    float: left;
 }
 
 .vote-number {
