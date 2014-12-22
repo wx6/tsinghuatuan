@@ -153,7 +153,8 @@ function createBasicVoteItem()
 
     $(".item-td").click(function(){
         console.log("test point 1");
-        tick = $(this).children('.tick');
+        tick = $(this).children(".tick");
+        console.log(tick.attr("value"));
         if (tick.attr("value") == "off") {
             tick.show();
             tick.attr("value", "on");
