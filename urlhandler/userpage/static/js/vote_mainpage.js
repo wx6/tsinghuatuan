@@ -346,10 +346,12 @@ function changeItemCover(id) {
         tick.show();
         td.attr("value", "on");
         item.css("opacity", "0.4");
+        votenum = votenum + 1;
     } else {
         tick.hide();
         td.attr("value", "off");
         item.css("opacity", "1.0");
+        votenum = votenum - 1;
     }
 }
 
@@ -365,7 +367,6 @@ function CookieOnSelect(id) {
     } else {
         lastSelect = id;
         changeItemCover(id);
-        votenum++;
     } 
 }
 
