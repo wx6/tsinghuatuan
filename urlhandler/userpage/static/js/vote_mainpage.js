@@ -81,7 +81,11 @@ function addVoteNumber()
     for (var count = 0; count < vote_items.length;count++)
     {
         var item = vote_items[count];
-        $(".votes2")[count].innerHTML = "人气:"+item.vote_num;
+        var html = "人气:"+item.vote_num
+                    + "<a class='detail-entry' href=''>"
+                    + "<img src='" + detailImg + "'/>"
+                    + "</a>";
+        $(".votes2")[count].innerHTML = html;
     }
 }
 
@@ -130,7 +134,6 @@ function createBasicVoteItem()
 
 function createSingleVotes(count,line,vote_items)
 {
-    var left = 2.5;
     var item = vote_items[count];
     var voteTag =  "<p class='votes2'></p>";
 
@@ -147,7 +150,6 @@ function createSingleVotes(count,line,vote_items)
 
 function createSingleItemName(count,line,vote_items)
 {
-    var left = 2.5;
     var item = vote_items[count];
     var nameTag =  "<p class='voteitem'>"+item.name+"</p>";
 
