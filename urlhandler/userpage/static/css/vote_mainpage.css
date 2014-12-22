@@ -46,8 +46,13 @@ td {
     font-size: 1em;
 }
 
+.vote2 {
+    text-align: center;
+}
+
 .vote-number {
     float: left;
+    margin-right: 5px;
 }
 
 .detail-entry {
