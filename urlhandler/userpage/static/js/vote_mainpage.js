@@ -153,7 +153,14 @@ function createBasicVoteItem()
 
     $(".item-td").click(function(){
         console.log("test point 1");
-        $(this).children('.tick').show();
+        tick = $(this).children('.tick');
+        if (tick.attr("value") == "off") {
+            tick.show();
+            tick.attr("value", "on");
+        } else {
+            tick.hide();
+            tick.attr("value", "off");
+        }
         console.log("test point 2");
     });
 }
