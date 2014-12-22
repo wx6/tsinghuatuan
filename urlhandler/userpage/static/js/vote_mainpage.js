@@ -137,7 +137,7 @@ function createBasicVoteItem()
 function createSingleVotes(count,line,vote_items)
 {
     var item = vote_items[count];
-    var voteTag =  "<p class='votes2'></p>";
+    var voteTag =  "<div class='votes2'></div>";
 
     var td = "<td>"+voteTag+"</td>";
 
@@ -275,10 +275,8 @@ function findcookie (key) {
 function CookieOnLoad(){
     var result = findcookie("activityID");
     if(result != voteId) {
-        console.log("no cookies");
         initCookie(voteId, vote_items);
     } else {
-        console.log("some cookies");
         loadCookie();
     }
 }
