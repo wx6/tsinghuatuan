@@ -85,7 +85,7 @@ function addVoteNumber()
                     + "<div class='vote-number'>" 
                     + "人气:" + item.vote_num
                     + "</div>"
-                    + "<a class='detail-entry' href=''>"
+                    + "<a class='detail-entry' href='" + item.url + "'>"
                     + "<img src='" + detailImg + "'/>"
                     + "</a>" + "</div>";
         $(".votes2")[count].innerHTML = html;
@@ -273,7 +273,7 @@ function findcookie (key) {
     }
 }
 
-function CookieOnLoad(){
+function CookieOnLoad() {
     var result = findcookie("activityID");
     if(result != voteId) {
         initCookie(voteId, vote_items);
@@ -282,7 +282,7 @@ function CookieOnLoad(){
     }
 }
 
-function initCookie(id, items){
+function initCookie(id, items) {
     var n = "activityID=" + id;
     document.cookie = n;
     for (var i = 0; i < items.length; i++){
@@ -290,7 +290,7 @@ function initCookie(id, items){
     }
 }
 
-function loadCookie(){
+function loadCookie() {
     votenum = 0;
     var tds = $(".item-td");
     for(var i = 0; i < tds.length; i++) {
@@ -332,7 +332,7 @@ function CookieOnSelect(id) {
     } 
 }
 
-function voteNumOverflow(vtLim, id){
+function voteNumOverflow(vtLim, id) {
     if(vtLim == 1) {
         changeItemCover(lastSelect);
         lastSelect = id;
