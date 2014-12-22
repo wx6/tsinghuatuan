@@ -6,17 +6,13 @@ function commitVote() {
         alert("请投票之后再提交");
         return false;
     }
-    /*
+    
     if(confirm(name_list))
         ;
     else{
         return false;
     }
-    */
-    var conf = confirm(name_list);
-    if (conf == false) {
-        return false;
-    }
+    
     var options = generateOptions();
     $('#voteItem').ajaxSubmit(options);
     return false;
