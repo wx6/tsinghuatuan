@@ -168,7 +168,7 @@ function createSingleItem(count,line,vote_items)
     var imgTag =  "<img class='itemimg' style = '"+"width:"+size+"px;height:"+size+"px;'/>";
     var selectedImgTag = "<img src='"+selectedImg+"' style='opacity=0.5;'>"+"</img>";
     
-    var td =  "<td class='item-td' id='" + item.id + "' name='" + item.id + "' value='off'>"
+    var td =  "<td class='item-td' id='" + (item.id) + "' name='" + (item.id) + "' value='off'>"
             + "<div class='table' style='position:relative;'>"+imgTag+"</div>" 
             + "<div class='tick' style='display:none;position:relative;bottom:"+(6+size)+"px;margin-bottom:-"+(6+size)+"px;z-index=2;'>"
             + selectedImgTag + "</div>" + "</td>";
@@ -189,8 +189,8 @@ function adjustImg()
     //     img[i].style.width = document.body.clientWidth * 0.3+"px";
     //     img[i].style.height = document.body.clientWidth * 0.3+"px";
     // }
-    var table = $(".table")
-    for(var i = 0; i < table.length; i++){
+    var table = $(".table");
+    for(var i = 0; i < table.length; i++) {
         table[i].style.height = document.body.clientWidth * 0.3+"px";
     }
 }
