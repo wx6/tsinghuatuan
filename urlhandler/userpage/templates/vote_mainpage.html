@@ -86,8 +86,12 @@ var size = Math.min(window.screen.availHeight, window.screen.availWidth) * 0.3;
 var selectedImg = "{% static 'img/tick.png' %}";
 var detailImg = "{% static 'img/detail.jpg' %}";
 
-var start_time= '{{ vote.start_time }}';
-var end_time= '{{ vote.end_time }}';
+var start_time= {{ vote.start_time }};
+var end_time= {{ vote.end_time }};
+
+console.log(start_time);
+console.log(end_time);
+
 var max_vote= maxVote;
 var vote_status='投票尚未开始';
 
