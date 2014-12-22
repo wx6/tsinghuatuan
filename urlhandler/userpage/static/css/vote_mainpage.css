@@ -14,34 +14,42 @@ tr {
 }
 
 td {
-    white-space:normal; 
-    word-break:break-all;
+    white-space: normal; 
+    word-break: break-all;
     width: 20%;
-    padding-top:0px; 
-    text-align:center;
+    padding-top: 0px; 
+    text-align: center;
 }
 
 .table {
     text-align: center;
-    width:100%;
-	margin-top:15px;
-    margin-bottom:6px;
+    width: 100%;
+	margin-top: 15px;
+    margin-bottom: 6px;
 }
 
 .voteitem {
-	margin:0em;
+	margin: 0em;
 }
 
 #hint {
-	margin-bottom:4em;
+	margin-bottom: 4em;
 }
 
 .vote-button {
-    display:none;
-    margin-top:1em;
-    width:60px;
-    height:34px;
-    background-color:#fff;
-    border-radius:9px;
-    font-size:1em;
+    display: none;
+    margin-top: 1em;
+    width: 60px;
+    height: 34px;
+    background-color: #fff;
+    border-radius: 9px;
+    font-size: 1em;
+}
+
+.vote-number {
+    float: left;
+}
+
+.detail-entry {
+    float: left;
 }

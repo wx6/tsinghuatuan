@@ -81,7 +81,9 @@ function addVoteNumber()
     for (var count = 0; count < vote_items.length;count++)
     {
         var item = vote_items[count];
-        var html = "人气:"+item.vote_num
+        var html = "<div class='vote-number'>" 
+                    + "人气:" + item.vote_num
+                    + "</div>"
                     + "<a class='detail-entry' href=''>"
                     + "<img src='" + detailImg + "'/>"
                     + "</a>";
