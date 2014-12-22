@@ -52,10 +52,11 @@ td {
 
 .vote-number {
     float: left;
-    margin-right: 5px;
+    margin-right: 10px;
+    padding-top: 5px;
 }
 
 .detail-entry {
-    float: left;
-    width: 20px;
+    float: right;
+    width: 30px;
 }
