@@ -198,7 +198,7 @@ function onCreate_unstarted()
 {
     $("#info")[0].innerHTML = "投票尚未开始。" 
     $("button").remove();
-    var size = document.body.clientWidth * 0.3;
+    var size = Math.min(window.screen.availWidth,window.screen.availHeight) * 0.3;
     createBasicVoteItem();
     adjustImg();
     addImg();
