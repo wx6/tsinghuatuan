@@ -272,20 +272,13 @@ function orientationChange() {
 }
 
 function onCreate(){
-    if(started == 0)
-    {
+    if(started == 0) {
         onCreate_unstarted();
-    }
-    else if(ended == 1)
-    {
-        onCreate_ended()
-    }
-    else if(voted == 0)
-    {
+    } else if(ended == 1) {
+        onCreate_ended();
+    } else if(voted == 0) {
         onCreate_unvoted();
-    }
-    else
-    {
+    } else {
         onCreate_voted();
     } 
 }
@@ -362,7 +355,7 @@ function CookieOnSelect(id) {
     document.cookie = escape(id) + "=" + checked;
     votenum += checked ? 1 : -1;
     */
-    if(votenum == maxVote) {
+    if(votenum == maxVote && id != lastSelect) {
         voteNumOverflow(maxVote, id);
     } else {
         lastSelect = id;
