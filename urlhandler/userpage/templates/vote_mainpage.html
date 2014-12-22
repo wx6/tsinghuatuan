@@ -118,7 +118,8 @@ for (var i in activity_extra_info)
     }
 }
 
-$('#activity_title_image').css("background","url("+activity_title_image+") no-repeat");
+$('#activity_title_image').css("background-size", "cover")
+                          .css("background","url("+activity_title_image+") no-repeat");
 </script>
 
 <script src="{% static 'js/vote_mainpage.js' %}"></script>

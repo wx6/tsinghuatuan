@@ -131,6 +131,8 @@ function bindClickEvent() {
             td.attr("value", "off");
             item.css("opacity", "1.0");
         }
+
+        CookieOnSelect(td.attr("id"));
     });
 }
 
@@ -211,7 +213,7 @@ function createSingleItem(count,line,vote_items)
     var imgTag =  "<img class='itemimg' style = '"+"width:"+size+"px;height:"+size+"px;'/>";
     var selectedImgTag = "<img src='"+selectedImg+"' style='opacity=0.5;'>"+"</img>";
     
-    var td =  "<td class='item-td' name='" + count + "' value='off'>"
+    var td =  "<td class='item-td' id='" + count + "' name='" + count + "' value='off'>"
             + "<div class='table' style='position:relative;'>"+imgTag+"</div>" 
             + "<div class='tick' style='display:none;position:relative;bottom:"+(6+size)+"px;margin-bottom:-"+(6+size)+"px;z-index=2;'>"
             + selectedImgTag + "</div>" + "</td>";
@@ -277,6 +279,10 @@ function onCreate_voted(){
     adjustImg();
     addVoteNumber();
     addImg();
+}
+
+function orientationChange() { 
+    adjustImg();
 }
 
 function onCreate(){
@@ -360,6 +366,7 @@ function CookieOnSelect(id){
 //            votenum++;
 //        }
 //    }
+    /*
     var input = document.getElementById(id);
     document.cookie = escape(id) + "=" + input.checked;
     votenum += input.checked? 1 : -1;
@@ -367,24 +374,34 @@ function CookieOnSelect(id){
         voteNumOverflow(maxVote,id);
     else
         lastSelect = id;
+    */
+    var td = $("#" + id);
+    var checked = (td.attr("value") == "on");
+    document.cookie = escape(id) + "=" + checked;
+    votenum += checked ? 1 : -1;
+    if(votenum > maxVote) {
+        voteNumOverflow(maxVote, id);
+    } else {
+        lastSelect = id;
+    } 
 }
-
-function orientationChange() { 
-    adjustImg();
-};
 
 function voteNumOverflow(vtLim,id){
     if(maxVote == 1){
-        var input = document.getElementById(lastSelect);
-        input.checked = false;
+        //var input = document.getElementById(lastSelect);
+        var td = $("#" + lastSelect);
+        //input.checked = false;
+        td.attr("value", "off");
         document.cookie = escape(lastSelect) + "=false";
         document.cookie = escape(id) + "=true";
         lastSelect = id;
         votenum--;
     }
     else{
-        var input = document.getElementById(id);
-        input.checked = false;
+        //var input = document.getElementById(id);
+        var td = $("#" + id);
+        //input.checked = false;
+        td.attr("value", "off");
         votenum--;
         alert("您的投票数已经达到上限！");
     }
