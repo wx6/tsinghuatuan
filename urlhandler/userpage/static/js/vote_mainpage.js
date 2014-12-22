@@ -69,7 +69,7 @@ function addImg()
 
 function addCheckBox()
 {
-    for (var count = 0; count < vote_items.length;count++)
+    for (var count = 0; count < vote_items.length;count++) 
     {
         var item = vote_items[count];
         var checkboxTag = "<input type ='checkbox' name="+item.id+" id='"+item.id+"'";
@@ -78,34 +78,6 @@ function addCheckBox()
         $($(".addcheckbox")[count]).append("<div class = 'checkbox'>"+checkboxTag+onclickTag+labelTag + "</div>");
     }
 }
-
-// function createSingleCheckBox(count,line,vote_items)
-// {
-//     var item = vote_items[count];
-//     var checkboxTag = "<input type ='checkbox' name="+item.id+" id='"+item.id+"'";
-//     var onclickTag = "onclick = "+"CookieOnSelect(this.id)>";
-//     var labelTag = "<label for="+item.id+"></label>";
-//     var cb = "";
-//     switch(count % line)
-//     {
-//         case 0: 
-//             td = "<tr><td><div class = 'checkbox'>"+checkboxTag+onclickTag+labelTag + "</div></td>";
-//             break;
-//         case 1:
-//             td =  "<td><div class = 'checkbox'>"+checkboxTag+onclickTag+labelTag + "</div></td>";
-//             break;
-//         case (line-1):
-//             td = "<td><div class = 'checkbox'>"+checkboxTag+onclickTag+labelTag + "</div></td></tr>";
-//             break;
-//         default:
-//             td = "<td><div class = 'checkbox'>"+checkboxTag+onclickTag+labelTag + "</div></td>";
-//             break;
-
-//        }
-//     return td;
-// }
-
-
 
 function addVoteNumber()
 {
@@ -199,7 +171,7 @@ function createSingleItem(count,line,vote_items)
     var imgTag =  "<img class='itemimg' style = '"+"width:"+size+"px;height:"+size+"px;'/>";
     var selectedImgTag = "<img src='"+selectedImg+"' style='opacity=0.5;'>"+"</img>";
     
-    var td =  "<td class='item-td' id='" + count + "' name='" + count + "' value='off'>"
+    var td =  "<td class='item-td' id='" + item.id + "' name='" + item.id + "' value='off'>"
             + "<div class='table' style='position:relative;'>"+imgTag+"</div>" 
             + "<div class='tick' style='display:none;position:relative;bottom:"+(6+size)+"px;margin-bottom:-"+(6+size)+"px;z-index=2;'>"
             + selectedImgTag + "</div>" + "</td>";
@@ -253,7 +225,7 @@ function onCreate_unvoted(){
     adjustImg();
     CookieOnLoad();
     addVoteNumber();
-    //saddCheckBox();
+    //addCheckBox();
     addImg();
 }
 
@@ -290,22 +262,28 @@ function findcookie (key) {
     var allcookies = document.cookie;
     var pos = document.cookie.indexOf(name)
     if(pos != -1) {
-        var start = pos + name.length;                  //cookie值开始的位置  
-        var end = allcookies.indexOf(";",start);        //从cookie值开始的位置起搜索第一个";"的位置,即cookie值结尾的位置  
-        if (end == -1) end = allcookies.length;        //如果end值为-1说明cookie列表里只有一个cookie  
-        var value = allcookies.substring(start,end); //提取cookie的值  
-        return(value);                           //对它解码 
+        //cookie值开始的位置
+        var start = pos + name.length;
+        //从cookie值开始的位置起搜索第一个";"的位置,即cookie值结尾的位置                 
+        var end = allcookies.indexOf(";",start);
+        //如果end值为-1说明cookie列表里只有一个cookie          
+        if (end == -1) end = allcookies.length;
+        //提取cookie的值       
+        var value = allcookies.substring(start,end);
+        //对它解码    
+        return(value);                           
     } else {
         return("");
     }
 }
 
 function CookieOnLoad(){
-    var consult = findcookie("activityID");
-    if(consult != voteId)
+    var result = findcookie("activityID");
+    if(result != voteId) {
         initCookie(voteId, vote_items);
-    else
+    } else {
         loadCookie();
+    }
 }
 
 function initCookie(id, items){
@@ -318,13 +296,14 @@ function initCookie(id, items){
 
 function loadCookie(){
     votenum = 0;
-    var form = document.getElementsByTagName("Input");
-    for(var i = 0; i < form.length; i++){
-        consult = findcookie(form[i].id);
-        if(consult == "true" && votenum < maxVote){
-            form[i].checked = true;
-            lastSelect = form[i].id;
-            votenum++;
+    //var form = document.getElementsByTagName("Input");
+    var tds = $(".item-td");
+    for(var i = 0; i < tds.length; i++) {
+        var id = tds[i].attr("id");
+        var result = findcookie(id);
+        if(result == "true" && votenum < maxVote) {
+            changeItemCover(id);
+            lastSelect = id;
         }
     }
 }
@@ -364,7 +343,7 @@ function voteNumOverflow(vtLim, id){
         lastSelect = id;
     } else {
         changeItemCover(id);
-        alert("您的投票数已经达到上限！");
+        alert("您的投票数已经达到上限，不能再投啦！");
     }
 }
 
