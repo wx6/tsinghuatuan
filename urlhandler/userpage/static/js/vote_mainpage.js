@@ -156,7 +156,6 @@ function createBasicVoteItem()
 function createSingalVotes(count,line,vote_items)
 {
     var left = 2.5;
-    var item = vote_items[count];
     var td = "";
     var voteTag =  "<p class='votes2'></p>";
     switch(count % line)
