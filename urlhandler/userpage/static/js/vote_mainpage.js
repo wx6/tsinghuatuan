@@ -154,7 +154,7 @@ function createSingleItem(count,line,vote_items)
 {
     var item = vote_items[count];
     var imgTag =  "<img class='itemimg' style = '" + "width:" + size + "px;height:" + size + "px;'/>";
-    var selectedImgTag = "<img src='" + selectedImg + "' style='opacity=0.5;'>" + "</img>";
+    var selectedImgTag = "<img src='" + selectedImg + "' style='width:" + size + "px;height:" + size + "px;'>" + "</img>";
     
     var td =  "<td class='item-td' id='" + (item.id) + "' name='" + (item.id) + "' value='off'>"
             + "<div class='table' style='position:relative;'>" + imgTag + "</div>" 
