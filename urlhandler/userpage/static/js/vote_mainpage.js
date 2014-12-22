@@ -282,8 +282,10 @@ function findcookie (key) {
 function CookieOnLoad(){
     var result = findcookie("activityID");
     if(result != voteId) {
+        console.log("no cookies");
         initCookie(voteId, vote_items);
     } else {
+        console.log("some cookies");
         loadCookie();
     }
 }
