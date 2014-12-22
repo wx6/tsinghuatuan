@@ -152,17 +152,18 @@ function createBasicVoteItem()
     }
 
     $(".item-td").click(function(){
-        console.log("test point 1");
-        tick = $(this).children(".tick");
-        console.log(tick.attr("value"));
-        if (tick.attr("value") == "off") {
+        
+        var this = $(this);
+        var tick = this.children(".tick");
+        
+        if (this.attr("value") == "off") {
             tick.show();
-            tick.attr("value", "on");
+            this.attr("value", "on");
         } else {
             tick.hide();
-            tick.attr("value", "off");
+            this.attr("value", "off");
         }
-        console.log("test point 2");
+        
     });
 }
 
