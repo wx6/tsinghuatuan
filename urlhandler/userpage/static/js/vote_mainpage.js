@@ -6,9 +6,15 @@ function commitVote() {
         alert("请投票之后再提交");
         return false;
     }
+    /*
     if(confirm(name_list))
         ;
     else{
+        return false;
+    }
+    */
+    var conf = confirm(name_list);
+    if (conf == false) {
         return false;
     }
     var options = generateOptions();
@@ -31,7 +37,7 @@ function generateVoteNames()
 
 function generateOptions()
 {
-     var options = {
+    var options = {
         dataType: 'json',
         success: function (data) {
             if(data.error==null) {
@@ -57,28 +63,15 @@ function successLoad(data)
 
 function addImg()
 {
-    for (var count = 0; count < vote_items.length;count++)
+    for (var count = 0; count < vote_items.length; count++) 
     {
         $(".itemimg")[count].src = vote_items[count].pic_url;
     }
 }
 
-
-function addCheckBox()
-{
-    for (var count = 0; count < vote_items.length;count++) 
-    {
-        var item = vote_items[count];
-        var checkboxTag = "<input type ='checkbox' name="+item.id+" id='"+item.id+"'";
-        var onclickTag = "onclick = "+"CookieOnSelect(this.id)>";
-        var labelTag = "<label for="+item.id+"></label>";
-        $($(".addcheckbox")[count]).append("<div class = 'checkbox'>"+checkboxTag+onclickTag+labelTag + "</div>");
-    }
-}
-
 function addVoteNumber()
 {
-    for (var count = 0; count < vote_items.length;count++)
+    for (var count = 0; count < vote_items.length; count++)
     {
         var item = vote_items[count];
         var html = "<div class='vote-number-box'>"
@@ -104,29 +97,28 @@ function createBasicVoteItem()
     var newCb = "";
     var newVotes = "";
     var blankDiv ="<div style='height:1px;'></div>"
-    var blankCheckBox = "<tr><td class='addcheckbox'></td><td class='addcheckbox'></td><td class='addcheckbox'></td></tr>"
-    for (count = 0;count < vote_items.length;count++)
+
+    for (count = 0; count < vote_items.length; count++)
     {
-       if(newHtml && (count % line) == 0 )
-       {
-           $("table").append(newHtml+blankDiv+newCb+blankCheckBox+newVotes);
-           newHtml = "";
-           newCb = "";
-           newVotes = "";
-       }
-       newHtml += createSingleItem(count,line,vote_items);
-       newCb += createSingleItemName(count,line,vote_items);
-       newVotes += createSingleVotes(count,line,vote_items);
+        if(newHtml && (count % line) == 0) {
+            $("table").append(newHtml+blankDiv+newCb+newVotes);
+            newHtml = "";
+            newCb = "";
+            newVotes = "";
+        }
+        newHtml += createSingleItem(count,line,vote_items);
+        newCb += createSingleItemName(count,line,vote_items);
+        newVotes += createSingleVotes(count,line,vote_items);
     }
-    if(count % line != 0)
-    {
+
+    if(count % line != 0) {
         newHtml += "</tr>";
         newCb += "</tr>";
         newVotes += "</tr>";
     }
-    if(newHtml)
-    {
-        $("table").append(newHtml+blankDiv+newCb+blankCheckBox+newVotes);
+    
+    if(newHtml) {
+        $("table").append(newHtml+blankDiv+newCb+newVotes);
         newHtml = "";
         newCb = "";
         newVotes = "";
