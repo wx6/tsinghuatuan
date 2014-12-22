@@ -189,7 +189,7 @@ function adjustImg()
 
 function onCreate_ended()
 {
-    $("#info")[0].innerHTML = "投票活动已经结束，点击名称查看详情。"
+    $("#info")[0].innerHTML = "投票已结束，点击名称查看详情。"
     $("button").remove();
     createBasicVoteItem();
     adjustImg();
@@ -199,7 +199,7 @@ function onCreate_ended()
 
 function onCreate_unstarted()
 {
-    $("#info")[0].innerHTML = "活动尚未开始，点击名称查看详情。" 
+    $("#info")[0].innerHTML = "投票尚未开始，点击名称查看详情。" 
     $("button").remove();
     var size = document.body.clientWidth * 0.3;
     createBasicVoteItem();
@@ -208,7 +208,7 @@ function onCreate_unstarted()
 }
 
 function onCreate_unvoted(){
-    $("#info")[0].innerHTML = "您可以投" + maxVote + "项，点击名称查看详情"
+    $("#info")[0].innerHTML = "投票正在进行中！点击名称查看详情。"
     $("button").show();
     createBasicVoteItem();
     adjustImg();
@@ -219,7 +219,7 @@ function onCreate_unvoted(){
 
 function onCreate_voted(){
     var name_list = generateVoteNames();
-    $("#info")[0].innerHTML = "您已经投了："+name_list+"，点击名称查看详情。"
+    $("#info")[0].innerHTML = "你已经投过票啦，感谢你的参与！点击名称查看详情。"
     $("button").remove();
     createBasicVoteItem();
     adjustImg();
