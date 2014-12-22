@@ -184,11 +184,6 @@ function createSingleItem(count,line,vote_items)
 
 function adjustImg()
 {
-    // var img = $(".itemimg");
-    // for(var i = 0; i < img.length; i++){
-    //     img[i].style.width = document.body.clientWidth * 0.3+"px";
-    //     img[i].style.height = document.body.clientWidth * 0.3+"px";
-    // }
     var table = $(".table");
     for(var i = 0; i < table.length; i++) {
         table[i].style.height = document.body.clientWidth * 0.3+"px";
@@ -218,16 +213,10 @@ function onCreate_unstarted()
 function onCreate_unvoted(){
     $("#info")[0].innerHTML = "您可以投" + maxVote + "项，点击名称查看详情"
     $("button").show();
-    console.log("test point 1");
     createBasicVoteItem();
-    console.log("test point 2");
     adjustImg();
-    console.log("test point 3");
     CookieOnLoad();
-    console.log("test point 4");
     addVoteNumber();
-    //addCheckBox();
-    console.log("test point 5");
     addImg();
 }
 
@@ -273,9 +262,9 @@ function findcookie (key) {
         //提取cookie的值       
         var value = allcookies.substring(start,end);
         //对它解码    
-        return(value);                           
+        return (value);                           
     } else {
-        return("");
+        return ("");
     }
 }
 
