@@ -9,11 +9,17 @@ function commitVote() {
         return false;
     }
     console.log("test point 3");
+    var conf = confirm(name_list);
+    if (conf == false) {
+        return false;
+    }
+    /*
     if(confirm(name_list))
         ;
     else{
         return false;
     }
+    */
     console.log("test point 4");
     var options = generateOptions();
     console.log("test point 5");
@@ -26,12 +32,13 @@ function generateVoteNames()
 {
     var name_list = "您要投的是：";
     var names = $(".voteitem");
-    var votes = $("input");
-    for(var i = 0; i < names.length; i++){
-        if(votes[i].checked)
+    var votes = $(".item-td");
+    for(var i = 0; i < names.length; i++) {
+        if($(votes[i]).attr("value") == "on") {
             name_list += names[i].innerHTML + ","
+        }
     }
-    name_list = name_list.substring(0, name_list.length-1);
+    //name_list = name_list.substring(0, name_list.length-1);
     return name_list;
 }
 
@@ -56,7 +63,6 @@ function generateOptions()
 function successLoad(data)
 {
     $("button").remove();
-    $(".checkbox").remove();
     location.reload(true);
 }
 
