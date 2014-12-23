@@ -78,6 +78,21 @@ function addVoteNumber()
                     + "</div>";
         $(".votes2")[count].innerHTML = html;
     }
+
+    adjustVoteNumber();
+}
+
+function adjustVoteNumber() {
+
+    function toNumber(width) {
+        return parseFloat(width.substring(0, width.length - 2));
+    }
+
+    var w1 = toNumber($(".vote-number").css("width"));
+    var w0 = toNumber($(".vote-number").parent().css("width"));
+    var w2 = toNumber($(".vote-number").next().css("width"));
+
+    $(".vote-number").css("padding-left", (w0 - w1 - w2) / 2 + "px");
 }
 
 function bindClickEvent() {
@@ -227,7 +242,8 @@ function onCreate_unbound() {
 }
 
 function orientationChange() { 
-    adjustImg();
+    //adjustImg();
+    adjustVoteNumber();
 }
 
 function onCreate(){
@@ -338,14 +354,14 @@ function voteNumOverflow(vtLim, id) {
 
 onCreate();
 
-/*
+
 // 添加事件监听 
 addEventListener('load', function(){ 
     orientationChange(); 
     //window.onorientationchange = orientationChange; 
     //setTimeout(function(){ window.scrollTo(0, 1); }, 100);
 });
-*/
+
 
 
 
