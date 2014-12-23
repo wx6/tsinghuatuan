@@ -262,6 +262,9 @@ def vote_user_post(request, voteid, openid):
     if not request.POST:
         raise Http404
 
+    if request.GET:
+        print request.GET
+
     print 'test point 2'
 
     post = request.POST

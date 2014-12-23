@@ -25,7 +25,7 @@ function generateVoteNames()
             name_list += names[i].innerHTML + ", "
         }
     }
-    name_list = name_list.substring(0, name_list.length-1);
+    name_list = name_list.substring(0, name_list.length - 2);
     return name_list;
 }
 
@@ -74,7 +74,8 @@ function addVoteNumber()
                     + "</div>"
                     + "<a class='detail-entry' href='" + item.url + "'>"
                     + "<img src='" + detailImg + "'/>"
-                    + "</a>" + "</div>";
+                    + "</a>" + "<div style='clear:both;'></div>"
+                    + "</div>";
         $(".votes2")[count].innerHTML = html;
     }
 }
