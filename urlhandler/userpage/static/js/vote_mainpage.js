@@ -92,7 +92,7 @@ function adjustVoteNumber() {
     var w0 = toNumber($(".vote-number").parent().css("width"));
     var w2 = toNumber($(".vote-number").next().css("width"));
 
-    $(".vote-number").css("padding-left", (w0 - w1 - w2) / 2 + "px");
+    $(".vote-number").css("margin-left", (w0 - w1 - w2 - 10) / 2 + "px");
 }
 
 function bindClickEvent() {
