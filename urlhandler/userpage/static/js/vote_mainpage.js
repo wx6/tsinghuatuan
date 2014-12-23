@@ -19,7 +19,7 @@ function generateVoteNames()
 {
     var name_list = "您要投的是：";
     var names = $(".voteitem");
-    var votes = $(".item-td");
+    var votes = $(".item-val");
     for(var i = 0; i < names.length; i++) {
         if($(votes[i]).attr("value") == "on") {
             name_list += names[i].innerHTML + ", "
@@ -158,7 +158,8 @@ function createSingleItem(count,line,vote_items)
     var imgTag =  "<img class='itemimg' style = '" + "width:" + size + "px;height:" + size + "px;'/>";
     var selectedImgTag = "<img src='" + selectedImg + "' style='width:" + size + "px;height:" + size + "px;'>" + "</img>";
     
-    var td =  "<td class='item-td' id='" + (item.id) + "' name='" + (item.id) + "' value='off'>"
+    var td =  "<td class='item-td' id='" + (item.id) + "'>"
+            + "<input type='text' class='item-val' style='display:none;' name='" + (item.id) + "' value='off'/>"
             + "<div class='table' style='position:relative;'>" + imgTag + "</div>" 
             + "<div class='tick' style='display:none;position:relative;bottom:" + (6+size) + "px;margin-bottom:-" + (6+size) + "px;z-index=2;'>"
             + selectedImgTag + "</div>" + "</td>";
@@ -299,16 +300,17 @@ function changeItemCover(id) {
     var td = $("#" + id);
     var tick = td.children(".tick");
     var item = td.children(".table");
+    var val = td.children(".item-val");
         
-    if (td.attr("value") == "off") {
+    if (val.attr("value") == "off") {
         tick.show();
-        td.attr("value", "on");
+        val.attr("value", "on");
         item.css("opacity", "0.4");
         votenum = votenum + 1;
         document.cookie = escape(id) + "=true";
     } else {
         tick.hide();
-        td.attr("value", "off");
+        val.attr("value", "off");
         item.css("opacity", "1.0");
         votenum = votenum - 1;
         document.cookie = escape(id) + "=false";
@@ -399,4 +401,5 @@ WeixinApi.ready(function(Api) {
 
     // iOS上，可以直接调用这个API进行分享，一句话搞定
     Api.generalShare(wxData,wxCallbacks);
+
 });
