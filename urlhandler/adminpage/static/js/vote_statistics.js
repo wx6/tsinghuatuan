@@ -1,20 +1,9 @@
-/*http://www.xiaoboy.com 小虾虎鱼 BY 穗溪*/
-/*2012-11-08*/
-var dataArr={
-	"data":[
-		{"id":1,"name":"百度","per":"10"},
-		{"id":2,"name":"腾讯","per":"20"},
-		{"id":3,"name":"新浪","per":"10"},
-		{"id":4,"name":"网易","per":"44"},
-		{"id":5,"name":"搜狐","per":"50"},
-		{"id":5,"name":"小虾虎鱼","per":"69"},
-		{"id":5,"name":"人人网","per":"72"},
-		{"id":5,"name":"爱奇艺","per":"88"},
-		{"id":5,"name":"奇虎360","per":"92"},
-		{"id":5,"name":"阿里巴巴","per":"15"},
-		{"id":5,"name":"阿里巴巴","per":"10"}
-	]
-};
+/**
+ * Created with Sublime.
+ * User: SwingACE
+ * Date: 14-12-23
+ * Time: 下午23:09
+ */
 
 function histogram(){
 	var controls={};
@@ -294,21 +283,19 @@ function init (){
     	var tr = $('<tr></tr>');
         $("<td class='table-item'></td>").html((i+1).toString()).appendTo(tr);
         $("<td class='table-item'></td>").html(items[i].name).appendTo(tr);
-        //$("<td></td>").html(item.name).appendTo(tr);
         $('#histogram-table').append(tr);
     }
 	new histogram().init(newItems);
 
 	var times = [];
-	for (var i = 0; i < vote.times.length; i++){
+	for (var i = vote.times.length-1; i >= 0; --i){
 		times.push({
-    		x:(i+1).toString(),
+    		x:(vote.times.length-i).toString(),
     		y:vote.times[i].height
     	})
     	var tr = $('<tr></tr>');
         $("<td class='table-item'></td>").html((i+1).toString()).appendTo(tr);
         $("<td class='table-item'></td>").html(vote.times[i].interval).appendTo(tr);
-        //$("<td></td>").html(item.name).appendTo(tr);
         $('#lineargram-table').append(tr);
 	}
 	var data = {values:[{value0:times}]};

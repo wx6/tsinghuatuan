@@ -1,36 +1,9 @@
 /**
- * Created with PyCharm.
- * User: Epsirom
- * Date: 13-11-30
- * Time: 上午11:43
+ * Created with Sublime.
+ * User: SwingACE
+ * Date: 14-12-23
+ * Time: 下午23:06
  */
-/*
-var datetimepicker_option = {
-    format: "yyyy年mm月dd日 - hh:ii",
-    autoclose: true,
-    pickerPosition: "bottom-left",
-    weekStart: 1,
-    todayBtn:  1,
-    autoclose: 1,
-    todayHighlight: 1,
-    startView: 2,
-    forceParse: 0,
-    showMeridian: 1,
-    language: 'zh-CN'
-};
-
-$(".form_datetime").datetimepicker(datetimepicker_option);
-
-function enableDatetimePicker(dom) {
-    dom.datetimepicker(datetimepicker_option);
-    dom.children('.input-group-addon').css('cursor', 'pointer').children().css('cursor', 'pointer');
-}
-l
-function disableDatetimePicker(dom) {
-    dom.datetimepicker('remove');
-    dom.children('.input-group-addon').css('cursor', 'no-drop').children().css('cursor', 'no-drop');
-}
-*/
 var dateInterfaceMap = {
     'year': 'getFullYear',
     'month': 'getMonth',
@@ -107,7 +80,7 @@ function initializeForm(vote) {
     }
     if (!vote.id) {
         $('#input-name').val('');
-        //新增活动，自动生成年份
+        //新增投票，自动生成年份
         var curyear = new Date().getFullYear();
         var curmonth = new Date().getMonth() + 1;
         $('#input-start-year').val(curyear);
@@ -242,23 +215,18 @@ function lockForm() {
     }
     $('#publishBtn').hide();
     $('#saveBtn').hide();
-    //$('#resetBtn').hide();
 }
 
 function lockByStatus(status, start_time, end_time) {
-    // true means lock, that is true means disabled
     var now = new Date();
     if (!start_time){
         $('#resultBtn').hide();
         return;
     }
     var statusLockMap = {
-        // saved but not published
         '0': {
         },
-        // published but not determined
         '1': {
-            //'name': true,
             'key': true,
             'start_time': function() {
                 return (new Date() >= getDateByObj(start_time));
@@ -302,13 +270,7 @@ function showPublishByStatus(status, start_time, linetime) {
     }
     if ((status >= 1) && (new Date() >= getDateByObj(linetime))) {
         $('#publishBtn').hide();
-        //$('#resetBtn').hide();
-        //$('#addItem').hide();
-        //$('#resultBtn').show();
     } else {
-        //$('#resultBtn').hide();
-        //$('#addItem').show();
-        //$('#resetBtn').show();
         $('#publishBtn').show();
     }
 }
@@ -406,14 +368,6 @@ function beforeSubmit(formData, jqForm, options) {
 function beforePublish(formData, jqForm, options) {
     if (beforeSubmit(formData, jqForm, options)) {
         showProcessing();
-        // if (vote.id) {
-        //     formData.push({
-        //         name: 'id',
-        //         required: false,
-        //         type: 'number',
-        //         value: vote.id.toString()
-        //     });
-        // }
         if (vote.status == 0){
             formData.push({
                 name: 'publish',
@@ -529,7 +483,6 @@ function renderBtn (){
          });
         renderBtn();
     });
-    //renderBtn();
 }
 
 function init_vote_choice(vote){
@@ -669,7 +622,6 @@ function seeVoteResult(){
 
 function updateVoteResult (){
     $("#tbody-vote_result").empty();
-    //$('#returnBtn').attr("href","/detail/"+vote.id+"/");
     var item,i;
     var items = vote.items;
     sort(items);
@@ -678,7 +630,6 @@ function updateVoteResult (){
         var tr = $('<tr></tr>');
         $("<td class='td-item_name'></td>").html(item.name).appendTo(tr);
         $("<td class='td-vote_num'></td>").html((item.vote_num).toString()).appendTo(tr);
-        //$("<td></td>").html(item.name).appendTo(tr);
         $('#tbody-vote_result').append(tr);
     }
 }

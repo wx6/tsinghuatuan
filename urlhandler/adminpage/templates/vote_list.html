@@ -29,8 +29,7 @@
                     'display_url':'{% url "adminpage.views.vote_modify_display" voteid=vote.id %}',
                     'operations':{'detail':'{% url "adminpage.views.vote_detail" voteid=vote.id %}',
                         'export':'{% url "adminpage.views.vote_export" voteid=vote.id %}',
-                        'statistics':'{% url "adminpage.views.vote_statistics" voteid=vote.id %}'
-                    }
+                        'statistics':'{% url "adminpage.views.vote_statistics" voteid=vote.id %}'}
                 }{% if forloop.last %}{% else %},{% endif %}
             {% endfor %}
         ];
