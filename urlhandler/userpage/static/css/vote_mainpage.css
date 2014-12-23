@@ -1,67 +1,63 @@
-form{
+form {
     width: 100%;
     text-align: center;
-    font-family: Microsoft YaHei
+    font-family: Microsoft YaHei;
 }
 
-table{
+table {
     width: 90%;
     margin: 0px auto;
 }
 
-tr{
+tr {
     width: 100%;
 }
 
-td{
-    white-space:normal; 
-    word-break:break-all;
+td {
+    white-space: normal; 
+    word-break: break-all;
     width: 20%;
-    padding-top:0px; 
-    text-align:center;
-}
-
-input[type="checkbox"]{
-    display: none;
-}
-
-.checkbox {
-    width: 2.5em;
-    height: 2.5em;
-    background: #CCCCCC;
-    margin-top: 0.5em;
-    border-radius: 100%;
-    position: relative;
-    margin: 0px auto;
-}
-
-.checkbox label {
-    width: 2em;
-    height: 2em;
-    border-radius: 3em;
-    cursor: pointer;
-    position: absolute;
-    top: 0.25em;
-    left: 0.25em;
-    z-index: 1;
-    background: white;
-}
-
-.checkbox input[type=checkbox]:checked + label {
-    background: #CC66FF;
-}
-
-.table{
+    padding-top: 0px; 
     text-align: center;
-    width:100%;
-	margin-top:1em;
-	margin-bottom:1em;
 }
-.voteitem
-{
-	margin:0em;
+
+.table {
+    text-align: center;
+    width: 100%;
+	margin-top: 15px;
+    margin-bottom: 6px;
 }
-#hint
-{
-	margin-bottom:4em;
+
+.voteitem {
+	margin: 0em;
+}
+
+#hint {
+	margin-bottom: 4em;
+}
+
+.vote-button {
+    display: none;
+    margin-top: 1em;
+    width: 60px;
+    height: 34px;
+    background-color: #fff;
+    border-radius: 9px;
+    font-size: 1em;
+}
+
+.vote2 {
+    text-align: center;
+}
+
+.vote-number {
+    float: left;
+    margin-left: 13px;
+    margin-right: 10px;
+    padding-top: 5px;
+}
+
+.detail-entry {
+    float: left;
+    width: 30px;
 }

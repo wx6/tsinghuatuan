@@ -1,6 +1,6 @@
 {% load staticfiles %}
+
 <!DOCTYPE html>
-<html>
 <head>
     <meta charset="utf-8">
     <meta name="HandheldFriendly" content="True">
@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=no">
     <title></title>
     <link type="text/css" href="{% static 'css/style.css' %}" rel="stylesheet">
-    <link href="{% static 'css/vote_mainpage.css' %}"  rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+    <link href="{% static 'css/vote_mainpage.css' %}"  rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="{% static 'js/jquery-2.1.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'lib/jq/form/jquery.form.min.js' %}"></script>
     <script type="text/javascript">
@@ -26,7 +26,7 @@
             <section class="info">
                 <figure>
                     <div class="mask"></div>
-                    <div id="activity_title_image" style="background-size: 100%;-webkit-animation:inherit" class="m-cover"></div>
+                    <div id="activity_title_image" class="m-cover"></div>
                 </figure>
                 <figure>
                     
@@ -44,102 +44,64 @@
                         <form id="voteItem" action="{% url 'userpage.views.vote_user_post' vote.id openid %}" method="post">
                             <table>
                             </table>
-                            </form>
-                                <button type="button" onclick="commitVote();" style="display:none;margin-top:1em;width:54px;height:34px;background-color: #fff;border-radius:9px;font-size:1em;">提交</button>
-                            <div id="hint"></div>
-                            </div>
+                        </form>
+                        <button class="vote-button" type="button" onclick="commitVote()">
+                            提交
+                        </button>
+                        <div id="hint"></div>
+                        </div>
 
                     </div>
                 </div>
             </section>
         </article>
     </div>
+
 <script src="{% static 'js/WeixinApi.js' %}"></script>
 <script type="text/javascript">
-//需要动态添加的信息
+var votenum = 0;
+var maxVote = {{ vote.max_num }};
+var vote_items = [
+    {% for item in vote.items %}
+        {
+            'voted':{{item.voted}},
+            'name': '{{item.name}}',
+            'vote_num':{{item.vote_num}},
+            'pic_url':'{{item.pic_url}}',
+            'id':{{item.id}},
+            'url':"{% url 'userpage.views.vote_item_detail' item.id %}"
+        }{% if forloop.last %}{% else %},{% endif %}
+    {% endfor %}
+];
+var vote_name = '{{ vote.name }}';
+var voted = {{ vote.voted }};
+var voteId = {{ vote.id }};
+var started = {{ vote.started }};
+var ended = {{ vote.ended }};
+var vote_pic_url = '{{ vote.pic_url }}';
+var vote_description = '{{ vote.description }}';
+var line = 3;
+var size = document.body.clientWidth * 0.3;
+var selectedImg = "{% static 'img/tick.png' %}";
+var detailImg = "{% static 'img/detail.jpg' %}";
 
-     var votenum = 0
-     var maxVote = {{vote.max_num}}
-     var vote_items = [
-            {% for item in vote.items %}
-                {
-                    'voted':{{item.voted}},
-                    'name': '{{item.name}}',
-                    'vote_num':{{item.vote_num}},
-                    'pic_url':'{{item.pic_url}}',
-                    'id':{{item.id}},
-                    'url':"{% url 'userpage.views.vote_item_detail' item.id %}"
-                }{% if forloop.last %}{% else %},{% endif %}
-            {% endfor %}
-        ];
-    var vote_name = '{{vote.name}}'
-    var voted = {{vote.voted}}
-    var voteId = {{vote.id}}
-    var started = {{vote.started}}
-    var ended = {{vote.ended}}
-    var vote_pic_url = '{{vote.pic_url}}'
-    var vote_description = '{{vote.description}}'
-    var line = 3;
-    var size = document.body.clientWidth * 0.3;
-    var selectedImg = "{% static 'img/tick.png' %}";
-
-var start_time= '{{vote.start_time}}';
-var end_time= '{{vote.end_time}}';
+var start_time= '{{ vote.start_time }}';
+var end_time= '{{ vote.end_time }}';
 var max_vote= maxVote;
 var vote_status='投票尚未开始';
-//var activity_get_ticket_time="11月22日(本周六)中午11:30--13:30";//领票时间
 
-var activity_page_title="新年音乐会-活动详情";//页面标题名称
-var activity_title="新年音乐会";//活动名称
-/*
-var activity_seat_type=1;//0:不选座 1:选区 2:选座
-var activity_detail_title="演出详情";//可以填"演出详情"、"活动详情"等
-var activity_content="　　这是清华大学的新年音乐会。这是清华大学的新年音乐会。这是清华大学的新年音乐会。这是清华大学的新年音乐会。这是清华大学的新年音乐会。这是清华大学的新年音乐会。这是清华大学的新年音乐会。这是清华大学的新年音乐会。这是清华大学的新年音乐会。这是清华大学的新年音乐会。这是清华大学的新年音乐会。这是清华大学的新年音乐会。这是清华大学的新年音乐会。这是清华大学的新年音乐会。这是清华大学的新年音乐会。这是清华大学的新年音乐会。这是清华大学的新年音乐会。这是清华大学的新年音乐会。这是清华大学的新年音乐会。这是清华大学的新年音乐会。这是清华大学的新年音乐会。这是清华大学的新年音乐会。";
-*/
-
-var activity_title_image="http://www.ssxncc.com/admin/UploadFiles/20131218195718990.jpg";//最好是横着的图片
-/*
-var activity_ticket_status=1;//0:未开始抢票 1:抢票中 2:抢票结束 3:抢票成功，点击查看 4:已领票
-var activity_book_ticket_link="";//抢票链接
-var activity_view_ticket_link="";//查票链接
-var activity_key = "adaka";
-var activity_remain_ticket = 123621;
-var activity_place = "iaudia";
-var act_key= "12938213972193";
-*/
-
+//页面标题名称
+var activity_page_title = vote_name + "投票详情";
+//活动名称
+var activity_title = vote_name;
+//最好是横着的图片
+var activity_title_image = vote_pic_url;
 
 var activity_extra_info=[{t:'开始时间',c:start_time},{t:'结束时间',c:end_time},{t:'最大投票数',c:max_vote},{t:'投票状态',c:vote_status}];
 
-/********************************/
-/*
-var activity_detail_title_2="抢票方式";
-var activity_content_2=
-    '<b>'+activity_book_ticket_time+'</b>'+
-    '， "清华大学紫荆之声"线上抢票，数量有限，先到先得。<br><div style="height:8px"></div>您可以:<br>'+
-    '1. 在微信中回复<b style="color:#dd881e">"抢票 '+activity_key+'"</b>进行抢票<br>'+
-    '2. 点击"抢票"下设二级菜单<b style="color:#dd881e">"'+activity_key+'"按钮</b>抢票<br>';
-var activity_detail_title_3="领票方式";
-var activity_content_3_seat_type=["门票随机发放，不提供选座服务。","该活动提供按区域选座服务，同学们可根据需要选座。","该活动提供选座服务，同学们可根据需要选座。"];
-*/
-/*
-var activity_content_3=
-    '<b style="color:#dd881e">'+activity_get_ticket_time+'</b>'+
-    '，在校团委门厅(文图十字路口西北侧小红楼，进门左转门内)<br>'+
-    '抢票成功的同学凭二维码兑换纸质票，并现金结清票款，请同学们自备零钱。<br>'+
-    '<b style="color:#dd881e">'+activity_content_3_seat_type[activity_seat_type]+'</b>';
-*/
-
 $('title').text(activity_page_title);
 $('#activity_title').text(activity_title);
-/*
-$('#activity_time').text(activity_time);
-$('#activity_content').append(activity_content);
-$('#activity_content_2').append(activity_content_2);
-//$('#activity_content_3').append(activity_content_3);
-var seat_type=["不选座","分区选座","选座"];
-$('#activity_seat_type').append(seat_type[activity_seat_type]);
-*/
+
 for (var i in activity_extra_info)
 {
     if(i==3)
@@ -157,39 +119,12 @@ for (var i in activity_extra_info)
      '</div>');
     }
 }
-/*
-$('#activity_detail_title').append('<b>'+activity_detail_title+'</b>');
-$('#activity_detail_title_2').append('<b>'+activity_detail_title_2+'</b>');
-$('#activity_detail_title_3').append('<b>'+activity_detail_title_3+'</b>');
-$('#activity_main_image').attr("src",activity_main_image);
-*/
+
 $('#activity_title_image').css("background","url("+activity_title_image+") no-repeat")
-/*
-var ticket_status=[
-    "未开始抢票",
-    "<b style='color:#dd001e;'>抢票中!</b>",
-    "抢票已结束",
-    "抢票成功",
-    "已领票"
-    ];
-$('#activity_ticket_status').append(ticket_status[activity_ticket_status]);
-if (activity_ticket_status==1)
-{
-    $('#activity_button').css('display','block');
-    $('#activity_button_content').append("<b>点我抢票!</b>");
-    $('#activity_button_content').attr("href",activity_book_ticket_link);
-}
-else if (activity_ticket_status==3)
-{
-    $('#activity_button').css('display','block');
-    $('#activity_button_content').append("<b>查看电子票</b>");
-    $('#activity_button_content').attr("href",activity_view_ticket_link);
-}
-else
-{
-    $('#activity_button').css('display','none');
-}*/
+                          .css("max-height", "100px").css("background-size", "cover");
 </script>
+
 <script src="{% static 'js/vote_mainpage.js' %}"></script>
+
 </body>
 </html>
