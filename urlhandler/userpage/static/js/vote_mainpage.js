@@ -6,13 +6,10 @@ function commitVote() {
         alert("请投票之后再提交");
         return false;
     }
-    
-    if(confirm(name_list))
-        ;
-    else{
+    var conf = confirm(name_list);
+    if (conf == false) {
         return false;
     }
-    
     var options = generateOptions();
     $('#voteItem').ajaxSubmit(options);
     return false;
@@ -22,12 +19,13 @@ function generateVoteNames()
 {
     var name_list = "您要投的是：";
     var names = $(".voteitem");
-    var votes = $("input");
-    for(var i = 0; i < names.length; i++){
-        if(votes[i].checked)
-            name_list += names[i].innerHTML + ","
+    var votes = $(".item-val");
+    for(var i = 0; i < names.length; i++) {
+        if($(votes[i]).attr("value") == "on") {
+            name_list += names[i].innerHTML + ", "
+        }
     }
-    name_list = name_list.substring(0, name_list.length-1);
+    name_list = name_list.substring(0, name_list.length - 2);
     return name_list;
 }
 
@@ -36,13 +34,14 @@ function generateOptions()
     var options = {
         dataType: 'json',
         success: function (data) {
-            if(data.error==null) {
+            if(data.error == null) {
                 successLoad(data);
             } else {
                 alert(data.error);
             }
         },
         error: function (xhr) {
+            console.log(xhr);
             alert("网络错误");
         }
     };
@@ -52,7 +51,6 @@ function generateOptions()
 function successLoad(data)
 {
     $("button").remove();
-    $(".checkbox").remove();
     location.reload(true);
 }
 
@@ -76,9 +74,25 @@ function addVoteNumber()
                     + "</div>"
                     + "<a class='detail-entry' href='" + item.url + "'>"
                     + "<img src='" + detailImg + "'/>"
-                    + "</a>" + "</div>";
+                    + "</a>" + "<div style='clear:both;'></div>"
+                    + "</div>";
         $(".votes2")[count].innerHTML = html;
     }
+
+    adjustVoteNumber();
+}
+
+function adjustVoteNumber() {
+
+    function toNumber(width) {
+        return parseFloat(width.substring(0, width.length - 2));
+    }
+
+    var w1 = toNumber($(".vote-number").css("width"));
+    var w0 = toNumber($(".vote-number").parent().css("width"));
+    var w2 = toNumber($(".vote-number").next().css("width"));
+
+    $(".vote-number").css("margin-left", (w0 - w1 - w2 - 10) / 2 + "px");
 }
 
 function bindClickEvent() {
@@ -119,8 +133,6 @@ function createBasicVoteItem()
         newCb = "";
         newVotes = "";
     }
-
-    bindClickEvent();
 }
 
 function createSingleVotes(count,line,vote_items)
@@ -159,9 +171,10 @@ function createSingleItem(count,line,vote_items)
 {
     var item = vote_items[count];
     var imgTag =  "<img class='itemimg' style = '" + "width:" + size + "px;height:" + size + "px;'/>";
-    var selectedImgTag = "<img src='" + selectedImg + "' style='opacity=0.5;'>" + "</img>";
+    var selectedImgTag = "<img src='" + selectedImg + "' style='width:" + size + "px;height:" + size + "px;'>" + "</img>";
     
-    var td =  "<td class='item-td' id='" + (item.id) + "' name='" + (item.id) + "' value='off'>"
+    var td =  "<td class='item-td' id='" + (item.id) + "'>"
+            + "<input type='text' class='item-val' style='display:none;' name='" + (item.id) + "' value='off'/>"
             + "<div class='table' style='position:relative;'>" + imgTag + "</div>" 
             + "<div class='tick' style='display:none;position:relative;bottom:" + (6+size) + "px;margin-bottom:-" + (6+size) + "px;z-index=2;'>"
             + selectedImgTag + "</div>" + "</td>";
@@ -178,14 +191,12 @@ function createSingleItem(count,line,vote_items)
 function adjustImg()
 {
     var table = $(".table");
-    var size = Math.min(window.screen.availHeight,window.screen.availWidth) * 0.3;
     for(var i = 0; i < table.length; i++) {
-        table[i].style.height = size+"px";
+        table[i].style.height = size + "px";
     }
 }
 
-function onCreate_ended()
-{
+function onCreate_ended() {
     $("#info")[0].innerHTML = "投票已结束。"
     $("button").remove();
     createBasicVoteItem();
@@ -194,28 +205,26 @@ function onCreate_ended()
     addImg();
 }
 
-function onCreate_unstarted()
-{
+function onCreate_unstarted() {
     $("#info")[0].innerHTML = "投票尚未开始。" 
     $("button").remove();
-    var size = Math.min(window.screen.availWidth,window.screen.availHeight) * 0.3;
     createBasicVoteItem();
     adjustImg();
     addImg();
 }
 
-function onCreate_unvoted(){
+function onCreate_unvoted() {
     $("#info")[0].innerHTML = "投票正在进行中！"
     $("button").show();
     createBasicVoteItem();
+    bindClickEvent();
     adjustImg();
     CookieOnLoad();
     addVoteNumber();
     addImg();
 }
 
-function onCreate_voted(){
-    var name_list = generateVoteNames();
+function onCreate_voted() {
     $("#info")[0].innerHTML = "你已经投过票啦，感谢你的参与！"
     $("button").remove();
     createBasicVoteItem();
@@ -224,8 +233,17 @@ function onCreate_voted(){
     addImg();
 }
 
-function orientationChange() { 
+function onCreate_unbound() {
+    $("#info")[0].innerHTML = "您尚未绑定，不能参与投票。" 
+    $("button").remove();
+    createBasicVoteItem();
     adjustImg();
+    addImg();
+}
+
+function orientationChange() { 
+    //adjustImg();
+    adjustVoteNumber();
 }
 
 function onCreate(){
@@ -233,6 +251,8 @@ function onCreate(){
         onCreate_unstarted();
     } else if(ended == 1) {
         onCreate_ended();
+    } else if (bound == 0) {
+        onCreate_unbound();
     } else if(voted == 0) {
         onCreate_unvoted();
     } else {
@@ -296,16 +316,17 @@ function changeItemCover(id) {
     var td = $("#" + id);
     var tick = td.children(".tick");
     var item = td.children(".table");
+    var val = td.children(".item-val");
         
-    if (td.attr("value") == "off") {
+    if (val.attr("value") == "off") {
         tick.show();
-        td.attr("value", "on");
+        val.attr("value", "on");
         item.css("opacity", "0.4");
         votenum = votenum + 1;
         document.cookie = escape(id) + "=true";
     } else {
         tick.hide();
-        td.attr("value", "off");
+        val.attr("value", "off");
         item.css("opacity", "1.0");
         votenum = votenum - 1;
         document.cookie = escape(id) + "=false";
@@ -333,14 +354,6 @@ function voteNumOverflow(vtLim, id) {
 
 onCreate();
 
-/*
-// 添加事件监听 
-addEventListener('load', function(){ 
-    orientationChange(); 
-    //window.onorientationchange = orientationChange; 
-    //setTimeout(function(){ window.scrollTo(0, 1); }, 100);
-});
-*/
 
 
 
@@ -396,4 +409,5 @@ WeixinApi.ready(function(Api) {
 
     // iOS上，可以直接调用这个API进行分享，一句话搞定
     Api.generalShare(wxData,wxCallbacks);
+
 });

@@ -224,8 +224,13 @@ def vote_main_view(request, voteid, openid):
     else:
         voteDict['ended'] = 0
 
-    user = User.objects.filter(weixin_id=openid)[0]
-    stu_id = user.stu_id
+    users = User.objects.filter(weixin_id=openid)
+
+    if users.exists():
+        stu_id = users[0].stu_id
+        bound = 1
+    else:
+        bound = 0
 
     voteItems = VoteItem.objects.filter(vote_key=vote.key, status__gte=0)
     for item in  voteItems:
@@ -236,15 +241,17 @@ def vote_main_view(request, voteid, openid):
         itemDict['vote_num'] = int(item.vote_num)
         itemDict['id'] = int(item.id)
         itemDict['voted'] = 0
-        singleVotes = SingleVote.objects.filter(stu_id=stu_id, item_id=itemDict['id'])
-        if singleVotes.exists():
-            itemDict['voted'] = 1
-            voteDict['voted'] = 1
+        if bound == 1:
+            singleVotes = SingleVote.objects.filter(stu_id=stu_id, item_id=itemDict['id'])
+            if singleVotes.exists():
+                itemDict['voted'] = 1
+                voteDict['voted'] = 1
         voteDict['items'].append(itemDict)
 
     return render_to_response('vote_mainpage.html', {
         'vote': voteDict,
-        'openid': openid
+        'openid': openid,
+        'bound': bound
     }, context_instance=RequestContext(request))
 
 
@@ -255,6 +262,8 @@ def vote_user_post(request, voteid, openid):
 
     post = request.POST
     rtnJSON = {}
+
+    print post
 
     try:
         user = User.objects.filter(weixin_id=openid)[0]

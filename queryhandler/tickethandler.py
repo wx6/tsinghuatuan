@@ -419,9 +419,12 @@ def check_vote_event(msg):
 
 def response_vote_event(msg):
     fromuser = get_msg_from(msg)
+
+    '''
     user = get_user(fromuser)
     if user is None:
         return get_reply_text_xml(msg, get_text_unbinded_vote_event(fromuser))
+    '''
 
     now = datetime.datetime.fromtimestamp(get_msg_create_time(msg))
     votes = Vote.objects.filter(display=1).order_by("end_time")
@@ -432,7 +435,7 @@ def response_vote_event(msg):
             title = vote.name,
             description = get_text_vote_description(vote),
             pic_url = vote.pic_url,
-            url = s_reverse_vote_mainpage(vote.id, user.weixin_id)
+            url = s_reverse_vote_mainpage(vote.id, fromuser)
         ))
 
     items = []
@@ -442,7 +445,7 @@ def response_vote_event(msg):
             title = vote.name,
             description = get_text_vote_description(vote),
             pic_url = vote.pic_url,
-            url = s_reverse_vote_mainpage(vote.id, user.weixin_id)
+            url = s_reverse_vote_mainpage(vote.id, fromuser)
         ))
         if (len(items) >= 10):
             break

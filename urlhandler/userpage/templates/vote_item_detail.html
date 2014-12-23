@@ -31,7 +31,7 @@
                 </figure> 
                 <figure>
                     <figcaption style="margin-left:28px">
-                        <p class="time">{{item.vote_name}}</p>
+                        <p class="time">{{ item.vote_name }}</p>
                         <h1 id="activity_title"></h1>
                     </figcaption>
                 </figure>
@@ -50,11 +50,10 @@
 
 <script src="{% static 'js/WeixinApi.js' %}"></script>
 <script type="text/javascript">
-//需要动态添加的信息
-var activity_page_title= "XXX投票活动";//页面标题名称
-var activity_title="{{item.name}}";//活动名称
-var activity_title_image="{{item.vote_pic}}";
-var activity_extra_info=[];
+var activity_page_title = "{{ item.vote_name }}";
+var activity_title = "{{ item.name }}";
+var activity_title_image = "{{ item.vote_pic }}";
+var activity_extra_info = [];
 
 $('title').text(activity_page_title);
 $('#activity_title').text(activity_title);

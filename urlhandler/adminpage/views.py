@@ -609,7 +609,7 @@ def vote_modify(vote):
     curVote = Vote.objects.get(id=vote['id'])
     old_start_time = curVote.start_time
 
-    for k in ['pic_url', 'description']:
+    for k in ['name', 'pic_url', 'description']:
         setattr(curVote, k, vote[k])
     now = datetime.now()
     if now < old_start_time:
@@ -732,7 +732,11 @@ def vote_export(request, voteid):
 
     write_row(ws1, 0, [u'投票项名称', u'得票数', u'得票数占总票数百分比'])
     for index, item in enumerate(voteItems):
-        write_row(ws1, index + 1, [item.name, item.vote_num, str(round(float(item.vote_num) / total_votes * 100, 2)) + '%'])
+        if total_votes != 0:
+            res = round(float(item.vote_num) / total_votes * 100, 2)
+        else:
+            res = 0
+        write_row(ws1, index + 1, [item.name, item.vote_num, str(res) + '%'])
 
     row = 0
     for item in voteItems:
@@ -763,7 +767,7 @@ def vote_statistics(request, voteid):
         return HttpResponseRedirect(s_reverse_admin_home())
 
     vote = Vote.objects.get(id=voteid)
-    voteItems = VoteItem.objects.filter(vote_key=vote.key)
+    voteItems = VoteItem.objects.filter(vote_key=vote.key, status=1)
 
     total_votes = 0
     for item in voteItems:

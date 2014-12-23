@@ -32,10 +32,6 @@ td {
 	margin: 0em;
 }
 
-#hint {
-	margin-bottom: 4em;
-}
-
 .vote-button {
     display: none;
     margin-top: 1em;
@@ -46,13 +42,16 @@ td {
     font-size: 1em;
 }
 
-.vote2 {
-    text-align: center;
+.votes2 {
+    
+}
+
+.vote-number-box {
+    
 }
 
 .vote-number {
     float: left;
-    margin-left: 13px;
     margin-right: 10px;
     padding-top: 5px;
 }
@@ -60,4 +59,8 @@ td {
 .detail-entry {
     float: left;
     width: 30px;
+}
+
+.button-area {
+    text-align: center;
 }
