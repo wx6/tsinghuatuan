@@ -354,13 +354,14 @@ function voteNumOverflow(vtLim, id) {
 
 onCreate();
 
-
-// 添加事件监听 
+/*
+// 添加事件监听
 addEventListener('load', function(){ 
     orientationChange(); 
     //window.onorientationchange = orientationChange; 
     //setTimeout(function(){ window.scrollTo(0, 1); }, 100);
 });
+*/
 
 
 
