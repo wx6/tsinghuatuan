@@ -259,11 +259,11 @@ def vote_main_view(request, voteid, openid):
 def vote_user_post(request, voteid, openid):
     print 'test point 1'
 
-    if not request.POST:
-        raise Http404
-
     if request.GET:
         print request.GET
+
+    if not request.POST:
+        raise Http404
 
     print 'test point 2'
 
