@@ -48,15 +48,14 @@ button{
 	margin: 0em;
 }
 
-/*.vote-button {
+.vote-button {
     display: none;
     margin-top: 1em;
     width: 60px;
     height: 34px;
-    background-color: #fff;
     border-radius: 9px;
     font-size: 1em;
-}*/
+}
 
 .votes2 {
     
