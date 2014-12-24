@@ -155,7 +155,7 @@ function createSingleItemName(count,line,vote_items)
 {
     var item = vote_items[count];
     var nameTag = "<a class='detail-link' href='" + item.url + "'>" + "<p class='voteitem'>"+item.name+"</p></a>";
-    
+
     var td = "<td>"+nameTag+"</td>";
 
     if (count % line == 0) {
@@ -197,7 +197,7 @@ function adjustImg()
 }
 
 function onCreate_ended() {
-    $("#info")[0].innerHTML = "投票已结束。"
+    $("#info")[0].innerHTML = "点击名称可以查看详情。"
     $("button").remove();
     createBasicVoteItem();
     adjustImg();
@@ -206,7 +206,7 @@ function onCreate_ended() {
 }
 
 function onCreate_unstarted() {
-    $("#info")[0].innerHTML = "投票尚未开始。" 
+    $("#info")[0].innerHTML = "点击名称可以查看详情。" 
     $("button").remove();
     createBasicVoteItem();
     adjustImg();
@@ -214,7 +214,7 @@ function onCreate_unstarted() {
 }
 
 function onCreate_unvoted() {
-    $("#info")[0].innerHTML = "投票正在进行中！"
+    $("#info")[0].innerHTML = "点击名称可以查看详情。"
     $("button").show();
     createBasicVoteItem();
     bindClickEvent();
@@ -234,7 +234,7 @@ function onCreate_voted() {
 }
 
 function onCreate_unbound() {
-    $("#info")[0].innerHTML = "您尚未绑定，不能参与投票。" 
+    $("#info")[0].innerHTML = "您尚未绑定学号，不能参与投票。" 
     $("button").remove();
     createBasicVoteItem();
     adjustImg();
