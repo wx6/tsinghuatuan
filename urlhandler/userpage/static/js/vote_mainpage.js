@@ -79,7 +79,7 @@ function addVoteNumber()
         $(".votes2")[count].innerHTML = html;
     }
 
-    adjustVoteNumber();
+    //adjustVoteNumber();
 }
 
 function adjustVoteNumber() {
@@ -243,7 +243,7 @@ function onCreate_unbound() {
 
 function orientationChange() { 
     //adjustImg();
-    adjustVoteNumber();
+    //adjustVoteNumber();
 }
 
 function onCreate(){
