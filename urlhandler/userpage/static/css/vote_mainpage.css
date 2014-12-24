@@ -50,11 +50,12 @@ button{
 
 .vote-button {
     display: none;
+    font-family: Microsoft YaHei;
     margin-top: 1em;
     width: 60px;
     height: 34px;
     border-radius: 9px;
-    font-size: 1em;
+    font-size: 1.1em;
 }
 
 .votes2 {
