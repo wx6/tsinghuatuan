@@ -72,9 +72,9 @@ function addVoteNumber()
                     + "<div class='vote-number'>" 
                     + "人气:" + item.vote_num
                     + "</div>"
-                    + "<a class='detail-entry' href='" + item.url + "'>"
-                    + "<img src='" + detailImg + "'/>"
-                    + "</a>" + "<div style='clear:both;'></div>"
+                    // + "<a class='detail-entry' href='" + item.url + "'>"
+                    // + "<img src='" + detailImg + "'/>"
+                    // + "</a>" + "<div style='clear:both;'></div>"
                     + "</div>";
         $(".votes2")[count].innerHTML = html;
     }
