@@ -81,7 +81,8 @@
         var vote_pic_url = '{{ vote.pic_url }}';
         var vote_description = '{{ vote.description }}';
         var line = 3;
-        var size = Math.min(window.screen.availHeight, window.screen.availWidth) * 0.3;
+        // var size = Math.min(window.screen.availHeight, window.screen.availWidth) * 0.3;
+        var size = Math.min(document.body.scrollWidth, document.body.scrollHeight) * 0.3;
         var selectedImg = "{% static 'img/tick.png' %}";
         var detailImg = "{% static 'img/detail.jpg' %}";
         var start_time = '{{ vote.start_time|date:"Y年m月d日 H:i" }}';
