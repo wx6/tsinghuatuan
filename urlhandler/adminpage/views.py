@@ -774,6 +774,7 @@ def vote_statistics(request, voteid):
         total_votes  = total_votes + item.vote_num
 
     voteDict = {}
+    voteDict['name'] = vote.name
     voteDict['items'] = []
     for item in voteItems:
         itemDict = {}
