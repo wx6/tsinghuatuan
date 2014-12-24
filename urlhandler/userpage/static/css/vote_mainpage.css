@@ -29,12 +29,12 @@ button{
     border:1px solid #333029;
     display:inline-block;
     cursor:pointer;
-    color:#000000;
+    color:#ffffff;
     font-family:arial;
     font-size:17px;
     padding:1px 1px;
     text-decoration:none;
-    text-shadow:0px 1px 0px #ffffff;
+    /*text-shadow:0px 1px 0px #ffffff;*/
 }
 
 .table {
