@@ -1,11 +1,11 @@
 #button{position:relative;margin-left:40px;}
-#histogram-table{float:left; width:174px;font-size:15px;position:relative;margin-left:40px;text-align:center;border:1px groove;}
-#lineargram-table{float:left; width:200px;font-size:15px;position:relative;margin-left:60px;text-align:center;border:1px groove;}
+#histogram-table{float:left; width:18%;font-size:15px;position:relative;margin-left:40px;text-align:center;border:1px groove;}
+#lineargram-table{float:left; width:20%;font-size:15px;position:relative;margin-left:60px;text-align:center;border:1px groove;}
 .caption{text-align:center;font-weight:10px;font-size:20px;}
 .table-item{border:1px groove;min-height:30px;word-break: break-all;}
 .bs-footer{float: right;}
 
-canvas{background-color:white;position:relative;margin-left:5px;margin-top:10px;margin-bottom:25px;/*box-shadow: 3px 3px 3px #7e7a7c;*/}
+#canvas{width:70%; height:300px;background-color:white;position:relative;margin-left:5px;margin-top:10px;margin-bottom:25px;/*box-shadow: 3px 3px 3px #7e7a7c;*/}
 
 body{margin:0;padding:0;margin:20px;}
 ul,li,dl,dd,dt,p{margin:0;padding:0;}
@@ -15,7 +15,7 @@ ul,li{list-style:none;}
 .xiaoboy a:hover{text-decoration:underline;color:#fe5400;}
 
 /*以下为柱状图样式*/
-.histogram-container{position:relative;margin-left:60px;margin-top:10px;margin-bottom:60px;width: 740px;float: right;}
+.histogram-container{position:relative;margin-left:60px;margin-top:10px;margin-bottom:60px;width: 70%;float: right;}
 .histogram-bg-line{border:#999 solid;border-width:0 0px 1px 1px;border-right-color:#eee;overflow:hidden;width:99%;}
 .histogram-bg-line ul{overflow:hidden;border:#eee solid;border-width:1px 0 0 0;clear:both;}
 .histogram-bg-line li{float:left;overflow:hidden;background:#fff;}
