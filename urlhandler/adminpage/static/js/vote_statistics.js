@@ -275,22 +275,22 @@ function init (){
 	var items = vote.items;
     sort(items);
     var newItems = [];
-    for (var i = 0; i < items.length; i++){
+    for (var i = vote.times.length-1; i >= 0; --i){
     	newItems.push({
-    		"name":(i+1).toString(),
+    		"name":(vote.times.length-i).toString(),
     		"per":(items[i].vote_num).toString()
     	})
     	var tr = $('<tr></tr>');
-        $("<td class='table-item'></td>").html((i+1).toString()).appendTo(tr);
+        $("<td class='table-item'></td>").html((vote.times.length-i).toString()).appendTo(tr);
         $("<td class='table-item'></td>").html(items[i].name).appendTo(tr);
         $('#histogram-table').append(tr);
     }
 	new histogram().init(newItems);
 
 	var times = [];
-	for (var i = vote.times.length-1; i >= 0; --i){
+	for (var i = 0; i < vote.times.length; i++){
 		times.push({
-    		x:(vote.times.length-i).toString(),
+    		x:(i+1).toString(),
     		y:vote.times[i].height
     	})
     	var tr = $('<tr></tr>');
@@ -301,12 +301,7 @@ function init (){
 	var data = {values:[{value0:times}]};
 	LineChart.setKey([""]);
 	LineChart.setData("canvas",data,60,"red","#333",true,true);
-	$("#histogram-container").show();
-	$("#histogram-table").show();
-	$("#histogram-caption").show();
-	$("#canvas").hide();
-	$("#lineargram-table").hide();
-	$("#lineargram-caption").hide();
+	showHistogram();
 }
 
 function showHistogram (){
