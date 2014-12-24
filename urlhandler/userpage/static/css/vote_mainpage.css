@@ -22,14 +22,14 @@ td {
 }
 
 button{
-    width:80px;background-color:#eae0c2;
+    width:80px;background-color:#DD001E;
     -moz-border-radius:28px;
     -webkit-border-radius:28px;
     border-radius:28px;
     border:1px solid #333029;
     display:inline-block;
     cursor:pointer;
-    color:#505739;
+    color:#ffffff;
     font-family:arial;
     font-size:17px;
     padding:1px 1px;
