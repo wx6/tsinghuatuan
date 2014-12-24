@@ -2,7 +2,7 @@
 #histogram-table{float:left; font-size:15px;position:relative;margin-left:40px;text-align:center;border:1px groove;}
 #lineargram-table{/*float:left;*/ font-size:15px;position:relative;margin-left:60px;text-align:center;border:1px groove;}
 .caption{text-align:center;font-weight:10px;font-size:20px;}
-.table-item{border:1px groove;min-height:30px;}
+.table-item{border:1px groove;min-height:30px;word-break: break-all;}
 
 canvas{background-color:white;position:relative;margin-left:5px;margin-top:10px;margin-bottom:25px;/*box-shadow: 3px 3px 3px #7e7a7c;*/}
 
