@@ -50,7 +50,7 @@ button{
 
 .vote-button {
     display: none;
-    font-family: Microsoft YaHei;
+    /*font-family: Microsoft YaHei;*/
     margin-top: 1em;
     width: 95%;
     height: 2.2em;
