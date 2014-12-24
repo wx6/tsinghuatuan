@@ -31,7 +31,7 @@
                 </figure> 
                 <figure>
                     <figcaption style="margin-left:28px">
-                        <p class="time">{{ item.vote_name }}</p>
+                        <p class="time">{{ item.vote_name }}投票</p>
                         <h1 id="activity_title"></h1>
                     </figcaption>
                 </figure>
@@ -48,18 +48,17 @@
         </article>
     </div>
 
-<script src="{% static 'js/WeixinApi.js' %}"></script>
-<script type="text/javascript">
-var activity_page_title = "{{ item.vote_name }}";
-var activity_title = "{{ item.name }}";
-var activity_title_image = "{{ item.vote_pic }}";
-var activity_extra_info = [];
+    <script src="{% static 'js/WeixinApi.js' %}"></script>
+    <script type="text/javascript">
+        var activity_page_title = "{{ item.vote_name }}";
+        var activity_title = "{{ item.name }}";
+        var activity_title_image = "{{ item.vote_pic }}";
+        var activity_extra_info = [];
 
-$('title').text(activity_page_title);
-$('#activity_title').text(activity_title);
-$('#activity_title_image').css("background","url("+activity_title_image+") no-repeat")
+        $('title').text(activity_page_title);
+        $('#activity_title').text(activity_title);
+        $('#activity_title_image').css("background","url("+activity_title_image+") no-repeat")
                           .css("max-height", "100px").css("background-size", "cover");
-</script>
-
+    </script>
 </body>
 </html>
