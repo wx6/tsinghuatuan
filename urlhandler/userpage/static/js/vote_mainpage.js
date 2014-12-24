@@ -154,8 +154,8 @@ function createSingleVotes(count,line,vote_items)
 function createSingleItemName(count,line,vote_items)
 {
     var item = vote_items[count];
-    var nameTag =  "<p class='voteitem'>"+item.name+"</p>";
-
+    var nameTag = "<a class='detail-link' href='" + item.url + "'>" + "<p class='voteitem'>"+item.name+"</p></a>";
++ 
     var td = "<td>"+nameTag+"</td>";
 
     if (count % line == 0) {
@@ -220,7 +220,7 @@ function onCreate_unvoted() {
     bindClickEvent();
     adjustImg();
     CookieOnLoad();
-    addVoteNumber();
+    //addVoteNumber();
     addImg();
 }
 

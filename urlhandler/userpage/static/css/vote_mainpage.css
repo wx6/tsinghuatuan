@@ -75,6 +75,10 @@ button {
     width: 20px;
 }
 
+.detail-link {
+    text-decoration: none;
+}
+
 .button-area {
     text-align: center;
 }
