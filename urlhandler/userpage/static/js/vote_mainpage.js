@@ -214,7 +214,7 @@ function onCreate_unstarted() {
 }
 
 function onCreate_unvoted() {
-    $("#info")[0].innerHTML = "点击名称可以查看详情。"
+    $("#info")[0].innerHTML = "点击图片选择投票项，点击名称查看详情。"
     $("button").show();
     createBasicVoteItem();
     bindClickEvent();
