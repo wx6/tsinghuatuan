@@ -275,13 +275,13 @@ function init (){
 	var items = vote.items;
     sort(items);
     var newItems = [];
-    for (var i = vote.times.length-1; i >= 0; --i){
+    for (var i = vote.items.length-1; i >= 0; --i){
     	newItems.push({
-    		"name":(vote.times.length-i).toString(),
+    		"name":(vote.items.length-i).toString(),
     		"per":(items[i].vote_num).toString()
     	})
     	var tr = $('<tr></tr>');
-        $("<td class='table-item'></td>").html((vote.times.length-i).toString()).appendTo(tr);
+        $("<td class='table-item'></td>").html((vote.items.length-i).toString()).appendTo(tr);
         $("<td class='table-item'></td>").html(items[i].name).appendTo(tr);
         $('#histogram-table').append(tr);
     }
