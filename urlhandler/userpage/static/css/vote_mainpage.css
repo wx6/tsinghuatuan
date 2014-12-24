@@ -21,7 +21,7 @@ td {
     text-align: center;
 }
 
-button{
+button {
     width:80px;background-color:#c62d1f;
     -moz-border-radius:28px;
     -webkit-border-radius:28px;
@@ -69,12 +69,11 @@ button{
 .vote-number {
     float: left;
     margin-right: 10px;
-    padding-top: 5px;
 }
 
 .detail-entry {
     float: left;
-    width: 30px;
+    width: 20px;
 }
 
 .button-area {
