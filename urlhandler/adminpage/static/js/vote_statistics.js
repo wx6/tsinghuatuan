@@ -72,30 +72,31 @@ Array.prototype.max = function(){//最大值
 } 
 
 
-  
-  var multiData = {values:[
- { value0:[
-   {x:"Jan",y:5},
-   {x:"Feb",y:5},
-   {x:"Mar",y:80},
-   {x:"Apr",y:10},
-   {x:"May",y:30},
-   {x:"Jun",y:30},
-   {x:"Jul",y:60},
-   {x:"Aug",y:10}
-  ]},
-  { value1:[
-    {x:"Jan",y:50},
-    {x:"Feb",y:40},
-    {x:"Mar",y:60},
-    {x:"Apr",y:10},
-    {x:"May",y:20},
-    {x:"Jun",y:10},
-    {x:"Jul",y:40},
-    {x:"Aug",y:10}
-   ]}
-  ]	
- }//必须按照这个格式定义数据，关键字values value0 value1 ...... 
+ // 一下为格式示例
+ //  var multiData = {values:[
+ // { value0:[
+ //   {x:"Jan",y:5},
+ //   {x:"Feb",y:5},
+ //   {x:"Mar",y:80},
+ //   {x:"Apr",y:10},
+ //   {x:"May",y:30},
+ //   {x:"Jun",y:30},
+ //   {x:"Jul",y:60},
+ //   {x:"Aug",y:10}
+ //  ]},
+ //  { value1:[
+ //    {x:"Jan",y:50},
+ //    {x:"Feb",y:40},
+ //    {x:"Mar",y:60},
+ //    {x:"Apr",y:10},
+ //    {x:"May",y:20},
+ //    {x:"Jun",y:10},
+ //    {x:"Jul",y:40},
+ //    {x:"Aug",y:10}
+ //   ]}
+ //  ]	
+ // }
+ //必须按照这个格式定义数据，关键字values value0 value1 ...... 
    /*
     *@param0: canvas 的id
     *@param1: json 数据
