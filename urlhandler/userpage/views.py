@@ -224,7 +224,7 @@ def vote_main_view(request, voteid, openid):
     else:
         voteDict['ended'] = 0
 
-    users = User.objects.filter(weixin_id=openid)
+    users = User.objects.filter(weixin_id=openid, status=1)
 
     if users.exists():
         stu_id = users[0].stu_id
