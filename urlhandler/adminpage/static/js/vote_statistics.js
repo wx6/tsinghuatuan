@@ -109,7 +109,7 @@ Array.prototype.max = function(){//最大值
    //先定义数据线的名字，再绘制数据
  
 		
-    var LineChart={
+var LineChart={
     keynames:[],//数据信息数组
     can:undefined,
     ctx:undefined,
