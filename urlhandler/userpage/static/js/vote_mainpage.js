@@ -220,7 +220,6 @@ function onCreate_unvoted() {
     bindClickEvent();
     adjustImg();
     CookieOnLoad();
-    //addVoteNumber();
     addImg();
 }
 
