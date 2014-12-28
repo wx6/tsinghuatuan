@@ -154,7 +154,7 @@ function createSingleVotes(count,line,vote_items)
 function createSingleItemName(count,line,vote_items)
 {
     var item = vote_items[count];
-    var nameTag = "<a class='detail-link' onclick='javascript:void(0)' href='" + '#' + "'>" + "<p class='voteitem'>"+item.name+"</p></a>";
+    var nameTag = "<a class='detail-link' href='" + 'javascript:void(0)' + "'>" + "<p class='voteitem'>"+item.name+"</p></a>";
 
     var td = "<td>"+nameTag+"</td>";
 
