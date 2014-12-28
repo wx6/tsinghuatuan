@@ -7,26 +7,26 @@ from queryhandler.tickethandler import *
 from queryhandler.query_transfer import get_information_response
 
 handler_list = [
-    {'check': check_book_event,             'response': response_book_event},
-    {'check': check_book_ticket,            'response': response_book_ticket},
-    {'check': check_cancel_ticket,          'response': response_cancel_ticket},
-    {'check': check_bookable_activities,    'response': response_bookable_activities},
-    {'check': check_exam_tickets,           'response': response_exam_tickets},
-    {'check': check_help_or_subscribe,      'response': response_help_or_subscribe_response},
+    # {'check': check_book_event,             'response': response_book_event},
+    # {'check': check_book_ticket,            'response': response_book_ticket},
+    # {'check': check_cancel_ticket,          'response': response_cancel_ticket},
+    # {'check': check_bookable_activities,    'response': response_bookable_activities},
+    # {'check': check_exam_tickets,           'response': response_exam_tickets},
+    # {'check': check_help_or_subscribe,      'response': response_help_or_subscribe_response},
     {'check': check_unsubscribe_or_unbind,  'response': response_unsubscribe_or_unbind},
     {'check': check_bind_account,           'response': response_bind_account},
-    {'check': check_fetch_ticket,           'response': response_fetch_ticket},
-    {'check': check_no_book_acts_event,     'response': response_no_book_acts},
-    {'check': check_get_activity_menu,      'response': response_get_activity_menu},
-    {'check': check_xnlhwh,                 'response': response_xnlhwh},
+    # {'check': check_fetch_ticket,           'response': response_fetch_ticket},
+    # {'check': check_no_book_acts_event,     'response': response_no_book_acts},
+    # {'check': check_get_activity_menu,      'response': response_get_activity_menu},
+    # {'check': check_xnlhwh,                 'response': response_xnlhwh},
     #### add by xiaohe ###
-    {'check': check_book_tmp_ticket,        'response': response_book_tmp_ticket},
+    # {'check': check_book_tmp_ticket,        'response': response_book_tmp_ticket},
     #### end by xiaohe ###
 
-    #### add by liu junlin ####
+    #### added by liu junlin ####
     {'check': check_vote_event,             'response': response_vote_event},
     {'check': check_clear_vote_record,      'response': response_clear_vote_record}
-    #### end by liu junlin ####
+    #### added by liu junlin ####
 ]
 
 
@@ -56,11 +56,13 @@ def handle_weixin_request(environ):
         except Exception as e:
             print 'Error occured!!!!!!' + str(e)
             return get_reply_text_xml(msg, u'对不起，没有找到您需要的信息 T T')
+        '''
         try:
             return get_information_response(request_body)
         except Exception as e:
             print 'Error occured!!!!!!' + str(e)
             return get_reply_text_xml(msg, u'对不起，没有找到您需要的信息:(')
+        '''
 
 
 # convert string 'a=1&b=2&c=3' to dict {'a':1,'b':2,'c':3}
