@@ -25,15 +25,11 @@
         <article id="container" class="ticket">
             <section class="info">
                 <figure>
-                    <div class="mask"></div>
-                    <div id="activity_title_image" class="m-cover"></div>
+                    <div id="activity_title_image" style="-webkit-animation:inherit" class="m-cover"></div>
                 </figure>
                 <figure>
-                    
-                    <figcaption style="margin-left:28px">
-                        <p class="time">Tsinghua University</p>
-                        <h1 id="activity_title"></h1>
-                        
+                    <figcaption style="text-align:center">
+                        <h1 id="activity_title"></h1> 
                     </figcaption>
                 </figure>
                 <div class="lead" id="activity_extra_info"></div>
@@ -98,20 +94,6 @@
         var activity_title_image = vote_pic_url;
         //提示信息
         var activity_extra_info = [{t:'投票时间',c:interval},{t:'可投票数',c:max_vote},{t:'友情提示',c:vote_status}];
-
-        $('title').text(activity_page_title);
-        $('#activity_title').text(activity_title);
-
-        for (var i in activity_extra_info) {
-            if(i == 2) {
-                $('#activity_extra_info').append('<div><span>'+activity_extra_info[i].t+':</span>'+'<label id="info">'+activity_extra_info[i].c+'</label>'+'</div>');
-            } else {
-                $('#activity_extra_info').append('<div><span>'+activity_extra_info[i].t+':</span>'+'<label>'+activity_extra_info[i].c+'</label>'+'</div>');
-            }
-        }
-
-        $('#activity_title_image').css("background","url("+activity_title_image+") no-repeat")
-                                  .css("max-height", "100px").css("background-size", "cover");
     </script>
     <script type="text/javascript" src="{% static 'js/vote_mainpage.js' %}"></script>
 </body>

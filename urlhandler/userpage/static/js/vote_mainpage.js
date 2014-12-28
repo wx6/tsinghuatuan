@@ -245,7 +245,24 @@ function orientationChange() {
     //adjustVoteNumber();
 }
 
+function createExtraInfo() {
+    $('title').text(activity_page_title);
+    $('#activity_title').text(activity_title);
+
+    for (var i in activity_extra_info) {
+        if(i == 2) {
+            $('#activity_extra_info').append('<div><span>'+activity_extra_info[i].t+':</span>'+'<label id="info">'+activity_extra_info[i].c+'</label>'+'</div>');
+        } else {
+            $('#activity_extra_info').append('<div><span>'+activity_extra_info[i].t+':</span>'+'<label>'+activity_extra_info[i].c+'</label>'+'</div>');
+        }
+    }
+
+    $('#activity_title_image').css("background","url("+activity_title_image+") no-repeat")
+                            .css("max-height", "100px").css("background-size", "cover");
+}
+
 function onCreate(){
+    createExtraInfo();
     if(started == 0) {
         onCreate_unstarted();
     } else if(ended == 1) {
