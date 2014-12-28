@@ -257,7 +257,10 @@ function createExtraInfo() {
         }
     }
 
-    $('#activity_title_image').css("background","url("+activity_title_image+") no-repeat");
+    $('#activity_title_image').css({
+        "background" : "url(" + activity_title_image + ") no-repeat",
+        "background-position" : "center"
+    });
                             //.css("max-height", "100px").css("background-size", "cover");
 }
 
