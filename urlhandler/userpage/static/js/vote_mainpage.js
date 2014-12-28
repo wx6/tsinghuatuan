@@ -197,7 +197,7 @@ function adjustImg()
 }
 
 function onCreate_ended() {
-    $("#info")[0].innerHTML = "点击名称可以查看详情。"
+    $("#info")[0].innerHTML = "投票已经结束。"
     $("button").remove();
     createBasicVoteItem();
     adjustImg();
@@ -251,9 +251,9 @@ function createExtraInfo() {
 
     for (var i in activity_extra_info) {
         if(i == 2) {
-            $('#activity_extra_info').append('<div><span>'+activity_extra_info[i].t+':</span>'+'<label id="info">'+activity_extra_info[i].c+'</label>'+'</div>');
+            $('#activity_extra_info').append('<div>'+'<label id="info">'+activity_extra_info[i].c+'</label>'+'</div>');
         } else {
-            $('#activity_extra_info').append('<div><span>'+activity_extra_info[i].t+':</span>'+'<label>'+activity_extra_info[i].c+'</label>'+'</div>');
+            $('#activity_extra_info').append('<div>'+'<label>'+activity_extra_info[i].c+'</label>'+'</div>');
         }
     }
 
