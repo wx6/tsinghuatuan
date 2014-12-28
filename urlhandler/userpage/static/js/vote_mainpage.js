@@ -197,7 +197,7 @@ function adjustImg()
 }
 
 function onCreate_ended() {
-    $("#info")[0].innerHTML = "投票已经结束。"
+    $("#info")[0].innerHTML = "投票已经结束"
     $("button").remove();
     createBasicVoteItem();
     adjustImg();
@@ -206,7 +206,7 @@ function onCreate_ended() {
 }
 
 function onCreate_unstarted() {
-    $("#info")[0].innerHTML = "点击名称可以查看详情。" 
+    $("#info")[0].innerHTML = "投票尚未开始" 
     $("button").remove();
     createBasicVoteItem();
     adjustImg();
@@ -214,7 +214,7 @@ function onCreate_unstarted() {
 }
 
 function onCreate_unvoted() {
-    $("#info")[0].innerHTML = "点击图片投票，点击名称查看详情。"
+    $("#info")[0].innerHTML = "点击图片投票，点击名称查看详情"
     $("button").show();
     createBasicVoteItem();
     bindClickEvent();
@@ -233,7 +233,7 @@ function onCreate_voted() {
 }
 
 function onCreate_unbound() {
-    $("#info")[0].innerHTML = "您尚未绑定学号，不能参与投票。" 
+    $("#info")[0].innerHTML = "您尚未绑定学号，不能参与投票" 
     $("button").remove();
     createBasicVoteItem();
     adjustImg();
