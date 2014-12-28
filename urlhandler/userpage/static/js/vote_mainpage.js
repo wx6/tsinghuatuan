@@ -257,8 +257,8 @@ function createExtraInfo() {
         }
     }
 
-    $('#activity_title_image').css("background","url("+activity_title_image+") no-repeat")
-                            .css("max-height", "100px").css("background-size", "cover");
+    $('#activity_title_image').css("background","url("+activity_title_image+") no-repeat");
+                            //.css("max-height", "100px").css("background-size", "cover");
 }
 
 function onCreate(){
