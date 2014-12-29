@@ -462,16 +462,19 @@ def check_clear_vote_record(msg):
 
 def response_clear_vote_record(msg):
     fromuser = get_msg_from(msg)
+
+    '''
     user = get_user(fromuser)
     if user is None:
         return get_reply_text_xml(msg, get_text_unbinded_vote_event(fromuser))
+    '''
 
     singleVotes = SingleVote.objects.filter(stu_id=fromuser)
-    for singleVote in singleVotes:
-        VoteItem.objects.filter(id=singleVote.item_id).update(vote_num=F('vote_num')-1)
-        # singleVote.status = 0
-        # singleVote.save()
-    singleVotes.delete()
+
+    if singleVotes.exists():
+        for singleVote in singleVotes:
+            VoteItem.objects.filter(id=singleVote.item_id).update(vote_num=F('vote_num')-1)
+        singleVotes.delete()
 
     return get_reply_text_xml(msg, get_text_clear_record_success())
 
