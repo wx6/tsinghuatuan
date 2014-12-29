@@ -107,7 +107,6 @@ function getItemBox(item, id) {
         '<div class="item-name">' + 
             item.name + 
         '</div>' + 
-        /*
         '<div class="item-description">' + 
             item.description +
         '</div>' + 
@@ -119,8 +118,9 @@ function getItemBox(item, id) {
         '</div>' +
         '<div style="clear:both;">' +
         '</div>' +
-        */
     '</div>';
+
+    return box;
 }
 
 function createVoteItem() {
