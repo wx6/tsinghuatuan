@@ -111,6 +111,7 @@ function getItemBox(item, id) {
             item.description +
         '</div>' + 
         '<div class="item-vote">' + 
+            '人气' + 
         '</div>' + 
         '<div class="item-tick">' +
             '<img src="' + selectedImg + '">'
