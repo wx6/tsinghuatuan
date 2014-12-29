@@ -64,10 +64,13 @@ button {
 
 .item-tick {
     float: right;
+    height: 100px;
+    width: 100px;
 }
 
 .item-tick img {
-    height: 100px;
+    height: 100%;
+    width: 100%;
 }
 
 .button-area {
