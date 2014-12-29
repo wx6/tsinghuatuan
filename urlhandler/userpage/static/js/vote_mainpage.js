@@ -124,6 +124,7 @@ function createVoteItem() {
     for (var i = 0; i < vote_items.length; i++) {
         var item = vote_items[i];
         var box = getItemBox(item, i);
+        $('#itemList').append(box);
     }
 }
 
