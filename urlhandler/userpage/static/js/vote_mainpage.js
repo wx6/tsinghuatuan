@@ -114,10 +114,10 @@ function getItemBox(item, id) {
             '人气' + 
         '</div>' + 
         '<div class="item-tick">' +
-            '<img src="' + selectedImg + '">'
+            '<img src="' + selectedImg + '">' +
         '</div>' +
         '<div style="clear:both;">' +
-        '</div>'
+        '</div>' +
     '</div>'
 }
 
