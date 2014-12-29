@@ -192,9 +192,26 @@ function createExtraInfo() {
     
 }
 
-function onCreate(){
-    createExtraInfo();
+function onCreate_program_list() {
+    $('title').text('新年联欢晚会节目单');
+    $('#activity_title').text('新年联欢晚会节目单');
+    if (started == 0) {
+        $('#itemList').html('晚会尚未开始，精彩敬请期待');
+    } else {
+        $("button").remove();
+        createBasicVoteItem();
+        addImg();
+    }
+    
+}
 
+function onCreate(){
+    if (typeid == 1) {
+        onCreate_program_list();
+        return;
+    }
+
+    createExtraInfo();
     if(started == 0) {
         onCreate_unstarted();
     } else if(ended == 1) {

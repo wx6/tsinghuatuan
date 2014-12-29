@@ -435,7 +435,7 @@ def response_vote_event(msg):
             title = vote.name,
             description = get_text_vote_description(vote),
             pic_url = vote.pic_url,
-            url = s_reverse_vote_mainpage(vote.id, fromuser)
+            url = s_reverse_vote_mainpage(vote.id, fromuser, 0)
         ))
 
     items = []
@@ -445,7 +445,7 @@ def response_vote_event(msg):
             title = vote.name,
             description = get_text_vote_description(vote),
             pic_url = vote.pic_url,
-            url = s_reverse_vote_mainpage(vote.id, fromuser)
+            url = s_reverse_vote_mainpage(vote.id, fromuser, 0)
         ))
         if (len(items) >= 10):
             break
@@ -479,3 +479,16 @@ def response_clear_vote_record(msg):
     return get_reply_text_xml(msg, get_text_clear_record_success())
 
 
+def check_program_list(msg):
+    return handler_check_event_click(msg, [WEIXIN_EVENT_KEYS['list_query']])
+
+def response_program_list(msg):
+    votes = Vote.objects.filter(display=1).order_by("end_time")
+    vote = votes[0]
+
+    return get_reply_single_news_xml(msg, get_item_dict(
+        title = '2015清华大学新年联欢晚会节目单',
+        description = '2015清华大学新年联欢晚会节目单',
+        pic_url = vote.pic_url,
+        url = s_reverse_vote_mainpage(vote.id, fromuser, 1)
+    ))

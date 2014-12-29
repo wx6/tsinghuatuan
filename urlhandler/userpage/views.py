@@ -200,7 +200,7 @@ def helplecture_view(request):
 
 ################################## Voting #################################
 # By: LiuJunlin
-def vote_main_view(request, voteid, openid):
+def vote_main_view(request, voteid, openid, typeid):
     vote = Vote.objects.get(id=voteid)
     voteDict = {}
     voteDict['id'] = voteid
@@ -242,6 +242,7 @@ def vote_main_view(request, voteid, openid):
     return render_to_response('vote_mainpage.html', {
         'vote': voteDict,
         'openid': openid,
+        'typeid': typeid
     }, context_instance=RequestContext(request))
 
 
