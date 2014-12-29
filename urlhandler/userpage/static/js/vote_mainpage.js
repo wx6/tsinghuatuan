@@ -55,11 +55,12 @@ function successLoad(data)
 }
 
 
-function addImg()
-{
-    for (var count = 0; count < vote_items.length; count++) 
-    {
-        $(".itemimg")[count].src = vote_items[count].pic_url;
+function addImg() {
+    for (var i = 0; i < vote_items.length; i++) {
+        $($('.item-box')[i]).css({
+            'background' :  'url(' + item.pic_url + i + '.png' + ')',
+            'background-size' : 'cover'
+        });
     }
 }
 
@@ -125,7 +126,7 @@ function bindClickEvent() {
 
 function createItemBox(item, id) {
     var box = 
-    '<div class="item-box" id="' + item.id + '" style="background:url(' + item.pic_url + ');">' +
+    '<div class="item-box" id="' + item.id + '">' +
         '<input type="text" class="item-val" style="display:none;" name="' + (item.id) + '" value="off"/>' +
         '<div class="item-name">' + 
             '名称: ' + item.name + 
@@ -161,17 +162,16 @@ function onCreate_ended() {
     $("#info")[0].innerHTML = "投票已经结束"
     $("button").remove();
     createBasicVoteItem();
-    adjustImg();
-    addVoteNumber();
-    addImg();
+    // addVoteNumber();
+    // addImg();
 }
 
 function onCreate_unstarted() {
     $("#info")[0].innerHTML = "投票尚未开始" 
     $("button").remove();
     createBasicVoteItem();
-    adjustImg();
-    addImg();
+    // adjustImg();
+    // addImg();
 }
 
 function onCreate_unvoted() {
@@ -181,16 +181,16 @@ function onCreate_unvoted() {
     bindClickEvent();
     // adjustImg();
     // CookieOnLoad();
-    // addImg();
+    addImg();
 }
 
 function onCreate_voted() {
     $("#info")[0].innerHTML = "你已经投过票啦，感谢你的参与"
     $("button").remove();
     createBasicVoteItem();
-    adjustImg();
-    addVoteNumber();
-    addImg();
+    // adjustImg();
+    // addVoteNumber();
+    //addImg();
 }
 
 function createExtraInfo() {
