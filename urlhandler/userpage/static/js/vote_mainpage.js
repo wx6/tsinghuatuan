@@ -214,29 +214,21 @@ function onCreate_unstarted() {
 }
 
 function onCreate_unvoted() {
-    $("#info")[0].innerHTML = "点击图片投票，点击名称查看详情"
+    $("#info")[0].innerHTML = "你最多可投" + maxVote + "项，点击图片可投票"
     $("button").show();
     createBasicVoteItem();
     bindClickEvent();
     adjustImg();
-    CookieOnLoad();
+    // CookieOnLoad();
     addImg();
 }
 
 function onCreate_voted() {
-    $("#info")[0].innerHTML = "你已经投过票啦，感谢你的参与！"
+    $("#info")[0].innerHTML = "你已经投过票啦，感谢你的参与"
     $("button").remove();
     createBasicVoteItem();
     adjustImg();
     addVoteNumber();
-    addImg();
-}
-
-function onCreate_unbound() {
-    $("#info")[0].innerHTML = "您尚未绑定学号，不能参与投票" 
-    $("button").remove();
-    createBasicVoteItem();
-    adjustImg();
     addImg();
 }
 
@@ -250,7 +242,7 @@ function createExtraInfo() {
     $('#activity_title').text(activity_title);
 
     for (var i in activity_extra_info) {
-        if(i == 2) {
+        if(i == 1) {
             $('#activity_extra_info').append('<div>'+'<label id="info">'+activity_extra_info[i].c+'</label>'+'</div>');
         } else {
             $('#activity_extra_info').append('<div>'+'<label>'+activity_extra_info[i].c+'</label>'+'</div>');
@@ -262,7 +254,7 @@ function createExtraInfo() {
         "height" : "100px",
         "background-position" : "center"
     });
-                            //.css("max-height", "100px").css("background-size", "cover");
+    
 }
 
 function onCreate(){
@@ -271,8 +263,6 @@ function onCreate(){
         onCreate_unstarted();
     } else if(ended == 1) {
         onCreate_ended();
-    } else if (bound == 0) {
-        onCreate_unbound();
     } else if(voted == 0) {
         onCreate_unvoted();
     } else {
