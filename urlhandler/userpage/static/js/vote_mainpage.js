@@ -82,41 +82,62 @@ function addVoteNumber()
     //adjustVoteNumber();
 }
 
-function adjustVoteNumber() {
-
-    function toNumber(width) {
-        return parseFloat(width.substring(0, width.length - 2));
+function changeItemCover(id) {
+    var td = $("#" + id);
+    var tick = td.children(".item-tick");
+    var val = td.children(".item-val");
+        
+    if (val.attr("value") == "off") {
+        tick.show();
+        val.attr("value", "on");
+        votenum = votenum + 1;
+    } else {
+        tick.hide();
+        val.attr("value", "off");
+        votenum = votenum - 1;
     }
+}
 
-    var w1 = toNumber($(".vote-number").css("width"));
-    var w0 = toNumber($(".vote-number").parent().css("width"));
-    var w2 = toNumber($(".vote-number").next().css("width"));
+function selectItem(id) {
+    changeItemCover(id);
+    if(votenum > maxVote) {
+        voteNumOverflow(maxVote, id);
+    } else {
+        lastSelect = id;
+    } 
+}
 
-    $(".vote-number").css("margin-left", (w0 - w1 - w2 - 10) / 2 + "px");
+function voteNumOverflow(vtLim, id) {
+    if(vtLim == 1) {
+        changeItemCover(lastSelect);
+        lastSelect = id;
+    } else {
+        changeItemCover(id);
+        alert("您的投票数已经达到上限，不能再投啦！");
+    }
 }
 
 function bindClickEvent() {
-    $(".item-td").click(function(){
-        CookieOnSelect($(this).attr("id"));
+    $(".item-box").click(function(){
+        selectItem($(this).attr("id"));
     });
 }
 
-function getItemBox(item, id) {
+function createItemBox(item, id) {
     var box = 
-    '<div class="item-box" style="background:url(' + item.pic_url + ');">' + 
+    '<div class="item-box" id="' + item.id + '" style="background:url(' + item.pic_url + ');">' +
+        '<input type="text" class="item-val" style="display:none;" name="' + (item.id) + '" value="off"/>' +
         '<div class="item-name">' + 
-            '名称:' + item.name + 
+            '名称: ' + item.name + 
         '</div>' + 
         '<div class="item-description">' + 
-            '来源:' + item.description +
+            '来源: ' + item.description +
         '</div>' + 
         '<div class="item-vote">' + 
-            '人气' + 
+            '人气: ' + 
         '</div>' + 
-        '<div class="item-tick">' +
+        '<div class="item-tick" style="display:none;">' +
             '<img src="' + selectedImg + '">' +
-        '</div>' +
-        '<div style="clear:both;">' +
         '</div>' +
     '</div>';
 
@@ -126,7 +147,7 @@ function getItemBox(item, id) {
 function createVoteItem() {
     for (var i = 0; i < vote_items.length; i++) {
         var item = vote_items[i];
-        var box = getItemBox(item, i);
+        var box = createItemBox(item, i);
         console.log('Current Item:' + i);
         $('#itemList').append(box);
     }
@@ -135,99 +156,6 @@ function createVoteItem() {
 function createBasicVoteItem()
 {
     createVoteItem();
-    /*
-    var newHtml = "";
-    var newCb = "";
-    var newVotes = "";
-    var blankDiv ="<div style='height:1px;'></div>"
-
-    for (count = 0; count < vote_items.length; count++)
-    {
-        if(newHtml && (count % line) == 0) {
-            $("table").append(newHtml+blankDiv+newCb+newVotes);
-            newHtml = "";
-            newCb = "";
-            newVotes = "";
-        }
-        newHtml += createSingleItem(count,line,vote_items);
-        newCb += createSingleItemName(count,line,vote_items);
-        newVotes += createSingleVotes(count,line,vote_items);
-    }
-
-    if(count % line != 0) {
-        newHtml += "</tr>";
-        newCb += "</tr>";
-        newVotes += "</tr>";
-    }
-    
-    if(newHtml) {
-        $("table").append(newHtml+blankDiv+newCb+newVotes);
-        newHtml = "";
-        newCb = "";
-        newVotes = "";
-    }
-    */
-}
-
-function createSingleVotes(count,line,vote_items)
-{
-    var item = vote_items[count];
-    var voteTag =  "<div class='votes2'></div>";
-
-    var td = "<td>"+voteTag+"</td>";
-
-    if (count % line == 0) {
-        td = "<tr>" + td;
-    } else if (count % line == (line - 1)) {
-        td = td + "</tr>";
-    }
-
-    return td;
-}
-
-function createSingleItemName(count,line,vote_items)
-{
-    var item = vote_items[count];
-    var nameTag = "<a class='detail-link' href='" + 'javascript:void(0)' + "'>" + "<p class='voteitem'>"+item.name+"</p></a>";
-
-    var td = "<td>"+nameTag+"</td>";
-
-    if (count % line == 0) {
-        td = "<tr>" + td;
-    } else if (count % line == (line - 1)) {
-        td = td + "</tr>";
-    }
-
-    return td;
-}
-
-function createSingleItem(count,line,vote_items)
-{
-    var item = vote_items[count];
-    var imgTag =  "<img class='itemimg' style = '" + "width:" + size + "px;height:" + size + "px;'/>";
-    var selectedImgTag = "<img src='" + selectedImg + "' style='width:" + size + "px;height:" + size + "px;'>" + "</img>";
-    
-    var td =  "<td class='item-td' id='" + (item.id) + "'>"
-            + "<input type='text' class='item-val' style='display:none;' name='" + (item.id) + "' value='off'/>"
-            + "<div class='table' style='position:relative;'>" + imgTag + "</div>" 
-            + "<div class='tick' style='display:none;position:relative;bottom:" + (6+size) + "px;margin-bottom:-" + (6+size) + "px;z-index=2;'>"
-            + selectedImgTag + "</div>" + "</td>";
-
-    if (count % line == 0) {
-        td = "<tr>" + td;
-    } else if (count % line == (line - 1)) {
-        td = td + "</tr>";
-    }
-    
-    return td;
-}
-
-function adjustImg()
-{
-    var table = $(".table");
-    for(var i = 0; i < table.length; i++) {
-        table[i].style.height = size + "px";
-    }
 }
 
 function onCreate_ended() {
@@ -251,7 +179,7 @@ function onCreate_unvoted() {
     $("#info")[0].innerHTML = "你最多可投" + maxVote + "项，点击图片可投票"
     $("button").show();
     createBasicVoteItem();
-    // bindClickEvent();
+    bindClickEvent();
     // adjustImg();
     // CookieOnLoad();
     // addImg();
@@ -264,11 +192,6 @@ function onCreate_voted() {
     adjustImg();
     addVoteNumber();
     addImg();
-}
-
-function orientationChange() { 
-    //adjustImg();
-    //adjustVoteNumber();
 }
 
 function createExtraInfo() {
@@ -293,6 +216,7 @@ function createExtraInfo() {
 
 function onCreate(){
     createExtraInfo();
+    
     if(started == 0) {
         onCreate_unstarted();
     } else if(ended == 1) {
@@ -301,98 +225,6 @@ function onCreate(){
         onCreate_unvoted();
     } else {
         onCreate_voted();
-    }
-}
-
-
-function findcookie (key) {
-    var name = escape(key);
-    name += "=";
-    var allcookies = document.cookie;
-    var pos = document.cookie.indexOf(name)
-    if(pos != -1) {
-        //cookie值开始的位置
-        var start = pos + name.length;
-        //从cookie值开始的位置起搜索第一个";"的位置,即cookie值结尾的位置                 
-        var end = allcookies.indexOf(";",start);
-        //如果end值为-1说明cookie列表里只有一个cookie          
-        if (end == -1) end = allcookies.length;
-        //提取cookie的值       
-        var value = allcookies.substring(start,end);
-        //对它解码    
-        return (value);                           
-    } else {
-        return ("");
-    }
-}
-
-function CookieOnLoad() {
-    var result = findcookie("activityID");
-    if(result != voteId) {
-        initCookie(voteId, vote_items);
-    } else {
-        loadCookie();
-    }
-}
-
-function initCookie(id, items) {
-    var n = "activityID=" + id;
-    document.cookie = n;
-    for (var i = 0; i < items.length; i++){
-        document.cookie = items[i].id + "=false";
-    }
-}
-
-function loadCookie() {
-    votenum = 0;
-    var tds = $(".item-td");
-    for(var i = 0; i < tds.length; i++) {
-        var id = $(tds[i]).attr("id");
-        var result = findcookie(id);
-        if(result == "true" && votenum < maxVote) {
-            changeItemCover(id);
-            lastSelect = id;
-        }
-    }
-}
-
-function changeItemCover(id) {
-    var td = $("#" + id);
-    var tick = td.children(".tick");
-    var item = td.children(".table");
-    var val = td.children(".item-val");
-        
-    if (val.attr("value") == "off") {
-        tick.show();
-        val.attr("value", "on");
-        item.css("opacity", "0.4");
-        votenum = votenum + 1;
-        document.cookie = escape(id) + "=true";
-    } else {
-        tick.hide();
-        val.attr("value", "off");
-        item.css("opacity", "1.0");
-        votenum = votenum - 1;
-        document.cookie = escape(id) + "=false";
-    }
-}
-
-function CookieOnSelect(id) {
-    changeItemCover(id);
-    if(votenum > maxVote) {
-        voteNumOverflow(maxVote, id);
-    } else {
-        lastSelect = id;
-    } 
-}
-
-function voteNumOverflow(vtLim, id) {
-    if(vtLim == 1) {
-        changeItemCover(lastSelect);
-        lastSelect = id;
-    } else {
-        changeItemCover(id);
-        alert("您的投票数已经达到上限，不能再投啦！");
     }
 }
 
