@@ -103,7 +103,7 @@ function bindClickEvent() {
 
 function getItemBox(item, id) {
     var box = 
-    '<div class="item-box">' + 
+    '<div class="item-box" style="background:url(' + item.pic_url + ');">' + 
         '<div class="item-name">' + 
             '名称:' + item.name + 
         '</div>' + 

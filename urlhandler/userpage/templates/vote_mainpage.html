@@ -65,7 +65,8 @@
                     'name' :  '{{ item.name }}',
                     'description' : '{{ item.description }}',
                     'vote_num': {{ item.vote_num }},
-                    'pic_url': '{{ item.pic_url }}',
+                    // 'pic_url': '{{ item.pic_url }}',
+                    'pic_url': '{% static "img/0.png" %}',
                     'id': {{ item.id }},
                     'url': "{% url 'userpage.views.vote_item_detail' item.id %}"
                 }{% if forloop.last %}{% else %},{% endif %}
