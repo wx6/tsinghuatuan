@@ -1,6 +1,7 @@
 var lastSelect;
 
 function commitVote() {
+    var name_list = generateVoteNames();
     if(votenum <= 0) {
         alert("你还没有选择节目哦！");
         return false;
@@ -14,8 +15,20 @@ function commitVote() {
     return false;
 }
 
-function generateOptions()
-{
+function generateVoteNames() {
+    var name_list = "您要投的是：";
+    var names = $(".voteitem");
+    var votes = $(".item-val");
+    for(var i = 0; i < names.length; i++) {
+        if($(votes[i]).attr("value") == "on") {
+            name_list += names[i].innerHTML + ", "
+        }
+    }
+    name_list = name_list.substring(0, name_list.length - 2);
+    return name_list;
+}
+
+function generateOptions() {
     var options = {
         dataType: 'json',
         success: function (data) {
@@ -33,8 +46,7 @@ function generateOptions()
     return options;
 }
 
-function successLoad(data)
-{
+function successLoad(data) {
     $("button").remove();
     location.reload(true);
 }
