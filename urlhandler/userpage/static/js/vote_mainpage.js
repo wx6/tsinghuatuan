@@ -101,8 +101,36 @@ function bindClickEvent() {
     });
 }
 
+function getItemBox(item, id) {
+    var box = 
+    '<div class="item-box">' + 
+        '<div class="item-name">' + 
+            item.name + 
+        '</div>' + 
+        '<div class="item-description">' + 
+            item.description +
+        '</div>' + 
+        '<div class="item-vote">' + 
+        '</div>' + 
+        '<div class="item-tick">' +
+            '<img src="' + selectedImg + '">'
+        '</div>' +
+        '<div style="clear:both;">' +
+        '</div>'
+    '</div>'
+}
+
+function createVoteItem() {
+    for (var i = 0; i < vote_items.length; i++) {
+        var item = vote_items[i];
+        var box = getItemBox(item, i);
+    }
+}
+
 function createBasicVoteItem()
 {
+    createVoteItem();
+    /*
     var newHtml = "";
     var newCb = "";
     var newVotes = "";
@@ -133,6 +161,7 @@ function createBasicVoteItem()
         newCb = "";
         newVotes = "";
     }
+    */
 }
 
 function createSingleVotes(count,line,vote_items)
@@ -217,10 +246,10 @@ function onCreate_unvoted() {
     $("#info")[0].innerHTML = "你最多可投" + maxVote + "项，点击图片可投票"
     $("button").show();
     createBasicVoteItem();
-    bindClickEvent();
-    adjustImg();
+    // bindClickEvent();
+    // adjustImg();
     // CookieOnLoad();
-    addImg();
+    // addImg();
 }
 
 function onCreate_voted() {

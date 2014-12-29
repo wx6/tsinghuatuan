@@ -44,8 +44,33 @@ button {
     margin-bottom: 6px;
 }
 
-.voteitem {
-	margin: 0em;
+.item-box {
+    width: 100%;
+    height: 100px;
+}
+
+.item-name {
+
+}
+
+.item-description {
+
+}
+
+.item-vote {
+    /*display: none;*/
+}
+
+.item-tick {
+    float: right;
+}
+
+.item-tick img {
+    height: 100px;
+}
+
+.button-area {
+    text-align: center;
 }
 
 .vote-button {
@@ -56,29 +81,4 @@ button {
     height: 2.2em;
     border-radius: 0.6em;
     font-size: 1.1em;
-}
-
-.votes2 {
-    
-}
-
-.vote-number-box {
-    
-}
-
-.vote-number {
-    
-}
-
-.detail-entry {
-    float: left;
-    width: 20px;
-}
-
-.detail-link {
-    text-decoration: none;
-}
-
-.button-area {
-    text-align: center;
 }
