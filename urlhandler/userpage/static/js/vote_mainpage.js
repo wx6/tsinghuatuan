@@ -219,7 +219,7 @@ WeixinApi.ready(function(Api) {
     var wxData = {
         "appId": "wxa04c8f42f836340b", // 服务号可以填写appId
         "imgUrl" : vote_pic_url,
-        "link" : 'http://mp.weixin.qq.com/s?__biz=MzA5MjEzOTQwNA==&mid=201830666&idx=1&sn=018376ab9e5b5fc6aedb3c56ee5e3db4#rd',
+        "link" : 'http://mp.weixin.qq.com/s?__biz=MzA5MjEzOTQwNA==&mid=202215525&idx=1&sn=3a549a27e1d2847776db3e2a40f967cc#rd',
         "desc" : vote_description,
         "title" : vote_name
     };
