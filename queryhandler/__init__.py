@@ -52,12 +52,12 @@ def handle_weixin_request(environ):
         msg = parse_msg_xml(ET.fromstring(raw_str))
         try:
             #recognize type of message and return result
-            response_vote_event(msg)
-            '''
+            # response_vote_event(msg)
+            
             for handler in handler_list:
                 if handler['check'](msg):
                     return handler['response'](msg)
-            '''
+            
         except Exception as e:
             print 'Error occured!!!!!!' + str(e)
         return get_reply_text_xml(msg, u'对不起，没有找到您需要的信息 T T')
