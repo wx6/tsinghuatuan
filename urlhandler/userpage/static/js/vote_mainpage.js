@@ -17,11 +17,10 @@ function commitVote() {
 
 function generateVoteNames() {
     var name_list = "您要投的是：";
-    var names = $(".voteitem");
     var votes = $(".item-val");
-    for(var i = 0; i < names.length; i++) {
+    for(var i = 0; i < votes.length; i++) {
         if($(votes[i]).attr("value") == "on") {
-            name_list += names[i].innerHTML + ", "
+            name_list += vote_items[i].name + ", "
         }
     }
     name_list = name_list.substring(0, name_list.length - 2);
