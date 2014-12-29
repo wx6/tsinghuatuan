@@ -209,9 +209,7 @@ function onCreate(){
 onCreate();
 
 
-
-
-
+/*
 // 初始化WeixinApi，等待分享
 WeixinApi.ready(function(Api) {
 
@@ -265,4 +263,4 @@ WeixinApi.ready(function(Api) {
     Api.generalShare(wxData,wxCallbacks);
 
 });
-
+*/
