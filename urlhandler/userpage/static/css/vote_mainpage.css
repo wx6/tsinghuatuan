@@ -56,7 +56,7 @@ button {
 
 .item-name {
     position: absolute;
-    top: 20px;
+    top: 15px;
 }
 
 .item-description {
@@ -67,7 +67,7 @@ button {
 .item-vote {
     /*display: none;*/
     position: absolute;
-    top: 60px;
+    top: 65px;
 }
 
 .item-tick {
