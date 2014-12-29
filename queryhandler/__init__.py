@@ -35,7 +35,8 @@ def handle_weixin_request(environ):
     '''
     data = urldecode(environ['QUERY_STRING'])
     print data
-    
+    '''
+    '''
     if not check_weixin_signature(data['signature'], data['timestamp'], data['nonce']):
         print '!!!!! Check weixin signature failed !!!!!'
         return ''

@@ -19,7 +19,8 @@ WEIXIN_EVENT_KEYS = {
     'ticket_no_book_recommand': 'TSINGHUA_NO_BOOK_ACTS',
     'ticket_book_header': 'TSINGHUA_BOOK_',
     'modern_figure': 'V1001_MODERN_FIGURE',
-    'vote_query': 'TSINGHUA_VOTE',
+    'vote_query': 'IN_THE_AIR_VOTE',
+    'list_query': 'IN_THE_AIR_LIST'
 }
 '''
 weixin_custom_menu_template = {
