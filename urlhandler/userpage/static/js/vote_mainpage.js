@@ -195,6 +195,12 @@ function createExtraInfo() {
 function onCreate_program_list() {
     $('title').text('新年联欢晚会节目单');
     $('#activity_title').text('新年联欢晚会节目单');
+    $('#activity_title_image').css({
+        "background" : "url(" + activity_title_image + ") no-repeat",
+        "height" : "100px",
+        "background-position" : "center"
+    });
+    
     if (started == 0) {
         $('#itemList').html('晚会尚未开始，精彩敬请期待');
     } else {
