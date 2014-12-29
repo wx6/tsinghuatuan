@@ -105,10 +105,10 @@ function getItemBox(item, id) {
     var box = 
     '<div class="item-box">' + 
         '<div class="item-name">' + 
-            item.name + 
+            '名称:' + item.name + 
         '</div>' + 
         '<div class="item-description">' + 
-            item.description +
+            '来源:' + item.description +
         '</div>' + 
         '<div class="item-vote">' + 
             '人气' + 
