@@ -3,7 +3,7 @@ var lastSelect;
 function commitVote() {
     var name_list = generateVoteNames();
     if(votenum <= 0) {
-        alert("请投票之后再提交");
+        alert("你还没有选择节目哦！");
         return false;
     }
     var conf = confirm(name_list);
@@ -13,20 +13,6 @@ function commitVote() {
     var options = generateOptions();
     $('#voteItem').ajaxSubmit(options);
     return false;
-} 
-
-function generateVoteNames()
-{
-    var name_list = "您要投的是：";
-    var names = $(".voteitem");
-    var votes = $(".item-val");
-    for(var i = 0; i < names.length; i++) {
-        if($(votes[i]).attr("value") == "on") {
-            name_list += names[i].innerHTML + ", "
-        }
-    }
-    name_list = name_list.substring(0, name_list.length - 2);
-    return name_list;
 }
 
 function generateOptions()
@@ -42,7 +28,7 @@ function generateOptions()
         },
         error: function (xhr) {
             console.log(xhr);
-            alert("网络错误");
+            alert("很抱歉，好像发生了奇怪的错误= =");
         }
     };
     return options;
@@ -57,7 +43,6 @@ function successLoad(data)
 
 function addImg() {
     for (var i = 0; i < vote_items.length; i++) {
-        console.log('item-box: ' + i);
         $($('.item-box')[i]).css({
             'background' :  'url(' + vote_items[i].pic_url + (i % 6) + '.png)',
             'background-size' : 'cover'
@@ -65,23 +50,10 @@ function addImg() {
     }
 }
 
-function addVoteNumber()
-{
-    for (var count = 0; count < vote_items.length; count++)
-    {
-        var item = vote_items[count];
-        var html = "<div class='vote-number-box'>"
-                    + "<div class='vote-number'>" 
-                    + "人气:" + item.vote_num
-                    + "</div>"
-                    // + "<a class='detail-entry' href='" + item.url + "'>"
-                    // + "<img src='" + detailImg + "'/>"
-                    // + "</a>" + "<div style='clear:both;'></div>"
-                    + "</div>";
-        $(".votes2")[count].innerHTML = html;
+function addVoteNumber() {
+    for (var i = 0; i < vote_items.length; i++) {
+        $($('.item-vote')[i]).html('人气: ' + vote_items[i].vote_num);
     }
-
-    //adjustVoteNumber();
 }
 
 function changeItemCover(id) {
@@ -163,16 +135,15 @@ function onCreate_ended() {
     $("#info")[0].innerHTML = "投票已经结束"
     $("button").remove();
     createBasicVoteItem();
-    // addVoteNumber();
-    // addImg();
+    addVoteNumber();
+    addImg();
 }
 
 function onCreate_unstarted() {
     $("#info")[0].innerHTML = "投票尚未开始" 
     $("button").remove();
     createBasicVoteItem();
-    // adjustImg();
-    // addImg();
+    addImg();
 }
 
 function onCreate_unvoted() {
@@ -180,8 +151,6 @@ function onCreate_unvoted() {
     $("button").show();
     createBasicVoteItem();
     bindClickEvent();
-    // adjustImg();
-    // CookieOnLoad();
     addImg();
 }
 
@@ -189,9 +158,8 @@ function onCreate_voted() {
     $("#info")[0].innerHTML = "你已经投过票啦，感谢你的参与"
     $("button").remove();
     createBasicVoteItem();
-    // adjustImg();
-    // addVoteNumber();
-    //addImg();
+    addVoteNumber();
+    addImg();
 }
 
 function createExtraInfo() {
@@ -233,7 +201,7 @@ onCreate();
 
 
 
-/*
+
 // 初始化WeixinApi，等待分享
 WeixinApi.ready(function(Api) {
 
@@ -287,4 +255,4 @@ WeixinApi.ready(function(Api) {
     Api.generalShare(wxData,wxCallbacks);
 
 });
-*/
+
