@@ -46,7 +46,7 @@
                         </form>
                         <div class="button-area">
                             <button class="vote-button" type="button" onclick="commitVote()">
-                                提交
+                                提交投票
                             </button>
                         </div>
                     </div>
@@ -77,7 +77,6 @@
         var voteId = {{ vote.id }};
         var started = {{ vote.started }};
         var ended = {{ vote.ended }};
-        var bound = {{ bound }};
         // var vote_pic_url = '{{ vote.pic_url }}';
         var vote_pic_url = "{% static 'img/2015logo.png' %}";
         var vote_description = '{{ vote.description }}';
