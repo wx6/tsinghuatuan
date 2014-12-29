@@ -1,7 +1,6 @@
 var lastSelect;
 
 function commitVote() {
-    var name_list = generateVoteNames();
     if(votenum <= 0) {
         alert("你还没有选择节目哦！");
         return false;
