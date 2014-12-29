@@ -259,4 +259,7 @@ def get_text_vote_description(vote):
             + '\n投票结束时间：\n' + get_text_time_standard(vote.end_time) \
             + '\n最大投票数量：' + str(vote.max_num)
 
+def get_text_no_list():
+    return '节目单暂时还没有发布哦~'
+
 

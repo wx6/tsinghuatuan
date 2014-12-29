@@ -484,6 +484,9 @@ def check_program_list(msg):
 
 def response_program_list(msg):
     votes = Vote.objects.filter(display=1).order_by("end_time")
+    if not votes.exists():
+        return get_reply_text_xml(msg, get_text_no_list())
+
     vote = votes[0]
 
     return get_reply_single_news_xml(msg, get_item_dict(
