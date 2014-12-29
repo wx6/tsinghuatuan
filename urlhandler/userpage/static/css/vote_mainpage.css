@@ -52,6 +52,7 @@ button {
     margin-bottom: 5px;
     position: relative;
     padding-left: 20px;
+    background-size: cover;
 }
 
 .item-name {

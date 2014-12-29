@@ -134,7 +134,6 @@ function createItemBox(item, id) {
             '来源: ' + item.description +
         '</div>' + 
         '<div class="item-vote">' + 
-            '人气: ' + 
         '</div>' + 
         '<div class="item-tick" style="display:none;">' +
             '<img src="' + selectedImg + '">' +
@@ -216,7 +215,7 @@ function createExtraInfo() {
 
 function onCreate(){
     createExtraInfo();
-    
+
     if(started == 0) {
         onCreate_unstarted();
     } else if(ended == 1) {
