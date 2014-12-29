@@ -59,7 +59,7 @@ function addImg() {
     for (var i = 0; i < vote_items.length; i++) {
         console.log('item-box: ' + i);
         $($('.item-box')[i]).css({
-            'background' :  'url(' + item.pic_url + (i % 6) + '.png)',
+            'background' :  'url(' + vote_items[i].pic_url + (i % 6) + '.png)',
             'background-size' : 'cover'
         });
     }
