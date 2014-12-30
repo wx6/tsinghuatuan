@@ -442,7 +442,7 @@ def response_vote_event(msg):
 
     for vote in votes:
         items.append(get_item_dict(
-            title = vote.name,
+            title = '投票:' + vote.name,
             description = get_text_vote_description(vote),
             pic_url = vote.pic_url,
             url = s_reverse_vote_mainpage(vote.id, fromuser, 0)
