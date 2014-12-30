@@ -152,8 +152,9 @@ function onCreate_ended() {
 function onCreate_unstarted() {
     $("#info")[0].innerHTML = "投票尚未开始" 
     $("button").remove();
-    createBasicVoteItem();
-    addImg();
+    $('#itemList').html('晚会尚未开始，精彩敬请期待');
+    //createBasicVoteItem();
+    //addImg();
 }
 
 function onCreate_unvoted() {
