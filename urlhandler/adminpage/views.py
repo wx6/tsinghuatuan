@@ -150,7 +150,7 @@ def login(request):
     if user is not None and user.is_active:
         auth.login(request, user)
         rtnJSON['message'] = 'success'
-        rtnJSON['next'] = s_reverse_activity_list()
+        rtnJSON['next'] = s_reverse_vote_list()
     else:
         time.sleep(2)
         rtnJSON['message'] = 'failed'
