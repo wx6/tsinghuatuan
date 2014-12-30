@@ -112,10 +112,10 @@ function createItemBox(item, id) {
     '<div class="item-box" id="' + item.id + '">' +
         '<input type="text" class="item-val" style="display:none;" name="' + (item.id) + '" value="off"/>' +
         '<div class="item-name">' + 
-            '名称: ' + item.name + 
+            item.name + 
         '</div>' + 
         '<div class="item-description">' + 
-            '来源: ' + item.description +
+            item.description +
         '</div>' + 
         '<div class="item-vote">' + 
         '</div>' + 
