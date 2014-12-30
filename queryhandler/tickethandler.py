@@ -483,6 +483,8 @@ def check_program_list(msg):
     return handler_check_event_click(msg, [WEIXIN_EVENT_KEYS['list_query']])
 
 def response_program_list(msg):
+    fromuser = get_msg_from(msg)
+    
     votes = Vote.objects.filter(display=1).order_by("end_time")
     if not votes.exists():
         return get_reply_text_xml(msg, get_text_no_list())
