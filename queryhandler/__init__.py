@@ -13,8 +13,8 @@ handler_list = [
     # {'check': check_bookable_activities,    'response': response_bookable_activities},
     # {'check': check_exam_tickets,           'response': response_exam_tickets},
     # {'check': check_help_or_subscribe,      'response': response_help_or_subscribe_response},
-    {'check': check_unsubscribe_or_unbind,  'response': response_unsubscribe_or_unbind},
-    {'check': check_bind_account,           'response': response_bind_account},
+    # {'check': check_unsubscribe_or_unbind,  'response': response_unsubscribe_or_unbind},
+    # {'check': check_bind_account,           'response': response_bind_account},
     # {'check': check_fetch_ticket,           'response': response_fetch_ticket},
     # {'check': check_no_book_acts_event,     'response': response_no_book_acts},
     # {'check': check_get_activity_menu,      'response': response_get_activity_menu},
@@ -25,7 +25,7 @@ handler_list = [
 
     #### added by liu junlin ####
     {'check': check_vote_event,             'response': response_vote_event},
-    {'check': check_clear_vote_record,      'response': response_clear_vote_record},
+    # {'check': check_clear_vote_record,      'response': response_clear_vote_record},
     {'check': check_program_list,           'response': response_program_list}
     #### added by liu junlin ####
 ]
