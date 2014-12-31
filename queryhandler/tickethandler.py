@@ -492,8 +492,8 @@ def response_program_list(msg):
     vote = votes[0]
 
     return get_reply_single_news_xml(msg, get_item_dict(
-        title = '2015清华大学新年联欢晚会节目单',
-        description = '2015清华大学新年联欢晚会节目单',
+        title = '2015清华大学新年晚会节目单',
+        description = '2015清华大学新年晚会节目单',
         pic_url = vote.pic_url,
         url = s_reverse_vote_mainpage(vote.id, fromuser, 1)
     ))
