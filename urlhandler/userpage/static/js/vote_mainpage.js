@@ -62,7 +62,7 @@ function addImg() {
 
 function addVoteNumber() {
     for (var i = 0; i < vote_items.length; i++) {
-        $($('.item-vote')[i]).html('人气: ' + vote_items[i].vote_num);
+        $($('.item-vote')[i]).html('人气：' + vote_items[i].vote_num);
     }
 }
 
