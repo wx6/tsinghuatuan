@@ -33,19 +33,17 @@ handler_list = [
 
 # entry of weixin handler
 def handle_weixin_request(environ):
-    '''
+    
     data = urldecode(environ['QUERY_STRING'])
     print data
-    '''
-    '''
+    
     if not check_weixin_signature(data['signature'], data['timestamp'], data['nonce']):
         print '!!!!! Check weixin signature failed !!!!!'
         return ''
-    '''
-    '''
+    
     if environ['REQUEST_METHOD'] == 'GET':
         return data['echostr']
-    '''
+    
     if environ['REQUEST_METHOD'] == 'POST':
         try:
             request_body_size = int(environ['CONTENT_LENGTH'])
