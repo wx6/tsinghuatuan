@@ -427,7 +427,7 @@ def response_vote_event(msg):
     '''
 
     now = datetime.datetime.fromtimestamp(get_msg_create_time(msg))
-    votes = Vote.objects.filter(display=1).order_by("end_time")
+    votes = Vote.objects.filter(display=1, status=1).order_by("end_time")
 
     if len(votes) == 1:
         vote = votes[0]
