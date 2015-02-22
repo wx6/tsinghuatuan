@@ -35,7 +35,7 @@ def home(request):
     if not request.user.is_authenticated():
         return render_to_response('login.html', context_instance=RequestContext(request))
     else:
-        return HttpResponseRedirect(s_reverse_activity_list())
+        return HttpResponseRedirect(s_reverse_vote_list())
 
 
 def activity_list(request):
