@@ -59,6 +59,9 @@ class Vote(models.Model):
     display = models.IntegerField(default=0)
     # 0: do not present to users
     # 1: present to uesrs
+    layout_style = models.IntegerField(default=0)
+    has_images = models.IntegerField(default=1)
+    background = models.CharField(max_length=255)
 
 class VoteItem(models.Model):
     name = models.CharField(max_length=255)
