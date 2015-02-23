@@ -51,19 +51,30 @@ button {
     padding-left: 20px;
 }
 
+.item-image {
+    position: absolute;
+    height: 90px;
+    width: 90px;
+    top: 5px;
+    left: 5px;
+}
+
 .item-name {
     position: absolute;
     top: 15px;
+    left: 110px;
 }
 
 .item-description {
     position: absolute;
     top: 40px;
+    left: 110px;
 }
 
 .item-vote {
     position: absolute;
     top: 65px;
+    left: 110px;
 }
 
 .item-tick {
