@@ -59,6 +59,10 @@ button {
     left: 5px;
 }
 
+.item-image img {
+    height: 100%;
+}
+
 .item-name {
     position: absolute;
     top: 15px;
