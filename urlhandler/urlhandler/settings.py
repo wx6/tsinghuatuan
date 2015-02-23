@@ -60,9 +60,9 @@ if 'SERVER_SOFTWARE' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'wx6_test',
-            'USER': 'wx6',
-            'PASSWORD': 'KaKqBLXzlHIbqJvq',
+            'NAME': 'wxvote',
+            'USER': 'root',
+            'PASSWORD': '123456789',
             'HOST': '127.0.0.1',
             'PORT': '3306',
             }
@@ -78,9 +78,9 @@ elif (os.environ.get('USER', '') == 'ssastadmin') or ('SSAST_DEPLOYMENT' in os.e
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'wx6_test',
-            'USER': 'wx6',
-            'PASSWORD': 'KaKqBLXzlHIbqJvq',
+            'NAME': 'wxvote',
+            'USER': 'root',
+            'PASSWORD': '123456789',
             'HOST': '127.0.0.1',
             'PORT': '3306',
             }
@@ -89,9 +89,9 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'wx6_test',
-            'USER': 'wx6',
-            'PASSWORD': 'KaKqBLXzlHIbqJvq',
+            'NAME': 'wxvote',
+            'USER': 'root',
+            'PASSWORD': '123456789',
             'HOST': '127.0.0.1',
             'PORT': '3306',
             }
