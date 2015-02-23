@@ -54,7 +54,7 @@ function successLoad(data) {
 function addImg() {
     for (var i = 0; i < vote_items.length; i++) {
         $($('.item-box')[i]).css({
-            'background' :  'url(' + vote_items[i].pic_url + (i % 6) + '.png)',
+            'background' :  'url(' + vote_items[i].bg_pic + (i % 6) + '.png)',
             'background-size' : 'cover'
         });
     }
@@ -111,6 +111,9 @@ function createItemBox(item, id) {
     var box = 
     '<div class="item-box" id="' + item.id + '">' +
         '<input type="text" class="item-val" style="display:none;" name="' + (item.id) + '" value="off"/>' +
+        '<div class="item-image">' +
+            '<img src="' + item.pic_url + '">' +
+        '</div>' +
         '<div class="item-name">' + 
             item.name + 
         '</div>' + 
@@ -131,7 +134,6 @@ function createVoteItem() {
     for (var i = 0; i < vote_items.length; i++) {
         var item = vote_items[i];
         var box = createItemBox(item, i);
-        console.log('Current Item:' + i);
         $('#itemList').append(box);
     }
 }
@@ -152,7 +154,7 @@ function onCreate_ended() {
 function onCreate_unstarted() {
     $("#info")[0].innerHTML = "投票尚未开始" 
     $("button").remove();
-    $('#itemList').html('晚会尚未开始，精彩敬请期待');
+    $('#itemList').html('活动尚未开始，精彩敬请期待');
     //createBasicVoteItem();
     //addImg();
 }
