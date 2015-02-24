@@ -185,6 +185,7 @@ function createVoteItem() {
             box = createItemBoxForGridLayout(item, i);
             $('#itemList').css({
                 "width" : "330px",
+                "margin" : "0 auto 0 auto"
             });
         }
         $('#itemList').append(box);

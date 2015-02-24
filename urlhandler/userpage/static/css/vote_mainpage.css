@@ -57,8 +57,7 @@ button {
     height: 200px;
     color: #FFFFFF;
     font-size: 15px;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin: 0 5px 15px 5px;
     float: left;
     position: relative;
     background: rgba(255, 255, 255, 0.7);
@@ -72,7 +71,19 @@ button {
     left: 5px;
 }
 
+.item-image-grid {
+    position: absolute;
+    height: 90px;
+    width: 90px;
+    top: 5px;
+    left: 5px;
+}
+
 .item-image img {
+    height: 100%;
+}
+
+.item-image-grid img {
     height: 100%;
 }
 
