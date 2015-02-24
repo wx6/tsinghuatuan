@@ -56,8 +56,6 @@ function addImg() {
     for (var i = 0; i < vote_items.length; i++) {
         if (layout_style == 0) {
             $($('.item-box')[i]).css({
-                // 'background' :  'url(' + vote_items[i].bg_pic + (i % 6) + '.png)',
-                // 'background-size' : 'cover'
                 'background' : 'rgba(255, 255, 255, 0.7)',
             });
         } else if (layout_style == 1) {
@@ -185,6 +183,9 @@ function createVoteItem() {
             box = createItemBox(item, i);
         } else if (layout_style == 1) {
             box = createItemBoxForGridLayout(item, i);
+            $('#itemList').css({
+                "width" : "330px",
+            });
         }
         $('#itemList').append(box);
     }
