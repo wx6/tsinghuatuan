@@ -189,9 +189,10 @@ function createExtraInfo() {
     }
 
     $('#activity_title_image').css({
-        "background" : "url(" + activity_title_image + ") no-repeat",
+        "background" : "url(" + activity_title_image + ") repeat-x",
+        "background-size" : "auto 100%",
         "height" : "100px",
-        "background-position" : "center"
+        // "background-position" : "center"
     });
 
     $('.info').css({
