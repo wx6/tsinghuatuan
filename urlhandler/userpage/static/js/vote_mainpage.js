@@ -184,7 +184,7 @@ function createVoteItem() {
         } else if (layout_style == 1) {
             box = createItemBoxForGridLayout(item, i);
             $('#itemList').css({
-                "width" : (scrollWidth - 30) + "px",
+                "width" : (scrollWidth - 20) + "px",
                 "margin" : "0 auto 0 auto",
                 "float" : "left"
             });
