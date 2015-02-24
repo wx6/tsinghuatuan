@@ -142,7 +142,7 @@ button {
     bottom: 5px;
     height: 80px;
     width: 80px;
-    z-index: 2px;
+    z-index: 2;
 }
 
 .item-tick img {
