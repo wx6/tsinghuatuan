@@ -195,7 +195,8 @@ function createExtraInfo() {
     });
 
     $('.info').css({
-        "background" : background_pic + " no-repeat"
+        "background" : background_pic + " repeat-y",
+        "background-size" : "100% auto"
     });
     
 }
