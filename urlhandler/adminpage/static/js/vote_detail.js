@@ -79,6 +79,7 @@ function updateVote(nact) {
 function initializeForm(vote) {
     var key;
     for (key in keyMap) {
+        console.log(key);
         actionMap[keyMap[key]]($('#input-' + key), vote[key]);
     }
     if (!vote.id) {
