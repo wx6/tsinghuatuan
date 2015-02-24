@@ -97,6 +97,7 @@ button {
 .item-name-grid {
     position: absolute;
     top: 90px;
+    margin: 0 auto 0 auto;
 }
 
 .item-description {
@@ -106,9 +107,10 @@ button {
     color: black;
 }
 
-.item-description-gird {
+.item-description-grid {
     position: absolute;
     top: 105px;
+    margin: 0 auto 0 auto;
 }
 
 .item-vote {
