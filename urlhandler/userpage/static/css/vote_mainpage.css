@@ -57,7 +57,8 @@ button {
     height: 180px;
     color: #FFFFFF;
     font-size: 13px;
-    margin: 0 5px 15px 5px;
+    margin-top: 0;
+    margin-bottom: 15px;
     float: left;
     position: relative;
     background: rgba(255, 255, 255, 0.7);

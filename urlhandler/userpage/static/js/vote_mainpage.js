@@ -175,6 +175,20 @@ function createItemBoxForGridLayout(item, id) {
     return box;
 }
 
+function modifyStyle() {
+    $('#itemList').css({
+        "width" : (scrollWidth - 20) + "px",
+        "margin" : "0 auto 0 auto",
+        "float" : "left"
+    });
+
+    var delta = (scrollWidth - 20) / 6;
+    $('.item-box-grid').css({
+        "margin-left" : delta + "px",
+        "margin-right" : delta + "px"
+    })
+}
+
 function createVoteItem() {
     for (var i = 0; i < vote_items.length; i++) {
         var item = vote_items[i];
@@ -183,18 +197,16 @@ function createVoteItem() {
             box = createItemBox(item, i);
         } else if (layout_style == 1) {
             box = createItemBoxForGridLayout(item, i);
-            $('#itemList').css({
-                "width" : (scrollWidth - 20) + "px",
-                "margin" : "0 auto 0 auto",
-                "float" : "left"
-            });
         }
         $('#itemList').append(box);
     }
+
+    if (layout_style == 1) {
+        modifyStyle();
+    }
 }
 
-function createBasicVoteItem()
-{
+function createBasicVoteItem() {
     createVoteItem();
 }
 
