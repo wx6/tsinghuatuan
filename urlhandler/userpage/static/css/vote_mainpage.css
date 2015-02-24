@@ -1,5 +1,5 @@
 .info {
-    background: rgb(32, 123, 165);
+    /* background: rgb(32, 123, 165); */
 }
 
 form {
@@ -50,7 +50,7 @@ button {
     height: 100px;
     color: #FFFFFF;
     font-size: 15px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     position: relative;
     padding-left: 20px;
 }

@@ -193,6 +193,10 @@ function createExtraInfo() {
         "height" : "100px",
         "background-position" : "center"
     });
+
+    $('.info').css({
+        "background" : background_pic + " no-repeat"
+    });
     
 }
 
