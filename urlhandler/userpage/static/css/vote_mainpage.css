@@ -98,6 +98,7 @@ button {
     position: absolute;
     top: 90px;
     color: black;
+    width: 100%;
 }
 
 .item-description {
@@ -111,6 +112,7 @@ button {
     position: absolute;
     top: 110px;
     color: black;
+    width: 100%;
 }
 
 .item-vote {
@@ -124,6 +126,7 @@ button {
     position: absolute;
     top: 130px;
     color: black;
+    width: 100%;
 }
 
 .item-tick {
@@ -135,8 +138,8 @@ button {
 
 .item-tick-grid {
     position: absolute;
-    top: 85px;
     left: 5px;
+    bottom: 5px;
     height: 80px;
     width: 80px;
     z-index: 2px;
