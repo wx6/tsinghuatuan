@@ -52,6 +52,7 @@ function successLoad(data) {
 
 
 function addImg() {
+    /*
     for (var i = 0; i < vote_items.length; i++) {
         if (layout_style == 0) {
             $($('.item-box')[i]).css({
@@ -65,6 +66,7 @@ function addImg() {
             });
         }
     }
+    */
 }
 
 function addVoteNumber() {
