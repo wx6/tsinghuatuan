@@ -53,8 +53,8 @@ button {
 }
 
 .item-box-grid {
-    width: 100px;
-    height: 200px;
+    width: 90px;
+    height: 180px;
     color: #FFFFFF;
     font-size: 15px;
     margin: 0 5px 15px 5px;
@@ -73,8 +73,8 @@ button {
 
 .item-image-grid {
     position: absolute;
-    height: 90px;
-    width: 90px;
+    height: 80px;
+    width: 80px;
     top: 5px;
     left: 5px;
 }

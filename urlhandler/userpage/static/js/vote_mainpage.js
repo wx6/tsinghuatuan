@@ -184,7 +184,7 @@ function createVoteItem() {
         } else if (layout_style == 1) {
             box = createItemBoxForGridLayout(item, i);
             $('#itemList').css({
-                "width" : "330px",
+                "width" : "300px",
                 "margin" : "0 auto 0 auto"
             });
         }
