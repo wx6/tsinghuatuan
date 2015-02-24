@@ -182,7 +182,7 @@ function modifyStyle() {
         "float" : "left"
     });
 
-    var delta = (scrollWidth - 20) / 6;
+    var delta = (scrollWidth - 20 - 270) / 6;
     $('.item-box-grid').css({
         "margin-left" : delta + "px",
         "margin-right" : delta + "px"
