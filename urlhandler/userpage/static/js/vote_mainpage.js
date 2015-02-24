@@ -139,9 +139,9 @@ function createItemBox(item, id) {
         '<div class="item-name">' + 
             item.name + 
         '</div>' + 
-        // '<div class="item-description">' + 
-        //     item.description +
-        // '</div>' + 
+        '<div class="item-description">' + 
+            item.description +
+        '</div>' + 
         '<div class="item-vote">' + 
         '</div>' + 
         '<div class="item-tick" style="display:none;">' +
@@ -162,9 +162,9 @@ function createItemBoxForGridLayout(item, id) {
         '<div class="item-name-grid">' + 
             item.name + 
         '</div>' + 
-        '<div class="item-description-grid">' + 
-            item.description +
-        '</div>' + 
+        // '<div class="item-description-grid">' + 
+        //     item.description +
+        // '</div>' + 
         '<div class="item-vote-grid">' + 
         '</div>' + 
         '<div class="item-tick-grid" style="display:none;">' +
