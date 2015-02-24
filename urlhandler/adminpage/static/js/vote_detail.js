@@ -35,7 +35,10 @@ var dateInterfaceMap = {
     'start_time': 'time',
     'end_time': 'time',
     'pic_url': 'value',
-    'max_num' : 'value'
+    'max_num' : 'value',
+    'background' : 'value',
+    'layout_style' : 'value',
+    'has_images' : 'value'
 }, lockMap = {
     'value': function(dom, lock) {
         dom.prop('disabled', lock);

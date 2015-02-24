@@ -20,7 +20,10 @@
             'key': '{{ vote.key|escapejs }}',
             'description': '{{ vote.description|escapejs }}',
             'pic_url': '{{ vote.pic_url }}',
+            'background': '{{ vote.background }}',
             'max_num' : {{ vote.max_num }},
+            'layout_style' : {{ vote.layout_style }},
+            'has_images' : {{ vote.has_images }},
             'start_time': {
                 'year': {{ vote.start_time.year }},
                 'month': {{ vote.start_time.month }},
