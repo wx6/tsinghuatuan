@@ -77,6 +77,7 @@ function updateVote(nact) {
 }
 
 function initializeForm(vote) {
+    console.log("come here");
     var key;
     for (key in keyMap) {
         console.log(key);
