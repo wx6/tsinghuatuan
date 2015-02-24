@@ -53,23 +53,38 @@ function successLoad(data) {
 
 function addImg() {
     for (var i = 0; i < vote_items.length; i++) {
-        $($('.item-box')[i]).css({
-            // 'background' :  'url(' + vote_items[i].bg_pic + (i % 6) + '.png)',
-            'background' : 'rgba(255, 255, 255, 0.7)',
-            'background-size' : 'cover'
-        });
+        if (layout_style == 0) {
+            $($('.item-box')[i]).css({
+                // 'background' :  'url(' + vote_items[i].bg_pic + (i % 6) + '.png)',
+                // 'background-size' : 'cover'
+                'background' : 'rgba(255, 255, 255, 0.7)',
+            });
+        } else if (layout_style == 1) {
+            $($('.item-box-grid')[i]).css({
+                'background' : 'rgba(255, 255, 255, 0.7)',
+            });
+        }
     }
 }
 
 function addVoteNumber() {
     for (var i = 0; i < vote_items.length; i++) {
-        $($('.item-vote')[i]).html('人气：' + vote_items[i].vote_num);
+        if (layout_style == 0) {
+            $($('.item-vote')[i]).html('人气：' + vote_items[i].vote_num);
+        } else if (layout_style == 1) {
+            $($('.item-vote-grid')[i]).html('人气：' + vote_items[i].vote_num);
+        }
     }
 }
 
 function changeItemCover(id) {
     var td = $("#" + id);
-    var tick = td.children(".item-tick");
+    var tick; 
+    if (layout_style == 0) {
+        tick = td.children(".item-tick");
+    } else if (layout_style == 1) {
+        tick = td.children(".item-tick-grid");
+    }
     var val = td.children(".item-val");
         
     if (val.attr("value") == "off") {
@@ -103,9 +118,15 @@ function voteNumOverflow(vtLim, id) {
 }
 
 function bindClickEvent() {
-    $(".item-box").click(function(){
-        selectItem($(this).attr("id"));
-    });
+    if (layout_style == 0) {
+        $(".item-box").click(function() {
+            selectItem($(this).attr("id"));
+        });
+    } else if (layout_style == 1) {
+        $(".item-box-grid").click(function() {
+            selectItem($(this).attr("id"));
+        });
+    }
 }
 
 function createItemBox(item, id) {
@@ -131,10 +152,38 @@ function createItemBox(item, id) {
     return box;
 }
 
+function createItemBoxForGridLayout(item, id) {
+    var box = 
+    '<div class="item-box-grid" id="' + item.id + '">' +
+        '<input type="text" class="item-val" style="display:none;" name="' + (item.id) + '" value="off"/>' +
+        '<div class="item-image-grid">' +
+            '<img src="' + item.pic_url + '">' +
+        '</div>' +
+        '<div class="item-name-grid">' + 
+            item.name + 
+        '</div>' + 
+        '<div class="item-description-grid">' + 
+            item.description +
+        '</div>' + 
+        '<div class="item-vote-grid">' + 
+        '</div>' + 
+        '<div class="item-tick-grid" style="display:none;">' +
+            '<img src="' + selectedImg + '">' +
+        '</div>' +
+    '</div>';
+
+    return box;
+}
+
 function createVoteItem() {
     for (var i = 0; i < vote_items.length; i++) {
         var item = vote_items[i];
-        var box = createItemBox(item, i);
+        var box;
+        if (layout_style == 0) {
+            box = createItemBox(item, i);
+        } else if (layout_style == 1) {
+            box = createItemBoxForGridLayout(item, i);
+        }
         $('#itemList').append(box);
     }
 }
