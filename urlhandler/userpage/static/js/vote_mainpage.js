@@ -54,7 +54,8 @@ function successLoad(data) {
 function addImg() {
     for (var i = 0; i < vote_items.length; i++) {
         $($('.item-box')[i]).css({
-            'background' :  'url(' + vote_items[i].bg_pic + (i % 6) + '.png)',
+            // 'background' :  'url(' + vote_items[i].bg_pic + (i % 6) + '.png)',
+            'background' : 'rgba(255, 255, 255, 0.7)',
             'background-size' : 'cover'
         });
     }
