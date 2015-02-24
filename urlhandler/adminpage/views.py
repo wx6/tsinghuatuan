@@ -609,6 +609,12 @@ def vote_modify(vote):
     curVote = Vote.objects.get(id=vote['id'])
     old_start_time = curVote.start_time
 
+    print 'information print begins'
+    print vote['layout_style']
+    print vote['has_images']
+    print vote['background']
+    print 'information print ends'
+
     for k in ['name', 'pic_url', 'description']:
         setattr(curVote, k, vote[k])
     now = datetime.now()
