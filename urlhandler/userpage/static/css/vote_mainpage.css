@@ -1,3 +1,7 @@
+.info {
+    background: rgb(32, 123, 165);
+}
+
 form {
     width: 100%;
     text-align: center;
@@ -49,6 +53,7 @@ button {
     margin-bottom: 5px;
     position: relative;
     padding-left: 20px;
+    background: rgba(255, 255, 255, 0.7);
 }
 
 .item-image {
@@ -67,18 +72,21 @@ button {
     position: absolute;
     top: 15px;
     left: 110px;
+    color: black;
 }
 
 .item-description {
     position: absolute;
     top: 40px;
     left: 110px;
+    color: black;
 }
 
 .item-vote {
     position: absolute;
     top: 65px;
     left: 110px;
+    color: black;
 }
 
 .item-tick {
