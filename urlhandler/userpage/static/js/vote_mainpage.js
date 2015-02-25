@@ -199,7 +199,7 @@ function createItemBoxForGridLayout(item, id) {
 }
 
 function modifyStyle() {
-    scrollWidth = document.body.scrollWidth;
+    clientWidth = document.body.clientWidth;
 
     $('#itemList').css({
         "width" : (scrollWidth - 20) + "px",
@@ -207,7 +207,7 @@ function modifyStyle() {
         "float" : "left"
     });
 
-    var delta = (scrollWidth - 20 - 270) / 6;
+    var delta = (clientWidth - 20 - 270) / 6;
     $('.item-box-grid').css({
         "margin-left" : delta + "px",
         "margin-right" : delta + "px"
@@ -297,7 +297,6 @@ function showPageImages() {
 function orientationChange() {
     if (layout_style == 1) {
         modifyStyle();
-        alert("屏幕旋转!");
     }
 }
 
