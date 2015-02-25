@@ -78,6 +78,7 @@ button {
     width: 80px;
     top: 5px;
     left: 5px;
+    background: url(http://115.28.212.177:4606/static1/img/loading.gif);
 }
 
 .item-image img {
