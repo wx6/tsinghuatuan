@@ -129,6 +129,8 @@ function bindClickEvent() {
 
     for (var i = 0; i < vote_items.length; i++) {
         var item = vote_items[i];
+        console.log(item.id);
+        console.log(item.url);
         if (layout_style == 0) {
             $("#" + item.id + " .item-image").click(function(e) {
                 e.stopPropagation();
