@@ -131,7 +131,7 @@ function bindClickEvent() {
 function createItemBox(item, id) {
     var depict = item.description;
     if (depict.length > 10) {
-        depict = depict.substr(0, 12) + "...";
+        depict = depict.substr(0, 10) + "...";
     }
 
     var box = 
