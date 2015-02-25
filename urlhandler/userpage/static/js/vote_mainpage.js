@@ -202,7 +202,7 @@ function modifyStyle() {
     clientWidth = document.body.clientWidth;
 
     $('#itemList').css({
-        "width" : (scrollWidth - 20) + "px",
+        "width" : (clientWidth - 20) + "px",
         "margin" : "0 auto 0 auto",
         "float" : "left"
     });
