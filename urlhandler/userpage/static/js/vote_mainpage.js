@@ -130,11 +130,13 @@ function bindClickEvent() {
     for (var i = 0; i < vote_items.length; i++) {
         var item = vote_items[i];
         if (layout_style == 0) {
-            $("#" + item.id + " .item-image").click(function() {
+            $("#" + item.id + " .item-image").click(function(e) {
+                e.stopPropagation();
                 location.href = item.url;
             });
         } else if (layout_style == 1) {
-            $("#" + item.id + " .item-image-grid").click(function() {
+            $("#" + item.id + " .item-image-grid").click(function(e) {
+                e.stopPropagation();
                 location.href = item.url;
             });
         }
