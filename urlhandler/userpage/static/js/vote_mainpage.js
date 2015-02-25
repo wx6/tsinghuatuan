@@ -257,7 +257,9 @@ function createExtraInfo() {
             $('#activity_extra_info').append('<div>'+'<label>'+activity_extra_info[i].c+'</label>'+'</div>');
         }
     }
+}
 
+function showImages() {
     $('#activity_title_image').css({
         "background" : "url(" + activity_title_image + ") repeat-x",
         "background-size" : "auto 100%",
@@ -269,7 +271,6 @@ function createExtraInfo() {
         "background" : background_pic + " repeat-y",
         "background-size" : "100% auto"
     });
-    
 }
 
 function onCreate_program_list() {
@@ -307,6 +308,7 @@ function onCreate(){
     } else {
         onCreate_voted();
     }
+    showImages();
 }
 
 onCreate();
