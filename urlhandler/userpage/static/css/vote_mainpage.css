@@ -80,6 +80,8 @@ button {
     left: 5px;
     background-image: url(http://115.28.212.177:4606/static1/img/loading.gif);
     background-size: 60% 60%;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .item-image img {
