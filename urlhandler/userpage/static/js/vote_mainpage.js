@@ -128,18 +128,15 @@ function bindClickEvent() {
     }
 
     for (var i = 0; i < vote_items.length; i++) {
-        var item = vote_items[i];
-        console.log(item.id);
-        console.log(item.url);
         if (layout_style == 0) {
-            $("#" + item.id + " .item-image").click(function(e) {
+            $("#" + vote_items[i].id + " .item-image").click(function(e) {
                 e.stopPropagation();
-                location.href = item.url;
+                location.href = vote_items[i].url;
             });
         } else if (layout_style == 1) {
-            $("#" + item.id + " .item-image-grid").click(function(e) {
+            $("#" + vote_items[i].id + " .item-image-grid").click(function(e) {
                 e.stopPropagation();
-                location.href = item.url;
+                location.href = vote_items[i].url;
             });
         }
     }
