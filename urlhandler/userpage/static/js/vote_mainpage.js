@@ -52,19 +52,18 @@ function successLoad(data) {
 
 
 function addImg() {
-    /*
     for (var i = 0; i < vote_items.length; i++) {
+        var item = vote_items[i];
         if (layout_style == 0) {
-            $($('.item-box')[i]).css({
-                'background' : 'rgba(255, 255, 255, 0.7)',
+            $('#' + item.id + ' .item-image img').attr({
+                'src' : item.pic_url
             });
         } else if (layout_style == 1) {
-            $($('.item-box-grid')[i]).css({
-                'background' : 'rgba(255, 255, 255, 0.7)',
+            $('#' + item.id + ' .item-image-grid img').attr({
+                'src' : item.pic_url
             });
         }
     }
-    */
 }
 
 function addVoteNumber() {
@@ -139,7 +138,7 @@ function createItemBox(item, id) {
     '<div class="item-box" id="' + item.id + '">' +
         '<input type="text" class="item-val" style="display:none;" name="' + (item.id) + '" value="off"/>' +
         '<div class="item-image">' +
-            '<img src="' + item.pic_url + '">' +
+            '<img src="' + '">' +
         '</div>' +
         '<div class="item-name">' + 
             item.name + 
@@ -162,7 +161,7 @@ function createItemBoxForGridLayout(item, id) {
     '<div class="item-box-grid" id="' + item.id + '">' +
         '<input type="text" class="item-val" style="display:none;" name="' + (item.id) + '" value="off"/>' +
         '<div class="item-image-grid">' +
-            '<img src="' + item.pic_url + '">' +
+            '<img src="' + '">' +
         '</div>' +
         '<div class="item-name-grid">' + 
             item.name + 
