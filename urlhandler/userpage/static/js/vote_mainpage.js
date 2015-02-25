@@ -294,8 +294,10 @@ function showPageImages() {
     });
 }
 
+var t = 0;
 function orientationChange() {
     alert("hahaha");
+    $('#11 .item-vote-grid').html('人气 ' + (1 - t));
     if (layout_style == 1) {
         alert("屏幕发生旋转！");
         modifyStyle();
