@@ -321,14 +321,20 @@ function onCreate_program_list() {
     
 }
 
+function addEvent() {
+    addEventListener('load', function() {
+        window.onorientationchange = orientationChange;
+    });
+}
+
 function onCreate(){
     if (typeid == 1) {
         onCreate_program_list();
         return;
     }
 
-    console.log("test point 1");
     createExtraInfo();
+
     if(started == 0) {
         onCreate_unstarted();
     } else if(ended == 1) {
@@ -338,7 +344,10 @@ function onCreate(){
     } else {
         onCreate_voted();
     }
+
     showPageImages();
+
+    addEvent();
 }
 
 onCreate();
