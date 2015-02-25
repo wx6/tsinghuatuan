@@ -293,7 +293,7 @@ function showPageImages() {
 }
 
 function orientationChange() {
-    
+
 }
 
 function onCreate_program_list() {
@@ -321,6 +321,7 @@ function onCreate(){
         return;
     }
 
+    console.log("test point 1");
     createExtraInfo();
     if(started == 0) {
         onCreate_unstarted();
