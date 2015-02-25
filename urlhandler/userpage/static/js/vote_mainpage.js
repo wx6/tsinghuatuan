@@ -297,6 +297,7 @@ function showPageImages() {
 function orientationChange() {
     if (layout_style == 1) {
         modifyStyle();
+        alert("屏幕旋转!");
     }
 }
 
