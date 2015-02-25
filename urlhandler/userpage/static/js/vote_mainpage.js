@@ -259,7 +259,7 @@ function createExtraInfo() {
     }
 }
 
-function showImages() {
+function showPageImages() {
     $('#activity_title_image').css({
         "background" : "url(" + activity_title_image + ") repeat-x",
         "background-size" : "auto 100%",
@@ -308,7 +308,7 @@ function onCreate(){
     } else {
         onCreate_voted();
     }
-    showImages();
+    showPageImages();
 }
 
 onCreate();
