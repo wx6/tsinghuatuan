@@ -126,6 +126,19 @@ function bindClickEvent() {
             selectItem($(this).attr("id"));
         });
     }
+
+    for (var i = 0; i < vote_items.length; i++) {
+        var item = vote_items[i];
+        if (layout_style == 0) {
+            $("#" + item.id + " .item-image").click(function() {
+                location.href = item.url;
+            });
+        } else if (layout_style == 1) {
+            $("#" + item.id + " .item-image-grid").click(function() {
+                location.href = item.url;
+            });
+        }
+    }
 }
 
 function createItemBox(item, id) {
