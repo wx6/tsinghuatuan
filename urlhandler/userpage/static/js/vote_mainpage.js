@@ -128,15 +128,16 @@ function bindClickEvent() {
     }
 
     for (var i = 0; i < vote_items.length; i++) {
+        var item = vote_items[i];
         if (layout_style == 0) {
-            $("#" + vote_items[i].id + " .item-image").click(function(e) {
+            $("#" + item.id + " .item-image a").click(function(e) {
                 e.stopPropagation();
-                location.href = vote_items[i].url;
+                // location.href = vote_items[i].url;
             });
         } else if (layout_style == 1) {
-            $("#" + vote_items[i].id + " .item-image-grid").click(function(e) {
+            $("#" + item.id + " .item-image-grid a").click(function(e) {
                 e.stopPropagation();
-                location.href = vote_items[i].url;
+                // location.href = vote_items[i].url;
             });
         }
     }
@@ -152,7 +153,9 @@ function createItemBox(item, id) {
     '<div class="item-box" id="' + item.id + '">' +
         '<input type="text" class="item-val" style="display:none;" name="' + (item.id) + '" value="off"/>' +
         '<div class="item-image">' +
-            '<img src="' + '">' +
+            '<a href="' + item.url + '">' + 
+                '<img src=""/>' + 
+            '</a>' +
         '</div>' +
         '<div class="item-name">' + 
             item.name + 
@@ -175,7 +178,9 @@ function createItemBoxForGridLayout(item, id) {
     '<div class="item-box-grid" id="' + item.id + '">' +
         '<input type="text" class="item-val" style="display:none;" name="' + (item.id) + '" value="off"/>' +
         '<div class="item-image-grid">' +
-            '<img src="' + '">' +
+            '<a href="' + item.url + '">' + 
+                '<img src=""/>' + 
+            '</a>' +
         '</div>' +
         '<div class="item-name-grid">' + 
             item.name + 
