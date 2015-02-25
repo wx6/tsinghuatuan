@@ -199,6 +199,8 @@ function createItemBoxForGridLayout(item, id) {
 }
 
 function modifyStyle() {
+    scrollWidth = document.body.scrollWidth;
+
     $('#itemList').css({
         "width" : (scrollWidth - 20) + "px",
         "margin" : "0 auto 0 auto",
