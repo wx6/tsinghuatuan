@@ -292,6 +292,12 @@ function showPageImages() {
     });
 }
 
+function orientationChange() {
+    if (layout_style == 1) {
+        modifyStyle();
+    }
+}
+
 function onCreate_program_list() {
     $('title').text('新年联欢晚会节目单');
     $('#activity_title').text('新年联欢晚会节目单');
