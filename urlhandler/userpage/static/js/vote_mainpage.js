@@ -294,10 +294,8 @@ function showPageImages() {
     });
 }
 
-var t = 0;
 function orientationChange() {
     if (layout_style == 1) {
-        alert("屏幕发生旋转！");
         modifyStyle();
     }
 }
