@@ -59,8 +59,9 @@
         $('#activity_title').text(activity_title);
         $('#activity_title_image').css("background","url("+activity_title_image+") no-repeat")
                           .css("max-height", "100px").css("background-size", "cover");
-    
-        if (item.has_images == 0) {
+        
+        var has_images = {{ item.has_images }};
+        if (has_images == 0) {
             $('#activity_extra_info img').attr({
                 'src' : ''
             });
