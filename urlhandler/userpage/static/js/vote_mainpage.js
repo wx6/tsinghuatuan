@@ -56,11 +56,11 @@ function addImg() {
         var item = vote_items[i];
         if (layout_style == 0) {
             $('#' + item.id + ' .item-image img').attr({
-                'src' : item.pic_url
+                'src' : (has_images == 1) ? item.pic_url : default_item_pic;
             });
         } else if (layout_style == 1) {
             $('#' + item.id + ' .item-image-grid img').attr({
-                'src' : item.pic_url
+                'src' : (has_images == 1) ? item.pic_url : default_item_pic;
             });
         }
     }
@@ -199,6 +199,8 @@ function createItemBoxForGridLayout(item, id) {
 }
 
 function modifyStyle() {
+    var previousWidth = clientWidth;
+
     clientWidth = document.body.clientWidth;
 
     $('#itemList').css({
@@ -212,6 +214,8 @@ function modifyStyle() {
         "margin-left" : delta + "px",
         "margin-right" : delta + "px"
     })
+
+    return (clientWidth != previousWidth);
 }
 
 function createVoteItem() {
@@ -296,7 +300,10 @@ function showPageImages() {
 
 function orientationChange() {
     if (layout_style == 1) {
-        modifyStyle();
+        while (true) {
+            if (modifyStyle())
+                break;
+        }
     }
 }
 

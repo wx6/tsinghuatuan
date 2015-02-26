@@ -80,9 +80,10 @@
         var ended = {{ vote.ended }};
         var vote_pic_url = '{{ vote.pic_url }}';
         // var vote_pic_url = "{% static 'img/2015logo.png' %}";
+        var default_item_pic = 'http://115.28.212.177:4606/static1/img/tsinghua_logo.img';
         var vote_description = '{{ vote.description }}';
         var line = 3;
-        var scrollWidth = document.body.scrollWidth;
+        var clientWidth = document.body.clientWidth;
         var selectedImg = "{% static 'img/tick.png' %}";
         var detailImg = "{% static 'img/detail.jpg' %}";
         var start_time = '{{ vote.start_time|date:"Y.m.d H:i" }}';
