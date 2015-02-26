@@ -311,6 +311,7 @@ def vote_item_detail(request, itemid):
     vote = Vote.objects.filter(key=item.vote_key)[0]
     itemDict['vote_pic'] = vote.pic_url
     itemDict['vote_name'] = vote.name
+    itemDict['has_images'] = vote.has_images
 
     return render_to_response('vote_item_detail.html', {
         'item': itemDict,

@@ -36,7 +36,7 @@
                     </figcaption>
                 </figure>
                 <div class="lead" id="activity_extra_info">
-                        <img style="max-width:200px;" src="{{item.pic_url}}"/>
+                        <img style="max-width:200px;" src="{{ item.pic_url }}"/>
                 </div>
                 <div class="corner"></div>
                 <div class="details">
@@ -59,6 +59,12 @@
         $('#activity_title').text(activity_title);
         $('#activity_title_image').css("background","url("+activity_title_image+") no-repeat")
                           .css("max-height", "100px").css("background-size", "cover");
+    
+        if (item.has_images == 0) {
+            $('#activity_extra_info img').attr({
+                'src' : ''
+            });
+        }
     </script>
 </body>
 </html>
