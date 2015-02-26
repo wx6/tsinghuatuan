@@ -56,11 +56,11 @@ function addImg() {
         var item = vote_items[i];
         if (layout_style == 0) {
             $('#' + item.id + ' .item-image img').attr({
-                'src' : (has_images == 1) ? item.pic_url : default_item_pic;
+                'src' : ((has_images == 1) ? item.pic_url : default_item_pic)
             });
         } else if (layout_style == 1) {
             $('#' + item.id + ' .item-image-grid img').attr({
-                'src' : (has_images == 1) ? item.pic_url : default_item_pic;
+                'src' : ((has_images == 1) ? item.pic_url : default_item_pic)
             });
         }
     }
