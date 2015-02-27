@@ -199,7 +199,7 @@ function createItemBoxForGridLayout(item, id) {
 }
 
 function modifyStyle() {
-    var previousWidth = clientWidth;
+    // var previousWidth = clientWidth;
 
     clientWidth = document.body.clientWidth;
 
@@ -215,7 +215,7 @@ function modifyStyle() {
         "margin-right" : delta + "px"
     })
 
-    return (clientWidth != previousWidth);
+    // return (clientWidth != previousWidth);
 }
 
 function createVoteItem() {
@@ -300,10 +300,11 @@ function showPageImages() {
 
 function orientationChange() {
     if (layout_style == 1) {
-        while (true) {
-            if (modifyStyle())
-                break;
-        }
+        modifyStyle();
+        // while (true) {
+        //     if (modifyStyle())
+        //         break;
+        // }
     }
 }
 
