@@ -263,7 +263,7 @@ function onCreate_unstarted() {
 }
 
 function onCreate_unvoted() {
-    $("#info")[0].innerHTML = "点击选择投票项，点图片查看详情</br>你最多可投" + maxVote + "张票"
+    $("#info")[0].innerHTML = "你最多可投" + maxVote + "张票，点击图片查看详情</br>"
     $("button").show();
     createBasicVoteItem();
     bindClickEvent();
