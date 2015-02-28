@@ -201,15 +201,24 @@ function createItemBoxForGridLayout(item, id) {
 function modifyStyle() {
     // var previousWidth = clientWidth;
 
-    clientWidth = document.body.clientWidth;
+    // clientWidth = document.body.clientWidth;
+
+    var width;
+    if (window.orientation == 0) {
+        width = clientWidth;
+    } else if (window.orientation == 90 || window.orientation == -90) {
+        width = clientHeight;
+    } else {
+        return;
+    }
 
     $('#itemList').css({
-        "width" : (clientWidth - 20) + "px",
+        "width" : (width - 20) + "px",
         "margin" : "0 auto 0 auto",
         "float" : "left"
     });
 
-    var delta = (clientWidth - 20 - 270) / 6;
+    var delta = (width - 20 - 270) / 6;
     $('.item-box-grid').css({
         "margin-left" : delta + "px",
         "margin-right" : delta + "px"
