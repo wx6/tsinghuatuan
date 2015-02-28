@@ -205,9 +205,9 @@ function modifyStyle() {
 
     var width;
     if (window.orientation == 90 || window.orientation == -90) {
-        width = scrollHeight;
+        width = screenHeight;
     } else {
-        width = scrollWidth;
+        width = screenWidth;
     }
 
     $('#itemList').css({
