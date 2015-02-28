@@ -205,9 +205,9 @@ function modifyStyle() {
 
     var width;
     if (window.orientation == 0) {
-        width = clientWidth;
+        width = scrollWidth;
     } else if (window.orientation == 90 || window.orientation == -90) {
-        width = clientHeight;
+        width = scrollHeight;
     } else {
         return;
     }
