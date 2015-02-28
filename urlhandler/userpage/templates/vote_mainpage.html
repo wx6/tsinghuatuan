@@ -85,6 +85,8 @@
         var line = 3;
         var clientWidth = document.body.clientWidth;
         var clientHeight = document.body.clientHeight;
+        console.log(clientWidth);
+        console.log(clientHeight);
         var selectedImg = "{% static 'img/tick.png' %}";
         var detailImg = "{% static 'img/detail.jpg' %}";
         var start_time = '{{ vote.start_time|date:"Y.m.d H:i" }}';
