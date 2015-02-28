@@ -204,12 +204,10 @@ function modifyStyle() {
     // clientWidth = document.body.clientWidth;
 
     var width;
-    if (window.orientation == 0) {
-        width = scrollWidth;
-    } else if (window.orientation == 90 || window.orientation == -90) {
+    if (window.orientation == 90 || window.orientation == -90) {
         width = scrollHeight;
     } else {
-        return;
+        width = scrollWidth;
     }
 
     $('#itemList').css({
