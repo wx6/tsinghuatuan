@@ -17,10 +17,12 @@ from queryhandler.settings import SITE_DOMAIN, SITE_HTTP_PROTOCOL
 
 def app(environ, start_response):
     update_site_domain(environ.get('HTTP_HOST', ''))
+    '''
     print 'Environ printing begins'
     print type(environ)
     print environ
     print 'Environ printing ends'
+    '''
     if environ.get('PATH_INFO', '') == LUCKY_URL:
         result = handle_weixin_request(environ)
         #result = 'hehe'

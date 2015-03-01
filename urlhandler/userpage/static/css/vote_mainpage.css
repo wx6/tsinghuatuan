@@ -9,6 +9,13 @@ table {
     margin: 0px auto;
 }
 
+.table {
+    text-align: center;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 6px;
+}
+
 tr {
     width: 100%;
 }
@@ -34,36 +41,103 @@ button {
     height: 45px;
 }
 
-.table {
-    text-align: center;
-    width: 100%;
-	margin-top: 15px;
-    margin-bottom: 6px;
-}
-
 .item-box {
     width: 100%;
     height: 100px;
     color: #FFFFFF;
     font-size: 15px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     position: relative;
     padding-left: 20px;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.item-box-grid {
+    width: 90px;
+    height: 180px;
+    color: #FFFFFF;
+    font-size: 13px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    float: left;
+    position: relative;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.item-image {
+    position: absolute;
+    height: 90px;
+    width: 90px;
+    top: 5px;
+    left: 5px;
+    z-index: 3;
+    background-image: url(http://115.28.212.177:4606/static1/img/loading.gif);
+    background-size: 60% 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.item-image-grid {
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    top: 5px;
+    left: 5px;
+    z-index: 3;
+    background-image: url(http://115.28.212.177:4606/static1/img/loading.gif);
+    background-size: 60% 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.item-image img {
+    height: 100%;
+}
+
+.item-image-grid img {
+    height: 100%;
 }
 
 .item-name {
     position: absolute;
     top: 15px;
+    left: 110px;
+    color: black;
+}
+
+.item-name-grid {
+    position: absolute;
+    top: 90px;
+    color: black;
+    width: 100%;
 }
 
 .item-description {
     position: absolute;
     top: 40px;
+    left: 110px;
+    color: black;
+}
+
+.item-description-grid {
+    position: absolute;
+    top: 110px;
+    color: black;
+    width: 100%;
 }
 
 .item-vote {
     position: absolute;
     top: 65px;
+    left: 110px;
+    color: black;
+}
+
+.item-vote-grid {
+    position: absolute;
+    top: 140px;
+    color: black;
+    width: 100%;
 }
 
 .item-tick {
@@ -73,7 +147,21 @@ button {
     width: 100px;
 }
 
+.item-tick-grid {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    height: 80px;
+    width: 80px;
+    z-index: 2;
+}
+
 .item-tick img {
+    height: 100%;
+    width: 100%;
+}
+
+.item-tick-grid img {
     height: 100%;
     width: 100%;
 }

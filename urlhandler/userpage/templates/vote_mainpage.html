@@ -66,8 +66,8 @@
                     'name' :  '{{ item.name }}',
                     'description' : '{{ item.description }}',
                     'vote_num': {{ item.vote_num }},
-                    // 'pic_url': '{{ item.pic_url }}',
-                    'pic_url': '{% static "img/" %}',
+                    'pic_url': '{{ item.pic_url }}',
+                    'bg_pic': '{% static "img/" %}',
                     'id': {{ item.id }},
                     'url': "{% url 'userpage.views.vote_item_detail' item.id %}"
                 }{% if forloop.last %}{% else %},{% endif %}
@@ -78,11 +78,17 @@
         var voteId = {{ vote.id }};
         var started = {{ vote.started }};
         var ended = {{ vote.ended }};
-        // var vote_pic_url = '{{ vote.pic_url }}';
-        var vote_pic_url = "{% static 'img/2015logo.png' %}";
+        var vote_pic_url = '{{ vote.pic_url }}';
+        // var vote_pic_url = "{% static 'img/2015logo.png' %}";
+        var default_item_pic = 'http://115.28.212.177:4606/static1/img/tsinghua_logo.jpg';
         var vote_description = '{{ vote.description }}';
         var line = 3;
-        var size = Math.min(document.body.scrollWidth, document.body.scrollHeight) * 0.3;
+        // var scrollWidth = document.body.scrollWidth;
+        // var scrollHeight = document.body.scrollHeight;
+        var screenWidth = window.screen.width;
+        var screenHeight = window.screen.height;
+        console.log(screenWidth);
+        console.log(screenHeight);
         var selectedImg = "{% static 'img/tick.png' %}";
         var detailImg = "{% static 'img/detail.jpg' %}";
         var start_time = '{{ vote.start_time|date:"Y.m.d H:i" }}';
@@ -90,16 +96,17 @@
         var interval = start_time + ' ~ ' + end_time;
         var max_vote = maxVote;
         var vote_status = '';
-
-        //页面标题名称
+        var layout_style = {{ vote.layout_style }};
+        var has_images = {{ vote.has_images }};
+        var background_pic = '{{ vote.background }}';
+        if (background_pic[0] != '#') background_pic = 'url(' + background_pic + ')'; 
+        
         var activity_page_title = vote_name + "投票详情";
-        //活动名称
         var activity_title = vote_name;
-        //最好是横着的图片
         var activity_title_image = vote_pic_url;
-        //提示信息
         var activity_extra_info = [{c:interval},{c:vote_status}];
     </script>
     <script type="text/javascript" src="{% static 'js/vote_mainpage.js' %}"></script>
+
 </body>
 </html>

@@ -35,7 +35,10 @@ var dateInterfaceMap = {
     'start_time': 'time',
     'end_time': 'time',
     'pic_url': 'value',
-    'max_num' : 'value'
+    'max_num' : 'value',
+    'background' : 'value',
+    'layout_style' : 'value',
+    'has_images' : 'value'
 }, lockMap = {
     'value': function(dom, lock) {
         dom.prop('disabled', lock);
@@ -74,8 +77,10 @@ function updateVote(nact) {
 }
 
 function initializeForm(vote) {
+    // console.log("come here");
     var key;
     for (key in keyMap) {
+        // console.log(key);
         actionMap[keyMap[key]]($('#input-' + key), vote[key]);
     }
     if (!vote.id) {
@@ -466,7 +471,7 @@ $('.form-control').on('focus', function() {var me = $(this); setTimeout(function
 
 function addchoice() {
     var vote_choice_count = $('.vote_choice').length + 1;
-    $('<details open="open" id="vote_choice_'+vote_choice_count.toString()+'" class="vote_choice"><summary class="vote_option_summary">投票项'+vote_choice_count.toString()+'<span class="vote_delete" title="删除"></span></summary><div class="dynamic"><div class="form-group"><label for="input-item" class="col-sm-2 control-label">投票项名称</label><div class="col-sm-10"><input type="text" name="name'+vote_choice_count.toString()+'" class="form-control"placeholder="投票项的名称，如 舞蹈：花儿为什么这样红"></div></div><div class="form-group"><label for="input-item_description" class="col-sm-2 control-label">投票项简介</label><div class="col-sm-10"><textarea row="3" style="resize: none;height: 74px;" type="text" name="description'+vote_choice_count.toString()+'" class="form-control" row="3" placeholder="投票项的简介，如 来源：学生艺术团"></textarea></div></div><div class="form-group"><label for="input-item_pic_url" class="col-sm-2 control-label">投票项图片</label><div class="col-sm-10"><input type="url" name="pic_url'+vote_choice_count.toString()+'" class="form-control" placeholder="投票项配图链接，如不需要，填写任意网址即可"></div></div></div></details>').insertBefore("#bottom_button");
+    $('<details open="open" id="vote_choice_'+vote_choice_count.toString()+'" class="vote_choice"><summary class="vote_option_summary">投票项'+vote_choice_count.toString()+'<span class="vote_delete" title="删除"></span></summary><div class="dynamic"><div class="form-group"><label for="input-item" class="col-sm-2 control-label">投票项名称</label><div class="col-sm-10"><input type="text" name="name'+vote_choice_count.toString()+'" maxlength="12" class="form-control"placeholder="投票项的名称，如 舞蹈：花儿为什么这样红"></div></div><div class="form-group"><label for="input-item_description" class="col-sm-2 control-label">投票项简介</label><div class="col-sm-10"><textarea row="3" style="resize: none;height: 74px;" type="text" name="description'+vote_choice_count.toString()+'" class="form-control" row="3" placeholder="投票项的简介，如 来源：学生艺术团"></textarea></div></div><div class="form-group"><label for="input-item_pic_url" class="col-sm-2 control-label">投票项图片</label><div class="col-sm-10"><input type="url" name="pic_url'+vote_choice_count.toString()+'" class="form-control" placeholder="投票项配图链接，如不需要，填写任意网址即可"></div></div></div></details>').insertBefore("#bottom_button");
     renderBtn();
 };
 

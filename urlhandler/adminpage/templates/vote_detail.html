@@ -20,7 +20,10 @@
             'key': '{{ vote.key|escapejs }}',
             'description': '{{ vote.description|escapejs }}',
             'pic_url': '{{ vote.pic_url }}',
+            'background': '{{ vote.background }}',
             'max_num' : {{ vote.max_num }},
+            'layout_style' : {{ vote.layout_style }},
+            'has_images' : {{ vote.has_images }},
             'start_time': {
                 'year': {{ vote.start_time.year }},
                 'month': {{ vote.start_time.month }},
@@ -75,7 +78,7 @@
             <div class="form-group">
                 <label for="input-name" class="col-sm-2 control-label" id="label-input-name">投票名称</label>
                 <div class="col-sm-10">
-                    <input type="text" maxlength="26" name="name" class="form-control" id="input-name" placeholder="投票名称，如 我最喜爱的晚会节目" autofocus>
+                    <input type="text" maxlength="12" name="name" class="form-control" id="input-name" placeholder="投票名称，如 我最喜爱的晚会节目" autofocus>
                 </div>
             </div>
 
@@ -97,6 +100,49 @@
                 <label for="input-pic_url" class="col-sm-2 control-label" min="0">投票配图</label>
                 <div class="col-sm-10">
                     <input type="url" name="pic_url" class="form-control" id="input-pic_url" min="0" placeholder="活动配图链接，如不需要，填写任意网址即可">
+                </div>
+            </div>
+
+            <!--
+            <div class="form-group">
+                <label class="col-sm-2 control-label">投票页面背景色</label>
+                <div class="col-sm-10">
+                    <select name="background" id="input-background" class="form-control" required>
+                        <option value="#207BA5">中蓝</option>
+                        <option value="#EE7AE9">浅紫</option>
+                        <option value="#CDC5BF">淡灰</option>
+                        <option value="#EE7621">桔橙</option>
+                        <option value="#32CD32">翠绿</option>
+                        <option value="0">自定义颜色或图片</option>
+                    </select>
+                </div>
+            </div>
+            -->
+
+            <div class="form-group" id="background">
+                <label for="input-background" class="col-sm-2 control-label">投票页背景颜色或图片</label>
+                <div class="col-sm-10">
+                    <input type="text" name="background" class="form-control" id="input-background" placeholder="纯色背景请用十六进制RGB表示法（参考http://www.114la.com/other/rgb.htm），图片背景请输入图片网址，不填则用默认背景">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">投票页面布局方式</label>
+                <div class="col-sm-10">
+                    <select name="layout_style" id="input-layout_style" class="form-control" required>
+                        <option value="0">横条式</option>
+                        <option value="1">网格式</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">投票项是否有图片</label>
+                <div class="col-sm-10">
+                    <select name="has_images" id="input-has_images" class="form-control" required>
+                        <option value="1">是</option>
+                        <option value="0">否（若选此项，在下方的投票项图片栏中填入任意网址即可）</option>
+                    </select>
                 </div>
             </div>
 
@@ -199,7 +245,7 @@
                     <div class="form-group">
                         <label for="input-item" class="col-sm-2 control-label">投票项名称</label>
                         <div class="col-sm-10">
-                            <input type="text" name="name1" class="form-control"placeholder="投票项的名称，如 舞蹈：花儿为什么这样红">
+                            <input type="text" name="name1" maxlength="12" class="form-control" placeholder="投票项的名称，如 舞蹈：花儿为什么这样红">
                         </div>
                     </div>
 

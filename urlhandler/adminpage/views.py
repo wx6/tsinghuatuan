@@ -35,7 +35,7 @@ def home(request):
     if not request.user.is_authenticated():
         return render_to_response('login.html', context_instance=RequestContext(request))
     else:
-        return HttpResponseRedirect(s_reverse_activity_list())
+        return HttpResponseRedirect(s_reverse_vote_list())
 
 
 def activity_list(request):
@@ -609,8 +609,12 @@ def vote_modify(vote):
     curVote = Vote.objects.get(id=vote['id'])
     old_start_time = curVote.start_time
 
-    for k in ['name', 'pic_url', 'description']:
+    for k in ['name', 'pic_url', 'description', 'background']:
         setattr(curVote, k, vote[k])
+
+    for k in ['max_num', 'layout_style', 'has_images']:
+        setattr(curVote, k, int(vote[k]))
+
     now = datetime.now()
     if now < old_start_time:
         setattr(curVote, 'start_time', str_to_datetime(vote['start_time']))
@@ -620,7 +624,7 @@ def vote_modify(vote):
         setattr(curVote, 'status', 1)
     else:
         setattr(curVote, 'status', 0)
-    setattr(curVote, 'max_num', int(vote['max_num']))
+    
     curVote.save()
 
     if (now < old_start_time):
@@ -657,12 +661,13 @@ def vote_item_modify(vote, newVote):
 
 def vote_create(vote):
     preVote = {}
-    for k in ['name', 'key', 'description', 'pic_url']:
+    for k in ['name', 'key', 'description', 'pic_url', 'background']:
         preVote[k] = vote[k]
+    for k in ['max_num', 'layout_style', 'has_images']:
+        preVote[k] = int(vote[k])
     for k in ['start_time', 'end_time']:
         preVote[k] = str_to_datetime(vote[k])
     preVote['status'] = 1 if ('publish' in vote) else 0
-    preVote['max_num'] = int(vote['max_num'])
     preVote['display'] = 1
     newVote = Vote.objects.create(**preVote)
 

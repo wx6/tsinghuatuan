@@ -53,22 +53,37 @@ function successLoad(data) {
 
 function addImg() {
     for (var i = 0; i < vote_items.length; i++) {
-        $($('.item-box')[i]).css({
-            'background' :  'url(' + vote_items[i].pic_url + (i % 6) + '.png)',
-            'background-size' : 'cover'
-        });
+        var item = vote_items[i];
+        if (layout_style == 0) {
+            $('#' + item.id + ' .item-image img').attr({
+                'src' : ((has_images == 1) ? item.pic_url : default_item_pic)
+            });
+        } else if (layout_style == 1) {
+            $('#' + item.id + ' .item-image-grid img').attr({
+                'src' : ((has_images == 1) ? item.pic_url : default_item_pic)
+            });
+        }
     }
 }
 
 function addVoteNumber() {
     for (var i = 0; i < vote_items.length; i++) {
-        $($('.item-vote')[i]).html('人气：' + vote_items[i].vote_num);
+        if (layout_style == 0) {
+            $($('.item-vote')[i]).html('人气：' + vote_items[i].vote_num);
+        } else if (layout_style == 1) {
+            $($('.item-vote-grid')[i]).html('人气：' + vote_items[i].vote_num);
+        }
     }
 }
 
 function changeItemCover(id) {
     var td = $("#" + id);
-    var tick = td.children(".item-tick");
+    var tick; 
+    if (layout_style == 0) {
+        tick = td.children(".item-tick");
+    } else if (layout_style == 1) {
+        tick = td.children(".item-tick-grid");
+    }
     var val = td.children(".item-val");
         
     if (val.attr("value") == "off") {
@@ -102,20 +117,51 @@ function voteNumOverflow(vtLim, id) {
 }
 
 function bindClickEvent() {
-    $(".item-box").click(function(){
-        selectItem($(this).attr("id"));
-    });
+    if (layout_style == 0) {
+        $(".item-box").click(function() {
+            selectItem($(this).attr("id"));
+        });
+    } else if (layout_style == 1) {
+        $(".item-box-grid").click(function() {
+            selectItem($(this).attr("id"));
+        });
+    }
+
+    for (var i = 0; i < vote_items.length; i++) {
+        var item = vote_items[i];
+        if (layout_style == 0) {
+            $("#" + item.id + " .item-image a").click(function(e) {
+                e.stopPropagation();
+                // location.href = vote_items[i].url;
+            });
+        } else if (layout_style == 1) {
+            $("#" + item.id + " .item-image-grid a").click(function(e) {
+                e.stopPropagation();
+                // location.href = vote_items[i].url;
+            });
+        }
+    }
 }
 
 function createItemBox(item, id) {
+    var depict = item.description;
+    if (depict.length > 10) {
+        depict = depict.substr(0, 10) + "...";
+    }
+
     var box = 
     '<div class="item-box" id="' + item.id + '">' +
         '<input type="text" class="item-val" style="display:none;" name="' + (item.id) + '" value="off"/>' +
+        '<div class="item-image">' +
+            '<a href="' + item.url + '">' + 
+                '<img src=""/>' + 
+            '</a>' +
+        '</div>' +
         '<div class="item-name">' + 
             item.name + 
         '</div>' + 
         '<div class="item-description">' + 
-            item.description +
+            depict +
         '</div>' + 
         '<div class="item-vote">' + 
         '</div>' + 
@@ -127,17 +173,76 @@ function createItemBox(item, id) {
     return box;
 }
 
+function createItemBoxForGridLayout(item, id) {
+    var box = 
+    '<div class="item-box-grid" id="' + item.id + '">' +
+        '<input type="text" class="item-val" style="display:none;" name="' + (item.id) + '" value="off"/>' +
+        '<div class="item-image-grid">' +
+            '<a href="' + item.url + '">' + 
+                '<img src=""/>' + 
+            '</a>' +
+        '</div>' +
+        '<div class="item-name-grid">' + 
+            item.name + 
+        '</div>' + 
+        // '<div class="item-description-grid">' + 
+        //     item.description +
+        // '</div>' + 
+        '<div class="item-vote-grid">' + 
+        '</div>' + 
+        '<div class="item-tick-grid" style="display:none;">' +
+            '<img src="' + selectedImg + '">' +
+        '</div>' +
+    '</div>';
+
+    return box;
+}
+
+function modifyStyle() {
+    // var previousWidth = clientWidth;
+
+    // clientWidth = document.body.clientWidth;
+
+    var width;
+    if (window.orientation == 90 || window.orientation == -90) {
+        width = screenHeight;
+    } else {
+        width = screenWidth;
+    }
+
+    $('#itemList').css({
+        "width" : (width - 20) + "px",
+        "margin" : "0 auto 0 auto",
+        "float" : "left"
+    });
+
+    var delta = (width - 20 - 270) / 6;
+    $('.item-box-grid').css({
+        "margin-left" : delta + "px",
+        "margin-right" : delta + "px"
+    })
+
+    // return (clientWidth != previousWidth);
+}
+
 function createVoteItem() {
     for (var i = 0; i < vote_items.length; i++) {
         var item = vote_items[i];
-        var box = createItemBox(item, i);
-        console.log('Current Item:' + i);
+        var box;
+        if (layout_style == 0) {
+            box = createItemBox(item, i);
+        } else if (layout_style == 1) {
+            box = createItemBoxForGridLayout(item, i);
+        }
         $('#itemList').append(box);
+    }
+
+    if (layout_style == 1) {
+        modifyStyle();
     }
 }
 
-function createBasicVoteItem()
-{
+function createBasicVoteItem() {
     createVoteItem();
 }
 
@@ -152,13 +257,13 @@ function onCreate_ended() {
 function onCreate_unstarted() {
     $("#info")[0].innerHTML = "投票尚未开始" 
     $("button").remove();
-    $('#itemList').html('晚会尚未开始，精彩敬请期待');
+    $('#itemList').html('活动尚未开始，精彩敬请期待');
     //createBasicVoteItem();
     //addImg();
 }
 
 function onCreate_unvoted() {
-    $("#info")[0].innerHTML = "你最多可投" + maxVote + "项，点击图片可投票"
+    $("#info")[0].innerHTML = "你最多可投" + maxVote + "张票，点击图片查看详情</br>"
     $("button").show();
     createBasicVoteItem();
     bindClickEvent();
@@ -184,13 +289,30 @@ function createExtraInfo() {
             $('#activity_extra_info').append('<div>'+'<label>'+activity_extra_info[i].c+'</label>'+'</div>');
         }
     }
+}
 
+function showPageImages() {
     $('#activity_title_image').css({
-        "background" : "url(" + activity_title_image + ") no-repeat",
+        "background" : "url(" + activity_title_image + ") repeat-x",
+        "background-size" : "auto 100%",
         "height" : "100px",
-        "background-position" : "center"
+        // "background-position" : "center"
     });
-    
+
+    $('.info').css({
+        "background" : background_pic + " repeat-y",
+        "background-size" : "100% auto"
+    });
+}
+
+function orientationChange() {
+    if (layout_style == 1) {
+        modifyStyle();
+        // while (true) {
+        //     if (modifyStyle())
+        //         break;
+        // }
+    }
 }
 
 function onCreate_program_list() {
@@ -212,6 +334,12 @@ function onCreate_program_list() {
     
 }
 
+function addEvent() {
+    addEventListener('load', function() {
+        window.onorientationchange = orientationChange;
+    });
+}
+
 function onCreate(){
     if (typeid == 1) {
         onCreate_program_list();
@@ -219,6 +347,7 @@ function onCreate(){
     }
 
     createExtraInfo();
+
     if(started == 0) {
         onCreate_unstarted();
     } else if(ended == 1) {
@@ -228,6 +357,10 @@ function onCreate(){
     } else {
         onCreate_voted();
     }
+
+    showPageImages();
+
+    addEvent();
 }
 
 onCreate();

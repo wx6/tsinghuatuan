@@ -199,7 +199,6 @@ def helplecture_view(request):
 
 
 ################################## Voting #################################
-# By: LiuJunlin
 def vote_main_view(request, voteid, openid, typeid):
     vote = Vote.objects.get(id=voteid)
     voteDict = {}
@@ -213,6 +212,9 @@ def vote_main_view(request, voteid, openid, typeid):
     voteDict['end_time'] = vote.end_time
     voteDict['items'] = []
     voteDict['voted'] = 0
+    voteDict['background'] = vote.background
+    voteDict['layout_style'] = vote.layout_style
+    voteDict['has_images'] = vote.has_images
 
     now = datetime.datetime.now()
     if (now > vote.start_time):
@@ -309,6 +311,7 @@ def vote_item_detail(request, itemid):
     vote = Vote.objects.filter(key=item.vote_key)[0]
     itemDict['vote_pic'] = vote.pic_url
     itemDict['vote_name'] = vote.name
+    itemDict['has_images'] = vote.has_images
 
     return render_to_response('vote_item_detail.html', {
         'item': itemDict,
