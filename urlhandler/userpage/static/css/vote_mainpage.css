@@ -71,7 +71,7 @@ button {
     top: 5px;
     left: 5px;
     z-index: 3;
-    background-image: url(http://115.28.212.177:4606/static1/img/loading.gif);
+    background-image: url(/static1/img/loading.gif);
     background-size: 60% 60%;
     background-repeat: no-repeat;
     background-position: center;
@@ -84,7 +84,7 @@ button {
     top: 5px;
     left: 5px;
     z-index: 3;
-    background-image: url(http://115.28.212.177:4606/static1/img/loading.gif);
+    background-image: url(/static1/img/loading.gif);
     background-size: 60% 60%;
     background-repeat: no-repeat;
     background-position: center;
