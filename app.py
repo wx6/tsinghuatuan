@@ -8,8 +8,13 @@ if path not in sys.path:
     sys.path.insert(1, path)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "urlhandler.settings")
 
-from django.core.handlers.wsgi import WSGIHandler
-django_WSGI = WSGIHandler()
+import django
+if django.VERSION[0] > 1 or django.VERSION[1] > 6:
+    from django.core.wsgi import get_wsgi_application
+    django_WSGI = get_wsgi_application()
+else:
+    from django.core.handlers.wsgi import WSGIHandler
+    django_WSGI = WSGIHandler()
 
 from queryhandler import handle_weixin_request
 from settings import LUCKY_URL
