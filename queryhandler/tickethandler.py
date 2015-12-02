@@ -15,7 +15,7 @@ from queryhandler.weixin_msg import *
 from weixinlib.settings import WEIXIN_EVENT_KEYS
 
 from weixinlib.settings import WEIXIN_TOKEN
-
+from weixinlib import http_get
 
 def get_user(openid):
     try:
@@ -413,6 +413,9 @@ def response_xnlhwh(msg):
 
 ################################## Voting #################################
 # By: Liu Junlin
+def get_user_vote(openid):
+    return http_get('/acquireid?openid='+openid)
+
 def check_vote_event(msg):
     return handler_check_text(msg, ['投票']) or handler_check_event_click(msg, [WEIXIN_EVENT_KEYS['vote_query']])
 
@@ -420,11 +423,9 @@ def check_vote_event(msg):
 def response_vote_event(msg):
     fromuser = get_msg_from(msg)
 
-    '''
-    user = get_user(fromuser)
-    if user is None:
+    user = get_user_vote(fromuser)
+    if user == -1:
         return get_reply_text_xml(msg, get_text_unbinded_vote_event(fromuser))
-    '''
 
     now = datetime.datetime.fromtimestamp(get_msg_create_time(msg))
     votes = Vote.objects.filter(display=1, status=1).order_by("end_time")
@@ -463,11 +464,9 @@ def check_clear_vote_record(msg):
 def response_clear_vote_record(msg):
     fromuser = get_msg_from(msg)
 
-    '''
-    user = get_user(fromuser)
-    if user is None:
+    user = get_user_vote(fromuser)
+    if user == -1:
         return get_reply_text_xml(msg, get_text_unbinded_vote_event(fromuser))
-    '''
 
     singleVotes = SingleVote.objects.filter(stu_id=fromuser)
 
