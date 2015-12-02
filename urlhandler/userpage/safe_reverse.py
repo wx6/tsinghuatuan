@@ -1,10 +1,10 @@
 from django.core.urlresolvers import reverse
-from queryhandler.settings import SITE_DOMAIN
+from queryhandler.settings import SITE_DOMAIN, SITE_NOTPORT
 
 
 def s_reverse_validate(openid):
-	return SITE_DOMAIN + reverse('userpage.views.validate_view', kwargs={'openid': openid})
-
+#	return SITE_DOMAIN + reverse('userpage.views.validate_view', kwargs={'openid': openid})
+	return SITE_NOTPORT + '/validate?openid=' + openid
 
 def s_reverse_activity_detail(activityid):
 	return SITE_DOMAIN + reverse('userpage.views.details_view', kwargs={'activityid': activityid})
