@@ -528,7 +528,7 @@ def vote_list(request):
 
     for vote in vote_models:
         votes += [wrap_vote_dict(vote)]
-
+    print(votes)
     return render_to_response('vote_list.html', {
         'votes':votes
     }, context_instance=RequestContext(request))
@@ -582,9 +582,13 @@ def vote_post(request):
     rtnJSON = {}
 
     try:
+        print(1)
         if 'id' in post:
+            print(2)
             vote = vote_modify(post)
+            print(100)
         else:
+            print(3)
             iskey = Vote.objects.filter(key=post['key'])
             if iskey:
                 now = datetime.now()
@@ -593,10 +597,14 @@ def vote_post(request):
                         rtnJSON['error'] = u"当前有投票活动正在使用该活动代称"
                         return HttpResponse(json.dumps(rtnJSON, cls=DatetimeJsonEncoder),
                                             content_type='application/json')
+            print(4)
             vote = vote_create(post)
             # rtnJSON['updateUrl'] = s_reverse_activity_detail(activity.id)
+        print(5)
         voteDict = wrap_vote_dict(vote)
+        print(6)
         voteDict['items'] = get_vote_items(vote)
+        print(7)
         rtnJSON['vote'] = voteDict
     except Exception as e:
         print str(e)
@@ -608,17 +616,20 @@ def vote_post(request):
 def vote_modify(vote):
     curVote = Vote.objects.get(id=vote['id'])
     old_start_time = curVote.start_time
+    print(8)
 
     for k in ['name', 'pic_url', 'description', 'background']:
         setattr(curVote, k, vote[k])
+    print(9)
 
-    for k in ['max_num', 'layout_style', 'has_images']:
+    for k in ['max_num', 'layout_style', 'has_images', 'vote_type']:
         setattr(curVote, k, int(vote[k]))
-
+    print(10)
     now = datetime.now()
     if now < old_start_time:
         setattr(curVote, 'start_time', str_to_datetime(vote['start_time']))
     setattr(curVote, 'end_time', str_to_datetime(vote['end_time']))
+    print(11)
 
     if 'publish' in vote:
         setattr(curVote, 'status', 1)
@@ -626,13 +637,14 @@ def vote_modify(vote):
         setattr(curVote, 'status', 0)
     
     curVote.save()
+    print(12)
 
     if (now < old_start_time):
         vote_item_delete(curVote.key)
         vote_item_create(vote, curVote)
     else:
         vote_item_modify(vote, curVote)
-
+    print(13)
     return curVote
 
 
@@ -656,14 +668,16 @@ def vote_item_modify(vote, newVote):
         count = count + 1
         for k in ['name', 'pic_url', 'description']:
             setattr(item, k, vote[k + str(count)])
+        print(20)
         item.save()
+        print(21)
 
 
 def vote_create(vote):
     preVote = {}
     for k in ['name', 'key', 'description', 'pic_url', 'background']:
         preVote[k] = vote[k]
-    for k in ['max_num', 'layout_style', 'has_images']:
+    for k in ['max_num', 'layout_style', 'has_images', 'vote_type']:
         preVote[k] = int(vote[k])
     for k in ['start_time', 'end_time']:
         preVote[k] = str_to_datetime(vote[k])

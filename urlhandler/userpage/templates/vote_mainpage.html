@@ -85,8 +85,20 @@
         var line = 3;
         // var scrollWidth = document.body.scrollWidth;
         // var scrollHeight = document.body.scrollHeight;
+        //var screenWidth, screenHeight;
+	//setTimeout(function(){
+	    //screenWidth = window.screen.width;
+	    //screenHeight = window.screen.height;
+	    //console.log(screenWidth);
+	    //console.log(screenHeight);
+	//}, 100);
         var screenWidth = window.screen.width;
         var screenHeight = window.screen.height;
+        var userAgent = navigator.userAgent;
+        if (userAgent.indexOf('Android') > -1) {
+            screenWidth = window.innerWidth;
+            screenHeight = window.innerHeight;
+        }
         console.log(screenWidth);
         console.log(screenHeight);
         var selectedImg = "{% static 'img/tick.png' %}";
@@ -105,6 +117,7 @@
         var activity_title = vote_name;
         var activity_title_image = vote_pic_url;
         var activity_extra_info = [{c:interval},{c:vote_status}];
+        
     </script>
     <script type="text/javascript" src="{% static 'js/vote_mainpage.js' %}"></script>
 

@@ -232,15 +232,18 @@ def vote_main_view(request, voteid, openid, typeid):
         itemDict['name'] = item.name
         itemDict['pic_url'] = item.pic_url
         itemDict['description'] = item.description
+        itemDict['description'] = itemDict['description'].replace('\n','<br/>')
         itemDict['vote_num'] = int(item.vote_num)
         itemDict['id'] = int(item.id)
         itemDict['voted'] = 0
-        singleVotes = SingleVote.objects.filter(stu_id=openid, item_id=itemDict['id'])
+        if vote.vote_type == 0:
+            singleVotes = SingleVote.objects.filter(stu_id=openid, item_id=itemDict['id'])
+        else:
+            singleVotes = SingleVote.objects.filter(stu_id=openid, item_id=itemDict['id'], time__year=now.year, time__month=now.month, time__day=now.day)
         if singleVotes.exists():
             itemDict['voted'] = 1
             voteDict['voted'] = 1
         voteDict['items'].append(itemDict)
-
     return render_to_response('vote_mainpage.html', {
         'vote': voteDict,
         'openid': openid,
@@ -259,17 +262,26 @@ def vote_user_post(request, voteid, openid):
     try:
         vote = Vote.objects.get(id=voteid)
         voteItems = VoteItem.objects.filter(vote_key=vote.key, status__gte=0)
-
+        print(1)
         now = datetime.datetime.now()
         if vote.end_time < now:
             rtnJSON['error'] = u'投票活动已经过了截止日期啦！'
             return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
+        print(2)
 
-        for item in voteItems:
-            singleVotes = SingleVote.objects.filter(stu_id=openid, item_id=item.id)
-            if singleVotes.exists():
-                rtnJSON['error'] = u'你已经投过票啦！'
-                return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
+        if vote.vote_type == 0:
+            for item in voteItems:
+                singleVotes = SingleVote.objects.filter(stu_id=openid, item_id=item.id)
+                if singleVotes.exists():
+                    rtnJSON['error'] = u'你已经投过票啦！'
+                    return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
+        elif vote.vote_type == 1:
+            for item in voteItems:
+                singleVotes = SingleVote.objects.filter(stu_id=openid, item_id=item.id, time__year=now.year, time__month=now.month, time__day=now.day)
+                if singleVotes.exists():
+                    rtnJSON['error'] = u'你已经投过票啦！'
+                    return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
+        print(3)
 
         items = []
         count = 0
@@ -278,6 +290,7 @@ def vote_user_post(request, voteid, openid):
             k = str(item.id)
             itemDict = model_to_dict(item)
             itemDict['voted'] = 0
+            print(4)
             if (k in post) and (post[k] == 'on'):
                 count = count + 1
                 preVote = {}
@@ -292,7 +305,6 @@ def vote_user_post(request, voteid, openid):
             items.append(itemDict)
         
         rtnJSON['items'] = items
-
     except Exception as e:
         print 'Error occured!!!!!' + str(e)
         rtnJSON['error'] = str(e)
@@ -307,7 +319,7 @@ def vote_item_detail(request, itemid):
     itemDict['name'] = item.name
     itemDict['pic_url'] = item.pic_url
     itemDict['description'] = item.description
-
+    itemDict['description'] = itemDict['description'].replace('\n','<br/>')
     vote = Vote.objects.filter(key=item.vote_key)[0]
     itemDict['vote_pic'] = vote.pic_url
     itemDict['vote_name'] = vote.name
