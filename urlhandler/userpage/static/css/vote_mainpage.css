@@ -130,14 +130,36 @@ button {
     position: absolute;
     top: 65px;
     left: 110px;
-    color: black;
+    right: 5px;
+    bottom: 0px;
+    /*background-color: #535968;*/
 }
 
 .item-vote-grid {
     position: absolute;
-    top: 140px;
-    color: black;
+    top: 130px;
+    bottom: 0px;
+    background-color: #535968;
     width: 100%;
+    line-height: 50px;
+}
+
+.item-vote p {
+    text-align: center;
+    line-height: 30px;
+    font-family: Microsoft YaHei;
+    color: white;
+    text-shadow: 0px 0px 10px #fff, 0px 0px 20px #fff, 0px 0px 40px #9dd;
+    cursor: pointer;
+}
+
+.item-vote-grid p {
+    text-align: center;
+    line-height: 60px;
+    font-family: Microsoft YaHei;
+    color: white;
+    text-shadow: 0px 0px 10px #fff, 0px 0px 20px #fff, 0px 0px 40px #9dd;
+    cursor: pointer;
 }
 
 .item-tick {
@@ -168,4 +190,11 @@ button {
 
 .button-area {
     text-align: center;
+}
+
+.vote-button {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    z-index: 100;
 }

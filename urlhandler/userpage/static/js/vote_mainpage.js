@@ -78,20 +78,24 @@ function addVoteNumber() {
 
 function changeItemCover(id) {
     var td = $("#" + id);
-    var tick; 
+    var tick, tips;
     if (layout_style == 0) {
         tick = td.children(".item-tick");
+        tips = td.children(".item-vote").children(".item-tip");
     } else if (layout_style == 1) {
         tick = td.children(".item-tick-grid");
+        tips = td.children(".item-vote-grid").children(".item-tip-grid");
     }
     var val = td.children(".item-val");
         
     if (val.attr("value") == "off") {
         tick.show();
+        tips.hide();
         val.attr("value", "on");
         votenum = votenum + 1;
     } else {
         tick.hide();
+        tips.show();
         val.attr("value", "off");
         votenum = votenum - 1;
     }
@@ -163,7 +167,8 @@ function createItemBox(item, id) {
         '<div class="item-description">' + 
             depict +
         '</div>' + 
-        '<div class="item-vote">' + 
+        '<div class="item-vote">' +
+        '<div class="item-tip"><p>点此投票</p></div>' +
         '</div>' + 
         '<div class="item-tick" style="display:none;">' +
             '<img src="' + selectedImg + '">' +
@@ -188,7 +193,8 @@ function createItemBoxForGridLayout(item, id) {
         // '<div class="item-description-grid">' + 
         //     item.description +
         // '</div>' + 
-        '<div class="item-vote-grid">' + 
+        '<div class="item-vote-grid">' +
+        '<div class="item-tip-grid"><p>点此投票</p></div>' +
         '</div>' + 
         '<div class="item-tick-grid" style="display:none;">' +
             '<img src="' + selectedImg + '">' +
@@ -202,8 +208,7 @@ function modifyStyle() {
     // var previousWidth = clientWidth;
 
     // clientWidth = document.body.clientWidth;
-
-    var width;
+        var width;
     if (window.orientation == 90 || window.orientation == -90) {
         width = screenHeight;
     } else {
@@ -221,8 +226,8 @@ function modifyStyle() {
         "margin-left" : delta + "px",
         "margin-right" : delta + "px"
     })
-
-    // return (clientWidth != previousWidth);
+    
+   // return (clientWidth != previousWidth);
 }
 
 function createVoteItem() {
@@ -293,12 +298,34 @@ function createExtraInfo() {
 
 function showPageImages() {
     $('#activity_title_image').css({
-        "background" : "url(" + activity_title_image + ") repeat-x",
-        "background-size" : "auto 100%",
-        "height" : "100px",
-        // "background-position" : "center"
+       "background" : "url(" + activity_title_image + ") no-repeat center",
+       "background-size" : "auto 100%",
+       "height" : "100px",
+       "background-position" : "center"
     });
-
+    // 可选
+    // $('#activity_title_image').append('<img src="' + activity_title_image + '"/>');
+    // var sw;
+    // if (window.orientation == 90 || window.orientation == -90) {
+    //     sw = screenHeight;
+    // } else {
+    //     sw = screenWidth;
+    // }
+    // var img = new Image();
+    // img.src = activity_title_image;
+    // img.onload = function () {
+    //     var imgWidth = img.width;
+    //     var imgHeight = img.height;
+    //     var transImgWidth = imgWidth * (180 / imgHeight);
+    //     alert(sw);
+    //     alert(transImgWidth);
+    //     $('#activity_title_image').children('img').css({
+    //         'height': "180px",
+    //         'width': transImgWidth + "px",
+    //         'left': (sw - transImgWidth) / 2 + "px",
+    //         'right': (sw - transImgWidth) / 2 + "px"
+    //     });
+    // };
     $('.info').css({
         "background" : background_pic + " repeat-y",
         "background-size" : "100% auto"

@@ -25,7 +25,7 @@
         <article id="container" class="ticket">
             <section class="info">
                 <figure>
-                    <div id="activity_title_image" style="-webkit-animation:inherit;" class="m-cover"></div>
+                    <div id="activity_title_image" style="-webkit-animation:inherit; clip:rect(auto auto 100px auto);" class="m-cover"></div>
                 </figure>
                 <figure>
                     <figcaption style="text-align:center; margin-top:12px;">
@@ -43,6 +43,7 @@
                             <div id="itemList">
 
                             </div>
+                             <div style="height: 45px; display: inline-block;width: 100%;"></div>
                         </form>
                         <div class="button-area">
                             <button class="vote-button" type="button" onclick="commitVote()">
@@ -86,12 +87,12 @@
         // var scrollWidth = document.body.scrollWidth;
         // var scrollHeight = document.body.scrollHeight;
         //var screenWidth, screenHeight;
-	//setTimeout(function(){
-	    //screenWidth = window.screen.width;
-	    //screenHeight = window.screen.height;
-	    //console.log(screenWidth);
-	    //console.log(screenHeight);
-	//}, 100);
+    //setTimeout(function(){
+        //screenWidth = window.screen.width;
+        //screenHeight = window.screen.height;
+        //console.log(screenWidth);
+        //console.log(screenHeight);
+    //}, 100);
         var screenWidth = window.screen.width;
         var screenHeight = window.screen.height;
         var userAgent = navigator.userAgent;
