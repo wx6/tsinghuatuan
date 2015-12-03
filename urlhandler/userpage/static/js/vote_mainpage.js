@@ -164,6 +164,7 @@ function createItemBox(item, id) {
             depict +
         '</div>' + 
         '<div class="item-vote">' + 
+        '<p>点此投票</p>' + 
         '</div>' + 
         '<div class="item-tick" style="display:none;">' +
             '<img src="' + selectedImg + '">' +
@@ -189,6 +190,7 @@ function createItemBoxForGridLayout(item, id) {
         //     item.description +
         // '</div>' + 
         '<div class="item-vote-grid">' + 
+        '<p>点此投票</p>' + 
         '</div>' + 
         '<div class="item-tick-grid" style="display:none;">' +
             '<img src="' + selectedImg + '">' +
