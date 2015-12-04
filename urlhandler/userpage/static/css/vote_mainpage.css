@@ -113,6 +113,7 @@ button {
 }
 
 .item-description {
+    text-align: left;
     position: absolute;
     top: 40px;
     left: 110px;
@@ -163,8 +164,8 @@ button {
 }
 
 .item-tick {
-    position: absolute;
-    right: 0;
+    position: relative;
+    left: 50%;
     height: 100px;
     width: 100px;
 }

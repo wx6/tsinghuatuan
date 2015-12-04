@@ -148,11 +148,15 @@ function bindClickEvent() {
 }
 
 function createItemBox(item, id) {
-    var depict = item.description;
-    if (depict.length > 10) {
-        depict = depict.substr(0, 10) + "...";
+    var depict;
+    if (item.description_simply != '')
+        depict = item.description_simply;
+     else{
+        depict = item.description;
+        if (depict.length > 10) {
+            depict = depict.substr(0, 10) + "...";
+        }
     }
-
     var box = 
     '<div class="item-box" id="' + item.id + '">' +
         '<input type="text" class="item-val" style="display:none;" name="' + (item.id) + '" value="off"/>' +

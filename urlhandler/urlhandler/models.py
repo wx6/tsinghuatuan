@@ -70,6 +70,7 @@ class VoteItem(models.Model):
     name = models.CharField(max_length=255)
     pic_url = models.CharField(max_length=255)
     description = models.TextField()
+    description_simply = models.CharField(max_length=255)
     vote = models.ForeignKey(Vote)
     vote_key = models.CharField(max_length=255)
     vote_num = models.IntegerField(default=0)
