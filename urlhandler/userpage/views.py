@@ -232,7 +232,8 @@ def vote_main_view(request, voteid, openid, typeid):
         itemDict['name'] = item.name
         itemDict['pic_url'] = item.pic_url
         itemDict['description'] = item.description
-        itemDict['description'] = itemDict['description'].replace('\n','<br/>')
+        itemDict['description_simply'] = item.description_simply
+        itemDict['description'] = itemDict['description'].replace('\n',' ')
         itemDict['vote_num'] = int(item.vote_num)
         itemDict['id'] = int(item.id)
         itemDict['voted'] = 0

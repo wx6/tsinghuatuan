@@ -43,7 +43,6 @@
                             <div id="itemList">
 
                             </div>
-                             <div style="height: 45px; display: inline-block;width: 100%;"></div>
                         </form>
                         <div class="button-area">
                             <button class="vote-button" type="button" onclick="commitVote()">

@@ -171,15 +171,6 @@ function checkmax_num(){
     return true;
 }
 
-function initialProgress(checked, ordered, total) {
-    $('#tickets-checked').css('width', check_percent(100.0 * checked / total) + '%')
-        .tooltip('destroy').tooltip({'title': '已检入：' + checked + '/' + ordered + '=' + (100.0 * checked / ordered).toFixed(2) + '%'});
-    $('#tickets-ordered').css('width', check_percent(100.0 * (ordered - checked) / total) + '%')
-        .tooltip('destroy').tooltip({'title': '订票总数：' + ordered + '/' + total + '=' + (100.0 * ordered / total).toFixed(2) + '%' + '，其中未检票：' + (ordered - checked) + '/' + ordered + '=' + (100.0 * (ordered - checked) / ordered).toFixed(2) + '%'});
-    $('#tickets-remain').css('width', check_percent(100.0 * (total - ordered) / total) + '%')
-        .tooltip('destroy').tooltip({'title': '余票：' + (total - ordered) + '/' + total + '=' + (100.0 * (total - ordered) / total).toFixed(2) + '%'});
-}
-
 function changeView(id) {
     var opt = ['noscript', 'form', 'processing', 'result', 'vote_result'], len = opt.length, i;
     for (i = 0; i < len; ++i) {
@@ -471,7 +462,19 @@ $('.form-control').on('focus', function() {var me = $(this); setTimeout(function
 
 function addchoice() {
     var vote_choice_count = $('.vote_choice').length + 1;
-    $('<details open="open" id="vote_choice_'+vote_choice_count.toString()+'" class="vote_choice"><summary class="vote_option_summary">投票项'+vote_choice_count.toString()+'<span class="vote_delete" title="删除"></span></summary><div class="dynamic"><div class="form-group"><label for="input-item" class="col-sm-2 control-label">投票项名称</label><div class="col-sm-10"><input type="text" name="name'+vote_choice_count.toString()+'" maxlength="12" class="form-control"placeholder="投票项的名称，如 舞蹈：花儿为什么这样红"></div></div><div class="form-group"><label for="input-item_description" class="col-sm-2 control-label">投票项简介</label><div class="col-sm-10"><textarea row="3" style="resize: none;height: 74px;" type="text" name="description'+vote_choice_count.toString()+'" class="form-control" row="3" placeholder="投票项的简介，如 来源：学生艺术团"></textarea></div></div><div class="form-group"><label for="input-item_pic_url" class="col-sm-2 control-label">投票项图片</label><div class="col-sm-10"><input type="url" name="pic_url'+vote_choice_count.toString()+'" class="form-control" placeholder="投票项配图链接，如不需要，填写任意网址即可"></div></div></div></details>').insertBefore("#bottom_button");
+    $('<details open="open" id="vote_choice_'  +
+        vote_choice_count.toString()+
+        '" class="vote_choice"><summary class="vote_option_summary">投票项'+
+        vote_choice_count.toString()+
+        '<span class="vote_delete" title="删除"></span></summary><div class="dynamic"><div class="form-group"><label for="input-item" class="col-sm-2 control-label">投票项名称</label><div class="col-sm-10"><input type="text" name="name'+
+        vote_choice_count.toString()+
+        '" maxlength="12" class="form-control"placeholder="投票项的名称，如 舞蹈：花儿为什么这样红"></div></div><div class="form-group"><label for="input-item_description_simply" class="col-sm-2 control-label">投票项简介</label><div class="col-sm-10"><input type="text" name="description_simply'+
+        vote_choice_count.toString()+
+        '" maxlength="20" class="form-control" placeholder="投票项的简介，填写字数需小于20字符，如为空则默认截取投票详情"></div></div><div class="form-group"><label for="input-item_description" class="col-sm-2 control-label">投票项详情</label><div class="col-sm-10"><textarea row="3" style="resize: none;height: 74px;" type="text" name="description'+
+        vote_choice_count.toString()+
+        '" class="form-control" row="3" placeholder="投票项的简介，如 来源：学生艺术团"></textarea></div></div><div class="form-group"><label for="input-item_pic_url" class="col-sm-2 control-label">投票项图片</label><div class="col-sm-10"><input type="url" name="pic_url'+
+        vote_choice_count.toString()+
+        '" class="form-control" placeholder="投票项配图链接，如不需要，填写任意网址即可"></div></div></div></details>').insertBefore("#bottom_button");
     renderBtn();
 };
 
@@ -510,6 +513,7 @@ function show_vote_choice(vote) {
     count = 0;
     while(count < vote.items.length){
         $("input[name='name"+(count+1).toString()+"']").val(vote.items[count].name);
+        $("input[name='description_simply"+(count+1).toString()+"']").val(vote.items[count].description_simply);
         $("textarea[name='description"+(count+1).toString()+"']").val(vote.items[count].description);
         $("input[name='pic_url"+(count+1).toString()+"']").val(vote.items[count].pic_url);
         ++count;
@@ -561,6 +565,12 @@ function passLockedText(formData){
                 value: vote.items[i].name
             });
             formData.push({
+                name: 'description_simply'+(i+1).toString(),
+                required: false,
+                type: 'text',
+                value: vote.items[i].name
+            });
+            formData.push({
                 name: 'description'+(i+1).toString(),
                 required: false,
                 type: 'text',
@@ -603,6 +613,7 @@ function lockItemsByStatus(status, start_time, end_time){
         var i;
         for (i = 0; i < $('.vote_choice').length; i++){
             $("input[name='name"+(i+1).toString()+"']").prop('disabled',false);
+            $("input[name='description_simply"+(i+1).toString()+"']").prop('disabled',false);
             $("textarea[name='description"+(i+1).toString()+"']").prop('disabled',false);
             $("input[name='pic_url"+(i+1).toString()+"']").prop('disabled',false);
         }
@@ -611,6 +622,7 @@ function lockItemsByStatus(status, start_time, end_time){
         var i;
         for (i = 0; i < $('.vote_choice').length; i++){
             $("input[name='name"+(i+1).toString()+"']").prop('disabled',true);
+            $("input[name='description_simply"+(i+1).toString()+"']").prop('disabled',true);
             $("textarea[name='description"+(i+1).toString()+"']").prop('disabled',true);
             $("input[name='pic_url"+(i+1).toString()+"']").prop('disabled',true);
             $("#input-name").prop('disabled',true);
