@@ -303,7 +303,6 @@ function showPageImages() {
        "height" : "100px",
        "background-position" : "center"
     });
-    // 可选
     // $('#activity_title_image').append('<img src="' + activity_title_image + '"/>');
     // var sw;
     // if (window.orientation == 90 || window.orientation == -90) {
