@@ -414,7 +414,7 @@ def response_xnlhwh(msg):
 ################################## Voting #################################
 # By: Liu Junlin
 def get_user_vote(openid):
-    return http_get('http://166.111.80.30/acquireid?openid='+openid)
+    return http_get('/acquireid?openid='+openid)
 
 def check_vote_event(msg):
     return handler_check_text(msg, ['投票']) or handler_check_event_click(msg, [WEIXIN_EVENT_KEYS['vote_query']])
