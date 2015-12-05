@@ -297,6 +297,7 @@ function createExtraInfo() {
         } else {
             $('#activity_extra_info').append('<div>'+'<label>'+activity_extra_info[i].c+'</label>'+'</div>');
         }
+        $('#activity_extra_info').append('<div>' + '<label>' + '点击图片查看详细信息' + '</label></div>');
     }
 }
 

@@ -57,6 +57,7 @@
         var activity_description = "{{ item.description }}"
         activity_description = activity_description.replace(/&lt;/g, '<');
         activity_description = activity_description.replace(/&gt;/g, '>');
+        activity_description = activity_description.replace(/ /g, '&nbsp');
         $('title').text(activity_page_title);
         $('#activity_description').html(activity_description);
         $('#activity_title').text(activity_title);
