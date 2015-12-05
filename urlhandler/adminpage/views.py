@@ -27,6 +27,8 @@ from django.utils.encoding import smart_str
 
 from urlhandler.models import Vote, VoteItem, SingleVote
 from datetime import timedelta
+from PIL import Image
+from queryhandler.settings import SITE_DOMAIN
 
 
 
@@ -807,3 +809,35 @@ def vote_statistics(request, voteid):
     return render_to_response('vote_statistics.html', {
         'vote': voteDict,
     }, context_instance=RequestContext(request))
+
+
+def upload_pic(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(s_reverse_admin_home())
+
+    if not request.POST:
+        raise Http404
+
+    rtnJSON = {}
+    try:
+        if 'upfile' in request.FILES:
+            filename = request.FILES['upfile']
+        else:
+            filename = ''
+        if filename:
+            try:
+                img = Image.open(filename)
+            except Exception as e:
+                rtnJSON['responseText'] = u'图片格式错误!'
+                return HttpResponse(json.dump(rtnJSON), content_type='application/json')
+            img.save("urlhandler/userpage/static/img/" + filename.__str__(), img.format)
+            rtnJSON['responseText'] = SITE_DOMAIN + "/static1/img/" + filename.__str__()
+            return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
+        else:
+            rtnJSON['responseText'] = u'图片名为空'
+            return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
+    except Exception as e:
+        print str(e)
+        rtnJSON['responseText'] = str(e)
+        return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
+
