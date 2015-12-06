@@ -215,6 +215,7 @@ def vote_main_view(request, voteid, openid, typeid):
     voteDict['background'] = vote.background
     voteDict['layout_style'] = vote.layout_style
     voteDict['has_images'] = vote.has_images
+    voteDict['vote_type'] = vote.vote_type
 
     now = datetime.datetime.now()
     if (now > vote.start_time):
