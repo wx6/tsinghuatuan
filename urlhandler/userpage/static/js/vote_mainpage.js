@@ -293,13 +293,15 @@ function createExtraInfo() {
     $('title').text(activity_page_title);
     $('#activity_title').text(activity_title);
 
+    var node = $('#activity_extra_info');
     for (var i in activity_extra_info) {
         if(i == 1) {
-            $('#activity_extra_info').append('<div>'+'<label id="info">'+activity_extra_info[i].c+'</label>'+'</div>');
+            node.append('<div>'+'<label id="info">'+activity_extra_info[i].c+'</label>'+'</div>');
         } else {
-            $('#activity_extra_info').append('<div>'+'<label>'+activity_extra_info[i].c+'</label>'+'</div>');
+            node.append('<div>'+'<label>'+activity_extra_info[i].c+'</label>'+'</div>');
         }
     }
+    node.append('<div>' + '<label>' + '点击图片查看详细信息' + '</label></div>');
 }
 
 function showPageImages() {
