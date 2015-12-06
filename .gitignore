@@ -1,3 +1,9 @@
 *.pyc
 *.pyo
-
+*~
+~*
+nohup*
+log*
+log/*
+# for django collect-static
+static/

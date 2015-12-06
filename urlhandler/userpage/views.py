@@ -204,7 +204,7 @@ def vote_main_view(request, voteid, openid, typeid):
     voteDict = {}
     voteDict['id'] = voteid
     voteDict['name'] = vote.name
-    voteDict['description'] = vote.description
+    voteDict['description'] = vote.description.replace('\n','\\n').replace("'","\\'")
     voteDict['pic_url'] = vote.pic_url
     voteDict['end_time'] = vote.end_time
     voteDict['max_num'] = vote.max_num
@@ -215,6 +215,7 @@ def vote_main_view(request, voteid, openid, typeid):
     voteDict['background'] = vote.background
     voteDict['layout_style'] = vote.layout_style
     voteDict['has_images'] = vote.has_images
+    voteDict['vote_type'] = vote.vote_type
 
     now = datetime.datetime.now()
     if (now > vote.start_time):
@@ -231,9 +232,8 @@ def vote_main_view(request, voteid, openid, typeid):
         itemDict = {}
         itemDict['name'] = item.name
         itemDict['pic_url'] = item.pic_url
-        itemDict['description'] = item.description
-        itemDict['description_simply'] = item.description_simply
-        itemDict['description'] = itemDict['description'].replace('\n',' ')
+        itemDict['description_simply'] = item.description_simply.replace("'","\\'")
+        itemDict['description'] = item.description.replace('\n','\\n').replace("'","\\'")
         itemDict['vote_num'] = int(item.vote_num)
         itemDict['id'] = int(item.id)
         itemDict['voted'] = 0

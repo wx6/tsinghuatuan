@@ -149,12 +149,12 @@ function bindClickEvent() {
 
 function createItemBox(item, id) {
     var depict;
-    if (item.description_simply != '')
+    if (item.description_simply)
         depict = item.description_simply;
      else{
         depict = item.description;
-        if (depict.length > 10) {
-            depict = depict.substr(0, 10) + "...";
+        if (depict.length > 20) {
+            depict = depict.substr(0, 20) + "...";
         }
     }
     var box = 
@@ -272,7 +272,8 @@ function onCreate_unstarted() {
 }
 
 function onCreate_unvoted() {
-    $("#info")[0].innerHTML = "你最多可投" + maxVote + "张票，点击图片查看详情</br>"
+    var str = vote_type == 1 ? "今天" : "";
+    $("#info")[0].innerHTML = "您" + str +"最多可投" + maxVote + "张票，点击图片查看详情"
     $("button").show();
     createBasicVoteItem();
     bindClickEvent();
@@ -280,7 +281,8 @@ function onCreate_unvoted() {
 }
 
 function onCreate_voted() {
-    $("#info")[0].innerHTML = "你已经投过票啦，感谢你的参与"
+    var str = vote_type == 1 ? "今天" : "";
+    $("#info")[0].innerHTML = "您" + str +"已经投过票啦，感谢您的参与"
     $("button").remove();
     createBasicVoteItem();
     addVoteNumber();
@@ -291,14 +293,15 @@ function createExtraInfo() {
     $('title').text(activity_page_title);
     $('#activity_title').text(activity_title);
 
+    var node = $('#activity_extra_info');
     for (var i in activity_extra_info) {
         if(i == 1) {
-            $('#activity_extra_info').append('<div>'+'<label id="info">'+activity_extra_info[i].c+'</label>'+'</div>');
+            node.append('<div>'+'<label id="info">'+activity_extra_info[i].c+'</label>'+'</div>');
         } else {
-            $('#activity_extra_info').append('<div>'+'<label>'+activity_extra_info[i].c+'</label>'+'</div>');
+            node.append('<div>'+'<label>'+activity_extra_info[i].c+'</label>'+'</div>');
         }
-        $('#activity_extra_info').append('<div>' + '<label>' + '点击图片查看详细信息' + '</label></div>');
     }
+    node.append('<div>' + '<label>' + '点击图片查看详细信息' + '</label></div>');
 }
 
 function showPageImages() {
