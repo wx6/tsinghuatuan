@@ -830,6 +830,11 @@ def upload_pic(request):
             except Exception as e:
                 rtnJSON['responseText'] = u'图片格式错误!'
                 return HttpResponse(json.dump(rtnJSON), content_type='application/json')
+            w, h = img.size
+            if w < h:
+                img.thumbnail((200, (h * 200 / w), Image.ANTIALIAS))
+            else:
+                img.thumbnail((w * 200 / h, 200), Image.ANTIALIAS)
             img.save("urlhandler/userpage/static/img/" + filename.__str__(), img.format)
             rtnJSON['responseText'] = SITE_DOMAIN + "/static1/img/" + filename.__str__()
             return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
