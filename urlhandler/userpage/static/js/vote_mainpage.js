@@ -153,8 +153,8 @@ function createItemBox(item, id) {
         depict = item.description_simply;
      else{
         depict = item.description;
-        if (depict.length > 10) {
-            depict = depict.substr(0, 10) + "...";
+        if (depict.length > 20) {
+            depict = depict.substr(0, 20) + "...";
         }
     }
     var box = 
