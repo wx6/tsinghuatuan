@@ -149,7 +149,7 @@ function bindClickEvent() {
 
 function createItemBox(item, id) {
     var depict;
-    if (item.description_simply != '')
+    if (item.description_simply)
         depict = item.description_simply;
      else{
         depict = item.description;
