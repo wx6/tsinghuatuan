@@ -65,7 +65,8 @@
                 {
                     'voted' : {{ item.voted }},
                     'name' :  '{{ item.name }}',
-                    'description' : '{{ item.description }}',
+                    'description_simply' : '{{ item.description_simply|safe }}',
+                    'description' : '{{ item.description|safe }}',
                     'vote_num': {{ item.vote_num }},
                     'pic_url': '{{ item.pic_url }}',
                     'bg_pic': '{% static "img/" %}',
@@ -82,7 +83,7 @@
         var vote_pic_url = '{{ vote.pic_url }}';
         // var vote_pic_url = "{% static 'img/2015logo.png' %}";
         var default_item_pic = '/static1/img/tsinghua_logo.jpg';
-        var vote_description = '{{ vote.description }}';
+        var vote_description = '{{ vote.description|safe }}';
         var line = 3;
         // var scrollWidth = document.body.scrollWidth;
         // var scrollHeight = document.body.scrollHeight;
