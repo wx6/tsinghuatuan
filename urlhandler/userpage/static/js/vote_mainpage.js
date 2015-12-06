@@ -301,7 +301,7 @@ function createExtraInfo() {
             node.append('<div>'+'<label>'+activity_extra_info[i].c+'</label>'+'</div>');
         }
     }
-    node.append('<div>' + '<label>' + '点击图片查看详细信息' + '</label></div>');
+    node.append('<div>' + '<label>' + '点击头像查看详细信息' + '</label></div>');
 }
 
 function showPageImages() {
