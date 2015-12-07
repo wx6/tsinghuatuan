@@ -9,6 +9,7 @@ import urllib, urllib2
 import datetime
 from django.utils import timezone
 
+from queryhandler.tickethandler import get_user_vote
 
 from userpage.safe_reverse import *
 from weixinlib.settings import WEIXIN_TOKEN
@@ -19,9 +20,8 @@ from weixinlib.base_support import get_access_token
 from urlhandler.models import Vote, VoteItem, SingleVote
 from django.http import HttpResponseRedirect
 from django.forms.models import model_to_dict
-from weixinlib.settings import WEIXIN_APPID, WEIXIN_SECRET, WEIXIN_APPID
+from weixinlib.settings import WEIXIN_APPID, WEIXIN_SECRET
 from django.db.models import F
-
 
 def home(request):
     return render_to_response('mobile_base.html')
@@ -199,7 +199,7 @@ def helplecture_view(request):
 
 
 ################################## Voting #################################
-def vote_main_view(request, voteid, openid, typeid):
+def vote_main_view(request, voteid, typeid):
     vote = Vote.objects.get(id=voteid)
     voteDict = {}
     voteDict['id'] = voteid
@@ -217,6 +217,11 @@ def vote_main_view(request, voteid, openid, typeid):
     voteDict['has_images'] = vote.has_images
     voteDict['vote_type'] = vote.vote_type
 
+    stu_id = request.session.get("stu_id", "")
+    if stu_id == "-1" or not stu_id:
+        is_validate = 0
+    else:
+        is_validate = 1
     now = datetime.datetime.now()
     if (now > vote.start_time):
         voteDict['started'] = 1
@@ -238,51 +243,68 @@ def vote_main_view(request, voteid, openid, typeid):
         itemDict['id'] = int(item.id)
         itemDict['voted'] = 0
         if vote.vote_type == 0:
-            singleVotes = SingleVote.objects.filter(stu_id=openid, item_id=itemDict['id'])
+            singleVotes = SingleVote.objects.filter(stu_id=stu_id, item_id=itemDict['id'])
         else:
-            singleVotes = SingleVote.objects.filter(stu_id=openid, item_id=itemDict['id'], time__year=now.year, time__month=now.month, time__day=now.day)
+            singleVotes = SingleVote.objects.filter(stu_id=stu_id, item_id=itemDict['id'], time__year=now.year, time__month=now.month, time__day=now.day)
         if singleVotes.exists():
             itemDict['voted'] = 1
             voteDict['voted'] = 1
         voteDict['items'].append(itemDict)
     return render_to_response('vote_mainpage.html', {
+        'is_validate': is_validate,
         'vote': voteDict,
-        'openid': openid,
+        'stu_id': stu_id,
         'typeid': typeid
     }, context_instance=RequestContext(request))
 
+def set_session(request, openid, url):
+    stu_id = ""
+    try:
+        stu_id = get_user_vote(openid) if openid else ""
+        if stu_id == "-1":
+            stu_id = ""
+    except:
+        pass
+    if stu_id:
+        request.session["openid"] = openid
+        request.session["stu_id"] = stu_id
+        request.session.set_expiry(0)
+    else:
+        del request.session["openid"]
+        del request.session["stu_id"]
+    if not url or url[0] != "/":
+        url = "/u/" + (url if url else "help")
+    print "set session: stu", stu_id
+    return HttpResponseRedirect(url)
 
-@csrf_exempt
-def vote_user_post(request, voteid, openid):
+def vote_post(request, voteid):
     if not request.POST:
         raise Http404
 
     post = request.POST
+    stu_id = request.session.get("stu_id", "")
     rtnJSON = {}
 
     try:
         vote = Vote.objects.get(id=voteid)
         voteItems = VoteItem.objects.filter(vote_key=vote.key, status__gte=0)
-        print(1)
         now = datetime.datetime.now()
         if vote.end_time < now:
             rtnJSON['error'] = u'投票活动已经过了截止日期啦！'
             return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
-        print(2)
 
         if vote.vote_type == 0:
             for item in voteItems:
-                singleVotes = SingleVote.objects.filter(stu_id=openid, item_id=item.id)
+                singleVotes = SingleVote.objects.filter(stu_id=stu_id, item_id=item.id)
                 if singleVotes.exists():
                     rtnJSON['error'] = u'你已经投过票啦！'
                     return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
         elif vote.vote_type == 1:
             for item in voteItems:
-                singleVotes = SingleVote.objects.filter(stu_id=openid, item_id=item.id, time__year=now.year, time__month=now.month, time__day=now.day)
+                singleVotes = SingleVote.objects.filter(stu_id=stu_id, item_id=item.id, time__year=now.year, time__month=now.month, time__day=now.day)
                 if singleVotes.exists():
                     rtnJSON['error'] = u'你已经投过票啦！'
                     return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
-        print(3)
 
         items = []
         count = 0
@@ -291,12 +313,11 @@ def vote_user_post(request, voteid, openid):
             k = str(item.id)
             itemDict = model_to_dict(item)
             itemDict['voted'] = 0
-            print(4)
             if (k in post) and (post[k] == 'on'):
                 count = count + 1
                 preVote = {}
                 preVote['item_id'] = item.id
-                preVote['stu_id'] = openid
+                preVote['stu_id'] = stu_id
                 preVote['time'] = now
                 preVote['status'] = 1
                 SingleVote.objects.create(**preVote)

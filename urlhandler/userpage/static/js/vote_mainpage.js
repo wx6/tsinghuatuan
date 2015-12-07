@@ -1,6 +1,13 @@
 var lastSelect;
 
 function commitVote() {
+    if (is_validate == 0){
+        var conf_stu = confirm('您尚未绑定学号，绑定学号方可投票，您确定前往绑定吗？');
+        if (conf_stu == false)
+            return false;
+        location.href = validate_url;
+        return false;
+    }
     var name_list = generateVoteNames();
     if(votenum <= 0) {
         alert("你还没有选择节目哦！");

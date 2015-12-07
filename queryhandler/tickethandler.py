@@ -425,7 +425,7 @@ def response_vote_event(msg):
     fromuser = get_msg_from(msg)
 
     user = get_user_vote(fromuser)
-    if user == "-1":
+    if user == "-1" or not user:
         return get_reply_text_xml(msg, get_text_unbinded_vote_event(fromuser))
 
     now = datetime.datetime.fromtimestamp(get_msg_create_time(msg))
@@ -466,10 +466,10 @@ def response_clear_vote_record(msg):
     fromuser = get_msg_from(msg)
 
     user = get_user_vote(fromuser)
-    if user == -1:
+    if user == "-1" or not user:
         return get_reply_text_xml(msg, get_text_unbinded_vote_event(fromuser))
 
-    singleVotes = SingleVote.objects.filter(stu_id=fromuser)
+    singleVotes = SingleVote.objects.filter(stu_id=user)
 
     if singleVotes.exists():
         for singleVote in singleVotes:
