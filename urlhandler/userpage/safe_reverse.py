@@ -28,3 +28,6 @@ def s_reverse_vote_mainpage(voteid, openid, typeid):
 		return SITE_DOMAIN + url
 	return SITE_DOMAIN + reverse('userpage.views.set_session', kwargs={'openid': openid, 'url': url})
 
+def s_reverse_vote_main_redirect(voteid, typeid):
+	url = reverse('userpage.views.vote_main_redirect', kwargs={'voteid': voteid, 'typeid': typeid})
+	return SITE_DOMAIN + url
