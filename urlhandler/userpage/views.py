@@ -220,6 +220,7 @@ def vote_main_view(request, voteid, typeid):
     voteDict['vote_type'] = vote.vote_type
 
     stu_id = request.session.get("stu_id", "")
+    openid = request.session.get("openid", "")
     is_validate = 1 if stu_id else 0
     now = datetime.datetime.now()
     if (now > vote.start_time):
@@ -255,6 +256,7 @@ def vote_main_view(request, voteid, typeid):
         voteDict['items'].append(itemDict)
     return render_to_response('vote_mainpage.html', {
         'is_validate': is_validate,
+        'validate_url': s_reverse_validate(openid),
         'vote': voteDict,
         'stu_id': stu_id,
         'typeid': typeid

@@ -437,7 +437,7 @@ def response_vote_event(msg):
             title = '投票:' + vote.name,
             description = get_text_vote_description(vote),
             pic_url = vote.pic_url,
-            url = s_reverse_vote_main_redirect(vote.id, fromuser, 0)
+            url = s_reverse_vote_mainpage(vote.id, fromuser, 0)
         ))
 
     items = []
@@ -447,7 +447,7 @@ def response_vote_event(msg):
             title = '投票:' + vote.name,
             description = get_text_vote_description(vote),
             pic_url = vote.pic_url,
-            url = s_reverse_vote_main_redirect(vote.id, fromuser, 0)
+            url = s_reverse_vote_mainpage(vote.id, fromuser, 0)
         ))
         if (len(items) >= 10):
             break
@@ -495,5 +495,5 @@ def response_program_list(msg):
         title = '2015清华大学新年晚会节目单',
         description = '2015清华大学新年晚会节目单',
         pic_url = vote.pic_url,
-        url = s_reverse_vote_main_redirect(vote.id, fromuser, 1)
+        url = s_reverse_vote_mainpage(vote.id, fromuser, 1)
     ))
