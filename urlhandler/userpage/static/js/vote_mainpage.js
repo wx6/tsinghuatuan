@@ -54,7 +54,14 @@ function generateOptions() {
 
 function successLoad(data) {
     $("button").remove();
-    location.reload(true);
+    var votes = $(".item-val");
+    for(var i = 0; i < votes.length; i++) {
+        if($(votes[i]).attr("value") == "on") {
+            vote_items[i].vote_num+= 1;
+        }
+    }
+    $('#itemList').html('');
+    onCreate_voted();
 }
 
 
