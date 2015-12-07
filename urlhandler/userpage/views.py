@@ -284,7 +284,7 @@ def vote_main_redirect(request, voteid, typeid):
     success_url = s_reverse_vote_mainpage(voteid, "OPENID", typeid)
     url = "%s://%s?appid=%s&redirect_uri=%s&%s" % (
         "https", "open.weixin.qq.com/connect/oauth2/authorize",
-        WEIXIN_APPID, urlquote("%s/url=%s", (
+        WEIXIN_APPID, urlquote("%s/url=%s" % (
             WEIXIN_OAUTH_REDIRECT, urlquote(success_url),
         )),
         "response_type=code&scope=snsapi_base#wechat_redirect",
