@@ -10,6 +10,7 @@ import datetime
 from django.utils import timezone
 
 from queryhandler.tickethandler import get_user_vote
+from queryhandler.settings import SITE_DOMAIN
 
 from userpage.safe_reverse import *
 from weixinlib.settings import WEIXIN_TOKEN
@@ -279,8 +280,9 @@ def set_session(request, openid, url):
     if not url or url[0] != "/":
         url = "/u/" + (url if url else "help")
     print "set session: stu", stu_id
-    return HttpResponseRedirect(url)
+    return HttpResponseRedirect(SITE_DOMAIN + url)
 
+@csrf_exempt
 def vote_post(request, voteid):
     if not request.POST:
         raise Http404
