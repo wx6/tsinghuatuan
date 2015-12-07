@@ -200,9 +200,6 @@ def helplecture_view(request):
 
 
 ################################## Voting #################################
-def vote_main_redirect(request, voteid, typeid, **kwargs):
-    url = s_reverse_vote_mainpage(voteid, None, typeid)
-    return HttpResponsePermanentRedirect(url)
 
 def vote_main_view(request, voteid, typeid):
     vote = Vote.objects.get(id=voteid)
@@ -263,7 +260,48 @@ def vote_main_view(request, voteid, typeid):
         'typeid': typeid
     }, context_instance=RequestContext(request))
 
+import urllib2
+from django.utils.http import urlquote
+from django.conf import settings
+
+WEIXIN_APPID = getattr(settings, "WEIXIN_APPID", "wxb2545ef150be8096")
+WEIXIN_OAUTH_REDIRECT = "http://student.tsinghua.edu.cn/api/user/wx/oauth/2"
+
+def vote_main_redirect(request, voteid, typeid, **kwargs):
+    openid = request.session.get("openid", "")
+    call_oauth = False
+    if not openid:
+        agent = request.META.get('HTTP_USER_AGENT', "")
+        if "MicroMessenger" in agent:
+            call_oauth = True
+    if not call_oauth:
+        url = s_reverse_vote_mainpage(voteid, None, typeid)
+        return HttpResponseRedirect(url)
+    
+    success_url = s_reverse_vote_mainpage(voteid, "OPENID", typeid)
+    url = "%s://%s?appid=%s&redirect_uri=%s&%s" % (
+        "https", "open.weixin.qq.com/connect/oauth2/authorize",
+        WEIXIN_APPID, urlquote("%s/url=%s", (
+            WEIXIN_OAUTH_REDIRECT, urlquote(success_url),
+        )),
+        "response_type=code&scope=snsapi_base#wechat_redirect",
+    )
+    return HttpResponseRedirect(url)
+
 def set_session(request, openid, url):
+    code = request.GET.get("code", "")
+    if code and openid.upper() == "OPENID":
+        _url = "%s://%s?appid=%s&secret=%s&code=%s&%s" % (
+            "https", "api.weixin.qq.com/sns/oauth2/access_token",
+            WEIXIN_APPID, settings.WEIXIN_SECRET, code, "grant_type=authorization_code"
+        )
+        try:
+            _r = urllib2.urlopen(_url)
+            _body = _r.read()
+            openid = json.loads(_body)['openid']
+        except:
+            pass
+        print "weixin oauth: ", openid
     stu_id = ""
     try:
         stu_id = get_user_vote(openid) if openid else ""
