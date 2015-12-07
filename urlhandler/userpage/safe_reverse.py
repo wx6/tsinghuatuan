@@ -24,5 +24,7 @@ def s_reverse_activity_menu(actid):
 
 def s_reverse_vote_mainpage(voteid, openid, typeid):
 	url = reverse('userpage.views.vote_main_view', kwargs={'voteid': voteid, 'typeid': typeid})
+    if openid is None:
+        return SITE_DOMAIN + url
 	return SITE_DOMAIN + reverse('userpage.views.set_session', kwargs={'openid': openid, 'url': url})
 

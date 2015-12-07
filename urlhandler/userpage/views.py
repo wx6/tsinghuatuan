@@ -18,7 +18,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from weixinlib.base_support import get_access_token
 from urlhandler.models import Vote, VoteItem, SingleVote
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.forms.models import model_to_dict
 from weixinlib.settings import WEIXIN_APPID, WEIXIN_SECRET
 from django.db.models import F
@@ -199,6 +199,10 @@ def helplecture_view(request):
 
 
 ################################## Voting #################################
+def vote_main_redirect(request, voteid, typeid, **kwargs):
+    url = s_reverse_vote_mainpage(voteid, None, typeid)
+    return HttpResponsePermanentRedirect(url)
+
 def vote_main_view(request, voteid, typeid):
     vote = Vote.objects.get(id=voteid)
     voteDict = {}
