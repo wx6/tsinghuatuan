@@ -384,7 +384,7 @@ def vote_post(request, voteid):
     except Exception as e:
         print 'Error occured!!!!!' + str(e)
         rtnJSON['error'] = str(e)
-        return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
+    return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
 
 
 def vote_item_detail(request, itemid):
