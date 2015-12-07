@@ -1,6 +1,6 @@
 #-*- coding:utf-8 -*-
 
-from django.http import HttpResponse, Http404
+from django.http.response import HttpResponse, Http404, HttpResponseForbidden
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from urlhandler.models import User, Activity, Ticket
@@ -223,10 +223,7 @@ def vote_main_view(request, voteid, typeid):
     voteDict['vote_type'] = vote.vote_type
 
     stu_id = request.session.get("stu_id", "")
-    if stu_id == "-1" or not stu_id:
-        is_validate = 0
-    else:
-        is_validate = 1
+    is_validate = 1 if stu_id else 0
     now = datetime.datetime.now()
     if (now > vote.start_time):
         voteDict['started'] = 1
@@ -247,11 +244,15 @@ def vote_main_view(request, voteid, typeid):
         itemDict['vote_num'] = int(item.vote_num)
         itemDict['id'] = int(item.id)
         itemDict['voted'] = 0
-        if vote.vote_type == 0:
+        if not stu_id:
+            exist = False
+        elif vote.vote_type == 0:
             singleVotes = SingleVote.objects.filter(stu_id=stu_id, item_id=itemDict['id'])
+            exist = singleVotes.exists()
         else:
             singleVotes = SingleVote.objects.filter(stu_id=stu_id, item_id=itemDict['id'], time__year=now.year, time__month=now.month, time__day=now.day)
-        if singleVotes.exists():
+            exist = singleVotes.exists()
+        if exist:
             itemDict['voted'] = 1
             voteDict['voted'] = 1
         voteDict['items'].append(itemDict)
@@ -270,16 +271,16 @@ def set_session(request, openid, url):
             stu_id = ""
     except:
         pass
-    if stu_id:
+    if openid:
         request.session["openid"] = openid
-        request.session["stu_id"] = stu_id
-        request.session.set_expiry(0)
     else:
         del request.session["openid"]
+    if stu_id:
+        request.session["stu_id"] = stu_id
+    else:
         del request.session["stu_id"]
     if not url or url[0] != "/":
         url = "/u/" + (url if url else "help")
-    print "set session: stu", stu_id
     return HttpResponseRedirect(SITE_DOMAIN + url)
 
 @csrf_exempt
@@ -289,6 +290,10 @@ def vote_post(request, voteid):
 
     post = request.POST
     stu_id = request.session.get("stu_id", "")
+    if not stu_id:
+        return HttpResponseForbidden(json.dumps({
+            "error": "没有绑定学号！"
+        }), content_type='application/json')
     rtnJSON = {}
 
     try:
@@ -337,8 +342,6 @@ def vote_post(request, voteid):
         print 'Error occured!!!!!' + str(e)
         rtnJSON['error'] = str(e)
         return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
-
-    return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
 
 
 def vote_item_detail(request, itemid):
