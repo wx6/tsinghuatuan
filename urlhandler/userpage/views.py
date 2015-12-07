@@ -265,7 +265,7 @@ from django.utils.http import urlquote
 from django.conf import settings
 
 WEIXIN_APPID = getattr(settings, "WEIXIN_APPID", "wxb2545ef150be8096")
-WEIXIN_OAUTH_REDIRECT = "http://student.tsinghua.edu.cn/api/user/wx/oauth/2"
+WEIXIN_OAUTH_REDIRECT = "http://student.tsinghua.edu.cn/api/user/wx/oauth/1"
 
 def vote_main_redirect_ext(request, voteid, typeid, **kwargs):
     return vote_main_redirect(request, voteid, typeid)
@@ -284,7 +284,9 @@ def vote_main_redirect(request, voteid, typeid):
     success_url = s_reverse_vote_mainpage(voteid, "OPENID", typeid)
     url = "%s://%s?appid=%s&redirect_uri=%s&%s" % (
         "https", "open.weixin.qq.com/connect/oauth2/authorize",
-        WEIXIN_APPID, urlquote(success_url),
+        WEIXIN_APPID, urlquote("%s/url=%s" % (
+            WEIXIN_OAUTH_REDIRECT, urlquote(success_url),
+        )),
         "response_type=code&scope=snsapi_base#wechat_redirect",
     )
     return HttpResponseRedirect(url)
