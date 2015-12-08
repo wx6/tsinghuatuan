@@ -200,8 +200,44 @@ def helplecture_view(request):
 
 
 ################################## Voting #################################
+import urllib2
+from django.utils.http import urlquote
+
+WEIXIN_OAUTH_REDIRECT = "http://student.tsinghua.edu.cn/api/user/wx/oauth"
 
 def vote_main_view(request, voteid, typeid):
+    stu_id = request.session.get("stu_id", "")
+    openid = request.session.get("openid", "")
+    is_validate = 1 if stu_id else 0
+    
+    call_oauth = False
+    if not openid:
+        agent = request.META.get('HTTP_USER_AGENT', "")
+        if "MicroMessenger" in agent:
+            call_oauth = True
+    if call_oauth:
+        success_url = s_reverse_vote_main_set_openid(voteid, "OPENID", typeid)
+        url = "%s://%s?appid=%s&redirect_uri=%s&%s" % (
+            "https", "open.weixin.qq.com/connect/oauth2/authorize",
+            WEIXIN_APPID, urlquote("%s/url=%s" % (
+                WEIXIN_OAUTH_REDIRECT, urlquote(success_url, ''),
+            ), ''),
+            "response_type=code&scope=snsapi_base#wechat_redirect",
+        )
+        print url
+        return HttpResponseRedirect(url)
+
+    if openid:
+        new_stu_id = ""
+        try:
+            new_stu_id = get_user_vote(openid) if openid else ""
+            if new_stu_id == "-1":
+                new_stu_id = ""
+        except:
+            pass
+        if new_stu_id != stu_id:
+            request.session["stu_id"] = stu_id
+
     vote = Vote.objects.get(id=voteid)
     voteDict = {}
     voteDict['id'] = voteid
@@ -219,9 +255,6 @@ def vote_main_view(request, voteid, typeid):
     voteDict['has_images'] = vote.has_images
     voteDict['vote_type'] = vote.vote_type
 
-    stu_id = request.session.get("stu_id", "")
-    openid = request.session.get("openid", "")
-    is_validate = 1 if stu_id else 0
     now = datetime.datetime.now()
     if (now > vote.start_time):
         voteDict['started'] = 1
@@ -254,7 +287,7 @@ def vote_main_view(request, voteid, typeid):
             itemDict['voted'] = 1
             voteDict['voted'] = 1
         voteDict['items'].append(itemDict)
-    # request.session["voted_" + str(voteid)] = voteDict['voted'] == 1
+    # request.session["voted_" + str(voteid)] = voteDict['voted']
     return render_to_response('vote_mainpage.html', {
         'is_validate': is_validate,
         'validate_url': s_reverse_validate(openid),
@@ -264,37 +297,8 @@ def vote_main_view(request, voteid, typeid):
         'typeid': typeid
     }, context_instance=RequestContext(request))
 
-import urllib2
-from django.utils.http import urlquote
-from django.conf import settings
-
-WEIXIN_APPID = getattr(settings, "WEIXIN_APPID", "wxb2545ef150be8096")
-WEIXIN_OAUTH_REDIRECT = "http://student.tsinghua.edu.cn/api/user/wx/oauth/1"
-
-def vote_main_redirect_ext(request, voteid, openid, typeid):
-    url = s_reverse_vote_mainpage(voteid, openid, typeid)
-    return HttpResponseRedirect(url)
-    # return vote_main_redirect(request, voteid, typeid)
-
-def vote_main_redirect(request, voteid, typeid):
-    openid = request.session.get("openid", "")
-    call_oauth = False
-    if not openid:
-        agent = request.META.get('HTTP_USER_AGENT', "")
-        if "MicroMessenger" in agent:
-            call_oauth = True
-    if not call_oauth:
-        url = s_reverse_vote_mainpage(voteid, None, typeid)
-        return HttpResponseRedirect(url)
-    
-    success_url = s_reverse_vote_mainpage(voteid, "OPENID", typeid)
-    url = "%s://%s?appid=%s&redirect_uri=%s&%s" % (
-        "https", "open.weixin.qq.com/connect/oauth2/authorize",
-        WEIXIN_APPID, urlquote("%s/url=%s" % (
-            WEIXIN_OAUTH_REDIRECT, urlquote(success_url),
-        )),
-        "response_type=code&scope=snsapi_base#wechat_redirect",
-    )
+def vote_main_redirect_old(request, voteid, openid, typeid):
+    url = s_reverse_vote_mainpage(voteid, typeid)
     return HttpResponseRedirect(url)
 
 def set_session(request, openid, url):
@@ -302,7 +306,7 @@ def set_session(request, openid, url):
     if code and openid.upper() == "OPENID":
         _url = "%s://%s?appid=%s&secret=%s&code=%s&%s" % (
             "https", "api.weixin.qq.com/sns/oauth2/access_token",
-            WEIXIN_APPID, settings.WEIXIN_SECRET, code, "grant_type=authorization_code"
+            WEIXIN_APPID, WEIXIN_SECRET, code, "grant_type=authorization_code"
         )
         try:
             _r = urllib2.urlopen(_url)
@@ -310,16 +314,15 @@ def set_session(request, openid, url):
             openid = json.loads(_body)['openid']
         except:
             pass
-        print "weixin oauth: ", openid
-    stu_id = ""
-    try:
-        stu_id = get_user_vote(openid) if openid else ""
-        if stu_id == "-1":
-            stu_id = ""
-    except:
-        pass
+        print "weixin oauth:", openid
     request.session["openid"] = openid
-    request.session["stu_id"] = stu_id
+    if not url or url[0] != "/":
+        url = "/u/" + (url if url else "help")
+    return HttpResponseRedirect(SITE_DOMAIN + url)
+
+def clean_session(request, url):
+    request.session["openid"] = ""
+    request.session["stu_id"] = ""
     if not url or url[0] != "/":
         url = "/u/" + (url if url else "help")
     return HttpResponseRedirect(SITE_DOMAIN + url)
