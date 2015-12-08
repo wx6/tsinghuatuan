@@ -307,7 +307,8 @@ function onCreate_unvoted() {
 
 function onCreate_voted() {
     var str = vote_type == 1 ? "今天" : "";
-    $("#info")[0].innerHTML = "您" + str +"已经投过票啦，感谢您的参与"
+    $("#info")[0].innerHTML = !is_validate ? "您未绑定账号，请在微信内访问投票页面"
+      : "您" + str +"已经投过票啦，感谢您的参与"
     $("button").remove();
     createBasicVoteItem();
     addVoteNumber();
@@ -411,7 +412,7 @@ function onCreate(){
         onCreate_unstarted();
     } else if(ended == 1) {
         onCreate_ended();
-    } else if(voted == 0) {
+    } else if(voted == 0 && is_validate) {
         onCreate_unvoted();
     } else {
         onCreate_voted();
