@@ -270,7 +270,10 @@ WEIXIN_APPID = getattr(settings, "WEIXIN_APPID", "wxb2545ef150be8096")
 WEIXIN_OAUTH_REDIRECT = "http://student.tsinghua.edu.cn/api/user/wx/oauth/1"
 
 def vote_main_redirect_ext(request, voteid, typeid, **kwargs):
-    return vote_main_redirect(request, voteid, typeid)
+    openid = kwargs.get("openid", None)
+    url = s_reverse_vote_mainpage(voteid, openid, typeid)
+    return HttpResponseRedirect(url)
+    # return vote_main_redirect(request, voteid, typeid)
 
 def vote_main_redirect(request, voteid, typeid):
     openid = request.session.get("openid", "")
