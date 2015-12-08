@@ -208,7 +208,6 @@ WEIXIN_OAUTH_REDIRECT = "http://student.tsinghua.edu.cn/api/user/wx/oauth"
 def vote_main_view(request, voteid, typeid):
     stu_id = request.session.get("stu_id", "")
     openid = request.session.get("openid", "")
-    is_validate = 1 if stu_id else 0
     
     call_oauth = False
     if not openid:
@@ -224,7 +223,6 @@ def vote_main_view(request, voteid, typeid):
             ), ''),
             "response_type=code&scope=snsapi_base#wechat_redirect",
         )
-        print url
         return HttpResponseRedirect(url)
 
     if openid:
@@ -236,7 +234,7 @@ def vote_main_view(request, voteid, typeid):
         except:
             pass
         if new_stu_id != stu_id:
-            request.session["stu_id"] = stu_id
+            request.session["stu_id"] = stu_id = new_stu_id
 
     vote = Vote.objects.get(id=voteid)
     voteDict = {}
@@ -287,6 +285,7 @@ def vote_main_view(request, voteid, typeid):
             itemDict['voted'] = 1
             voteDict['voted'] = 1
         voteDict['items'].append(itemDict)
+    is_validate = 1 if stu_id else 0
     # request.session["voted_" + str(voteid)] = voteDict['voted']
     return render_to_response('vote_mainpage.html', {
         'is_validate': is_validate,
@@ -314,7 +313,6 @@ def set_session(request, openid, url):
             openid = json.loads(_body)['openid']
         except:
             pass
-        print "weixin oauth:", openid
     request.session["openid"] = openid
     if not url or url[0] != "/":
         url = "/u/" + (url if url else "help")
