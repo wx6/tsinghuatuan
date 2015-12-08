@@ -220,7 +220,7 @@ def vote_main_view(request, voteid, typeid):
         url = "%s://%s?appid=%s&redirect_uri=%s&%s" % (
             "https", "open.weixin.qq.com/connect/oauth2/authorize",
             WEIXIN_APPID, urlquote("%s/url=%s" % (
-                WEIXIN_OAUTH_REDIRECT, urlquote(success_url, ''),
+                WEIXIN_OAUTH_REDIRECT, urlquote(urlquote(success_url, ''), ''),
             ), ''),
             "response_type=code&scope=snsapi_base#wechat_redirect",
         )
