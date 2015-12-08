@@ -46,7 +46,13 @@ function generateOptions() {
         },
         error: function (xhr) {
             console.log(xhr);
-            alert("很抱歉，好像发生了奇怪的错误= =");
+            var str = xhr && (typeof xhr == "object") && xhr.error;
+            if (str && str.length > 32) {
+              str = str.substr(0, 28) + "...";
+            } else {
+              str = "";
+            }
+            alert("很抱歉，好像发生了错误= =\n" + str);
         }
     };
     return options;
