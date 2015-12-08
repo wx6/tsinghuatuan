@@ -298,7 +298,7 @@ def vote_main_view(request, voteid, typeid):
 
 def vote_main_redirect_old(request, voteid, openid, typeid):
     url = s_reverse_vote_mainpage(voteid, typeid)
-    return HttpResponseRedirect(url)
+    return HttpResponsePermanentRedirect(url)
 
 def set_session(request, openid, url):
     code = request.GET.get("code", "")
