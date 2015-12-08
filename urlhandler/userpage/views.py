@@ -314,14 +314,8 @@ def set_session(request, openid, url):
             stu_id = ""
     except:
         pass
-    if openid:
-        request.session["openid"] = openid
-    else:
-        del request.session["openid"]
-    if stu_id:
-        request.session["stu_id"] = stu_id
-    else:
-        del request.session["stu_id"]
+    request.session["openid"] = openid
+    request.session["stu_id"] = stu_id
     if not url or url[0] != "/":
         url = "/u/" + (url if url else "help")
     return HttpResponseRedirect(SITE_DOMAIN + url)
