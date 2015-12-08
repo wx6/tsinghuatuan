@@ -2,6 +2,10 @@ var lastSelect;
 
 function commitVote() {
     if (is_validate == 0){
+        if (!openid) {
+          alert('非常抱歉！\n非微信环境下无法获取您的身份，\n请在微信内访问投票页面。');
+          return false;
+        }
         var conf_stu = confirm('您尚未绑定学号，绑定学号方可投票，您确定前往绑定吗？');
         if (conf_stu == false)
             return false;
@@ -43,6 +47,7 @@ function generateOptions() {
             } else {
                 alert(data.error);
             }
+            window.location.hash = "#voted";
         },
         error: function (xhr) {
             console.log(xhr);
@@ -416,6 +421,10 @@ function onCreate(){
 
     addEvent();
 }
-
+if (window.location.hash == "#voted") {
+  window.location.href = window.location.href.substr(0
+    , Math.max(window.location.href.indexOf("#"), 0)
+  );
+}
 onCreate();
 

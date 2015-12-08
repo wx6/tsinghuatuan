@@ -254,11 +254,13 @@ def vote_main_view(request, voteid, typeid):
             itemDict['voted'] = 1
             voteDict['voted'] = 1
         voteDict['items'].append(itemDict)
+    # request.session["voted_" + str(voteid)] = voteDict['voted'] == 1
     return render_to_response('vote_mainpage.html', {
         'is_validate': is_validate,
         'validate_url': s_reverse_validate(openid),
         'vote': voteDict,
         'stu_id': stu_id,
+        'openid': openid,
         'typeid': typeid
     }, context_instance=RequestContext(request))
 
