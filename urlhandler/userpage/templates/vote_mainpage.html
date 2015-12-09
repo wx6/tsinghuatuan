@@ -78,6 +78,7 @@
                 }{% if forloop.last %}{% else %},{% endif %}
             {% endfor %}
         ];
+        vote_items.reverse();
         var vote_name = '{{ vote.name }}';
         var voted = {{ vote.voted }};
         var voteId = {{ vote.id }};
