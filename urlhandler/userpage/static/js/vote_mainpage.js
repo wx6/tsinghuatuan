@@ -161,12 +161,12 @@ function bindClickEvent() {
         if (layout_style == 0) {
             $("#" + item.id + " .item-image a").click(function(e) {
                 e.stopPropagation();
-                // location.href = vote_items[i].url;
+                // location.href = item.url;
             });
         } else if (layout_style == 1) {
             $("#" + item.id + " .item-image-grid a").click(function(e) {
                 e.stopPropagation();
-                // location.href = vote_items[i].url;
+                // location.href = item.url;
             });
         }
     }
