@@ -138,3 +138,6 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
 )
+
+if os.environ.get('PRODUCTION', None):
+    from settings_production import *
