@@ -214,6 +214,7 @@ def vote_main_view(request, voteid, typeid):
         agent = request.META.get('HTTP_USER_AGENT', "")
         if "MicroMessenger" in agent:
             call_oauth = True
+    call_oauth = False
     if call_oauth:
         success_url = s_reverse_vote_main_set_openid(voteid, "OPENID", typeid)
         url = "%s://%s?appid=%s&redirect_uri=%s&%s" % (
@@ -225,7 +226,18 @@ def vote_main_view(request, voteid, typeid):
         )
         return HttpResponseRedirect(url)
 
-    if openid:
+    if not openid:
+        success_url = s_reverse_vote_main_set_stu_id(voteid, "STU_ID", typeid, domain=False)
+        url = "%s://%s/%s?appid=%s&redirect_uri=%s" % (
+            "http",
+            "127.0.0.1:8000" if request.GET.get('localhost') != '0' else "student.tsinghua.edu.cn",
+            "/api/user/stu_id",
+            'wxvote',
+            urlquote(urlquote(success_url, ''), ''),
+        )
+        return HttpResponseRedirect(url)
+
+    if openid and openid != stu_id:
         new_stu_id = ""
         try:
             new_stu_id = get_user_vote(openid) if openid else ""
@@ -314,6 +326,13 @@ def set_session(request, openid, url):
         except:
             pass
     request.session["openid"] = openid
+    if not url or url[0] != "/":
+        url = "/u/" + (url if url else "help")
+    return HttpResponseRedirect(SITE_DOMAIN + url)
+
+def set_stu_session(request, stu_id, url):
+    request.session["openid"] = stu_id
+    request.session["stu_id"] = stu_id
     if not url or url[0] != "/":
         url = "/u/" + (url if url else "help")
     return HttpResponseRedirect(SITE_DOMAIN + url)

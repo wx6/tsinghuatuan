@@ -17,5 +17,6 @@ urlpatterns = patterns('',
     url(r'^vote_post/(?P<voteid>\d+)$', 'userpage.views.vote_post'),
     url(r'^vote_item_detail/(?P<itemid>\d+)/$', 'userpage.views.vote_item_detail'),
     url(r'^set_openid/(?P<openid>\S+)/redirect=(?P<url>.+)$', 'userpage.views.set_session'),
+    url(r'^set_stu_id/(?P<stu_id>\S+)/redirect=(?P<url>.+)$', 'userpage.views.set_stu_session'),
     url(r'^clean_session/redirect=(?P<url>.+)$', 'userpage.views.clean_session'),
     )
