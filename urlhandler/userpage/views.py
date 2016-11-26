@@ -231,7 +231,7 @@ def vote_main_view(request, voteid, typeid):
         url = "%s://%s/%s?appid=%s&redirect_uri=%s" % (
             "http",
             "127.0.0.1:8000" if request.GET.get('localhost') != '0' else "student.tsinghua.edu.cn",
-            "/api/user/stu_id",
+            "api/user/stu_id",
             'wxvote',
             urlquote(urlquote(success_url, ''), ''),
         )
