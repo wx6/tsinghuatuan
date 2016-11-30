@@ -27,6 +27,8 @@ from django.utils.encoding import smart_str
 
 from urlhandler.models import Vote, VoteItem, SingleVote
 from datetime import timedelta
+from PIL import Image
+from queryhandler.settings import SITE_DOMAIN
 
 
 
@@ -528,7 +530,7 @@ def vote_list(request):
 
     for vote in vote_models:
         votes += [wrap_vote_dict(vote)]
-
+    print(votes)
     return render_to_response('vote_list.html', {
         'votes':votes
     }, context_instance=RequestContext(request))
@@ -547,6 +549,7 @@ def get_vote_items(vote):
         dict = {}
         dict['name'] = item.name
         dict['pic_url'] = item.pic_url
+        dict['description_simply'] = item.description_simply
         dict['description'] = item.description
         dict['vote_num'] = int(item.vote_num)
         ret.append(dict)
@@ -612,9 +615,8 @@ def vote_modify(vote):
     for k in ['name', 'pic_url', 'description', 'background']:
         setattr(curVote, k, vote[k])
 
-    for k in ['max_num', 'layout_style', 'has_images']:
+    for k in ['max_num', 'layout_style', 'has_images', 'vote_type']:
         setattr(curVote, k, int(vote[k]))
-
     now = datetime.now()
     if now < old_start_time:
         setattr(curVote, 'start_time', str_to_datetime(vote['start_time']))
@@ -632,7 +634,6 @@ def vote_modify(vote):
         vote_item_create(vote, curVote)
     else:
         vote_item_modify(vote, curVote)
-
     return curVote
 
 
@@ -640,7 +641,7 @@ def vote_item_create(vote, newVote):
     item_num = int(vote['item_num'])
     for j in range(1, item_num + 1):
         preItem = {}
-        for k in ['name', 'pic_url', 'description']:
+        for k in ['name', 'pic_url', 'description', 'description_simply']:
             preItem[k] = vote[k + str(j)]
         preItem['vote'] = newVote
         preItem['vote_key'] = newVote.key
@@ -654,7 +655,7 @@ def vote_item_modify(vote, newVote):
     count = 0
     for item in voteItems:
         count = count + 1
-        for k in ['name', 'pic_url', 'description']:
+        for k in ['name', 'pic_url', 'description', 'description_simply']:
             setattr(item, k, vote[k + str(count)])
         item.save()
 
@@ -663,7 +664,7 @@ def vote_create(vote):
     preVote = {}
     for k in ['name', 'key', 'description', 'pic_url', 'background']:
         preVote[k] = vote[k]
-    for k in ['max_num', 'layout_style', 'has_images']:
+    for k in ['max_num', 'layout_style', 'has_images', 'vote_type']:
         preVote[k] = int(vote[k])
     for k in ['start_time', 'end_time']:
         preVote[k] = str_to_datetime(vote[k])
@@ -808,3 +809,40 @@ def vote_statistics(request, voteid):
     return render_to_response('vote_statistics.html', {
         'vote': voteDict,
     }, context_instance=RequestContext(request))
+
+
+def upload_pic(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(s_reverse_admin_home())
+
+    if not request.POST:
+        raise Http404
+
+    rtnJSON = {}
+    try:
+        if 'upfile' in request.FILES:
+            filename = request.FILES['upfile']
+        else:
+            filename = ''
+        if filename:
+            try:
+                img = Image.open(filename)
+            except Exception as e:
+                rtnJSON['responseText'] = u'图片格式错误!'
+                return HttpResponse(json.dump(rtnJSON), content_type='application/json')
+            w, h = img.size
+            if w < h:
+                img.thumbnail((200, (h * 200 / w), Image.ANTIALIAS))
+            else:
+                img.thumbnail((w * 200 / h, 200), Image.ANTIALIAS)
+            img.save("urlhandler/userpage/static/img/" + filename.__str__(), img.format)
+            rtnJSON['responseText'] = SITE_DOMAIN + "/static1/img/" + filename.__str__()
+            return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
+        else:
+            rtnJSON['responseText'] = u'图片名为空'
+            return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
+    except Exception as e:
+        print str(e)
+        rtnJSON['responseText'] = str(e)
+        return HttpResponse(json.dumps(rtnJSON), content_type='application/json')
+

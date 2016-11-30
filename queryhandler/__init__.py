@@ -79,7 +79,7 @@ def urldecode(query):
     d = {}
     a = query.split('&')
     for s in a:
-        if s.find('='):
+        if s.find('=') > 0:
             k, v = map(urllib.unquote, s.split('='))
             d[k] = v
     return d

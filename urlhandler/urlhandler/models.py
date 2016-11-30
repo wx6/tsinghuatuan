@@ -62,11 +62,15 @@ class Vote(models.Model):
     layout_style = models.IntegerField(default=0)
     has_images = models.IntegerField(default=1)
     background = models.CharField(max_length=255)
+    vote_type = models.IntegerField(default=0)
+    # 0:  only once
+    # 1:  every day can vote once
 
 class VoteItem(models.Model):
     name = models.CharField(max_length=255)
     pic_url = models.CharField(max_length=255)
     description = models.TextField()
+    description_simply = models.CharField(max_length=255)
     vote = models.ForeignKey(Vote)
     vote_key = models.CharField(max_length=255)
     vote_num = models.IntegerField(default=0)

@@ -41,21 +41,24 @@
                 <div class="corner"></div>
                 <div class="details">
                     <div class="body">
-                        <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ item.description }}</p>
+                        <p id = 'activity_description'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</p>
                     </div>
                 </div>
             </section>
         </article>
     </div>
 
-    <script src="{% static 'js/WeixinApi.js' %}"></script>
     <script type="text/javascript">
         var activity_page_title = "{{ item.vote_name }}";
         var activity_title = "{{ item.name }}";
         var activity_title_image = "{{ item.vote_pic }}";
         var activity_extra_info = [];
-
+        var activity_description = "{{ item.description }}"
+        activity_description = activity_description.replace(/&lt;/g, '<');
+        activity_description = activity_description.replace(/&gt;/g, '>');
+        activity_description = activity_description.replace(/ /g, '&nbsp');
         $('title').text(activity_page_title);
+        $('#activity_description').html(activity_description);
         $('#activity_title').text(activity_title);
         $('#activity_title_image').css("background","url("+activity_title_image+") no-repeat")
                           .css("max-height", "100px").css("background-size", "cover");

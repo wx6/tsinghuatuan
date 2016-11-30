@@ -1,0 +1,13 @@
+*.pyc
+*.pyo
+*~
+~*
+nohup*
+log*
+log/*
+# for django collect-static
+static/
+
+upload
+datadir
+secret.env
