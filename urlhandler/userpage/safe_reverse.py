@@ -30,6 +30,11 @@ def s_reverse_vote_main_set_openid(voteid, openid, typeid):
 	url = reverse('userpage.views.vote_main_view', kwargs={'voteid': voteid, 'typeid': typeid})
 	return SITE_DOMAIN + reverse('userpage.views.set_session', kwargs={'openid': openid, 'url': url})
 
+def s_reverse_vote_main_set_stu_id(voteid, stu_id, typeid, domain=True):
+	url = reverse('userpage.views.vote_main_view', kwargs={'voteid': voteid, 'typeid': typeid})
+	return (SITE_DOMAIN if domain else '') + \
+        reverse('userpage.views.set_stu_session', kwargs={'stu_id': stu_id, 'url': url})
+
 def s_reverse_vote_main_in_menu(voteid, openid, typeid):
 	url = reverse('userpage.views.vote_main_view', kwargs={'voteid': voteid, 'typeid': typeid})
 	return SITE_DOMAIN + url
