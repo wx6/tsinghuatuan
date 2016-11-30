@@ -230,7 +230,7 @@ def vote_main_view(request, voteid, typeid):
         success_url = s_reverse_vote_main_set_stu_id(voteid, "STU_ID", typeid, domain=False)
         url = "%s://%s/%s?appid=%s&redirect_uri=%s" % (
             "http",
-            "127.0.0.1:8000" if request.GET.get('localhost') != '0' else "student.tsinghua.edu.cn",
+            "127.0.0.1:8000" if request.GET.get('localhost', '0') != '0' else "student.tsinghua.edu.cn",
             "api/user/stu_id",
             'wxvote',
             urlquote(urlquote(success_url, ''), ''),
